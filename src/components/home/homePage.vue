@@ -4,7 +4,7 @@
             <img src="@/assets/homeshow.png" alt />
         </div>
         <div class="grids">
-            <figure v-for="(item) in grid" :key="item.id">
+            <figure v-for="(item) in grid" :key="item.id" @click="linkTo(item.id)">
                 <img :src="item.url" alt />
                 <figcaption>
                     <p>{{item.title}}</p>
@@ -84,7 +84,14 @@ export default {
         };
     },
     mounted() {},
-    methods: {}
+    methods: {
+        linkTo(id) {
+            this.$store.commit("setListNum", id);
+            this.$router.push({
+                name: "list"
+            });
+        }
+    }
 };
 </script>
 <style scoped>
@@ -104,9 +111,9 @@ export default {
     margin: 0 0 0 -1px;
     text-align: center;
     padding: 0.4rem 0.5rem;
-    border-left:solid 1px #DDD;
-    border-bottom:solid 1px #DDD;
-    border-collapse:collapse;
+    border-left: solid 1px #ddd;
+    border-bottom: solid 1px #ddd;
+    border-collapse: collapse;
 }
 .grids figure img {
     width: 1rem;
