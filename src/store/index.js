@@ -14,8 +14,7 @@ export default new Vuex.Store({
 				title: "通知公告",
 				page: [{
 						text: "通知公告管理",
-						// ajax接口名
-						ajaxurl: baseUrl + "biz/pub/publicnotify/list.action",
+						ajaxurl: "biz/pub/publicnotify/list.action",
 						// ajax入参 updata
 						// 标题左侧
 						headerLeft: {
@@ -50,7 +49,7 @@ export default new Vuex.Store({
 					},
 					{
 						text: "新闻动态",
-						ajaxurl: baseUrl + "biz/pub/pubcontext/publist.action",
+						ajaxurl: "biz/pub/pubcontext/publist.action",
 						headerLeft: {
 							key: "标题",
 							value: "title",

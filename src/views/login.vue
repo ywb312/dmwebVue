@@ -30,8 +30,9 @@ export default {
     mounted() {},
     methods: {
         login() {
+            let _this = this;
             // 对账号验空
-            if (!this.username) {
+            if (!_this.username) {
                 // 弹出提示
                 Toast({
                     message: "请输入用户名",
@@ -41,7 +42,7 @@ export default {
                 return;
             }
             // 对密码验空
-            if (!this.password) {
+            if (!_this.password) {
                 // 弹出提示
                 Toast({
                     message: "请输入密码",
@@ -50,30 +51,34 @@ export default {
                 });
                 return;
             }
-            this.$router.push({
-                name:"home"
-            });
+            _this.$api.login
+                .login({
+                    username: _this.username,
+                    password: _this.password,
+                    "user-agent": "mobile"
+                })
+                .then(function(res) {
+                    if (res.result) {
+                        localStorage.session_Id = res.session_Id;
+                        localStorage.deptname = res.result.deptname;
+                        localStorage.rolename = res.result.rolename;
+                        localStorage.username = res.result.username;
+                        localStorage.loginname = res.result.loginname;
+                        _this.$router.push({
+                            name: "home"
+                        });
+                    } else {
+                        Toast({
+                            message: "账户或密码不正确",
+                            position: "bottom",
+                            duration: 4000
+                        });
+                        return;
+                    }
+                });
         }
     }
 };
-// $.ajax({
-//   type: "POST",
-//   url: baseUrl + "main/login.action",
-//   data: {
-//     username: $("#nickname").val(),
-//     password: $("#password").val(),
-//     "user-agent": "mobile"
-//   },
-//   success: function(data) {
-//     var data = JSON.parse(data);
-//     localStorage.session_Id = data.session_Id;
-//     localStorage.deptname = data.result.deptname;
-//     localStorage.rolename = data.result.rolename;
-//     localStorage.username = data.result.username;
-//     localStorage.loginname = data.result.loginname;
-//     window.location.href = "./home.html";
-//   }
-// });
 </script>
 <style scoped>
 .login {

@@ -1,9 +1,7 @@
 import axios from './http'
 
-function login (){
-    return axios.post('/login',{
-        xx:"Xx",
-    });
+function login (data){
+    return axios.post('main/login.action',data);
 }
 
 export default {
