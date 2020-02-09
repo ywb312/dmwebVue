@@ -1,15 +1,18 @@
 <template>
     <div class="detail">
         <!-- 标题  -->
-        <mt-header :title="pageData.text">
+        <mt-header :title="pageData.text" fixed>
             <router-link to slot="left">
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>
             </router-link>
         </mt-header>
-        <mt-cell title="标题文字" value="说明文字"></mt-cell>
+        <div class="wrap">
+            <preview :res="rendering" :pageData="pageData"></preview> 
+        </div>
     </div>
 </template>
 <script>
+import preview from '@/components/detail/preview'
 export default {
     data() {
         return {
@@ -24,7 +27,8 @@ export default {
                 end: "",
                 zgzrdw: "",
                 param: ""
-            }
+            },
+            rendering:""
         };
     },
     created() {
@@ -33,7 +37,8 @@ export default {
         this.pageData = this.$store.state.listPage[num - 1].page[a];    //当前页面的配置
         // 进入页面调取详情页接口 进行渲染
         this.$api.inform.showPage(this.pageData.ajaxurl, this.returnData(this.pageData)).then(res => {
-            this.rendering(res.rows);
+            this.rendering = res.rows;
+            console.log(res.rows);
         });
     },
     methods: {
@@ -50,12 +55,14 @@ export default {
             }
             return obj;
         },
-        // 渲染页面函数
-        rendering(data){
-            console.log(data);
-        }
+        // // 渲染页面函数
+        // rendering(data){
+        //     console.log(data);
+        // }
     },
-    components: {}
+    components: {
+        preview
+    }
 };
 </script>
 <style scoped>
@@ -66,5 +73,8 @@ export default {
     background-color: #2585cf;
     height: 1.1rem;
     font-size: 20px;
+}
+.wrap{
+    margin-top: 1.1rem;
 }
 </style>

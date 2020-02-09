@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
-const baseUrl = "/dmweb/";
 export default new Vuex.Store({
 	state: {
 		// 控制加载中的显示隐藏
@@ -84,7 +83,7 @@ export default new Vuex.Store({
 				title: "隐患管理",
 				page: [{
 						text: "隐患处理",
-						ajaxurl: baseUrl + "biz/im/zdrisknotice/list_notice_two.action",
+						ajaxurl: "biz/im/zdrisknotice/list_notice_two.action",
 						updata: ["olddate"],
 						headerLeft: {
 							key: "标题",
@@ -107,7 +106,7 @@ export default new Vuex.Store({
 					},
 					{
 						text: "隐患详情查询",
-						ajaxurl: baseUrl + "biz/rm/processrisk/list.action",
+						ajaxurl: "biz/rm/processrisk/list.action",
 						updata: ["queryAll", "crstate", "crqy", "str", "end"],
 						headerLeft: {
 							key: "标题",
@@ -133,7 +132,7 @@ export default new Vuex.Store({
 					},
 					{
 						text: "重大隐患评估记录",
-						ajaxurl: baseUrl + "biz/rm/zdriskassess/list.action",
+						ajaxurl: "biz/rm/zdriskassess/list.action",
 						updata: ["str", "end"],
 						headerLeft: {
 							key: "标题",
@@ -168,7 +167,7 @@ export default new Vuex.Store({
 					},
 					{
 						text: "重大隐患督办记录",
-						ajaxurl: baseUrl + "biz/rm/zdriskfeet/list.action",
+						ajaxurl: "biz/rm/zdriskfeet/list.action",
 						updata: ["str", "end"],
 						headerLeft: {
 							key: "标题",
@@ -200,7 +199,7 @@ export default new Vuex.Store({
 					},
 					{
 						text: "隐患整改指令记录",
-						ajaxurl: baseUrl + "biz/rm/zdriskreform/list.action",
+						ajaxurl: "biz/rm/zdriskreform/list.action",
 						updata: ["str", "end", "zgzrdw"],
 						headerLeft: {
 							key: "标题",
@@ -232,7 +231,7 @@ export default new Vuex.Store({
 					},
 					{
 						text: "隐患申请复查记录",
-						ajaxurl: baseUrl + "biz/rm/zdriskreview/list.action",
+						ajaxurl: "biz/rm/zdriskreview/list.action",
 						updata: ["str", "end", "zgzrdw"],
 						headerLeft: {
 							key: "标题",
@@ -267,7 +266,7 @@ export default new Vuex.Store({
 					},
 					{
 						text: "隐患验收结果记录",
-						ajaxurl: baseUrl + "biz/rm/zdriskaccept/list.action",
+						ajaxurl: "biz/rm/zdriskaccept/list.action",
 						updata: ["str", "end", "zgzrdw"],
 						headerLeft: {
 							key: "标题",
@@ -302,7 +301,7 @@ export default new Vuex.Store({
 					},
 					{
 						text: "重大隐患闭环记录",
-						// ajaxurl: baseUrl + "biz/rm/zdriskclose/list.action",
+						// ajaxurl: "biz/rm/zdriskclose/list.action",
 						// updata: ["str", "end"],
 						// headerLeft: {
 						//     key: "标题",
@@ -387,7 +386,7 @@ export default new Vuex.Store({
 					},
 					{
 						text: "专项检查计划",
-						ajaxurl: baseUrl + "biz/sc/checkplantemp/list.action",
+						ajaxurl: "biz/sc/checkplantemp/list.action",
 						updata: [],
 						headerLeft: {
 							key: "标题",
@@ -420,7 +419,7 @@ export default new Vuex.Store({
 				title: "提醒预警",
 				page: [{
 						text: "隐患预警",
-						// ajaxurl: baseUrl + "biz/tm/warninginfo/list.action",
+						// ajaxurl: "biz/tm/warninginfo/list.action",
 						// updata: [],
 						// headerLeft: {
 						//     key: "标题",
@@ -449,7 +448,7 @@ export default new Vuex.Store({
 					},
 					{
 						text: "检查逾期预警",
-						// ajaxurl: baseUrl + "biz/sc/checkplan/list_child_notice.action",
+						// ajaxurl: "biz/sc/checkplan/list_child_notice.action",
 						// updata: [],
 						// headerLeft: {
 						//     key: "标题",
@@ -478,7 +477,7 @@ export default new Vuex.Store({
 					},
 					{
 						text: "隐患逾期预警",
-						ajaxurl: baseUrl + "biz/im/zdrisknotice/list_notice_two.action",
+						ajaxurl: "biz/im/zdrisknotice/list_notice_two.action",
 						updata: ["olddate"],
 						headerLeft: {
 							key: "标题",
@@ -539,7 +538,7 @@ export default new Vuex.Store({
 				title: "三项人员信息管理",
 				page: [{
 						text: "特种作业人员信息",
-						// ajaxurl: baseUrl + "biz/people/specialPeople/list.action",
+						// ajaxurl: "biz/people/specialPeople/list.action",
 						// search:true,
 						// updata: ["param"],
 						// headerLeft: {
@@ -572,7 +571,7 @@ export default new Vuex.Store({
 					},
 					{
 						text: "持证人员信息",
-						// ajaxurl: baseUrl + "biz/people/certifiedPeople/list.action",
+						// ajaxurl: "biz/people/certifiedPeople/list.action",
 						// search:true,
 						// updata: ["param"],
 						// headerLeft: {
@@ -605,7 +604,7 @@ export default new Vuex.Store({
 					},
 					{
 						text: "主要负责人信息",
-						ajaxurl: baseUrl + "biz/people/peoplephoto/list.action",
+						ajaxurl: "biz/people/peoplephoto/list.action",
 						search: true,
 						updata: ["param"],
 						headerLeft: {
