@@ -21,9 +21,8 @@ export default {
     data() {
         return {};
     },
+    // res 获取到的数据 pageData父组件传来的配置项
     props: ["res", "pageData"],
-    mounted() {},
-    methods: {}
 };
 </script>
 <style scoped>
@@ -31,15 +30,16 @@ export default {
     height: 100%;
     overflow: hidden;
 }
-.wrapper{
+.wrapper {
     border-bottom: solid 1px #ddd;
     margin-bottom: 5px;
 }
-.title,.main div {
+.title,
+.main div {
     display: flex;
     justify-content: space-between;
     padding: 0.1rem 0.4rem;
-    background-color:rgb(250,250, 250);
+    background-color: rgb(250, 250, 250);
 }
 .bottom {
     width: 100%;
@@ -48,6 +48,6 @@ export default {
     text-align: center;
     border-top: solid 1px #ddd;
     border-bottom: solid 1px #ddd;
-    letter-spacing:0.2rem;
+    letter-spacing: 0.2rem;
 }
 </style>

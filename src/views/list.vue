@@ -14,7 +14,7 @@
             :key="item.text"
             :title="item.text"
             is-link
-            :to="{path:'/detail',query:{a:index}}"
+            :to="{path:pageData.path,query:{a:index}}"
         >
             <img slot="icon" src="@/assets/incid_rep.png" width="20" height="20" />
         </mt-cell>
@@ -23,7 +23,8 @@
 <script>
 export default {
     data() {
-        return {};
+        return {
+        };
     },
     created() {
         let num = this.$store.state.listNum;
@@ -32,7 +33,7 @@ export default {
     // 控制list缓存
     beforeRouteLeave(to, from, next) {
         // 如果是主页,则不缓存;不是主页则缓存。
-        if (to.name == "detail") {
+        if (to.name != "home") {
             from.meta.keepAlive = true;
             next();
         } else {//home

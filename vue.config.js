@@ -1,4 +1,5 @@
 module.exports = {
+    publicPath:'./',
     devServer: {
         proxy: {
             '/dmweb': {//代理api

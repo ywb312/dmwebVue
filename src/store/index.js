@@ -11,6 +11,7 @@ export default new Vuex.Store({
 		// 列表的渲染数据（标题、配置项、url）
 		listPage: [{
 				title: "通知公告",
+				path:"inform",
 				page: [{
 						text: "通知公告管理",
 						ajaxurl: "biz/pub/publicnotify/list.action",
@@ -49,6 +50,7 @@ export default new Vuex.Store({
 					{
 						text: "新闻动态",
 						ajaxurl: "biz/pub/pubcontext/publist.action",
+						updata:["olddate"],
 						headerLeft: {
 							key: "标题",
 							value: "title",
@@ -81,6 +83,7 @@ export default new Vuex.Store({
 			},
 			{
 				title: "隐患管理",
+				path:"danger",
 				page: [{
 						text: "隐患处理",
 						ajaxurl: "biz/im/zdrisknotice/list_notice_two.action",
@@ -338,6 +341,7 @@ export default new Vuex.Store({
 			},
 			{
 				title: "计划管理",
+				path:"plan",
 				page: [{
 						text: "我的检查计划",
 						// ajaxurl: baseUrl +"biz/sc/checkplan/list.action",
@@ -417,6 +421,7 @@ export default new Vuex.Store({
 			},
 			{
 				title: "提醒预警",
+				path:"remind",
 				page: [{
 						text: "隐患预警",
 						// ajaxurl: "biz/tm/warninginfo/list.action",
@@ -511,6 +516,7 @@ export default new Vuex.Store({
 			},
 			{
 				title: "风险管理",
+				path:"risk",
 				page: [{
 						text: "风险点划分",
 					},
@@ -536,6 +542,7 @@ export default new Vuex.Store({
 			},
 			{
 				title: "三项人员信息管理",
+				path:"person",
 				page: [{
 						text: "特种作业人员信息",
 						// ajaxurl: "biz/people/specialPeople/list.action",
@@ -639,6 +646,7 @@ export default new Vuex.Store({
 			},
 			{
 				title: "安全环保生产方针与目标",
+				path:"target",
 				page: [{
 						text: "安全生产方针",
 					},
@@ -652,6 +660,7 @@ export default new Vuex.Store({
 			},
 			{
 				title: "教育培训",
+				path:"education",
 				page: [{
 						text: "考试",
 					},
@@ -671,6 +680,7 @@ export default new Vuex.Store({
 			},
 			{
 				title: "生产工艺系统安全管理",
+				path:"technology",
 				page: [{
 						text: "项目三同时管理",
 					},
@@ -693,6 +703,7 @@ export default new Vuex.Store({
 			},
 			{
 				title: "环保管理",
+				path:"environment",
 				page: [{
 						text: "在线设施台账",
 					},
@@ -715,6 +726,7 @@ export default new Vuex.Store({
 			},
 			{
 				title: "应急管理",
+				path:"emergency",
 				page: [{
 						text: "应急预案",
 					},
@@ -737,6 +749,7 @@ export default new Vuex.Store({
 			},
 			{
 				title: "事故管理",
+				path:"accident",
 				page: [{
 						text: "事故快报",
 					},
