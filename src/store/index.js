@@ -344,30 +344,30 @@ export default new Vuex.Store({
 				path:"plan",
 				page: [{
 						text: "我的检查计划",
-						// ajaxurl: baseUrl +"biz/sc/checkplan/list.action",
-						// updata:[],
-						// headerLeft: {
-						//     key: "标题",
-						//     value: "crname",
-						// },
-						// headerRight: {
-						//     key: "栏目名称",
-						//     value: "txlb",
-						// },
-						// main: [{
-						//     key: "隐患描述",
-						//     value: "crdesc",
-						// }, {
-						//     key: "隐患场所",
-						//     value: "craddr",
-						// }, {
-						//     key: "审批时间",
-						//     value: "pcdate",
-						// }],
+						ajaxurl: "biz/sc/checkplan/list.action",
+						updata:[],
+						headerLeft: {
+						    key: "标题",
+						    value: "crname",
+						},
+						headerRight: {
+						    key: "栏目名称",
+						    value: "txlb",
+						},
+						main: [{
+						    key: "隐患描述",
+						    value: "crdesc",
+						}, {
+						    key: "隐患场所",
+						    value: "craddr",
+						}, {
+						    key: "审批时间",
+						    value: "pcdate",
+						}],
 					},
 					{
 						text: "计划查询",
-						// ajaxurl: baseUrl +"biz/sc/checkplan/getChildPlanRecord.action",
+						// ajaxurl: "biz/sc/checkplan/getChildPlanRecord.action",
 						// updata:[],
 						// headerLeft: {
 						//     key: "标题",

@@ -10,6 +10,8 @@ module.exports = {
                     "^/dmweb": '/'
                 }
             }
-        }
-    }
+        },
+    },
+
+    lintOnSave: false
 }
