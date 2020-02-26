@@ -1,26 +1,21 @@
 <template>
     <div class="picker">
-		<mt-cell :title="title" is-link @click.native="popupVisible = true;">
-			<span style="color:black">{{message}}</span>
-		</mt-cell>
-		<mt-popup
-			v-model="popupVisible"
-			popup-transition="popup-fade"
-			closeOnClickModal="true"
-			position="bottom"
-		>
-			<mt-picker
-				:slots="slots"
-				@change="onValuesChange"
-				style="width: 7.5rem;"
-				showToolbar
-			>
-				<div class="picker-toolbar-title">
-					<div class="usi-btn-cancel" @click="popupVisible = false;">取消</div>
-					<div class="usi-btn-sure" @click="confirm">确定</div>
-				</div>
-			</mt-picker>
-		</mt-popup>
+        <mt-cell :title="title" is-link @click.native="popupVisible = true;">
+            <span style="color:black">{{message}}</span>
+        </mt-cell>
+        <mt-popup
+            v-model="popupVisible"
+            popup-transition="popup-fade"
+            closeOnClickModal="true"
+            position="bottom"
+        >
+            <mt-picker :slots="slots" @change="onValuesChange" style="width: 7.5rem;" showToolbar>
+                <div class="picker-toolbar-title">
+                    <div class="usi-btn-cancel" @click="popupVisible = false;">取消</div>
+                    <div class="usi-btn-sure" @click="confirm">确定</div>
+                </div>
+            </mt-picker>
+        </mt-popup>
     </div>
 </template>
 <script>
@@ -32,21 +27,21 @@ export default {
             message: "请选择",
             showToolbar: true,
             popupVisible: false,
-            storge:"",
+            storge: ""
         };
-	},
-	props:["title","slots"],
+    },
+    props: ["title", "slots"],
     methods: {
-        confirm(){
+        confirm() {
             this.popupVisible = false;
             this.message = this.storge;
-            this.$emit('returnMsg',this.message);
+            this.$emit("returnMsg", this.message);
         },
         onValuesChange(picker, values) {
             this.storge = values[0];
             if (values[0] > values[1]) {
                 picker.setSlotValue(1, values[0]);
-			}
+            }
         }
     },
     components: {

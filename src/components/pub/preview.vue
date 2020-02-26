@@ -6,7 +6,7 @@
             :bottom-method="loadBottom"
             :bottom-all-loaded="allLoaded"
             :auto-fill="allLoaded"
-            bottomPullText ="正在加载更多..."
+            bottomPullText="正在加载更多..."
             ref="loadmore"
         >
             <div class="wrapper" v-for="(item,index) in rendering" :key="index">
@@ -20,15 +20,17 @@
                         <span>{{item[n.value]!=null?item[n.value]:""}}</span>
                     </div>
                 </div>
-                <div class="bottom">操作</div>
+                <div class="bottom" @click="popshow=true">操作</div>
             </div>
         </mt-loadmore>
+        <pop :popshow="popshow" @popupClose="popshow=false"></pop>
         <div v-show="noDate" class="noMoreText">暂无数据</div>
         <div v-show="noMore" class="noMoreText">没有更多数据了</div>
     </div>
 </template>
 <script>
 import { Loadmore } from "mint-ui";
+import pop from "@/components/pub/previewPopup"
 export default {
     name: "preview",
     data() {
@@ -36,27 +38,29 @@ export default {
             // 页码
             page: 1,
             // 渲染的数据
-            rendering:[],
+            rendering: [],
             // 停止上拉加载
             allLoaded: false,
             // 没有数据
-            noDate:false,
+            noDate: false,
             // 没有更多数据了
-            noMore:false,
+            noMore: false,
+            // 控制模态框
+            popshow:false,
         };
     },
-    // pageData父组件传来的配置项
-    props: ["pageData","params"],
-    created(){
+    // pageData父组件传来的配置项 params请求入参配置
+    props: ["pageData", "params"],
+    created() {
         this.getData();
     },
     methods: {
-        // 根据当前页面的配置 对请求的data进行添加
+        // 根据当前页面的配置 对请求入参进行添加筛选
         returnData(option) {
             let obj = {
                 rows: 10,
                 page: this.page,
-                "session":window.localStorage["session_Id"],
+                session: window.localStorage["session_Id"]
             };
             if (option.updata) {
                 for (let i = 0; i < option.updata.length; i++) {
@@ -73,7 +77,7 @@ export default {
                 .showPage(this.pageData.ajaxurl, this.returnData(this.pageData))
                 .then(res => {
                     // 判断rows是否返回数据
-                    if (res.rows.length!=0) {
+                    if (res.rows.length != 0) {
                         // 判断是新增还是替换  默认为新增
                         if (a) {
                             this.rendering.push(...res.rows);
@@ -83,16 +87,20 @@ export default {
                         // 返回数据小于10条 停止上拉刷新
                         if (res.rows.length < 10) {
                             this.allLoaded = true;
-                            this.noMore=true;
+                            this.noMore = true;
                         } else {
                             this.allLoaded = false;
-                            this.noMore=false;
+                            this.noMore = false;
                         }
-                    }else{
-                        this.noDate=true;
+                    } else {
+                        this.noDate = true;
                         this.allLoaded = true;
                     }
                 });
+        },
+        // 按钮点击事件popup组件显示  popupConfiguration
+        btnClick() {
+            // this.btnConfiguration;
         },
         // 上拉加载方法
         loadBottom() {
@@ -106,15 +114,16 @@ export default {
             this.$refs.loadmore.onTopLoaded();
         },
         // 清空所需渲染数据并重新渲染
-        cleraDate(){
+        cleraDate() {
             this.page = 1;
-            this.noMore=false;
+            this.noMore = false;
             this.rendering = [];
             this.getData(false);
-        },
+        }
     },
-    components:{
-        "mt-loadmore": Loadmore
+    components: {
+        "mt-loadmore": Loadmore,
+        pop
     }
 };
 </script>
@@ -143,7 +152,7 @@ export default {
     border-bottom: solid 1px #ddd;
     letter-spacing: 0.2rem;
 }
-.noMoreText{
+.noMoreText {
     width: 100%;
     padding: 0.3rem 0;
     text-align: center;

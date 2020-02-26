@@ -5,7 +5,7 @@
             <router-link to slot="left">
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>
             </router-link>
-            <router-link slot="right" to="/increase">
+            <router-link v-if="a==0" slot="right" to="/increase">
                 <mt-button>
                     <img class="white" src="../../assets/iconfont/add.svg" />
                 </mt-button>
@@ -30,6 +30,8 @@ export default {
         return {
             // 页面配置
             pageData: "",
+            // 第几个页面
+            a:"",
             // 传入的对象
             params: {
                 olddate: "0",
@@ -44,7 +46,7 @@ export default {
         };
     },
     created() {
-        let a = this.$route.query.a;
+        this.a = this.$route.query.a;
         let num = this.$store.state.listNum;
         this.pageData = this.$store.state.listPage[num - 1].page[a]; //当前页面的配置
     },
