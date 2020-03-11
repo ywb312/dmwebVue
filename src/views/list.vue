@@ -11,8 +11,8 @@
         </div>
         <mt-cell
             v-for="(item,index) in pageData.page"
-            :key="item.text"
-            :title="item.text"
+            :key="item"
+            :title="item"
             is-link
             :to="{path:pageData.path,query:{a:index}}"
         >

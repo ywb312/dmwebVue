@@ -1,5 +1,5 @@
 <template>
-    <div class="remind">
+    <div class="environment">
         <!-- 标题  -->
         <mt-header :title="pageData.text" fixed>
             <router-link to slot="left">
@@ -15,7 +15,7 @@
 <script>
 import preview from "@/components/pub/preview";
 export default {
-    name: "remind",
+    name: "environment",
     data() {
         return {
             // 页面配置
@@ -23,13 +23,32 @@ export default {
             // 传入的对象
             params: {
                 olddate: "0"
-            }
+            },
+            page: [
+                {
+                    text: "在线设施台账"
+                },
+                {
+                    text: "固体废物产生利用统计表"
+                },
+                {
+                    text: "项目建设情况"
+                },
+                {
+                    text: "排口台账"
+                },
+                {
+                    text: "评先创优情况"
+                },
+                {
+                    text: "危险废物处置统计表"
+                }
+            ]
         };
     },
     created() {
         let a = this.$route.query.a;
-        let num = this.$store.state.listNum;
-        this.pageData = this.$store.state.listPage[num - 1].page[a]; //当前页面的配置
+        this.pageData = this.page[a]; //当前页面的配置
     },
     methods: {},
     components: {
@@ -43,7 +62,7 @@ export default {
     height: 1.1rem;
     font-size: 20px;
 }
-.remind {
+.environment {
     height: 100%;
 }
 .wrap {

@@ -1,5 +1,5 @@
 <template>
-    <div class="emergency">
+    <div class="education">
         <!-- 标题  -->
         <mt-header :title="pageData.text" fixed>
             <router-link to slot="left">
@@ -15,7 +15,7 @@
 <script>
 import preview from "@/components/pub/preview";
 export default {
-    name: "emergency",
+    name: "education",
     data() {
         return {
             // 页面配置
@@ -23,13 +23,29 @@ export default {
             // 传入的对象
             params: {
                 olddate: "0"
-            }
+            },
+            page: [
+                {
+                    text: "考试"
+                },
+                {
+                    text: "考试结果"
+                },
+                {
+                    text: "我的考试结果"
+                },
+                {
+                    text: "培训计划管理(消防)"
+                },
+                {
+                    text: "培训计划管理(环保)"
+                }
+            ]
         };
     },
     created() {
         let a = this.$route.query.a;
-        let num = this.$store.state.listNum;
-        this.pageData = this.$store.state.listPage[num - 1].page[a]; //当前页面的配置
+        this.pageData = this.page[a]; //当前页面的配置
     },
     methods: {},
     components: {
@@ -43,7 +59,7 @@ export default {
     height: 1.1rem;
     font-size: 20px;
 }
-.emergency {
+.education {
     height: 100%;
 }
 .wrap {

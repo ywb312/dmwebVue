@@ -45,7 +45,7 @@ export default {
             noDate: false,
             // 没有更多数据了
             noMore: false,
-            // 控制模态框
+            // 控制模态框的显示
             popshow:false,
         };
     },
@@ -76,6 +76,9 @@ export default {
             this.$api.inform
                 .showPage(this.pageData.ajaxurl, this.returnData(this.pageData))
                 .then(res => {
+                    if (!res.rows) {
+                        return;
+                    }
                     // 判断rows是否返回数据
                     if (res.rows.length != 0) {
                         // 判断是新增还是替换  默认为新增

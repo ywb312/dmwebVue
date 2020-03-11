@@ -1,9 +1,7 @@
 <template>
     <div class="previewPopup">
         <mt-popup v-model="popupVisible" popup-transition="popup-fade" closeOnClickModal="true">
-            <div class="popupItem">待配置</div>
-            <div class="popupItem">待配置</div>
-            <div class="popupItem">待配置</div>
+            <div class="popupItem" @click="goRouter"></div>
         </mt-popup>
     </div>
 </template>
@@ -14,15 +12,18 @@ export default {
     data() {
         return {
             popupVisible:false,
-            childrenMessage: ""
         };
     },
     props: ["popshow"],
-    methods: {},
+    methods: {
+        goRouter(){
+        }
+    },
     watch: {
+        // 监听两个值 确定显示的状态
         popshow(val) {
-            //message即为父组件的值，val参数为值
-            this.popupVisible = val; //将父组件的值赋给childrenMessage 子组件的值
+            //popshow为父组件的值，val参数为值
+            this.popupVisible = val; //将父组件的值赋给popupVisible 子组件的值
         },
         popupVisible(val){
             if(val == false){

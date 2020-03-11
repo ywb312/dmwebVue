@@ -161,7 +161,7 @@ export default {
     color: black;
 }
 .mint-radiolist-title {
-    font-size: 16px;
+    font-size: 14px;
     color: #000;
 }
 </style>

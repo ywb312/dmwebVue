@@ -1,14 +1,14 @@
 <template>
     <div class="picker">
         <mt-cell :title="title" is-link @click.native="popupVisible = true;">
-            <span style="color:black">{{message}}</span>
+            <span style="color:black">{{message.text}}</span>
         </mt-cell>
         <mt-popup
             v-model="popupVisible"
             popup-transition="popup-fade"
             closeOnClickModal="true"
             position="bottom"
-        >
+        >yy
             <mt-picker :slots="slots" @change="onValuesChange" style="width: 7.5rem;" showToolbar>
                 <div class="picker-toolbar-title">
                     <div class="usi-btn-cancel" @click="popupVisible = false;">取消</div>
@@ -27,6 +27,7 @@ export default {
             message: "请选择",
             showToolbar: true,
             popupVisible: false,
+            // 暂存选项 用于第二次打开
             storge: ""
         };
     },
