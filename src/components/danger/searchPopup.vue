@@ -1,108 +1,127 @@
 <template>
     <div class="searchPopup">
-        <div class="popup" v-show="popupVisible" @click="popupVisible=false">
-            <div class="middle">
+        <div class="searchWrap" v-show="searchShow" @click="searchShow=false">
+            <div @click.stop class="middle">
                 <div class="title">隐患条件查询</div>
-                <pick title="隐患状态" :slots="statusSlots" @returnMsg="getStatus"></pick>
+                <tree title="查询单位" ></tree>
+                <pick v-if="statusShow" title="隐患状态" :slots="statusSlots" @returnMsg="getStatus"></pick>
                 <mt-field label="起始日期" placeholder="请选择开始日期" type="date" v-model="startDate"></mt-field>
                 <mt-field label="截至日期" placeholder="请选择截至日期" type="date" v-model="endDate"></mt-field>
-                <!-- <mt-button class="btn" type="primary" size="large" @click="update">确定</mt-button> -->
+                <mt-button class="btn" type="primary" size="large" @click="update">确定</mt-button>
             </div>
         </div>
     </div>
 </template>
 <script>
 import pick from "@/components/pub/picker";
+import tree from "@/components/pub/tree";
 export default {
     name: "searchPopup",
     data() {
         return {
-            popupVisible: false,
+            searchShow: false,
+            popupVisible:"",
             startDate: "",
             endDate: "",
+            yhStatus: "",
             statusSlots: [
                 {
                     values: [
                         {
                             text: "请选择",
-                            index: "0"
+                            id: "0"
                         },
                         {
                             text: "待评估",
-                            index: "1"
+                            id: "1"
                         },
                         {
                             text: "待指派",
-                            index: "2"
+                            id: "2"
                         },
                         {
                             text: "待整改",
-                            index: "3"
+                            id: "3"
                         },
                         {
                             text: "待验收",
-                            index: "4"
+                            id: "4"
                         },
                         {
                             text: "待督办",
-                            index: "5"
+                            id: "5"
                         },
                         {
                             text: "已闭环",
-                            index: "6"
+                            id: "6"
                         },
                         {
                             text: "待闭环",
-                            index: "7"
+                            id: "7"
                         },
                         {
                             text: "强制闭环",
-                            index: "8"
+                            id: "8"
                         },
                         {
                             text: "待处理",
-                            index: "9"
+                            id: "9"
                         }
                     ]
                 }
             ]
         };
     },
-    props: ["popshow"],
+    props: ["popshow", "statusShow"],
     methods: {
-        getStatus() {
-            console.log(1);
+        // 返回隐患状态
+        getStatus(v) {
+            this.yhStatus = v.id;
+        },
+        update() {
+            let obj = {
+                crstate: this.yhStatus,
+                str: this.startDate,
+                end: this.endDate
+                // zgzrdw
+            };
+            this.$emit("returnMsg", obj);
         }
     },
     watch: {
         // 监听两个值 确定显示的状态
         popshow(val) {
             //popshow为父组件的值，val参数为值
-            this.popupVisible = val; //将父组件的值赋给popupVisible 子组件的值
+            this.searchShow = val; //将父组件的值赋给popupVisible 子组件的值
         },
-        popupVisible(val) {
+        searchShow(val) {
             if (val == false) {
                 this.$emit("popupClose");
             }
         }
     },
     components: {
-        pick
+        pick,
+        tree
     }
 };
 </script>
 <style scoped>
-.popup {
+.searchWrap {
     width: 100%;
     height: 100%;
-    opacity: 0.6;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.6);
     bottom: 0;
     left: 0;
     position: fixed;
     z-index: 998;
 }
+.middle {
+    width: 100%;
+    margin-top: 50%;
+}
 .title {
+    font-size: 22px;
     text-align: center;
     background-color: white;
     padding: 15px 0;

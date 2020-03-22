@@ -69,7 +69,9 @@ export default new Vuex.Store({
 				path: "accident",
 				page: ["事故快报", "事故详情", "成立事故调查组", "现场调查取证", "事故分析", "调查报告", "事故事件库"],
 			}
-		]
+		],
+		// 组织结构树
+		tree:"",
 	},
 	mutations: {
 		setListNum(state, num) {
@@ -77,6 +79,9 @@ export default new Vuex.Store({
 		},
 		setIsLoading(state, bol) {
 			state.isLoading = bol;
+		},
+		setTree(state,data){
+			state.tree = data;
 		}
 	},
 	actions: {},

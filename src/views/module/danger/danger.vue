@@ -18,7 +18,7 @@
             <!-- 主体 -->
             <preview :pageData="pageData" :params="params" ref="mychild"></preview>
         </div>
-        <search-popup :popshow="popshow" @popupClose="popshow=false"></search-popup>
+        <search-popup :statusShow="a==1" :popshow="popshow" @popupClose="popshow=false"></search-popup>
     </div>
 </template>
 <script>

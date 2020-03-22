@@ -7,10 +7,10 @@
             </router-link>
         </mt-header>
         <mt-field label="填表人" placeholder="请输入填表人" v-model="tbr"></mt-field>
-        <mt-radio title="隐患类型" v-model="prtype" :options="['一般隐患', '重大隐患']"></mt-radio>
-        <pick title="可能发生的事故" :slots="knfsSlots" @returnMsg = "getKnfs"></pick>
-        <pick title="隐患等级" :slots="crLevelSlots"  @returnMsg = "getCrLevel"></pick>
-        <pick title="隐患分类" :slots="classifySlots"  @returnMsg = "getClassify"></pick>
+        <mt-radio title="隐患类型" v-model="prtype" :options="prtypeOption"></mt-radio>
+        <pick title="可能发生的事故" :slots="knfsSlots" @returnMsg="getKnfs"></pick>
+        <pick title="隐患等级" :slots="crLevelSlots" @returnMsg="getCrLevel"></pick>
+        <pick v-if="prtype=='YHLX001'" title="隐患分类" :slots="classifySlots" @returnMsg="getClassify"></pick>
         <mt-field label="隐患名称" placeholder="请输入隐患名称" v-model="inspacetcontent"></mt-field>
         <mt-field label="隐患地点" placeholder="请输入隐患地点" v-model="craddr"></mt-field>
         <mt-field label="存在问题" placeholder="请输入存在问题" v-model="czwt"></mt-field>
@@ -19,7 +19,7 @@
     </div>
 </template>
 <script>
-import { Toast } from 'mint-ui';
+import { Toast } from "mint-ui";
 import pick from "@/components/pub/picker";
 import uploadimg from "@/components/pub/uploadimg";
 export default {
@@ -27,123 +27,115 @@ export default {
     data() {
         return {
             tbr: "",
-            prtype: "一般隐患",
+            prtype: "YHLX001",
             inspacetcontent: "",
-            introduction: "",
             craddr: "",
             czwt: "",
-            knfs:"",
-            crLevel:"",
-            classify:"",
+            knfs: "",
+            crLevel: "",
+            classify: "",
+            // 单选框的配置
+            prtypeOption: [
+                {
+                    label: "一般隐患",
+                    value: "YHLX001"
+                },
+                {
+                    label: "重大隐患",
+                    value: "YHLX002"
+                }
+            ],
             // 下拉框的配置
             knfsSlots: [
                 {
                     values: [
-                        "请选择",
-                        "物体打击",
-                        "车辆伤害",
-                        "机械伤害",
-                        "起重伤害",
-                        "触电",
-                        "淹溺",
-                        "灼烫",
-                        "火灾",
-                        "高处坠落",
-                        "坍塌",
-                        "冒顶片帮",
-                        "透水",
-                        "放炮",
-                        "火药爆炸",
-                        "瓦斯爆炸",
-                        "锅炉爆炸",
-                        "容器爆炸",
-                        "其它爆炸",
-                        "中毒和窒息",
-                        "其它伤害"
+                        { text: "请选择", id: "0" },
+                        { text: "物体打击", id: "1" },
+                        { text: "车辆伤害", id: "2" },
+                        { text: "机械伤害", id: "3" },
+                        { text: "起重伤害", id: "4" },
+                        { text: "触电", id: "5" },
+                        { text: "淹溺", id: "6" },
+                        { text: "灼烫", id: "7" },
+                        { text: "火灾", id: "8" },
+                        { text: "高处坠落", id: "9" },
+                        { text: "坍塌", id: "10" },
+                        { text: "冒顶片帮", id: "11" },
+                        { text: "透水", id: "12" },
+                        { text: "放炮", id: "13" },
+                        { text: "火药爆炸", id: "14" },
+                        { text: "瓦斯爆炸", id: "15" },
+                        { text: "锅炉爆炸", id: "16" },
+                        { text: "容器爆炸", id: "17" },
+                        { text: "其它爆炸", id: "18" },
+                        { text: "中毒和窒息", id: "19" },
+                        { text: "其它伤害", id: "20" }
                     ]
                 }
             ],
             crLevelSlots: [
                 {
-                    values: ["请选择", "一级", "二级", "三级", "四级"]
+                    values: [
+                        { text: "请选择", id: "0" },
+                        { text: "一级", id: "1" },
+                        { text: "二级", id: "2" },
+                        { text: "三级", id: "3" },
+                        { text: "四级", id: "4" }
+                    ]
                 }
             ],
             classifySlots: [
                 {
-                    values: ["请选择", "行为不安全", "物品不安全", "环境不安全", "管理缺陷"]
+                    values: [
+                        { text: "请选择" },
+                        { text: "行为不安全" },
+                        { text: "物品不安全" },
+                        { text: "环境不安全" },
+                        { text: "管理缺陷" }
+                    ]
                 }
             ],
-            upImgArr:[],
+            upImgArr: []
         };
     },
     methods: {
         // 获取不同下拉框的值
-        getKnfs(v){
-            let arr = this.knfsSlots[0].values;
-            for(let i = 0;i<arr.length;i++){
-                if(arr[i]==v){
-                    this.knfs = "KNFS" + i;
-                }
-            }
+        getKnfs(v) {
+            this.knfs = v.id;
         },
-        getCrLevel(v){
-            let a = "";
-            switch(v) {
-                case "一级":
-                    a="1";
-                    break;
-                case "二级":
-                    a="2";
-                    break;
-                case "三级":
-                    a="3";
-                    break;
-                case "四级":
-                    a="4";
-                    break;
-                default:
-                    a="1";
-                    break;
-            } 
-            this.crLevel = a;
+        getCrLevel(v) {
+            this.crLevel = v.id;
         },
-        getClassify(v){
-            this.classify = v;
+        getClassify(v) {
+            this.classify = v.text;
         },
         // 获取图片数组
         // getImgArr(v){
         //     this.upImgArr = v;
         // },
-        update(){
-            let prtype = "";
-            if(this.prtype=="一般隐患"){
-                prtype="YHLX001"
-            }else{
-                prtype="YHLX002"
-            }
+        update() {
             let _self = this;
             let obj = {
-                "bean.tbr":this.tbr,
-                "bean.prtype":prtype,
-                "bean.inspacetcontent":this.inspacetcontent,
-                "bean.introduction":this.introduction,
-                "bean.craddr":this.craddr,
-                "bean.czwt":this.czwt,
-                "bean.knfs":this.knfs,
-                "bean.crLevel":this.crLevel,
-                "bean.classify":this.classify,
+                "bean.tbr": this.tbr,
+                "bean.prtype": this.prtype,
+                "bean.inspacetcontent": this.inspacetcontent,
+                "bean.craddr": this.craddr,
+                "bean.czwt": this.czwt,
+                "bean.knfs": this.knfs,
+                "bean.crLevel": this.crLevel,
+                "bean.classify": this.classify,
                 // "bean.img":this.upImgArr
-                "session":window.localStorage["session_Id"]
-            }
+                session: window.localStorage["session_Id"]
+            };
             // 上传接口
-            this.$api.danger.doAddSaveSingle(obj).then(function(){
-                 let instance = Toast({
-                    message: '操作成功',
+            this.$api.danger.doAddSaveSingle(obj).then(function() {
+                let instance = Toast({
+                    message: "操作成功"
                 });
-                setTimeout(()=>{
+                setTimeout(() => {
                     instance.close();
                     _self.$router.back(-1);
-                },1000);
+                }, 1000);
             });
         }
     },
@@ -171,7 +163,7 @@ export default {
     height: 1.1rem;
     font-size: 20px;
 }
-.btn{
+.btn {
     background-color: #2585cf;
     position: fixed;
     bottom: 0.1rem;

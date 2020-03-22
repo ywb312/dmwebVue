@@ -12,6 +12,7 @@ import { Indicator } from "mint-ui";
 export default {
     name: "App",
     computed: {
+        // 路由加载控制显示隐藏
         ...mapState({
             isLoading: state => state.isLoading
         })

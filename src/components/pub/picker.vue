@@ -8,8 +8,8 @@
             popup-transition="popup-fade"
             closeOnClickModal="true"
             position="bottom"
-        >yy
-            <mt-picker :slots="slots" @change="onValuesChange" style="width: 7.5rem;" showToolbar>
+        >
+            <mt-picker :slots="slots" @change="onValuesChange" style="width: 7.5rem;" valueKey="text" showToolbar>
                 <div class="picker-toolbar-title">
                     <div class="usi-btn-cancel" @click="popupVisible = false;">取消</div>
                     <div class="usi-btn-sure" @click="confirm">确定</div>
@@ -20,6 +20,7 @@
 </template>
 <script>
 import { Popup } from "mint-ui";
+// text为显示的文字 id为代表其代码 returnMsg为返回选中的数据
 export default {
     name: "picker",
     data() {

@@ -73,7 +73,7 @@ export default {
         },
         // 获取当前页面数据函数
         getData(a = true) {
-            this.$api.inform
+            this.$api.pub
                 .showPage(this.pageData.ajaxurl, this.returnData(this.pageData))
                 .then(res => {
                     if (!res.rows) {
