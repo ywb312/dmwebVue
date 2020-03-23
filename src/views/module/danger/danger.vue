@@ -16,9 +16,14 @@
             <!-- 查看方式 -->
             <correlation @radioChange="radioData" v-if="pageData.updata.indexOf('queryAll')>=0"></correlation>
             <!-- 主体 -->
-            <preview :pageData="pageData" :params="params" ref="mychild"></preview>
+            <preview :pageData="pageData" :params="params" ref="previewChild"></preview>
         </div>
-        <search-popup :statusShow="a==1" :popshow="popshow" @popupClose="popshow=false"></search-popup>
+        <search-popup
+            @returnMsg="paramsDate"
+            :statusShow="a==1"
+            :popshow="popshow"
+            @popupClose="popshow=false"
+        ></search-popup>
     </div>
 </template>
 <script>
@@ -46,7 +51,7 @@ export default {
                 param: ""
             },
             // 查找组件的显示
-            popshow:false,
+            popshow: false,
             // 筛选出页面配置
             pageData: "",
             // 所有页面进入的配置
@@ -346,7 +351,13 @@ export default {
         // 查看方式 得到子组件传入的值
         radioData(v) {
             this.params.queryAll = v;
-            this.$refs.mychild.cleraDate();
+            this.$refs.previewChild.cleraDate();
+        },
+        paramsDate(v) {
+            Object.keys(v).forEach(key => {
+                this.params[key] = v[key];
+            });
+            this.$refs.previewChild.cleraDate();
         }
     },
     components: {

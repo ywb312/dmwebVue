@@ -3,7 +3,7 @@
         <div class="searchWrap" v-show="searchShow" @click="searchShow=false">
             <div @click.stop class="middle">
                 <div class="title">隐患条件查询</div>
-                <tree title="查询单位" ></tree>
+                <tree title="查询单位" @selectMsg="getCompany" ></tree>
                 <pick v-if="statusShow" title="隐患状态" :slots="statusSlots" @returnMsg="getStatus"></pick>
                 <mt-field label="起始日期" placeholder="请选择开始日期" type="date" v-model="startDate"></mt-field>
                 <mt-field label="截至日期" placeholder="请选择截至日期" type="date" v-model="endDate"></mt-field>
@@ -69,7 +69,8 @@ export default {
                         }
                     ]
                 }
-            ]
+            ],
+            zgzrdw:""
         };
     },
     props: ["popshow", "statusShow"],
@@ -78,15 +79,19 @@ export default {
         getStatus(v) {
             this.yhStatus = v.id;
         },
+        getCompany(v){
+            this.zgzrdw = v.id;
+        },
         update() {
             let obj = {
                 crstate: this.yhStatus,
                 str: this.startDate,
-                end: this.endDate
-                // zgzrdw
+                end: this.endDate,
+                zgzrdw:this.zgzrdw
             };
+            this.$emit("popupClose");
             this.$emit("returnMsg", obj);
-        }
+        },
     },
     watch: {
         // 监听两个值 确定显示的状态

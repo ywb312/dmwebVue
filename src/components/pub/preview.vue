@@ -72,7 +72,7 @@ export default {
             return obj;
         },
         // 获取当前页面数据函数
-        getData(a = true) {
+        getData(more = true) {
             this.$api.pub
                 .showPage(this.pageData.ajaxurl, this.returnData(this.pageData))
                 .then(res => {
@@ -82,7 +82,7 @@ export default {
                     // 判断rows是否返回数据
                     if (res.rows.length != 0) {
                         // 判断是新增还是替换  默认为新增
-                        if (a) {
+                        if (more) {
                             this.rendering.push(...res.rows);
                         } else {
                             this.rendering = res.rows;
@@ -120,6 +120,7 @@ export default {
         cleraDate() {
             this.page = 1;
             this.noMore = false;
+            this.noDate = false;
             this.rendering = [];
             this.getData(false);
         }

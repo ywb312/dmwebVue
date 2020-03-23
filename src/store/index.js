@@ -71,7 +71,7 @@ export default new Vuex.Store({
 			}
 		],
 		// 组织结构树
-		tree:"",
+		treeData:"",
 	},
 	mutations: {
 		setListNum(state, num) {
@@ -81,7 +81,7 @@ export default new Vuex.Store({
 			state.isLoading = bol;
 		},
 		setTree(state,data){
-			state.tree = data;
+			state.treeData = data;
 		}
 	},
 	actions: {},

@@ -1,87 +1,190 @@
 <template>
-    <div class="trePreview">
-        <p class="back">
-            <span v-show="parentId!=-1" @click="backclick">返回上一级</span>
-        </p>
-        <div class="material-list">
-            <ul>
-                <li
-                    v-for="(item,index) in treeList"
-                    :key="index"
-                    :id="item.id"
-                    @click="choosemater(item)"
-                >
-                    {{item.name}}
-                    <i class="cubeic-arrow" v-show="item.children.length!=0"></i>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <ul v-if="data.length">
+        <li
+            v-for="(item, i) in data"
+            :key="i"
+            @click.stop="selectItem(item)"
+            v-show="expandFlag"
+        >
+            <div class="item">
+                <!-- 展开的图标 -->
+                <b
+                    class="expandIcon"
+                    @click.stop="expandItem(item, i)"
+                    :class="[
+        		expandArr.includes(i) ? 'reduce' : 'add',
+        		item.children && item.children.length ? '' : 'disabled'
+        	]"
+                ></b>
+                <!-- 选项名 -->
+                <h4>{{item[labelKey]}}</h4>
+                <!-- 选择的图标 -->
+                <b
+                    class="selectIcon"
+                    :class="[ value[valueKey] == item[valueKey] ? 'checked' : 'noChecked']"
+                ></b>
+            </div>
+            <list-menu
+                v-if="item.children"
+                @input="input"
+                :data="item.children"
+                :valueKey="valueKey"
+                :labelKey="labelKey"
+                :value="value"
+                :expandFlag="expandArr.includes(i)"
+            />
+        </li>
+    </ul>
 </template>
 <script>
 export default {
-    name: "trePreview",
+    // 组件名必写
+    name: "ListMenu",
+    props: {
+        // 选中的值的属性名，必传
+        valueKey: String,
+        // 在页面要展示的选项属性名，必传
+        labelKey: String,
+        // 选中的值，必传
+        value: Object,
+        // 控制展开，不需要传
+        expandFlag: {
+            type: Boolean,
+            default: true
+        },
+        // 总数据，必传
+        data: Array
+    },
     data() {
         return {
-            parentId: -1, //判断是否存在上一级
-            treeList: [], //数据列表
-            materialTree: [], //暂存的数据列表
-            parentNames: [] //父级数据名
+            // 当前级组件已展开的项
+            expandArr: []
         };
     },
     methods: {
-        getWarehouse() {
-            chooseWarehouse().then(json => {
-                this.treeList = []; //这个是存放数据名的数组
-                this.materialTree = json.data; //这个是暂时存放数据名的数组
-                this.getChild(0, this.materialTree); //这里是调用递归方法  初始化
-            });
+        // 子组件逐级传递选中项
+        input(item) {
+            this.$emit("input", item);
         },
-        choosemater(item) {
-            // this.current = id;
-            if (item.type == 1 && item.children.length == 0) {
-                //这里是判断是否还存在下一级以及是否到数据名 数据名的type为2 不是数据名则为1
-                console.log("下面暂无数据");
-                // this.parentId = -1;
-                return;
-            } else if (item.type == 2) {
-                // console.log(this.parentNames.toString() + "," + item.name);
-                this.$emit("applyMaterial", "选择物料（二级）", item.id); //我这里是需要选择数据在跳转其他页面
-                return;
-            }
-            this.parentNames.push(item.name); //存放每点击的数据名
-            this.treeList = [];
-            this.getChild(item.id, this.materialTree);
-            this.treeList = this.treeList;
-            this.parentId = item.parent_id;
-            return;
+        // 选择
+        selectItem(item) {
+            this.$emit("input", item);
         },
-        backclick() {
-            this.treeList = [];
-            this.getChild(this.parentId, this.materialTree);
-            this.parentNames.splice(this.parentNames.length - 1, 1); //点击返回上级时删除上次点击的数据名
-        },
-        getChild(id, children) {
-            //这里就是递归获取每一级的数据 传入数据id和树形和结构数据
-            let _this = this;
-            children.forEach(function(item) {
-                if (item.id == id) {
-                    //判断你点击的数据名并拿到该数据的上一级id
-                    _this.parentId = item.parent_id;
-                }
-                if (item.parent_id == id) {
-                    _this.treeList.push(item);
+        // 展开
+        expandItem(item, i) {
+            if (item.children && item.children.length) {
+                let index = this.expandArr.indexOf(i);
+                if (index > -1) {
+                    this.expandArr.splice(index, 1);
                 } else {
-                    _this.getChild(id, item.children);
+                    this.expandArr.push(i);
                 }
-            });
-            if (id == 0) {
-                //我的第一级id为0
-                this.parentId = -1; //让返回上一级按钮隐藏
             }
         }
     }
 };
 </script>
 <style scoped>
+ul {
+    width: 100%;
+    height: 100%;
+    color: #2a2a2a;
+    background: #fff;
+    overflow: scroll;
+    border-bottom: 0.8px solid #e1e1e1;
+}
+/* 去除滚动条 */
+::-webkit-scrollbar {
+    width: 0px;
+}
+.item {
+    box-sizing: border-box;
+    padding: 4px 4px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.expandIcon {
+    height: 20px;
+    width: 20px;
+    position: relative;
+}
+.expandIcon:after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 14px;
+    transform: translate(-50%, -50%);
+}
+.expandIcon.add {
+    border-color: #2585cf;
+}
+.expandIcon.add:after {
+    color: #2585cf;
+    content: "＋";
+}
+.expandIcon.reduce {
+    border-color: #2585cf;
+}
+.expandIcon.reduce:after {
+    color: #2585cf;
+    content: "－";
+}
+.expandIcon.disabled {
+    border-color: #ddd;
+}
+.expandIcon.disabled:after {
+    color: #ddd;
+}
+.selectIcon {
+    height: 20px;
+    width: 20px;
+    border: 1.5px solid;
+    border-radius: 50%;
+    position: relative;
+}
+.selectIcon:after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.selectIcon.checked {
+    border-color: #2585cf;
+    background: #2585cf;
+}
+.selectIcon.checked:after {
+    font-size: 14px;
+    color: #fff;
+    content: "✓";
+}
+.selectIcon.noChecked {
+    border-color: #2585cf;
+}
+.item h4 {
+    padding: 0 0 0 10px;
+    position: relative;
+    top: 2px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    flex-grow: 1;
+    white-space: nowrap;
+    color: #2a2a2a;
+}
+ul li:not(:first-child) {
+    border-top: 0.8px solid #e1e1e1;
+}
+ul li > ul {
+    box-sizing: border-box;
+    border-bottom: 0;
+    padding-left: 20px;
+    overflow: hidden;
+}
+ul li > ul li {
+    border-top: 0.8px solid #e1e1e1;
+}
+ul li > ul li .item {
+    padding-left: 8px;
+}
 </style>
