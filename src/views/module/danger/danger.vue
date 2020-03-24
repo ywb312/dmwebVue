@@ -14,13 +14,14 @@
         </mt-header>
         <div class="wrap">
             <!-- 查看方式 -->
-            <correlation @radioChange="radioData" v-if="pageData.updata.indexOf('queryAll')>=0"></correlation>
+            <correlation class="sty" @radioChange="radioData" v-if="pageData.updata.indexOf('queryAll')>=0"></correlation>
             <!-- 主体 -->
             <preview :pageData="pageData" :params="params" ref="previewChild"></preview>
         </div>
         <search-popup
             @returnMsg="paramsDate"
             :statusShow="a==1"
+            :companyShow="a==2||a==3||a==4||a==5||a==6"
             :popshow="popshow"
             @popupClose="popshow=false"
         ></search-popup>
@@ -308,37 +309,45 @@ export default {
                     ]
                 },
                 {
-                    text: "重大隐患闭环记录"
-                    // ajaxurl: "biz/rm/zdriskclose/list.action",
-                    // updata: ["str", "end"],
-                    // headerLeft: {
-                    //     value: "crname",
-                    // },
-                    // headerRight: {
-                    //     value: "",
-                    // },
-                    // main: [{
-                    //     key: "验收负责单位",
-                    //     value: "ysfzdwName",
-                    // }, {
-                    //     key: "验收专家人员",
-                    //     value: "yszjry",
-                    // }, {
-                    //     key: "现场验收时间",
-                    //     value: "xcyssj",
-                    // }, {
-                    //     key: "验收情况",
-                    //     value: "ysqk",
-                    // }, {
-                    //     key: "创建时间",
-                    //     value: "createdate",
-                    // }, {
-                    //     key: "填表人员",
-                    //     value: "tbr",
-                    // }, {
-                    //     key: "备注",
-                    //     value: "memo",
-                    // }],
+                    text: "重大隐患闭环记录",
+                    ajaxurl: "biz/rm/zdriskclose/list.action",
+                    updata: ["str", "end"],
+                    headerLeft: {
+                        value: "crname"
+                    },
+                    headerRight: {
+                        value: ""
+                    },
+                    main: [
+                        {
+                            key: "验收负责单位",
+                            value: "ysfzdwName"
+                        },
+                        {
+                            key: "验收专家人员",
+                            value: "yszjry"
+                        },
+                        {
+                            key: "现场验收时间",
+                            value: "xcyssj"
+                        },
+                        {
+                            key: "验收情况",
+                            value: "ysqk"
+                        },
+                        {
+                            key: "创建时间",
+                            value: "createdate"
+                        },
+                        {
+                            key: "填表人员",
+                            value: "tbr"
+                        },
+                        {
+                            key: "备注",
+                            value: "memo"
+                        }
+                    ]
                 }
             ]
         };
@@ -378,5 +387,11 @@ export default {
 }
 .wrap {
     padding-top: 1.1rem;
+}
+.sty{
+    position: sticky;
+    top: 1.1rem;
+    z-index: 1000;
+    background: white;
 }
 </style>

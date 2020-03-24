@@ -1,5 +1,6 @@
 ## vue.config.js 反向代理
     将本地vue服务端口/dmweb代理为localhost:8080/dmweb(后台服务端口)  可访问localhost:8080下的接口 不会发生跨域问题
+    将api的http.js中的baseURL "dmweb"替换为"localhost:8080/dmweb"
 
 ## module为最初的12个模块详情页,每个子页面详情都在其data中(还包括页面列表的格式和获取列表的url)
     通知公告 -- 'inform'

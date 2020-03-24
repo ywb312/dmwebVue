@@ -3,7 +3,7 @@
         <div class="searchWrap" v-show="searchShow" @click="searchShow=false">
             <div @click.stop class="middle">
                 <div class="title">隐患条件查询</div>
-                <tree title="查询单位" @selectMsg="getCompany" ></tree>
+                <tree v-if="companyShow" title="查询单位" @selectMsg="getCompany"></tree>
                 <pick v-if="statusShow" title="隐患状态" :slots="statusSlots" @returnMsg="getStatus"></pick>
                 <mt-field label="起始日期" placeholder="请选择开始日期" type="date" v-model="startDate"></mt-field>
                 <mt-field label="截至日期" placeholder="请选择截至日期" type="date" v-model="endDate"></mt-field>
@@ -15,12 +15,13 @@
 <script>
 import pick from "@/components/pub/picker";
 import tree from "@/components/pub/tree";
+import { Toast } from "mint-ui";
 export default {
     name: "searchPopup",
     data() {
         return {
             searchShow: false,
-            popupVisible:"",
+            popupVisible: "",
             startDate: "",
             endDate: "",
             yhStatus: "",
@@ -70,16 +71,16 @@ export default {
                     ]
                 }
             ],
-            zgzrdw:""
+            zgzrdw: "",
         };
     },
-    props: ["popshow", "statusShow"],
+    props: ["popshow", "statusShow","companyShow"],
     methods: {
         // 返回隐患状态
         getStatus(v) {
             this.yhStatus = v.id;
         },
-        getCompany(v){
+        getCompany(v) {
             this.zgzrdw = v.id;
         },
         update() {
@@ -87,11 +88,19 @@ export default {
                 crstate: this.yhStatus,
                 str: this.startDate,
                 end: this.endDate,
-                zgzrdw:this.zgzrdw
+                zgzrdw: this.zgzrdw
             };
+            if (obj.str > obj.end) {
+                Toast({
+                    message: "截止日期小于起始日期",
+                    position: "bottom",
+                    duration: 2000
+                });
+                return
+            }
             this.$emit("popupClose");
             this.$emit("returnMsg", obj);
-        },
+        }
     },
     watch: {
         // 监听两个值 确定显示的状态
@@ -107,7 +116,8 @@ export default {
     },
     components: {
         pick,
-        tree
+        tree,
+        Toast
     }
 };
 </script>

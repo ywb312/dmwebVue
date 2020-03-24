@@ -17,10 +17,10 @@
                 <div class="main">
                     <div v-for="(n,m) in pageData.main" :key="m">
                         <span>{{n.key}}:</span>
-                        <span>{{item[n.value]!=null?item[n.value]:""}}</span>
+                        <span style="max-width:250px;">{{item[n.value]!=null?delHtmlTag(item[n.value]):""}}</span>
                     </div>
                 </div>
-                <div class="bottom" @click="popshow=true">操作</div>
+                <div class="bottom" @click="btnClick(item)">操作</div>
             </div>
         </mt-loadmore>
         <pop :popshow="popshow" @popupClose="popshow=false"></pop>
@@ -30,7 +30,7 @@
 </template>
 <script>
 import { Loadmore } from "mint-ui";
-import pop from "@/components/pub/previewPopup"
+import pop from "@/components/pub/previewPopup";
 export default {
     name: "preview",
     data() {
@@ -39,14 +39,14 @@ export default {
             page: 1,
             // 渲染的数据
             rendering: [],
-            // 停止上拉加载
+            // 停止上拉加
             allLoaded: false,
             // 没有数据
             noDate: false,
             // 没有更多数据了
             noMore: false,
             // 控制模态框的显示
-            popshow:false,
+            popshow: false
         };
     },
     // pageData父组件传来的配置项 params请求入参配置
@@ -102,8 +102,9 @@ export default {
                 });
         },
         // 按钮点击事件popup组件显示  popupConfiguration
-        btnClick() {
-            // this.btnConfiguration;
+        btnClick(obj) {
+            console.log(obj);
+            this.popshow=true;
         },
         // 上拉加载方法
         loadBottom() {
@@ -123,7 +124,12 @@ export default {
             this.noDate = false;
             this.rendering = [];
             this.getData(false);
-        }
+        },
+        //正则去掉所有的html标记
+        delHtmlTag(str) {
+            str = str.replace(/&nbsp/g,"");
+            return str.replace(/<[^>]+>/g,""); 
+        },
     },
     components: {
         "mt-loadmore": Loadmore,
