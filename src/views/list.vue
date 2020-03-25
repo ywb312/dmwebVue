@@ -33,14 +33,13 @@ export default {
     // 控制list缓存
     beforeRouteLeave(to, from, next) {
         // 如果是主页,则不缓存;不是主页则缓存。
-        if (to.name != "home") {
+        if (to.name != "home") {//不是home , 缓存
             from.meta.keepAlive = true;
-            next();
-        } else {//home
+        } else {//home主页,不缓存
             from.meta.keepAlive = false;
             this.$destroy();
-            next();
         }
+        next();
     }
 };
 </script>

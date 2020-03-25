@@ -1,6 +1,6 @@
 import axios from './http'
 
-// 请求页面列表数据
+// 动态url和动态data
 function showPage (url,data){
     return axios.post(url,data);
 }

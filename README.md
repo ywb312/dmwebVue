@@ -17,6 +17,10 @@
 	事故管理 -- 'accident'
     如需修改功能的名称,功能在store/index.js和module其功能名文件夹 功能文件下同时修改
 
+## 开发的通用设置
+    颜色:#2585cf
+
+
 ## 将tree由父id并列数组转换为层级关系的children数组对象
 toTree(data) {
     // 删除 所有 nodes,以防止多次调用

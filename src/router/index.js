@@ -12,88 +12,136 @@ const routes = [{
 		name: 'login',
 		component: login,
 		meta: {
-			keepAlive: true
+			keepAlive: false
 		}
 	},
 	{
 		path: '/home',
 		name: 'home',
-		component: home
+		component: home,
+		meta: {
+			keepAlive: true
+		}
 	},
 	{
 		path: '/list',
 		name: 'list',
-		component: list
+		component: list,
+		meta: {
+			keepAlive: true
+		}
 	},
 	{ //通知公告
 		path: '/inform',
 		name: 'inform',
 		component: resolve => require(['../views/module/inform/inform.vue'], resolve),
+		meta: {
+			keepAlive: true
+		}
 	},
 	{ //隐患管理
 		path: '/danger',
 		name: 'danger',
 		component: resolve => require(['../views/module/danger/danger.vue'], resolve),
-	},
-	{ //新增隐患
-		path: '/increase',
-		name: 'increase',
-		component: resolve => require(['../views/module/danger/increase.vue'], resolve),
+		meta: {
+			keepAlive: true
+		}
 	},
 	{ //计划管理
 		path: '/plan',
 		name: 'plan',
 		component: resolve => require(['../views/module/plan/plan.vue'], resolve),
+		meta: {
+			keepAlive: true
+		}
 	},
 	{ //提醒预警
 		path: '/remind',
 		name: 'remind',
 		component: resolve => require(['../views/module/remind/remind.vue'], resolve),
+		meta: {
+			keepAlive: true
+		}
 	},
 	{ //  风险管理
 		path: '/risk',
 		name: 'risk',
 		component: resolve => require(['../views/module/risk/risk.vue'], resolve),
+		meta: {
+			keepAlive: true
+		}
 	},
 	{ //三项人员  
 		path: '/person',
 		name: 'person',
 		component: resolve => require(['../views/module/person/person.vue'], resolve),
+		meta: {
+			keepAlive: true
+		}
 	},
 	{ //方针目标
 		path: '/target',
 		name: 'target',
 		component: resolve => require(['../views/module/target/target.vue'], resolve),
+		meta: {
+			keepAlive: true
+		}
 	},
 	{ //教育培训
 		path: '/education',
 		name: 'education',
 		component: resolve => require(['../views/module/education/education.vue'], resolve),
+		meta: {
+			keepAlive: true
+		}
 	},
 	{ //工艺管理
 		path: '/technology',
 		name: 'technology',
 		component: resolve => require(['../views/module/technology/technology.vue'], resolve),
+		meta: {
+			keepAlive: true
+		}
 	},
 	{ //环保管理
 		path: '/environment',
 		name: 'environment',
 		component: resolve => require(['../views/module/environment/environment.vue'], resolve),
+		meta: {
+			keepAlive: true
+		}
 	},
 	{ //应急管理
 		path: '/emergency',
 		name: 'emergency',
 		component: resolve => require(['../views/module/emergency/emergency.vue'], resolve),
+		meta: {
+			keepAlive: true
+		}
 	},
 	{ //事故管理
 		path: '/accident',
 		name: 'accident',
 		component: resolve => require(['../views/module/accident/accident.vue'], resolve),
+		meta: {
+			keepAlive: true
+		}
+	},
+	{ //新增隐患
+		path: '/increase',
+		name: 'increase',
+		component: resolve => require(['../views/module/danger/increase.vue'], resolve),
+		meta: {
+			keepAlive: true
+		}
 	},
 	{ //详情
 		path: '/details',
 		name: 'details',
 		component: resolve => require(['../views/details.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
 	}
 ]
 

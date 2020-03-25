@@ -14,9 +14,18 @@
         </mt-header>
         <div class="wrap">
             <!-- 查看方式 -->
-            <correlation class="sty" @radioChange="radioData" v-if="pageData.updata.indexOf('queryAll')>=0"></correlation>
+            <correlation
+                class="sty"
+                @radioChange="radioData"
+                v-if="pageData.updata.indexOf('queryAll')>=0"
+            ></correlation>
             <!-- 主体 -->
-            <preview :pageData="pageData" :params="params" ref="previewChild"></preview>
+            <preview
+                :pageData="pageData"
+                :params="params"
+                :everyConfig="everyConfig"
+                ref="previewChild"
+            ></preview>
         </div>
         <search-popup
             @returnMsg="paramsDate"
@@ -349,6 +358,83 @@ export default {
                         }
                     ]
                 }
+            ],
+            // key为接口传入的键名,val为默认值,fix为固定值
+            everyConfig: [
+                {
+                    text: "隐患详情",
+                    value: [
+                        {
+                            key: "bean.yhid",
+                            val: "yhid",
+                            fix: false
+                        },
+                        {
+                            key: "bean.flag",
+                            val: "1",
+                            fix: true
+                        }
+                    ],
+                    postUrl: "biz/im/zdrisknotice/detail.action",
+
+                },
+                {
+                    text: "审批记录",
+                    value: [
+                        {
+                            key: "bussinesskey",
+                            val: "yhid",
+                            fix: false
+                        }
+                    ],
+                    postUrl: "manager/activity/getHicomments.action"
+                },
+                {
+                    text: "自查自改",
+                    value: [
+                        {
+                            key: "bean.yhid",
+                            val: "yhid",
+                            fix: false
+                        },
+                        {
+                            key: "bean.zgtype",
+                            val: "ZGLX002",
+                            fix: true
+                        }
+                    ],
+                    postUrl: "biz/sc/ybyhActiviti/doexp.action"
+                },
+                {
+                    text: "上报上级",
+                    value: [
+                        {
+                            key: "bean.yhid",
+                            val: "yhid",
+                            fix: false
+                        },
+                        {
+                            key: "bean.zgtype",
+                            val: "ZGLX001",
+                            fix: true
+                        }
+                    ],
+                    postUrl: "biz/sc/ybyhActiviti/doexp.action"
+                }
+                // {
+                //     text: "隐患指派",
+                //     value: {
+                //         "sbzpEntity.yhid": "",
+                //         "sbzpEntity.assignFlag": "0",
+                //         "sbzpEntity.zgzrdw":"",
+                //         "sbzpEntity.zgzrdwName":"",
+                //         "sbzpEntity.zgzlyq":"",
+                //         "sbzpEntity.zgdate":"",
+                //         "sbzpEntity.tbr":"",
+                //         "sbzpEntity.memo":"",
+                //     },
+                //     postUrl: "biz/sc/ybyhActiviti/doexp.action"
+                // },
             ]
         };
     },
@@ -373,6 +459,17 @@ export default {
         preview,
         correlation,
         searchPopup
+    },
+    beforeRouteLeave(to, from, next) {
+        if (to.name != "list") {
+            //不是list , 缓存
+            from.meta.keepAlive = true;
+        } else {
+            //list列表页,不缓存
+            from.meta.keepAlive = false;
+            this.$destroy();
+        }
+        next();
     }
 };
 </script>
@@ -388,7 +485,7 @@ export default {
 .wrap {
     padding-top: 1.1rem;
 }
-.sty{
+.sty {
     position: sticky;
     top: 1.1rem;
     z-index: 1000;
