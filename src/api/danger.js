@@ -12,6 +12,9 @@ function doAddSave (data){3.//提交检查结果
 function detail (data){//4.隐患详情
     return axios.post("biz/im/zdrisknotice/detail.action",data);
 }
+function getHicomments (data){//5.审批记录
+    return axios.post("manager/activity/getHicomments.action",data);
+}
 function completenodyTask (data){
     //5.待办事项-自查自改
     //6.待办事项-整改
@@ -26,5 +29,6 @@ export default {
     getExePlan,
     doAddSave,
     detail,
+    getHicomments,
     completenodyTask,
 }

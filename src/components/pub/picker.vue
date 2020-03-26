@@ -5,7 +5,6 @@
         </mt-cell>
         <mt-popup
             v-model="popupVisible"
-            popup-transition="popup-fade"
             closeOnClickModal="true"
             position="bottom"
         >

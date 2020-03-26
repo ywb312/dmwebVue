@@ -1,0 +1,12 @@
+pub
+    picker 选择框组件
+    preview 列表渲染组件
+        previewPopup 列表操作弹出框组件
+    tree 组织结构树组件
+        treePreview 组织树事件和渲染
+    uploadimg 上传图片组件
+danger
+    correlation 与我相关组件
+    searchPopup 右上角查找组件
+    record 审批纪录
+home 三个底部组件切换

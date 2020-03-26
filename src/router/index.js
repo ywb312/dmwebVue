@@ -31,12 +31,13 @@ const routes = [{
 			keepAlive: true
 		}
 	},
+	// 主页模块路由
 	{ //通知公告
 		path: '/inform',
 		name: 'inform',
 		component: resolve => require(['../views/module/inform/inform.vue'], resolve),
 		meta: {
-			keepAlive: true
+			keepAlive: false
 		}
 	},
 	{ //隐患管理
@@ -52,7 +53,7 @@ const routes = [{
 		name: 'plan',
 		component: resolve => require(['../views/module/plan/plan.vue'], resolve),
 		meta: {
-			keepAlive: true
+			keepAlive: false
 		}
 	},
 	{ //提醒预警
@@ -60,7 +61,7 @@ const routes = [{
 		name: 'remind',
 		component: resolve => require(['../views/module/remind/remind.vue'], resolve),
 		meta: {
-			keepAlive: true
+			keepAlive: false
 		}
 	},
 	{ //  风险管理
@@ -68,7 +69,7 @@ const routes = [{
 		name: 'risk',
 		component: resolve => require(['../views/module/risk/risk.vue'], resolve),
 		meta: {
-			keepAlive: true
+			keepAlive: false
 		}
 	},
 	{ //三项人员  
@@ -76,7 +77,7 @@ const routes = [{
 		name: 'person',
 		component: resolve => require(['../views/module/person/person.vue'], resolve),
 		meta: {
-			keepAlive: true
+			keepAlive: false
 		}
 	},
 	{ //方针目标
@@ -84,7 +85,7 @@ const routes = [{
 		name: 'target',
 		component: resolve => require(['../views/module/target/target.vue'], resolve),
 		meta: {
-			keepAlive: true
+			keepAlive: false
 		}
 	},
 	{ //教育培训
@@ -92,7 +93,7 @@ const routes = [{
 		name: 'education',
 		component: resolve => require(['../views/module/education/education.vue'], resolve),
 		meta: {
-			keepAlive: true
+			keepAlive: false
 		}
 	},
 	{ //工艺管理
@@ -100,7 +101,7 @@ const routes = [{
 		name: 'technology',
 		component: resolve => require(['../views/module/technology/technology.vue'], resolve),
 		meta: {
-			keepAlive: true
+			keepAlive: false
 		}
 	},
 	{ //环保管理
@@ -108,7 +109,7 @@ const routes = [{
 		name: 'environment',
 		component: resolve => require(['../views/module/environment/environment.vue'], resolve),
 		meta: {
-			keepAlive: true
+			keepAlive: false
 		}
 	},
 	{ //应急管理
@@ -116,7 +117,7 @@ const routes = [{
 		name: 'emergency',
 		component: resolve => require(['../views/module/emergency/emergency.vue'], resolve),
 		meta: {
-			keepAlive: true
+			keepAlive: false
 		}
 	},
 	{ //事故管理
@@ -124,7 +125,7 @@ const routes = [{
 		name: 'accident',
 		component: resolve => require(['../views/module/accident/accident.vue'], resolve),
 		meta: {
-			keepAlive: true
+			keepAlive: false
 		}
 	},
 	{ //新增隐患
@@ -142,7 +143,25 @@ const routes = [{
 		meta: {
 			keepAlive: false
 		}
-	}
+	},
+
+	// 工作台部分路由
+	{ //待办事项
+		path: '/backlog',
+		name: 'backlog',
+		component: resolve => require(['../views/work/backlog.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //已办事项
+		path: '/finished',
+		name: 'finished',
+		component: resolve => require(['../views/work/finished.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
 ]
 
 const router = new VueRouter({

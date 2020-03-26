@@ -5,19 +5,25 @@
                 class="popupItem"
                 v-for="item in everyConfig"
                 :key="item.text"
-                @click="goRouter(item)"
+                @click.stop="goRouter(item)"
             >{{item.text}}</div>
         </mt-popup>
+        <!-- 跳出的弹窗组件 -->
+        <record ref="child" :recordShow="recordShow" @popupClose="recordShow=false"></record>
     </div>
 </template>
 <script>
 import { Popup, Toast } from "mint-ui";
+import record from "@/components/danger/record";
 // props三个参数 popshow控制组件显示隐藏 everyConfig弹窗的配置项 selcetData选中对象的数据
 export default {
     name: "previewPopup",
     data() {
         return {
-            popupVisible: false
+            popupVisible: false,
+            currentView: "",
+            recordShow: false,
+            resData: {},
         };
     },
     props: ["popshow", "everyConfig", "selcetData"],
@@ -26,8 +32,8 @@ export default {
         goRouter(obj) {
             let self = this;
             // 如果需要跳转页面就直接跳转
+            self.popupVisible = false;
             if (obj.router) {
-                self.popupVisible = false;
                 self.$router.push({
                     path: obj.router,
                     query: {
@@ -36,11 +42,17 @@ export default {
                 });
                 return;
             }
+            // 动态使用路由
+            if (obj.component) {
+                self.recordShow = true;
+                self.currentView = obj.component;
+                self.$refs.child.getData(self.selcetData.yhid);
+                return;
+            }
             // 没有跳转页 就执行接口操作
             self.$api.pub
                 .showPage(obj.postUrl, this.setPostData(obj.value))
                 .then(res => {
-                    self.popupVisible = false;
                     if (res.message) {
                         Toast({
                             message: res.message,
@@ -78,7 +90,8 @@ export default {
     },
     components: {
         "mt-popup": Popup,
-        Toast
+        Toast,
+        record
     }
 };
 </script>

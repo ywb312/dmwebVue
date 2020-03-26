@@ -359,22 +359,15 @@ export default {
                     ]
                 }
             ],
-            // key为接口传入的键名,val为默认值,fix为固定值
+            // key为接口传入的键名,val为默认值,fix为固定值 
             everyConfig: [
                 {
-                    text: "隐患详情",
+                    text: "查看详情",
                     router:"/detail",
                 },
                 {
                     text: "审批记录",
-                    value: [
-                        {
-                            key: "bussinesskey",
-                            val: "yhid",
-                            fix: false
-                        }
-                    ],
-                    postUrl: "manager/activity/getHicomments.action"
+                    component:"record",
                 },
                 {
                     text: "自查自改",
@@ -475,7 +468,6 @@ export default {
 .sty {
     position: sticky;
     top: 1.1rem;
-    z-index: 1000;
     background: white;
 }
 </style>

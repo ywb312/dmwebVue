@@ -6,7 +6,6 @@
         <mt-popup
             class="fill"
             v-model="popupVisible"
-            popup-transition="popup-fade"
             closeOnClickModal="true"
             position="right"
         >
