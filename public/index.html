@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <title>vuedmweb</title>
   <style>
@@ -29,10 +29,12 @@
       padding: 0;
       border: 0;
     }
+
     html,
     body {
       height: 100%;
     }
+
     body {
       box-sizing: border-box;
       background: #fff;
@@ -40,21 +42,25 @@
       font-size: 14px;
       font-family: "SimSun", "宋体", "Arial Narrow";
     }
+
     ul,
     ol {
       list-style-type: none;
     }
+
     select,
     input,
     img,
     select {
       vertical-align: middle;
     }
+
     a {
       text-decoration: none;
     }
   </style>
 </head>
+
 <body>
   <noscript>
     <strong>We're sorry but vuedmweb doesn't work properly without JavaScript enabled. Please enable it to
@@ -79,4 +85,5 @@
     e.addEventListener && (n.addEventListener(o, a, !1), e.addEventListener("DOMContentLoaded", a, !1))
   }(window);
 </script>
+
 </html>

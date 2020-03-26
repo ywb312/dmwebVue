@@ -25,6 +25,18 @@ export default {
         // 点击
         goRouter(obj) {
             let self = this;
+            // 如果需要跳转页面就直接跳转
+            if (obj.router) {
+                self.popupVisible = false;
+                self.$router.push({
+                    path: obj.router,
+                    query: {
+                        id: self.selcetData.yhid
+                    }
+                });
+                return;
+            }
+            // 没有跳转页 就执行接口操作
             self.$api.pub
                 .showPage(obj.postUrl, this.setPostData(obj.value))
                 .then(res => {
@@ -76,7 +88,7 @@ export default {
     padding: 0.2rem 0.2rem;
     font-size: 16px;
     text-align: center;
-    border-bottom: 1px solid #2585cf;
+    border-bottom: 1px solid rgb(230, 230, 230);
 }
 .popupItem:last-of-type {
     border-bottom: none;

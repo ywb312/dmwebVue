@@ -136,9 +136,9 @@ const routes = [{
 		}
 	},
 	{ //详情
-		path: '/details',
-		name: 'details',
-		component: resolve => require(['../views/details.vue'], resolve),
+		path: '/detail',
+		name: 'detail',
+		component: resolve => require(['../views/module/danger/detail.vue'], resolve),
 		meta: {
 			keepAlive: false
 		}

@@ -363,20 +363,7 @@ export default {
             everyConfig: [
                 {
                     text: "隐患详情",
-                    value: [
-                        {
-                            key: "bean.yhid",
-                            val: "yhid",
-                            fix: false
-                        },
-                        {
-                            key: "bean.flag",
-                            val: "1",
-                            fix: true
-                        }
-                    ],
-                    postUrl: "biz/im/zdrisknotice/detail.action",
-
+                    router:"/detail",
                 },
                 {
                     text: "审批记录",

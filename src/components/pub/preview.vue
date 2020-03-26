@@ -29,7 +29,9 @@
     </div>
 </template>
 <script>
+// 这是基本渲染功能的组件 公用
 import { Loadmore } from "mint-ui";
+// 具体某一项所操作的组件
 import pop from "@/components/pub/previewPopup";
 export default {
     name: "preview",
