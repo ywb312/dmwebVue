@@ -2,7 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store/index'
 import login from '../views/login.vue'
-import home from '../views/home.vue'
+import home from '../views/home/home.vue'
+import homePage from '../views/home/homePage.vue'
+import computerPage from '../views/home/computerPage.vue'
+import mePage from '../views/home/mePage.vue'
 import list from '../views/list.vue'
 // 十二个功能分为十二个路由 按需加载
 Vue.use(VueRouter)
@@ -21,7 +24,23 @@ const routes = [{
 		component: home,
 		meta: {
 			keepAlive: true
-		}
+		},
+		children: [{
+				path: '/',
+				name: 'homePage',
+				component: homePage
+			},
+			{
+				path: 'computerPage',
+				name: 'computerPage',
+				component: computerPage
+			},
+			{
+				path: 'mePage',
+				name: 'mePage',
+				component: mePage
+			},
+		]
 	},
 	{
 		path: '/list',

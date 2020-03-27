@@ -28,17 +28,6 @@ export default {
     }
 };
 </script>
-<style>
-.mint-radiolist {
-    display: flex;
-    align-items: center;
-    color: black;
-}
-.mint-radiolist-title {
-    font-size: 14px;
-    color: #000;
-}
-</style>
 <style scoped>
 .correlation {
     height: 100%;

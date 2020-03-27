@@ -142,12 +142,7 @@ export default {
     components: {}
 };
 </script>
-<style>
-.mint-header {
-    background-color: #2585cf;
-    height: 1.1rem;
-    font-size: 20px;
-}
+<style scoped>
 .box {
     margin: 0.3rem;
     padding: 10px;

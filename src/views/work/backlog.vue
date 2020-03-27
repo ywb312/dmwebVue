@@ -32,10 +32,6 @@ export default {
                         value: "crdesc"
                     },
                     {
-                        key: "隐患场所",
-                        value: "craddr"
-                    },
-                    {
                         key: "审批时间",
                         value: "pcdate"
                     }

@@ -7,7 +7,7 @@
             </router-link>
         </mt-header>
         <div class="banner">
-            <img src="@/assets/incid_management.png" alt />
+            <img src="@/assets/img/incid_management.png" alt />
         </div>
         <mt-cell
             v-for="(item,index) in pageData.page"
@@ -16,7 +16,7 @@
             is-link
             :to="{path:pageData.path,query:{a:index}}"
         >
-            <img slot="icon" src="@/assets/incid_rep.png" width="20" height="20" />
+            <img slot="icon" src="@/assets/img/incid_rep.png" width="20" height="20" />
         </mt-cell>
     </div>
 </template>
@@ -32,10 +32,10 @@ export default {
     },
     // 控制list缓存
     beforeRouteLeave(to, from, next) {
-        // 如果是主页,则不缓存;不是主页则缓存。
-        if (to.name != "home") {//不是home , 缓存
+        // 如果是主页,则不缓存;不是主页则缓存。homePage是home的子路由
+        if (to.name != "homePage") {//不是home , 缓存
             from.meta.keepAlive = true;
-        } else {//home主页,不缓存
+        } else {//主页,不缓存
             from.meta.keepAlive = false;
             this.$destroy();
         }

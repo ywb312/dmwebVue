@@ -6,10 +6,10 @@
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>
             </router-link>
             <mt-button v-if="a==0" slot="right" @click="$router.push('/increase')">
-                <img src="../../../assets/iconfont/add.svg" />
+                <img src="@/assets/iconfont/add.svg" />
             </mt-button>
             <mt-button v-else slot="right" @click="popshow=true">
-                <img src="../../../assets/iconfont/search.svg" />
+                <img src="@/assets/iconfont/search.svg" />
             </mt-button>
         </mt-header>
         <div class="wrap">

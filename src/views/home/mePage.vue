@@ -1,5 +1,7 @@
 <template>
-    <div class="mePage"></div>
+    <div class="mePage">
+        <mt-header title="我的"></mt-header>
+    </div>
 </template>
 <script>
 export default {

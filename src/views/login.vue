@@ -7,11 +7,11 @@
         <div class="main">
             <div>
                 <mt-field class="input" placeholder="请输入用户名" v-model="username"></mt-field>
-                <img src="../assets/icon-test_1.png" alt />
+                <img src="@/assets/img/icon-test_1.png" alt />
             </div>
             <div>
                 <mt-field class="input" placeholder="请输入密码" type="password" v-model="password"></mt-field>
-                <img src="../assets/icon-test.png" alt />
+                <img src="@/assets/img/icon-test.png" alt />
             </div>
         </div>
         <p class="loginBtn" @click="login">登录</p>

@@ -6,14 +6,14 @@
                 <div class="load-container">
                     <img :src="item" />
                     <span @click="delImg(index)">
-                        <img style="color:#FFF" src="../../assets/iconfont/close.svg" alt="">
+                        <img style="color:#FFF" src="@/assets/iconfont/close.svg" alt="">
                     </span>
                 </div>
             </li>
             <li class="img-upload" v-if="allowAddImg">
                 <div class="only-add">
                     <div class="load-add" @click="upload()">
-                        <img style="color:black" src="../../assets/iconfont/increase.png">
+                        <img style="color:black" src="@/assets/iconfont/increase.png">
                         <input
                             type="file"
                             accept="image/*"

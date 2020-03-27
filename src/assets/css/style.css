@@ -1,0 +1,16 @@
+/* 标题样式 */
+.mint-header {
+    background-color: #2585cf;
+    height: 1.1rem;
+    font-size: 22px;
+}
+/* 单选框同行显示 */
+.mint-radiolist {
+    display: flex;
+    align-items: center;
+    color: black;
+}
+.mint-radiolist-title {
+    font-size: 14px;
+    color: #000;
+}
