@@ -8,6 +8,11 @@ export default new Vuex.Store({
 		isLoading: false,
 		// 用户进入功能的序列id
 		listNum: 1,
+		// 待办事项数据存放
+		backlog:{
+			records:0,
+			rows:[]
+		},
 		// 列表的渲染数据（标题、路由名、路由下的配置）
 		listPage: [{
 				title: "通知公告",
@@ -78,10 +83,13 @@ export default new Vuex.Store({
 			state.listNum = num;
 		},
 		setIsLoading(state, bol) {
-			state.isLoading = bol;
+			state.isLoading = bol.isLoading;
 		},
 		setTree(state,data){
 			state.treeData = data;
+		},
+		setBacklog(state,data){
+			state.backlog = data;
 		}
 	},
 	actions: {},

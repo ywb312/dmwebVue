@@ -51,7 +51,7 @@ export default {
                 });
                 return;
             }
-            _this.$api.login
+            _this.$api.pub
                 .login({
                     username: _this.username,
                     password: _this.password,

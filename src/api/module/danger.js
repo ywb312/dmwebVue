@@ -1,4 +1,4 @@
-import axios from './http'
+import axios from '../http'
 
 function doAddSaveSingle (data){//安全检查提交隐患
     return axios.post("biz/sc/checkplandetail/doAddSaveSingle.action",data);

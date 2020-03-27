@@ -11,6 +11,12 @@
                 @click.stop="toRouter(item)"
             >
                 <img :src="item.iconUrl" />
+                <mt-badge
+                    v-show="item.badge>0"
+                    class="float"
+                    type="error"
+                    size="small"
+                >{{item.badge}}</mt-badge>
                 <figcaption>{{item.text}}</figcaption>
             </figure>
         </div>
@@ -25,13 +31,14 @@ export default {
                     iconUrl: require("@/assets/img/home.png"),
                     text: "主页",
                     name: "homePage",
-                    active: true
+                    active: false
                 },
                 {
                     iconUrl: require("@/assets/img/computer.png"),
                     text: "工作台",
                     name: "computerPage",
-                    active: false
+                    active: false,
+                    badge: 0
                 },
                 {
                     iconUrl: require("@/assets/img/me.png"),
@@ -39,8 +46,28 @@ export default {
                     name: "mePage",
                     active: false
                 }
-            ]
+            ],
+            // 需要传的消息数 不是工作台的的数
+            comBadge: 0
         };
+    },
+    created() {
+        let self = this;
+        self.tabConfig.forEach(item => {
+            if (item.name == self.$route.name) {
+                item.active = true;
+            }
+        });
+        this.$api.work
+            .taskList({
+                page: 1,
+                rows: 10,
+                session: window.localStorage["session_Id"]
+            })
+            .then(res => {
+                self.$store.commit("setBacklog", res);
+                self.$set(self.tabConfig[1], "badge", res.records);
+            });
     },
     methods: {
         toRouter(obj) {
@@ -51,7 +78,9 @@ export default {
                 item.active = false;
             });
             obj.active = true;
-            this.$router.push({ name: obj.name });
+            this.$router.push({
+                name: obj.name
+            });
         }
     }
 };
@@ -70,6 +99,10 @@ export default {
     color: #999999;
     background-color: #565656;
 }
+.float {
+    position: absolute;
+    top: 2px;
+}
 .item {
     display: block;
     padding: 7px 0;
@@ -77,6 +110,7 @@ export default {
     text-align: center;
     margin: 0;
     text-decoration: none;
+    position: relative;
 }
 .item img {
     width: 24px;

@@ -457,14 +457,6 @@ export default {
 .danger {
     height: 100%;
 }
-.mint-header {
-    background-color: #2585cf;
-    height: 1.1rem;
-    font-size: 20px;
-}
-.wrap {
-    padding-top: 1.1rem;
-}
 .sty {
     position: sticky;
     top: 1.1rem;

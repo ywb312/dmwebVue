@@ -47,11 +47,6 @@ export default {
 .list {
     height: 100%;
 }
-.mint-header {
-    background-color: #2585cf;
-    height: 1.1rem;
-    font-size: 20px;
-}
 .banner img {
     display: block;
     width: 100%;

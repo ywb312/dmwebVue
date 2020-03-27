@@ -47,7 +47,7 @@ export default {
             noDate: false,
             // 没有更多数据了
             noMore: false,
-            // 控制模态框的显示a
+            // 控制模态框的显示
             popshow: false,
             // 选中的列表数据
             selcetData:""

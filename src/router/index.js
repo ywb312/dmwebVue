@@ -22,23 +22,30 @@ const routes = [{
 		path: '/home',
 		name: 'home',
 		component: home,
-		meta: {
-			keepAlive: true
-		},
+		redirect:"/home/homePage",
 		children: [{
-				path: '/',
+				path: 'homePage',
 				name: 'homePage',
-				component: homePage
+				component: homePage,
+				meta: {
+					keepAlive: true
+				},
 			},
 			{
 				path: 'computerPage',
 				name: 'computerPage',
-				component: computerPage
+				component: computerPage,
+				meta: {
+					keepAlive: true
+				},
 			},
 			{
 				path: 'mePage',
 				name: 'mePage',
-				component: mePage
+				component: mePage,
+				meta: {
+					keepAlive: true
+				},
 			},
 		]
 	},

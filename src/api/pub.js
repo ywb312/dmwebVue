@@ -10,7 +10,12 @@ function getTree (){
     return axios.post("/manager/sys/dept/tree4.action");
 }
 
+function login (data){
+    return axios.post('main/login.action',data);
+}
+
 export default {
+    login,
     showPage,
     getTree,
 }

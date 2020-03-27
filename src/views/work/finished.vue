@@ -26,9 +26,4 @@ export default {
 };
 </script>
 <style scoped>
-.mint-header {
-    background-color: #2585cf;
-    height: 1.1rem;
-    font-size: 20px;
-}
 </style>

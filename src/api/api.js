@@ -1,11 +1,11 @@
-import login from './login'
 import pub from './pub'
-import inform from './inform'
-import danger from './danger'
+import inform from './module/inform'
+import danger from './module/danger'
+import work from './work'
 
 export default {
-    login,
     pub,
     inform,
-    danger
+    danger,
+    work
 }
