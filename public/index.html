@@ -30,12 +30,8 @@
       border: 0;
     }
 
-    html,
     body {
       height: 100%;
-    }
-
-    body {
       box-sizing: border-box;
       background: #fff;
       color: #333;
@@ -70,6 +66,7 @@
   <!-- built files will be auto injected -->
 </body>
 <script>
+  let screenHeight = window.outerHeight;
   ! function (n) {
     var e = n.document,
       t = e.documentElement,
@@ -80,7 +77,8 @@
         var n = t.clientWidth || 320;
         n > 720 && (n = 720);
         // t.style.fontSize = n / d + "px"
-        t.style.cssText = 'font-size:' + n / d + 'px!important;'
+        // 后面设置html高度
+        t.style.cssText = 'font-size:' + n / d + 'px!important;height:' + screenHeight + 'px;'
       };
     e.addEventListener && (n.addEventListener(o, a, !1), e.addEventListener("DOMContentLoaded", a, !1))
   }(window);

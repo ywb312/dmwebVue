@@ -461,5 +461,6 @@ export default {
     position: sticky;
     top: 1.1rem;
     background: white;
+    z-index: 100;
 }
 </style>

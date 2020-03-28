@@ -16,7 +16,7 @@
             ref="loadmore"
             class="wrap"
         >
-            <div class="wrapper" v-for="(item,index) in backlog.rows" :key="index">
+            <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                 <div class="title">
                     <h3>{{index+1+"."+item.name}}</h3>
                     <p></p>
@@ -33,19 +33,19 @@
                 <div class="bottom" @click="btnClick(item)">操作</div>
             </div>
         </mt-loadmore>
-        <!-- <pop
+        <pop
             :popshow="popshow"
             :everyConfig="everyConfig"
             :selcetData="selcetData"
             @popupClose="popshow=false"
-        ></pop>-->
+        ></pop>
         <div v-show="noDate" class="noMoreText">暂无数据</div>
         <div v-show="noMore" class="noMoreText">没有更多数据了</div>
     </div>
 </template>
 <script>
 import { Loadmore } from "mint-ui";
-// import pop from "@/components/pub/previewPopup";
+import pop from "@/components/pub/previewPopup";
 export default {
     name: "backlog",
     data() {
@@ -63,12 +63,40 @@ export default {
             // 控制模态框的显示a
             popshow: false,
             // 选中的列表数据
-            selcetData: ""
+            selcetData: "",
+            everyConfig: [
+                {
+                    text: "查看详情",
+                    router:"/detail",
+                },
+                {
+                    text: "审批记录",
+                    component:"record",
+                },
+                {
+                    text: "自查自改",
+                    value: [
+                        {
+                            key: "bean.yhid",
+                            val: "yhid",
+                            fix: false
+                        },
+                        {
+                            key: "bean.zgtype",
+                            val: "ZGLX002",
+                            fix: true
+                        }
+                    ],
+                    postUrl: "biz/sc/ybyhActiviti/doexp.action"
+                },
+            ]
         };
     },
     created() {
         this.rendering = this.backlog.rows;
-        console.log(this.rendering);
+        if (!this.backlog.rows) {
+            this.getData();
+        }
     },
     methods: {
         getData(more = true) {
@@ -127,8 +155,7 @@ export default {
             this.noDate = false;
             this.rendering = [];
             this.getData(false);
-        },
-        
+        }
     },
     computed: {
         backlog() {
@@ -136,8 +163,8 @@ export default {
         }
     },
     components: {
-        "mt-loadmore": Loadmore
-        // pop
+        "mt-loadmore": Loadmore,
+        pop
     }
 };
 </script>
