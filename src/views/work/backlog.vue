@@ -24,7 +24,7 @@
                 <div class="main">
                     <div>
                         <span>{{item.startUserName+"发现的"+item.crname+"进行"+item.taskDefinitionKey+"处理"}}</span>
-                        <span style="min-width:70px">{{item.startUserName}}</span>
+                        <span style="min-width:70px">{{item.owner}}</span>
                     </div>
                     <div>
                         <span>{{item.createTime}}</span>
@@ -74,7 +74,7 @@ export default {
         getData(more = true) {
             this.$api.work
                 .taskList({
-                    page: 1,
+                    page: this.page,
                     rows: 10,
                     session: window.localStorage["session_Id"]
                 })
@@ -127,7 +127,8 @@ export default {
             this.noDate = false;
             this.rendering = [];
             this.getData(false);
-        }
+        },
+        
     },
     computed: {
         backlog() {
