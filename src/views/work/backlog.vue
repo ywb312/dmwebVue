@@ -32,6 +32,8 @@
                 </div>
                 <div class="bottom" @click="btnClick(item)">操作</div>
             </div>
+            <div v-show="noDate" class="noMoreText">暂无数据</div>
+            <div v-show="noMore" class="noMoreText">没有更多数据了</div>
         </mt-loadmore>
         <pop
             :popshow="popshow"
@@ -39,8 +41,6 @@
             :selcetData="selcetData"
             @popupClose="popshow=false"
         ></pop>
-        <div v-show="noDate" class="noMoreText">暂无数据</div>
-        <div v-show="noMore" class="noMoreText">没有更多数据了</div>
     </div>
 </template>
 <script>
@@ -67,33 +67,21 @@ export default {
             everyConfig: [
                 {
                     text: "查看详情",
-                    router:"/detail",
+                    router: "/detail"
                 },
                 {
                     text: "审批记录",
-                    component:"record",
+                    component: "record"
                 },
                 {
                     text: "自查自改",
-                    value: [
-                        {
-                            key: "bean.yhid",
-                            val: "yhid",
-                            fix: false
-                        },
-                        {
-                            key: "bean.zgtype",
-                            val: "ZGLX002",
-                            fix: true
-                        }
-                    ],
-                    postUrl: "biz/sc/ybyhActiviti/doexp.action"
-                },
+                    router: "/change"
+                }
             ]
         };
     },
     created() {
-        this.rendering = this.backlog.rows;
+        this.rendering = this.settingRes(this.backlog.rows);
         if (!this.backlog.rows) {
             this.getData();
         }
@@ -104,7 +92,8 @@ export default {
                 .taskList({
                     page: this.page,
                     rows: 10,
-                    session: window.localStorage["session_Id"]
+                    session: window.localStorage["session_Id"],
+                    sord: "asc"
                 })
                 .then(res => {
                     if (!res.rows) {
@@ -112,6 +101,7 @@ export default {
                     }
                     // 判断rows是否返回数据
                     if (res.rows.length != 0) {
+                        res.rows = this.settingRes(res.rows);
                         // 判断是新增还是替换  默认为新增
                         if (more) {
                             this.rendering.push(...res.rows);
@@ -135,6 +125,7 @@ export default {
         // 按钮点击事件popup组件显示
         btnClick(obj) {
             this.selcetData = obj;
+            this.selcetData.yhid = obj.bussinesskey;
             this.popshow = true;
         },
         // 上拉加载方法
@@ -155,6 +146,15 @@ export default {
             this.noDate = false;
             this.rendering = [];
             this.getData(false);
+        },
+        // 处理res.rows的taskDefinitionKey
+        settingRes(arr) {
+            arr.forEach(item => {
+                if (item.taskDefinitionKey == "zczg") {
+                    item.taskDefinitionKey = "自查自改";
+                }
+            });
+            return arr;
         }
     },
     computed: {

@@ -18,9 +18,12 @@ function getHicomments (data){//5.审批记录
 function completenodyTask (data){
     //5.待办事项-自查自改
     //6.待办事项-整改
-    //7.待办事项-一般隐患验
-    //8.待办事项-收到报上来
-    //9.待办事项-收到报上来
+    //7.待办事项-指派
+    //8.待办事项-上报
+    //9.待办事项-评估
+    //9.待办事项-督办
+    //9.待办事项-闭环
+    //9.待办事项-验收
     return axios.post("biz/sc/ybyhActiviti/completenodyTask.action",data);
 }
 

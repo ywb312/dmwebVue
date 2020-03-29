@@ -7,6 +7,7 @@
             closeOnClickModal="true"
         >
             <h2 class="title">审批意见</h2>
+            <div class="noData" v-if="resData.length==0">无审批记录</div>
             <div class="chunk" v-for="item in resData" :key="item.id">
                 <div>
                     <h3>{{item.name}}</h3>
@@ -81,6 +82,10 @@ export default {
     text-align: center;
     padding: 0.2rem 0;
     border-bottom: solid 1px #ddd;
+}
+.noData{
+    padding-top: 10px;
+    text-align: center;
 }
 .minWidth {
     min-width: 70px;

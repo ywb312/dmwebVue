@@ -18,22 +18,27 @@
         >
             <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                 <div class="title">
-                    <h3>{{index+1+"."+item.name}}</h3>
+                    <h3>{{index+1+"."+item.mattername}}</h3>
                     <p></p>
                 </div>
                 <div class="main">
                     <div>
-                        <span>{{item.startUserName+"发现的"+item.crname+"进行"+item.taskDefinitionKey+"处理"}}</span>
-                        <span style="min-width:70px">{{item.owner}}</span>
+                        <span>事项内容: {{item.memo}}</span>
+                        <span style="min-width:70px">{{item.handlename}}</span>
                     </div>
                     <div>
-                        <span>{{item.createTime}}</span>
+                        <span>发布时间:</span>
+                        <span>{{item.addtime}}</span>
+                    </div>
+                    <div>
+                        <span>处理时间:</span>
+                        <span>{{item.handletime}}</span>
                     </div>
                 </div>
             </div>
+            <div v-show="noDate" class="noMoreText">暂无数据</div>
+            <div v-show="noMore" class="noMoreText">没有更多数据了</div>
         </mt-loadmore>
-        <div v-show="noDate" class="noMoreText">暂无数据</div>
-        <div v-show="noMore" class="noMoreText">没有更多数据了</div>
     </div>
 </template>
 <script>
@@ -53,16 +58,19 @@ export default {
             noMore: false
         };
     },
-    created(){
+    created() {
         this.getData();
     },
     methods: {
         getData(more = true) {
             this.$api.work
-                .taskList({
+                .finshList({
                     page: this.page,
                     rows: 10,
-                    session: window.localStorage["session_Id"]
+                    sord: "asc",
+                    nd: "1585481133621",
+                    sidx: "",
+                    _search: false
                 })
                 .then(res => {
                     if (!res.rows) {
@@ -114,4 +122,30 @@ export default {
 };
 </script>
 <style scoped>
+.wrapper {
+    border-bottom: solid 1px #ddd;
+    margin-bottom: 5px;
+}
+.title,
+.main div {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.1rem 0.4rem;
+    background-color: rgb(250, 250, 250);
+}
+.bottom {
+    width: 100%;
+    padding: 0.2rem 0.3rem;
+    margin-bottom: -1px;
+    text-align: center;
+    border-top: solid 1px #ddd;
+    border-bottom: solid 1px #ddd;
+    letter-spacing: 0.2rem;
+}
+.noMoreText {
+    width: 100%;
+    padding: 0.3rem 0;
+    text-align: center;
+    color: gray;
+}
 </style>
