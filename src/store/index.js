@@ -77,6 +77,8 @@ export default new Vuex.Store({
 		],
 		// 组织结构树
 		treeData:"",
+		// 点击操作按钮获取的对象
+		selcetData:{},
 	},
 	mutations: {
 		setListNum(state, num) {
@@ -90,6 +92,9 @@ export default new Vuex.Store({
 		},
 		setBacklog(state,data){
 			state.backlog = data;
+		},
+		getSelcetData(state,data){
+			state.selcetData = data;
 		}
 	},
 	actions: {},

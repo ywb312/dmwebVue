@@ -1,35 +1,43 @@
 <template>
     <div class="detail">
         <!-- 标题  -->
-        <mt-header title="隐患详情">
+        <mt-header title="隐患详情" fixed>
             <router-link to slot="left">
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>
             </router-link>
         </mt-header>
-        <div class="box">
-            <h2 class="color">隐患描述</h2>
-            <mt-field label="作业地点" v-model="pro.craddr" readonly></mt-field>
-            <mt-field label="隐患名称" v-model="pro.crname" readonly></mt-field>
-            <mt-field label="检查单位" v-model="pro.crqy" readonly></mt-field>
-            <mt-field label="检查人员" v-model="pro.tbr" readonly></mt-field>
-            <mt-field label="隐患类型" v-model="pro.prtype" readonly></mt-field>
-            <mt-field label="隐患来源" v-model="pro.sourcetype" readonly></mt-field>
-            <mt-field label="检查日期" v-model="pro.pcdate" readonly></mt-field>
-            <mt-field label="存在问题" v-model="pro.crdesc" readonly></mt-field>
-            <div v-if="pro.yhImg.length>0">
-                <h4 class="color">检查现场图片</h4>
-                <div class="imgs">
-                    <img v-for="item in pro.yhImg" :key="item" :src="item" alt />
-                    <!-- 添加空div 使flex最后一行左对齐 -->
-                    <div class="holder"></div>
+        <div class="wrap">
+            <div class="box">
+                <h2 class="color">隐患描述</h2>
+                <mt-field label="作业地点" v-model="pro.craddr" readonly></mt-field>
+                <mt-field label="隐患名称" v-model="pro.crname" readonly></mt-field>
+                <mt-field label="检查单位" v-model="pro.crqy" readonly></mt-field>
+                <mt-field label="检查人员" v-model="pro.tbr" readonly></mt-field>
+                <mt-field label="隐患类型" v-model="pro.prtype" readonly></mt-field>
+                <mt-field label="隐患来源" v-model="pro.sourcetype" readonly></mt-field>
+                <mt-field label="检查日期" v-model="pro.pcdate" readonly></mt-field>
+                <mt-field label="存在问题" v-model="pro.crdesc" readonly></mt-field>
+                <div v-if="pro.yhImg.length>0">
+                    <h4 class="color">检查现场图片</h4>
+                    <div class="imgs">
+                        <img v-for="item in pro.yhImg" :key="item" :src="item" alt />
+                        <!-- 添加空div 使flex最后一行左对齐 -->
+                        <div class="holder"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div v-for="item in infos" :key="item.yhzt">
-            <img class="arrow" src="@/assets/iconfont/downarrow.svg" alt />
-            <div class="box">
-                <h2 class="color">{{item.text}}</h2>
-                <mt-field v-for="n in item.config" :key="n.label" :label="n.label" v-model="n.key" readonly></mt-field>
+            <div v-for="item in infos" :key="item.yhzt">
+                <img class="arrow" src="@/assets/iconfont/downarrow.svg" alt />
+                <div class="box">
+                    <h2 class="color">{{item.text}}</h2>
+                    <mt-field
+                        v-for="n in item.config"
+                        :key="n.label"
+                        :label="n.label"
+                        v-model="n.key"
+                        readonly
+                    ></mt-field>
+                </div>
             </div>
         </div>
     </div>
@@ -50,7 +58,7 @@ export default {
                 crdesc: "",
                 yhImg: []
             },
-            infos:[],
+            infos: [],
             // 指派数据渲染设置
             zpConfig: [
                 {
@@ -76,7 +84,7 @@ export default {
                 {
                     label: "备注",
                     key: "memo"
-                },
+                }
             ],
             // 整改数据渲染设置
             zgConfig: [
@@ -95,15 +103,15 @@ export default {
                 {
                     label: "整改日期",
                     key: "createDate"
-                },
-            ],
+                }
+            ]
             // 其他数据渲染设置根据zpConfig格式添加即可
         };
     },
     created() {
         let self = this;
         let obj = {
-            "bean.yhid": this.$route.query.id,
+            "bean.yhid": this.selcetData.yhid,
             "bean.flag": "1"
         };
         self.$api.danger.detail(obj).then(res => {
@@ -111,19 +119,20 @@ export default {
             self.setInfos(res.infos);
         });
     },
-    methods:{
+    methods: {
         // 对数据进行筛选 添加标题
-        setInfos(data){
+        setInfos(data) {
             let self = this;
             data.forEach(item => {
                 switch (item.yhzt) {
                     case "整改":
                         item.text = "隐患指派";
-                        self.setInfoOne(item,self.zpConfig);
+                        self.setInfoOne(item, self.zpConfig);
                         break;
                     case "验收":
+                    case "验收结果":
                         item.text = "隐患整改";
-                        self.setInfoOne(item,self.zgConfig);
+                        self.setInfoOne(item, self.zgConfig);
                         break;
                     default:
                         break;
@@ -132,14 +141,18 @@ export default {
             self.infos = data;
         },
         // 将整合好的数据添回至某一项
-        setInfoOne(data,config){
+        setInfoOne(data, config) {
             config.forEach(item => {
-                item.key = data[item.key]
+                item.key = data[item.key];
             });
             data.config = config;
-        },
+        }
     },
-    components: {}
+    computed: {
+        selcetData() {
+            return this.$store.state.selcetData;
+        }
+    }
 };
 </script>
 <style scoped>

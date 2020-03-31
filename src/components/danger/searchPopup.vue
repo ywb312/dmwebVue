@@ -5,8 +5,11 @@
                 <div class="title">隐患条件查询</div>
                 <tree v-if="companyShow" title="查询单位" @selectMsg="getCompany"></tree>
                 <pick v-if="statusShow" title="隐患状态" :slots="statusSlots" @returnMsg="getStatus"></pick>
-                <mt-field label="起始日期" placeholder="请选择开始日期" type="date" v-model="startDate"></mt-field>
-                <mt-field label="截至日期" placeholder="请选择截至日期" type="date" v-model="endDate"></mt-field>
+                <double-date-pick
+                    :config="dbDateConifg"
+                    @returnDate1="getStartDate"
+                    @returnDate2="getEndDate"
+                ></double-date-pick>
                 <mt-button class="btn" type="primary" size="large" @click="update">确定</mt-button>
             </div>
         </div>
@@ -15,6 +18,7 @@
 <script>
 import pick from "@/components/pub/picker";
 import tree from "@/components/pub/tree";
+import doubleDatePick from "@/components/pub/doubleDatePick";
 import { Toast } from "mint-ui";
 export default {
     name: "searchPopup",
@@ -72,9 +76,13 @@ export default {
                 }
             ],
             zgzrdw: "",
+            dbDateConifg: [
+                { title: "起始日期", placeholder: "请选择开始日期" },
+                { title: "截至日期", placeholder: "请选择截至日期" }
+            ]
         };
     },
-    props: ["popshow", "statusShow","companyShow"],
+    props: ["popshow", "statusShow", "companyShow"],
     methods: {
         // 返回隐患状态
         getStatus(v) {
@@ -82,6 +90,12 @@ export default {
         },
         getCompany(v) {
             this.zgzrdw = v.id;
+        },
+        getStartDate(v) {
+            this.startDate = v;
+        },
+        getEndDate(v) {
+            this.endDate = v;
         },
         update() {
             let obj = {
@@ -96,7 +110,7 @@ export default {
                     position: "bottom",
                     duration: 2000
                 });
-                return
+                return;
             }
             this.$emit("popupClose");
             this.$emit("returnMsg", obj);
@@ -117,7 +131,7 @@ export default {
     components: {
         pick,
         tree,
-        Toast
+        doubleDatePick
     }
 };
 </script>

@@ -9,4 +9,4 @@ danger
     correlation 与我相关组件
     searchPopup 右上角查找组件
     record 审批纪录
-home 三个底部组件切换
+work change路由下的提交 根据功能不同切换其路由

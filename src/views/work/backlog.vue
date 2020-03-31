@@ -23,7 +23,7 @@
                 </div>
                 <div class="main">
                     <div>
-                        <span>{{item.startUserName+"发现的"+item.crname+"进行"+item.taskDefinitionKey+"处理"}}</span>
+                        <span>{{item.startUserName+"发现的"+item.crname+"进行"+item.taskKeyText+"处理"}}</span>
                         <span style="min-width:70px">{{item.owner}}</span>
                     </div>
                     <div>
@@ -35,12 +35,7 @@
             <div v-show="noDate" class="noMoreText">暂无数据</div>
             <div v-show="noMore" class="noMoreText">没有更多数据了</div>
         </mt-loadmore>
-        <pop
-            :popshow="popshow"
-            :everyConfig="everyConfig"
-            :selcetData="selcetData"
-            @popupClose="popshow=false"
-        ></pop>
+        <pop :popshow="popshow" :everyConfig="everyConfig" @popupClose="popshow=false"></pop>
     </div>
 </template>
 <script>
@@ -62,8 +57,6 @@ export default {
             noMore: false,
             // 控制模态框的显示a
             popshow: false,
-            // 选中的列表数据
-            selcetData: "",
             everyConfig: [
                 {
                     text: "查看详情",
@@ -75,7 +68,8 @@ export default {
                 },
                 {
                     text: "自查自改",
-                    router: "/change"
+                    router: "/change",
+                    routerQuery: { type: "zczg" }
                 }
             ]
         };
@@ -124,8 +118,8 @@ export default {
         },
         // 按钮点击事件popup组件显示
         btnClick(obj) {
-            this.selcetData = obj;
-            this.selcetData.yhid = obj.bussinesskey;
+            obj.yhid = obj.bussinesskey;
+            this.$store.commit("getSelcetData", obj);
             this.popshow = true;
         },
         // 上拉加载方法
@@ -151,7 +145,7 @@ export default {
         settingRes(arr) {
             arr.forEach(item => {
                 if (item.taskDefinitionKey == "zczg") {
-                    item.taskDefinitionKey = "自查自改";
+                    item.taskKeyText = "自查自改";
                 }
             });
             return arr;

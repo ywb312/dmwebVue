@@ -188,6 +188,14 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //自查自改
+		path: '/change',
+		name: 'change',
+		component: resolve => require(['../views/work/change.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
 ]
 
 const router = new VueRouter({

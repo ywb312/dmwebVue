@@ -17,13 +17,15 @@
                 <div class="main">
                     <div v-for="(n,m) in pageData.main" :key="m">
                         <span>{{n.key}}:</span>
-                        <span style="max-width:250px;">{{item[n.value]!=null?delHtmlTag(item[n.value]):""}}</span>
+                        <span
+                            style="max-width:250px;"
+                        >{{item[n.value]!=null?delHtmlTag(item[n.value]):""}}</span>
                     </div>
                 </div>
                 <div class="bottom" @click="btnClick(item)">操作</div>
             </div>
         </mt-loadmore>
-        <pop :popshow="popshow" :everyConfig="everyConfig" :selcetData="selcetData" @popupClose="popshow=false"></pop>
+        <pop :popshow="popshow" :everyConfig="everyConfig" @popupClose="popshow=false"></pop>
         <div v-show="noDate" class="noMoreText">暂无数据</div>
         <div v-show="noMore" class="noMoreText">没有更多数据了</div>
     </div>
@@ -48,13 +50,11 @@ export default {
             // 没有更多数据了
             noMore: false,
             // 控制模态框的显示
-            popshow: false,
-            // 选中的列表数据
-            selcetData:""
+            popshow: false
         };
     },
     // pageData父组件传来的配置项 params请求入参配置
-    props: ["pageData", "params","everyConfig"],
+    props: ["pageData", "params", "everyConfig"],
     created() {
         this.getData();
     },
@@ -107,8 +107,9 @@ export default {
         },
         // 按钮点击事件popup组件显示
         btnClick(obj) {
-            this.selcetData = obj;
-            this.popshow=true;
+            // 选中的项存入vuex
+            this.$store.commit("getSelcetData", obj);
+            this.popshow = true;
         },
         // 上拉加载方法
         loadBottom() {
@@ -131,9 +132,9 @@ export default {
         },
         //正则去掉所有的html标记
         delHtmlTag(str) {
-            str = str.replace(/&nbsp/g,"");
-            return str.replace(/<[^>]+>/g,""); 
-        },
+            str = str.replace(/&nbsp/g, "");
+            return str.replace(/<[^>]+>/g, "");
+        }
     },
     components: {
         "mt-loadmore": Loadmore,

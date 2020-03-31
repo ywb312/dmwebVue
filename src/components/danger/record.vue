@@ -44,10 +44,10 @@ export default {
     },
     props: ["recordShow"],
     methods: {
-        getData(id) {
+        getData(obj) {
             let self = this;
             self.resData = [];
-            this.$api.danger.getHicomments({ bussinesskey: id }).then(res => {
+            this.$api.danger.getHicomments({ bussinesskey: obj.yhid }).then(res => {
                 self.resData = res.rows;
             });
         }

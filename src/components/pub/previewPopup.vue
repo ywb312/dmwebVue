@@ -9,13 +9,18 @@
             >{{item.text}}</div>
         </mt-popup>
         <!-- 跳出的弹窗组件 -->
-        <record ref="child" :recordShow="recordShow" @popupClose="recordShow=false"></record>
+        <component
+            ref="child"
+            :recordShow="recordShow"
+            @popupClose="recordShow=false"
+            :is="currentView"
+        ></component>
     </div>
 </template>
 <script>
 import { Popup, Toast } from "mint-ui";
 import record from "@/components/danger/record";
-// props三个参数 popshow控制组件显示隐藏 everyConfig弹窗的配置项 selcetData选中对象的数据
+// props三个参数 popshow控制组件显示隐藏 everyConfig弹窗的配置项
 export default {
     name: "previewPopup",
     data() {
@@ -23,10 +28,10 @@ export default {
             popupVisible: false,
             currentView: "",
             recordShow: false,
-            resData: {},
+            resData: {}
         };
     },
-    props: ["popshow", "everyConfig", "selcetData"],
+    props: ["popshow", "everyConfig"],
     methods: {
         // 点击
         goRouter(obj) {
@@ -34,19 +39,21 @@ export default {
             // 如果需要跳转页面就直接跳转
             self.popupVisible = false;
             if (obj.router) {
+                let query = "";
+                if (obj.routerQuery) {
+                    query = obj.routerQuery;
+                }
                 self.$router.push({
                     path: obj.router,
-                    query: {
-                        id: self.selcetData.yhid
-                    }
+                    query: query
                 });
                 return;
             }
-            // 动态使用路由
+            // 使用动态组件
             if (obj.component) {
                 self.recordShow = true;
                 self.currentView = obj.component;
-                self.$refs.child.getData(self.selcetData.yhid);
+                self.$refs.child.getData(self.selcetData);
                 return;
             }
             // 没有跳转页 就执行接口操作
@@ -86,6 +93,11 @@ export default {
             if (val == false) {
                 this.$emit("popupClose");
             }
+        }
+    },
+    computed: {
+        selcetData() {
+            return this.$store.state.selcetData;
         }
     },
     components: {

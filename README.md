@@ -20,6 +20,8 @@
 ## 开发的通用设置
     颜色:#2585cf
 
+## 接口格式 
+    let data = eval("(" + res + ")");
 
 ## 将tree由父id并列数组转换为层级关系的children数组对象
 toTree(data) {
