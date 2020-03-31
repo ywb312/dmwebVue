@@ -22,7 +22,7 @@ const routes = [{
 		path: '/home',
 		name: 'home',
 		component: home,
-		redirect:"/home/homePage",
+		redirect: "/home/homePage",
 		children: [{
 				path: 'homePage',
 				name: 'homePage',
@@ -71,7 +71,7 @@ const routes = [{
 		name: 'danger',
 		component: resolve => require(['../views/module/danger/danger.vue'], resolve),
 		meta: {
-			keepAlive: true
+			keepAlive: false
 		}
 	},
 	{ //计划管理

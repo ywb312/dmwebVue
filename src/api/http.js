@@ -2,14 +2,14 @@ import axios from 'axios'
 import qs from 'qs'
 
 // 公共url前缀
- axios.defaults.baseURL = '/dmweb/';
+axios.defaults.baseURL = '/dmweb/';
 
 // 设置超时时间
 // axios.defaults.timeout = 10000;
 
 // axios允许跨域携带资源凭证(cookie)
 axios.defaults.withCredentials = true; //true 跨域
-// axios.defaults.headers.common['token'] = localstorage.getItem('token'); //设置请求头，这个是不是必须的
+// axios.defaults.headers.common['token'] = localstorage.getItem('token'); //自定义请求头
 
 //设置请求传递数据的格式
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'
