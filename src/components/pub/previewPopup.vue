@@ -3,7 +3,7 @@
         <mt-popup v-model="popupVisible" popup-transition="popup-fade" closeOnClickModal="true">
             <div
                 class="popupItem"
-                v-for="item in everyConfig"
+                v-for="item in views"
                 :key="item.text"
                 @click.stop="goRouter(item)"
             >{{item.text}}</div>
@@ -12,7 +12,7 @@
         <component
             ref="child"
             :recordShow="recordShow"
-            @popupClose="recordShow=false"
+            @popupClose="recordShow32=false"
             :is="currentView"
         ></component>
     </div>
@@ -27,11 +27,19 @@ export default {
         return {
             popupVisible: false,
             currentView: "",
-            recordShow: false,
-            resData: {}
+            recordShow: false
         };
     },
-    props: ["popshow", "everyConfig"],
+    props: {
+        popshow: {
+            type: Boolean,
+            default: false
+        },
+        everyConfig: {
+            type: Array,
+            default: () => []
+        }
+    },
     methods: {
         // 点击
         goRouter(obj) {
@@ -98,6 +106,15 @@ export default {
     computed: {
         selcetData() {
             return this.$store.state.selcetData;
+        },
+        views() {
+            let arr = [];
+            this.everyConfig.forEach(item => {
+                if (eval(item.show) || item.show) {
+                    arr.push(item);
+                }
+            });
+            return arr;
         }
     },
     components: {

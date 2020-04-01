@@ -5,18 +5,21 @@
         </mt-cell>
         <mt-datetime-picker
             ref="picker"
-            type="date"
+            :type="type"
             v-model="pickerValue"
             :startDate="startDate"
             :endDate="endDate"
             yearFormat="{value}年"
             monthFormat="{value}月"
             dateFormat="{value}日"
+            hourFormat="{value}时"
+            minuteFormat="{value}分"
             @confirm="handleConfirm"
         ></mt-datetime-picker>
     </div>
 </template>
 <script>
+// 默认为日期选择器 type为选择器类型 time是可选之前/之后/任意 placeholder默认文字 title名称
 import { DatetimePicker } from "mint-ui";
 export default {
     name: "datePick",
@@ -28,10 +31,28 @@ export default {
             endDate: new Date(new Date().getFullYear() + 10, 11, 31)
         };
     },
-    props: ["title", "type", "placeholder"],
+    props: ["title", "time", "placeholder", "type"],
+    props: {
+        title: {
+            type: String,
+            default: "时间"
+        },
+        time: {
+            type: String,
+            default: ""
+        },
+        placeholder: {
+            type: String,
+            default: "请选择时间"
+        },
+        type: {
+            type: String,
+            default: "date"
+        }
+    },
     created() {
         this.message = this.placeholder;
-        switch (this.type) {
+        switch (this.time) {
             case "left":
             case "before":
                 this.endDate = new Date();

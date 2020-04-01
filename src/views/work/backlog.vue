@@ -23,8 +23,11 @@
                 </div>
                 <div class="main">
                     <div>
-                        <span>{{item.startUserName+"发现的"+item.crname+"进行"+item.taskKeyText+"处理"}}</span>
-                        <span style="min-width:70px">{{item.owner}}</span>
+                        <span
+                            v-if="item.startUserName"
+                        >{{item.startUserName+"发现的"+item.crname+"进行"+item.taskKeyText+"处理"}}</span>
+                        <span v-else>任务描述</span>
+                        <span style="min-width:70px;text-align: center;">{{item.owner}}</span>
                     </div>
                     <div>
                         <span>{{item.createTime}}</span>
@@ -60,16 +63,19 @@ export default {
             everyConfig: [
                 {
                     text: "查看详情",
-                    router: "/detail"
+                    router: "/detail",
+                    show: true
                 },
                 {
                     text: "审批记录",
-                    component: "record"
+                    component: "record",
+                    show: true
                 },
                 {
                     text: "自查自改",
                     router: "/change",
-                    routerQuery: { type: "zczg" }
+                    routerQuery: { type: "zczg" },
+                    show: true
                 }
             ]
         };
@@ -162,31 +168,4 @@ export default {
     }
 };
 </script>
-<style scoped>
-.wrapper {
-    border-bottom: solid 1px #ddd;
-    margin-bottom: 5px;
-}
-.title,
-.main div {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.1rem 0.4rem;
-    background-color: rgb(250, 250, 250);
-}
-.bottom {
-    width: 100%;
-    padding: 0.2rem 0.3rem;
-    margin-bottom: -1px;
-    text-align: center;
-    border-top: solid 1px #ddd;
-    border-bottom: solid 1px #ddd;
-    letter-spacing: 0.2rem;
-}
-.noMoreText {
-    width: 100%;
-    padding: 0.3rem 0;
-    text-align: center;
-    color: gray;
-}
-</style>
+<style scoped src="@/assets/css/preview.css">

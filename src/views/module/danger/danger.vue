@@ -359,15 +359,17 @@ export default {
                     ]
                 }
             ],
-            // key为接口传入的键名,val为默认值,fix为固定值 
+            //router是跳转的路由名 component动态组件名 show显示的条件 value下key为接口传入的键名,获取的属性名,fix为固定值
             everyConfig: [
                 {
                     text: "查看详情",
-                    router:"/detail",
+                    router: "/detail",
+                    show: true
                 },
                 {
                     text: "审批记录",
-                    component:"record",
+                    component: "record",
+                    show: true
                 },
                 {
                     text: "自查自改",
@@ -400,21 +402,12 @@ export default {
                         }
                     ],
                     postUrl: "biz/sc/ybyhActiviti/doexp.action"
+                },
+                {
+                    text: "隐患指派",
+                    router: "/assign",
+                    show: true
                 }
-                // {
-                //     text: "隐患指派",
-                //     value: {
-                //         "sbzpEntity.yhid": "",
-                //         "sbzpEntity.assignFlag": "0",
-                //         "sbzpEntity.zgzrdw":"",
-                //         "sbzpEntity.zgzrdwName":"",
-                //         "sbzpEntity.zgzlyq":"",
-                //         "sbzpEntity.zgdate":"",
-                //         "sbzpEntity.tbr":"",
-                //         "sbzpEntity.memo":"",
-                //     },
-                //     postUrl: "biz/sc/ybyhActiviti/doexp.action"
-                // },
             ]
         };
     },

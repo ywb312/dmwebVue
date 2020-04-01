@@ -123,7 +123,17 @@ export default {
         // 对数据进行筛选 添加标题
         setInfos(data) {
             let self = this;
-            data.forEach(item => {
+            let res = [];
+            let obj = {};
+            // 数组对象去重
+            for (let i = 0; i < data.length; i++) {
+                if (!obj[data[i].yhzt]) {
+                    // name  对应数组中的name
+                    res.push(data[i]);
+                    obj[data[i].yhzt] = true;
+                }
+            }
+            res.forEach(item => {
                 switch (item.yhzt) {
                     case "整改":
                         item.text = "隐患指派";
@@ -138,7 +148,7 @@ export default {
                         break;
                 }
             });
-            self.infos = data;
+            self.infos = res;
         },
         // 将整合好的数据添回至某一项
         setInfoOne(data, config) {

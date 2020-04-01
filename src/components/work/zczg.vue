@@ -9,7 +9,7 @@
         <mt-field label="填表人" placeholder="请输入填表人" v-model="tbr"></mt-field>
         <mt-field label="审批意见" placeholder="请输入审批意见" v-model="opinion"></mt-field>
         <mt-field label="整改情况" placeholder="请输入整改情况" v-model="zgpsqk"></mt-field>
-        <date-pick title="整改时间" type="after" placeholder="请选择完成时间" @returnDate="getZgsqsj"></date-pick>
+        <date-pick title="整改时间" time="after" placeholder="请选择完成时间" @returnDate="getZgsqsj"></date-pick>
         <mt-field label="验收说明" placeholder="请输入验收说明" v-model="ysqk"></mt-field>
         <mt-field label="备注" placeholder="请输入备注" v-model="memo"></mt-field>
         <!-- <uploadimg @toImgArr = "getImgArr"></uploadimg> -->

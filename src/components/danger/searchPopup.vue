@@ -104,7 +104,9 @@ export default {
                 end: this.endDate,
                 zgzrdw: this.zgzrdw
             };
-            if (obj.str > obj.end) {
+            let start = new Date(obj.str.replace(/\-/g, ".")).getTime();
+            let end = new Date(obj.end.replace(/\-/g, ".")).getTime();
+            if (start > end) {
                 Toast({
                     message: "截止日期小于起始日期",
                     position: "bottom",

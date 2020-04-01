@@ -1,0 +1,83 @@
+<template>
+    <div class="safeCheack">
+        <!-- 标题  -->
+        <mt-header title="安全检查">
+            <router-link to slot="left">
+                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
+            </router-link>
+        </mt-header>
+        <mt-field label="作业地点" placeholder="请输入作业地点" v-model="tbr"></mt-field>
+        <mt-field label="检查人员" placeholder="请输入备注说明" v-model="memo"></mt-field>
+        <date-pick title="检查日期" time="after" placeholder="请选择检查日期" @returnDate="getZgjzsj"></date-pick>
+        <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
+    </div>
+</template>
+<script>
+import tree from "@/components/pub/tree";
+import datePick from "@/components/pub/datePick";
+import { Toast } from "mint-ui";
+export default {
+    name: "safeCheack",
+    data() {
+        return {
+        };
+    },
+    methods: {
+        update() {
+            // if (this.zgzrdw == "") {
+            //     Toast({
+            //         message: "请选择整改责任单位",
+            //         duration: 2000
+            //     });
+            //     return;
+            // } else if (this.zgzlyq == "") {
+            //     Toast({
+            //         message: "请输入整改治理要求",
+            //         duration: 2000
+            //     });
+            //     return;
+            // } else if (this.tbr == "") {
+            //     Toast({
+            //         message: "请输入填表人员名称",
+            //         duration: 2000
+            //     });
+            //     return;
+            // } else if (this.zgdate == "") {
+            //     Toast({
+            //         message: "请选择整改截止时间",
+            //         duration: 2000
+            //     });
+            //     return;
+            // }
+            // let _self = this;
+            // let obj = {
+            //     "sbzpEntity.yhid": this.selcetData.yhid,
+            //     session: window.localStorage["session_Id"]
+            // };
+            // // 上传接口
+            // this.$api.danger.doexp(obj).then(function() {
+            //     let instance = Toast({
+            //         message: "操作成功"
+            //     });
+            //     setTimeout(() => {
+            //         instance.close();
+            //         _self.$router.back(-1);
+            //     }, 1000);
+            // });
+        }
+    },
+    computed: {
+        selcetData() {
+            return this.$store.state.selcetData;
+        }
+    },
+    components: {}
+};
+</script>
+<style scoped>
+.btn {
+    background-color: #2585cf;
+    position: fixed;
+    bottom: 0.1rem;
+}
+</style>

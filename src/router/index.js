@@ -74,10 +74,42 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //隐患管理 新增隐患
+		path: '/increase',
+		name: 'increase',
+		component: resolve => require(['../views/module/danger/increase.vue'], resolve),
+		meta: {
+			keepAlive: true
+		}
+	},
+	{ //隐患管理 隐患详情
+		path: '/detail',
+		name: 'detail',
+		component: resolve => require(['../views/module/danger/detail.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //隐患管理 填报指派
+		path: '/assign',
+		name: 'assign',
+		component: resolve => require(['../views/module/danger/assign.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
 	{ //计划管理
 		path: '/plan',
 		name: 'plan',
 		component: resolve => require(['../views/module/plan/plan.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //计划管理 安全检查
+		path: '/safeCheack',
+		name: 'safeCheack',
+		component: resolve => require(['../views/module/plan/safeCheack.vue'], resolve),
 		meta: {
 			keepAlive: false
 		}
@@ -90,7 +122,7 @@ const routes = [{
 			keepAlive: false
 		}
 	},
-	{ //  风险管理
+	{ //风险管理
 		path: '/risk',
 		name: 'risk',
 		component: resolve => require(['../views/module/risk/risk.vue'], resolve),
@@ -150,22 +182,6 @@ const routes = [{
 		path: '/accident',
 		name: 'accident',
 		component: resolve => require(['../views/module/accident/accident.vue'], resolve),
-		meta: {
-			keepAlive: false
-		}
-	},
-	{ //新增隐患
-		path: '/increase',
-		name: 'increase',
-		component: resolve => require(['../views/module/danger/increase.vue'], resolve),
-		meta: {
-			keepAlive: true
-		}
-	},
-	{ //详情
-		path: '/detail',
-		name: 'detail',
-		component: resolve => require(['../views/module/danger/detail.vue'], resolve),
 		meta: {
 			keepAlive: false
 		}

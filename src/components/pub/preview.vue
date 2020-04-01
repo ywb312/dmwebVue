@@ -12,7 +12,12 @@
             <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                 <div class="title">
                     <h3>{{item[pageData.headerLeft.value]!=null?index+1+"."+item[pageData.headerLeft.value]:""}}</h3>
-                    <p>{{item[pageData.headerRight.value]!=null?item[pageData.headerRight.value]:""}}</p>
+                    <p>
+                        <mt-badge
+                            v-if="item[pageData.headerRight.value]"
+                            size="small"
+                        >{{item[pageData.headerRight.value]}}</mt-badge>
+                    </p>
                 </div>
                 <div class="main">
                     <div v-for="(n,m) in pageData.main" :key="m">
@@ -54,7 +59,20 @@ export default {
         };
     },
     // pageData父组件传来的配置项 params请求入参配置
-    props: ["pageData", "params", "everyConfig"],
+    props: {
+        pageData: {
+            type: Object,
+            default: {}
+        },
+        params: {
+            type: Object,
+            default: {}
+        },
+        everyConfig: {
+            type: Array,
+            default: () => []
+        }
+    },
     created() {
         this.getData();
     },
@@ -147,30 +165,5 @@ export default {
     height: 100%;
     overflow: hidden;
 }
-.wrapper {
-    border-bottom: solid 1px #ddd;
-    margin-bottom: 5px;
-}
-.title,
-.main div {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.1rem 0.4rem;
-    background-color: rgb(250, 250, 250);
-}
-.bottom {
-    width: 100%;
-    padding: 0.2rem 0.3rem;
-    margin-bottom: -1px;
-    text-align: center;
-    border-top: solid 1px #ddd;
-    border-bottom: solid 1px #ddd;
-    letter-spacing: 0.2rem;
-}
-.noMoreText {
-    width: 100%;
-    padding: 0.3rem 0;
-    text-align: center;
-    color: gray;
-}
 </style>
+<style scoped src="@/assets/css/preview.css">

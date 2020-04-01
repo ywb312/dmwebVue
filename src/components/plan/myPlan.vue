@@ -1,12 +1,5 @@
 <template>
-    <div class="finished">
-        <!-- 标题  -->
-        <mt-header title="已办事项" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
-        <!-- 主体 -->
+    <div class="myPlan">
         <mt-loadmore
             :top-method="loadTop"
             :bottom-method="loadBottom"
@@ -14,64 +7,61 @@
             :auto-fill="allLoaded"
             bottomPullText="正在加载更多..."
             ref="loadmore"
-            class="wrap"
         >
-            <div class="wrapper" v-for="(item,index) in rendering" :key="index">
+            <div
+                class="wrapper"
+                v-for="(item,index) in rendering"
+                :key="index"
+                @click="btnClick(item)"
+            >
                 <div class="title">
-                    <h3>{{index+1+"."+item.mattername}}</h3>
-                    <p></p>
+                    <h4>{{index+1+"."+item.cpname}}</h4>
+                    <p style="min-width:40px">
+                        <mt-badge size="small">{{item.checktype}}</mt-badge>
+                    </p>
                 </div>
                 <div class="main">
                     <div>
-                        <span>事项内容: {{item.memo}}</span>
-                        <span style="min-width:70px">{{item.handlename}}</span>
-                    </div>
-                    <div>
-                        <span>发布时间:</span>
-                        <span>{{item.addtime}}</span>
-                    </div>
-                    <div>
-                        <span>处理时间:</span>
-                        <span>{{item.handletime}}</span>
+                        <span>检查截止时间: {{item.checkdeadline}}</span>
+                        <mt-badge size="small">{{item.planstatus}}</mt-badge>
                     </div>
                 </div>
             </div>
-            <div v-show="noDate" class="noMoreText">暂无数据</div>
-            <div v-show="noMore" class="noMoreText">没有更多数据了</div>
         </mt-loadmore>
+        <div v-show="noDate" class="noMoreText">暂无数据</div>
+        <div v-show="noMore" class="noMoreText">没有更多数据了</div>
     </div>
 </template>
 <script>
+// 这是基本渲染功能的组件 公用
+import { Loadmore } from "mint-ui";
 export default {
-    name: "finished",
+    name: "myPlan",
     data() {
         return {
-            // 页码
             page: 1,
-            // 渲染数据
+            // 渲染的数据
             rendering: [],
             // 停止上拉加
             allLoaded: false,
             // 没有数据
             noDate: false,
             // 没有更多数据了
-            noMore: false
+            noMore: false,
+            // 控制模态框的显示
+            popshow: false
         };
     },
+    // pageData父组件传来的配置项
+    props: ["pageData"],
     created() {
         this.getData();
     },
     methods: {
+        // 获取当前页面数据函数
         getData(more = true) {
-            this.$api.work
-                .finshList({
-                    page: this.page,
-                    rows: 10,
-                    sord: "asc",
-                    nd: "1585481133621",
-                    sidx: "",
-                    _search: false
-                })
+            this.$api.pub
+                .showPage(this.pageData.ajaxurl, this.pageData)
                 .then(res => {
                     if (!res.rows) {
                         return;
@@ -82,7 +72,6 @@ export default {
                         if (more) {
                             this.rendering.push(...res.rows);
                         } else {
-                            this.$store.commit("setBacklog", res);
                             this.rendering = res.rows;
                         }
                         // 返回数据小于10条 停止上拉刷新
@@ -98,6 +87,9 @@ export default {
                         this.allLoaded = true;
                     }
                 });
+        },
+        btnClick(obj) {
+            this.$store.commit("getSelcetData", obj);
         },
         // 上拉加载方法
         loadBottom() {
@@ -118,6 +110,9 @@ export default {
             this.rendering = [];
             this.getData(false);
         }
+    },
+    components: {
+        "mt-loadmore": Loadmore
     }
 };
 </script>
