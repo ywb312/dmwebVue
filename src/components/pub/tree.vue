@@ -3,12 +3,7 @@
         <mt-cell :title="title" is-link @click.native="popupVisible = true;">
             <span style="color:black">{{selectVal.name}}</span>
         </mt-cell>
-        <mt-popup
-            class="fill"
-            v-model="popupVisible"
-            closeOnClickModal="true"
-            position="right"
-        >
+        <mt-popup class="fill" v-model="popupVisible" closeOnClickModal="true" position="right">
             <tree-preview
                 :data="lists"
                 v-model="selectVal"
@@ -28,12 +23,13 @@ export default {
     data() {
         return {
             popupVisible: false,
-            lists:[],
-            selectVal:{},
+            lists: [],
+            selectVal: {}
         };
     },
     created() {
         let self = this;
+        this.selectVal.name = this.placeholder;
         // 判断vuex中是否存在数据 如果不存在就获取
         if (this.treeData != "") {
             this.lists = this.treeData;
@@ -47,7 +43,16 @@ export default {
             self.$store.commit("setTree", sortData);
         });
     },
-    props: ["title"],
+    props: {
+        title: {
+            type: String,
+            default: "单位"
+        },
+        placeholder: {
+            type: String,
+            default: "请选择单位"
+        }
+    },
     methods: {
         // 将父id并列的数组改为层级关系children数组
         toTree(data) {
@@ -76,12 +81,12 @@ export default {
             return val;
         }
     },
-    watch:{
-        selectVal:{
+    watch: {
+        selectVal: {
             handler(newValue, oldValue) {
-                this.$emit("selectMsg",newValue);
-    　　　　},
-    　　　　deep: true
+                this.$emit("selectMsg", newValue);
+            },
+            deep: true
         }
     },
     components: {
@@ -94,7 +99,7 @@ export default {
 };
 </script>
 <style scoped>
-.fill{
+.fill {
     width: 70%;
     height: 100%;
     margin-left: 30%;

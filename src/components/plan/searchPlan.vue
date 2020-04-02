@@ -1,5 +1,18 @@
 <template>
     <div class="searchPlan">
+        <div class="searchGroup">
+            <div class="btnGroup">
+                <span :class="params.checktype=='班'?'active':''" @click="inquire('班')">班</span>
+                <span :class="params.checktype=='周'?'active':''" @click="inquire('周')">周</span>
+                <span :class="params.checktype=='月'?'active':''" @click="inquire('月')">月</span>
+                <span :class="params.checktype=='季'?'active':''" @click="inquire('季')">季</span>
+            </div>
+            <tree title="查询单位" placeholder="请选择单位" @selectMsg="getCompany"></tree>
+            <date-pick title="查询日期" time="before" placeholder="请选择时间" @returnDate="getDate"></date-pick>
+            <div class="searchBtn">
+                <mt-button type="primary" size="large" @click.stop="searchClick">查询</mt-button>
+            </div>
+        </div>
         <mt-loadmore
             :top-method="loadTop"
             :bottom-method="loadBottom"
@@ -42,6 +55,8 @@
 <script>
 // 这是基本渲染功能的组件 公用
 import { Loadmore } from "mint-ui";
+import tree from "@/components/pub/tree";
+import datePick from "@/components/pub/datePick";
 export default {
     name: "searchPlan",
     data() {
@@ -64,7 +79,7 @@ export default {
                 checkdept: "",
                 tbr: "",
                 deptcode: "",
-                checktype: ""
+                checktype: "班"
             }
         };
     },
@@ -75,17 +90,15 @@ export default {
     },
     methods: {
         // 根据当前页面的配置 对请求入参进行添加筛选
-        returnData(option) {
+        returnData() {
             let obj = {
                 rows: 10,
                 page: this.page,
                 session: window.localStorage["session_Id"]
             };
-            if (option.updata) {
-                for (let i = 0; i < option.updata.length; i++) {
-                    obj["bean." + option.updata[i]] = this.params[
-                        option.updata[i]
-                    ];
+            for (const key in this.params) {
+                if (this.params[key] != "") {
+                    obj["bean." + key] = this.params[key];
                 }
             }
             return obj;
@@ -93,7 +106,7 @@ export default {
         // 获取当前页面数据函数
         getData(more = true) {
             this.$api.pub
-                .showPage(this.pageData.ajaxurl, this.returnData(this.pageData))
+                .showPage(this.pageData.ajaxurl, this.returnData())
                 .then(res => {
                     if (!res.rows) {
                         return;
@@ -120,10 +133,30 @@ export default {
                     }
                 });
         },
+        // 头部查询功能
+        inquire(str) {
+            this.params.checktype = str;
+            this.cleraDate();
+        },
+        // 获取组织机构
+        getCompany(v) {
+            this.params.checkdept = v.id;
+        },
+        // 获取日期时间
+        getDate(v) {
+            this.params.param = v;
+        },
+        // 查询按钮点击事件
+        searchClick() {
+            if (this.params.checkdept == "" && this.params.param == "") {
+                return;
+            } else {
+                this.cleraDate();
+            }
+        },
         btnClick(obj) {
-            if (!obj.tbr) return;
-            console.log(1);
-            this.$store.commit("getSelcetData", obj);
+        //     if (!obj.tbr) return;
+        //     this.$store.commit("getSelcetData", obj);
         },
         // 上拉加载方法
         loadBottom() {
@@ -146,14 +179,41 @@ export default {
         }
     },
     components: {
-        "mt-loadmore": Loadmore
+        "mt-loadmore": Loadmore,
+        tree,
+        datePick
     }
 };
 </script>
 <style scoped>
 .searchPlan {
     height: 100%;
-    overflow: hidden;
+}
+.searchGroup {
+    position: sticky;
+    top: 1.1rem;
+    z-index: 100;
+}
+.btnGroup {
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+}
+.btnGroup span {
+    width: 20%;
+    padding: 10px 0;
+    text-align: center;
+    border: solid 1px #2585cf;
+    border-radius: 10px;
+}
+.searchBtn {
+    background: white;
+    text-align: center;
+}
+.active {
+    color: white;
+    background-color: #2585cf;
 }
 </style>
 <style scoped src="@/assets/css/preview.css">

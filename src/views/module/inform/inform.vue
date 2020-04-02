@@ -5,6 +5,9 @@
             <router-link to slot="left">
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>
             </router-link>
+             <mt-button slot="right" @click="comp">
+                <img src="@/assets/iconfont/add.svg" />
+            </mt-button>
         </mt-header>
         <!-- 主体 -->
         <div class="wrap">
@@ -113,7 +116,15 @@ export default {
         let a = this.$route.query.a;
         this.pageData = this.page[a]; //当前页面的配置
     },
-    methods: {},
+    methods: {
+        com(){
+            if (this.$route.query.a == 0) {
+                
+            } else {
+                
+            }
+        }
+    },
     components: {
         preview
     }
