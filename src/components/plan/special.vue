@@ -32,6 +32,7 @@
                     </div>
                 </div>
             </div>
+            <mt-button class="btn" type="primary" size="large" @click="addData">提交</mt-button>
         </mt-loadmore>
         <div v-show="noDate" class="noMoreText">暂无数据</div>
         <div v-show="noMore" class="noMoreText">没有更多数据了</div>
@@ -114,6 +115,9 @@ export default {
             this.noDate = false;
             this.rendering = [];
             this.getData(false);
+        },
+        addData(){
+            
         }
     },
     components: {
@@ -121,4 +125,11 @@ export default {
     }
 };
 </script>
-<style scoped src="@/assets/css/preview.css">
+<style scoped>
+.btn {
+    background-color: #2585cf;
+    position: fixed;
+    bottom: 0.1rem;
+}
+</style>
+<style scoped src="@/assets/css/preview.css"/>

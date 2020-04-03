@@ -6,9 +6,9 @@
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>
             </router-link>
         </mt-header>
-        <mt-field label="作业地点" placeholder="请输入作业地点" v-model="tbr"></mt-field>
-        <mt-field label="检查人员" placeholder="请输入备注说明" v-model="memo"></mt-field>
-        <date-pick title="检查日期" time="after" placeholder="请选择检查日期" @returnDate="getZgjzsj"></date-pick>
+        <mt-field label="作业地点" placeholder="请输入作业地点" v-model="zydd"></mt-field>
+        <mt-field label="检查人员" placeholder="请输入备注说明" v-model="tbr"></mt-field>
+        <mt-field label="检查日期" placeholder="请输入检查日期" v-model="date" readonly></mt-field>
         <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
     </div>
 </template>
@@ -20,7 +20,17 @@ export default {
     name: "safeCheack",
     data() {
         return {
+            zydd:"",
+            tbr:"",
+            date:"",
         };
+    },
+    created(){
+        let date = new Date();
+        let years = new Date().getFullYear();
+        let mon = new Date().getMonth()+1;
+        let day = new Date().getDay();
+        this.date = years+"-"+mon+"-"+day+" ";
     },
     methods: {
         update() {

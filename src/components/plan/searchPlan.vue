@@ -7,10 +7,17 @@
                 <span :class="params.checktype=='月'?'active':''" @click="inquire('月')">月</span>
                 <span :class="params.checktype=='季'?'active':''" @click="inquire('季')">季</span>
             </div>
-            <tree title="查询单位" placeholder="请选择单位" @selectMsg="getCompany"></tree>
-            <date-pick title="查询日期" time="before" placeholder="请选择时间" @returnDate="getDate"></date-pick>
+            <tree title="查询单位" ref="treeChild" placeholder="请选择单位" @selectMsg="getCompany"></tree>
+            <date-pick
+                title="查询日期"
+                ref="dateChild"
+                time="before"
+                placeholder="请选择时间"
+                @returnDate="getDate"
+            ></date-pick>
             <div class="searchBtn">
-                <mt-button type="primary" size="large" @click.stop="searchClick">查询</mt-button>
+                <mt-button type="primary" size="small" @click.stop="clearCheacked">清空</mt-button>
+                <mt-button type="primary" size="small" @click.stop="searchClick">查询</mt-button>
             </div>
         </div>
         <mt-loadmore
@@ -146,6 +153,14 @@ export default {
         getDate(v) {
             this.params.param = v;
         },
+        // 清空按钮事件 重置date和tree
+        clearCheacked() {
+            this.params.checkdept = "";
+            this.params.param = "";
+            this.$refs.treeChild.reset();
+            this.$refs.dateChild.reset();
+            this.cleraDate();
+        },
         // 查询按钮点击事件
         searchClick() {
             if (this.params.checkdept == "" && this.params.param == "") {
@@ -154,9 +169,13 @@ export default {
                 this.cleraDate();
             }
         },
+        // 点击某一项 将数据commit到vuex 跳转页面
         btnClick(obj) {
-        //     if (!obj.tbr) return;
-        //     this.$store.commit("getSelcetData", obj);
+            if (!obj.tbr) return;
+            this.$store.commit("getSelcetData", obj);
+            this.$router.push({
+                name: "planDetail"
+            });
         },
         // 上拉加载方法
         loadBottom() {
@@ -208,12 +227,15 @@ export default {
     border-radius: 10px;
 }
 .searchBtn {
+    display: flex;
+    justify-content: space-around;
     background: white;
     text-align: center;
+    padding-bottom: 8px;
 }
 .active {
     color: white;
     background-color: #2585cf;
 }
 </style>
-<style scoped src="@/assets/css/preview.css">
+<style scoped src="@/assets/css/preview.css"/>

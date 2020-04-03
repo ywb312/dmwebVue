@@ -117,7 +117,7 @@ export default {
         this.pageData = this.page[a]; //当前页面的配置
     },
     methods: {
-        com(){
+        comp(){
             if (this.$route.query.a == 0) {
                 
             } else {

@@ -79,6 +79,9 @@ export default {
                 }
             });
             return val;
+        },
+        reset(){
+            this.selectVal.name = this.placeholder;
         }
     },
     watch: {

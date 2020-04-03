@@ -114,6 +114,14 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //计划管理 检查记录详情
+		path: '/planDetail',
+		name: 'planDetail',
+		component: resolve => require(['../views/module/plan/planDetail.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
 	{ //提醒预警
 		path: '/remind',
 		name: 'remind',

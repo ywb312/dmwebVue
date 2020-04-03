@@ -26,7 +26,7 @@ export default {
             pageData: "",
             page: [
                 {
-                    text: "我的检查计划",
+                    text: "检查计划",
                     ajaxurl: "biz/sc/checkplan/list.action"
                 },
                 {

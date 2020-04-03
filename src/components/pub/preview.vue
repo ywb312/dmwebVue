@@ -166,4 +166,4 @@ export default {
     overflow: hidden;
 }
 </style>
-<style scoped src="@/assets/css/preview.css">
+<style scoped src="@/assets/css/preview.css"/>

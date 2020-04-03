@@ -76,6 +76,9 @@ export default {
             let date = year + "-" + month + "-" + day;
             this.message = date;
             this.$emit("returnDate", this.message);
+        },
+        reset(){
+            this.message = this.placeholder;
         }
     },
     components: {
