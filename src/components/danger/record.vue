@@ -38,23 +38,28 @@ export default {
     name: "record",
     data() {
         return {
-            recordVisible: false,
-            resData: [],
+            recordVisible: true,
+            resData: []
         };
     },
-    props: ["recordShow"],
+    props: ["compShow"],
+    created() {
+        this.getData(this.selcetData);
+    },
     methods: {
         getData(obj) {
             let self = this;
             self.resData = [];
-            this.$api.danger.getHicomments({ bussinesskey: obj.yhid }).then(res => {
-                self.resData = res.rows;
-            });
+            this.$api.danger
+                .getHicomments({ bussinesskey: obj.yhid })
+                .then(res => {
+                    self.resData = res.rows;
+                });
         }
     },
     watch: {
         // 监听两个值 确定显示的状态
-        recordShow(val) {
+        compShow(val) {
             //popshow为父组件的值，val参数为值
             this.recordVisible = val; //将父组件的值赋给popupVisible 子组件的值
         },
@@ -66,6 +71,11 @@ export default {
     },
     components: {
         "mt-popup": Popup
+    },
+    computed: {
+        selcetData() {
+            return this.$store.state.selcetData;
+        }
     }
 };
 </script>
@@ -83,7 +93,7 @@ export default {
     padding: 0.2rem 0;
     border-bottom: solid 1px #ddd;
 }
-.noData{
+.noData {
     padding-top: 10px;
     text-align: center;
 }

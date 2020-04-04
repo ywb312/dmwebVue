@@ -9,9 +9,9 @@ export default new Vuex.Store({
 		// 用户进入功能的序列id
 		listNum: 1,
 		// 待办事项数据存放
-		backlog:{
-			records:0,
-			rows:[]
+		backlog: {
+			records: 0,
+			rows: []
 		},
 		// 列表的渲染数据（标题、路由名、路由下的配置）
 		listPage: [{
@@ -37,7 +37,7 @@ export default new Vuex.Store({
 			{
 				title: "风险管理",
 				path: "risk",
-				page: ["风险点划分", "危险源辨识", "风险等级评级", "管控措施制定", "风险清单", "安全风险公告栏", "岗位风险告知卡"],
+				page: ["车间/厂级风险辨识", "风险清单", "风险比较图", "风险统计", "安全风险公告栏", "岗位风险告知卡"],
 			},
 			{
 				title: "三项人员信息管理",
@@ -75,10 +75,146 @@ export default new Vuex.Store({
 				page: ["事故快报", "事故详情", "成立事故调查组", "现场调查取证", "事故分析", "调查报告", "事故事件库"],
 			}
 		],
+		// 危害 下拉框的配置
+		knfsSlots: [{
+			values: [{
+					text: "请选择",
+					id: ""
+				},
+				{
+					text: "物体打击",
+					id: "KNFS001"
+				},
+				{
+					text: "车辆伤害",
+					id: "KNFS002"
+				},
+				{
+					text: "机械伤害",
+					id: "KNFS003"
+				},
+				{
+					text: "起重伤害",
+					id: "KNFS004"
+				},
+				{
+					text: "触电",
+					id: "KNFS005"
+				},
+				{
+					text: "淹溺",
+					id: "KNFS006"
+				},
+				{
+					text: "灼烫",
+					id: "KNFS007"
+				},
+				{
+					text: "火灾",
+					id: "KNFS008"
+				},
+				{
+					text: "高处坠落",
+					id: "KNFS009"
+				},
+				{
+					text: "坍塌",
+					id: "KNFS010"
+				},
+				{
+					text: "冒顶片帮",
+					id: "KNFS011"
+				},
+				{
+					text: "透水",
+					id: "KNFS012"
+				},
+				{
+					text: "放炮",
+					id: "KNFS013"
+				},
+				{
+					text: "火药爆炸",
+					id: "KNFS014"
+				},
+				{
+					text: "瓦斯爆炸",
+					id: "KNFS015"
+				},
+				{
+					text: "锅炉爆炸",
+					id: "KNFS016"
+				},
+				{
+					text: "容器爆炸",
+					id: "KNFS017"
+				},
+				{
+					text: "其它爆炸",
+					id: "KNFS018"
+				},
+				{
+					text: "中毒和窒息",
+					id: "KNFS019"
+				},
+				{
+					text: "其它伤害",
+					id: "KNFS020"
+				}
+			]
+		}],
+		// 影响范围 下拉框的配置
+		yxfwSlots: [{
+			values: [{
+					text: "请选择",
+					id: ""
+				},
+				{
+					text: "本人",
+					id: "YXFWEI001"
+				},
+				{
+					text: "本岗位",
+					id: "YXFWEI002"
+				},
+				{
+					text: "多岗位",
+					id: "YXFWEI003"
+				},
+				{
+					text: "整个系统",
+					id: "YXFWEI004"
+				}
+			]
+		}],
+		// 潜在后果 下拉框的配置
+		qzhgSlots: [{
+			values: [{
+					text: "请选择",
+					id: ""
+				},
+				{
+					text: "经济损失",
+					id: "QZHG001"
+				},
+				{
+					text: "轻伤",
+					id: "QZHG002"
+				},
+				{
+					text: "重伤",
+					id: "QZHG003"
+				},
+				{
+					text: "死亡",
+					id: "QZHG004"
+				}
+			]
+		}],
 		// 组织结构树
-		treeData:"",
+		treeData: "",
 		// 点击操作按钮获取的对象
-		selcetData:{},
+		selcetData: {},
 	},
 	mutations: {
 		setListNum(state, num) {
@@ -87,13 +223,13 @@ export default new Vuex.Store({
 		setIsLoading(state, bol) {
 			state.isLoading = bol.isLoading;
 		},
-		setTree(state,data){
+		setTree(state, data) {
 			state.treeData = data;
 		},
-		setBacklog(state,data){
+		setBacklog(state, data) {
 			state.backlog = data;
 		},
-		getSelcetData(state,data){
+		getSelcetData(state, data) {
 			state.selcetData = data;
 		}
 	},

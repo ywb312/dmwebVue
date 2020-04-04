@@ -138,6 +138,14 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //风险管理 危险源
+		path: '/companyRisk',
+		name: 'companyRisk',
+		component: resolve => require(['../views/module/risk/companyRisk.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
 	{ //三项人员  
 		path: '/person',
 		name: 'person',

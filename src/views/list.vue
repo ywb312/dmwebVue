@@ -28,7 +28,12 @@ export default {
     },
     created() {
         let num = this.$store.state.listNum;
-        this.pageData = this.$store.state.listPage[num - 1];
+        this.pageData = this.listPage[num - 1];
+    },
+    computed:{
+        listPage(){
+            return this.$store.state.listPage
+        }
     },
     // 控制list缓存
     beforeRouteLeave(to, from, next) {

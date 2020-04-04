@@ -77,8 +77,6 @@ export default {
             noDate: false,
             // 没有更多数据了
             noMore: false,
-            // 控制模态框的显示
-            popshow: false,
             // 显示的数据
             params: {
                 param: "",
@@ -143,7 +141,7 @@ export default {
         // 头部查询功能
         inquire(str) {
             this.params.checktype = str;
-            this.cleraDate();
+            this.cleraData();
         },
         // 获取组织机构
         getCompany(v) {
@@ -159,14 +157,14 @@ export default {
             this.params.param = "";
             this.$refs.treeChild.reset();
             this.$refs.dateChild.reset();
-            this.cleraDate();
+            this.cleraData();
         },
         // 查询按钮点击事件
         searchClick() {
             if (this.params.checkdept == "" && this.params.param == "") {
                 return;
             } else {
-                this.cleraDate();
+                this.cleraData();
             }
         },
         // 点击某一项 将数据commit到vuex 跳转页面
@@ -185,11 +183,11 @@ export default {
         },
         // 下拉刷新方法
         loadTop() {
-            this.cleraDate();
+            this.cleraData();
             this.$refs.loadmore.onTopLoaded();
         },
         // 清空所需渲染数据并重新渲染
-        cleraDate() {
+        cleraData() {
             this.page = 1;
             this.noMore = false;
             this.noDate = false;
@@ -238,4 +236,4 @@ export default {
     background-color: #2585cf;
 }
 </style>
-<style scoped src="@/assets/css/preview.css"/>
+<style scoped src="@/assets/css/public.css"/>

@@ -46,33 +46,6 @@ export default {
                 }
             ],
             // 下拉框的配置
-            knfsSlots: [
-                {
-                    values: [
-                        { text: "请选择", id: "0" },
-                        { text: "物体打击", id: "1" },
-                        { text: "车辆伤害", id: "2" },
-                        { text: "机械伤害", id: "3" },
-                        { text: "起重伤害", id: "4" },
-                        { text: "触电", id: "5" },
-                        { text: "淹溺", id: "6" },
-                        { text: "灼烫", id: "7" },
-                        { text: "火灾", id: "8" },
-                        { text: "高处坠落", id: "9" },
-                        { text: "坍塌", id: "10" },
-                        { text: "冒顶片帮", id: "11" },
-                        { text: "透水", id: "12" },
-                        { text: "放炮", id: "13" },
-                        { text: "火药爆炸", id: "14" },
-                        { text: "瓦斯爆炸", id: "15" },
-                        { text: "锅炉爆炸", id: "16" },
-                        { text: "容器爆炸", id: "17" },
-                        { text: "其它爆炸", id: "18" },
-                        { text: "中毒和窒息", id: "19" },
-                        { text: "其它伤害", id: "20" }
-                    ]
-                }
-            ],
             crLevelSlots: [
                 {
                     values: [
@@ -138,6 +111,11 @@ export default {
                     _self.$router.back(-1);
                 }, 1000);
             });
+        }
+    },
+    computed:{
+        knfsSlots(){
+            return this.$store.state.knfsSlots;
         }
     },
     components: {

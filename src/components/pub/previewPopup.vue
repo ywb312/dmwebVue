@@ -9,25 +9,21 @@
             >{{item.text}}</div>
         </mt-popup>
         <!-- 跳出的弹窗组件 -->
-        <component
-            ref="child"
-            :recordShow="recordShow"
-            @popupClose="recordShow32=false"
-            :is="currentView"
-        ></component>
+        <component ref="child" :compShow="compShow" @popupClose="compShow=false" :is="currentView"></component>
     </div>
 </template>
 <script>
 import { Popup, Toast } from "mint-ui";
-import record from "@/components/danger/record";
 // props三个参数 popshow控制组件显示隐藏 everyConfig弹窗的配置项
+// 引入的组件要有emit popupClose函数
+import record from "@/components/danger/record";
 export default {
     name: "previewPopup",
     data() {
         return {
             popupVisible: false,
             currentView: "",
-            recordShow: false
+            compShow: false
         };
     },
     props: {
@@ -59,9 +55,8 @@ export default {
             }
             // 使用动态组件
             if (obj.component) {
-                self.recordShow = true;
+                self.compShow = true;
                 self.currentView = obj.component;
-                self.$refs.child.getData(self.selcetData);
                 return;
             }
             // 没有跳转页 就执行接口操作

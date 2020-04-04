@@ -54,8 +54,6 @@ export default {
             noDate: false,
             // 没有更多数据了
             noMore: false,
-            // 控制模态框的显示
-            popshow: false
         };
     },
     // pageData父组件传来的配置项
@@ -105,11 +103,11 @@ export default {
         },
         // 下拉刷新方法
         loadTop() {
-            this.cleraDate();
+            this.cleraData();
             this.$refs.loadmore.onTopLoaded();
         },
         // 清空所需渲染数据并重新渲染
-        cleraDate() {
+        cleraData() {
             this.page = 1;
             this.noMore = false;
             this.noDate = false;
@@ -132,4 +130,4 @@ export default {
     bottom: 0.1rem;
 }
 </style>
-<style scoped src="@/assets/css/preview.css"/>
+<style scoped src="@/assets/css/public.css"/>

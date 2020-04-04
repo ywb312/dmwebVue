@@ -1,8 +1,8 @@
 <template>
     <div class="searchPopup">
-        <div class="searchWrap" v-show="searchShow" @click="searchShow=false">
-            <div @click.stop class="middle">
-                <div class="title">隐患条件查询</div>
+        <div class="maskWrap" v-show="searchShow" @click="searchShow=false">
+            <div @click.stop class="maskMiddle">
+                <div class="maskTitle">隐患条件查询</div>
                 <tree v-if="companyShow" title="查询单位" @selectMsg="getCompany"></tree>
                 <pick v-if="statusShow" title="隐患状态" :slots="statusSlots" @returnMsg="getStatus"></pick>
                 <double-date-pick
@@ -137,25 +137,4 @@ export default {
     }
 };
 </script>
-<style scoped>
-.searchWrap {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    z-index: 998;
-}
-.middle {
-    width: 100%;
-    margin-top: 50%;
-}
-.title {
-    font-size: 22px;
-    text-align: center;
-    background-color: white;
-    padding: 15px 0;
-    color: #2585cf;
-}
-</style>
+<style scoped src="@/assets/css/public.css"/>

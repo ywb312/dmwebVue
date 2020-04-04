@@ -8,40 +8,30 @@
         </mt-header>
         <!-- 主体 -->
         <div class="wrap">
-            <preview :params="params" :pageData="pageData"></preview>
+            <component ref="child" :is="pageData.components" :pageData="pageData"></component>
         </div>
     </div>
 </template>
 <script>
-import preview from "@/components/pub/preview";
 export default {
     name: "risk",
     data() {
         return {
+            //动态组件名
+            currentView: "riskList",
             // 页面配置
             pageData: "",
-            // 传入的对象
-            params: {
-                olddate: "0"
-            },
             page: [
                 {
-                    text: "风险点划分"
+                    text: "风险辨识",
+                    components: "plantRisk"
                 },
                 {
-                    text: "危险源辨识"
+                    text: "风险清单",
+                    components: "riskList"
                 },
                 {
-                    text: "风险等级评级"
-                },
-                {
-                    text: "管控措施制定"
-                },
-                {
-                    text: "风险清单"
-                },
-                {
-                    text: "安全风险公告栏"
+                    text: "安全风险公告栏",
                 },
                 {
                     text: "岗位风险告知卡"
@@ -55,7 +45,8 @@ export default {
     },
     methods: {},
     components: {
-        preview
+        plantRisk: resolve => require(["@/components/risk/plantRisk"], resolve),
+        riskList: resolve => require(["@/components/risk/riskList"], resolve)
     }
 };
 </script>

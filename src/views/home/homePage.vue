@@ -108,13 +108,21 @@ export default {
     flex-wrap: wrap;
 }
 .grids figure {
-    flex: 1;
     margin: 0 0 0 -1px;
+    width: 33.33%;
+    box-sizing: border-box;
     text-align: center;
     padding: 0.4rem 0.5rem;
     border-left: solid 1px #ddd;
     border-bottom: solid 1px #ddd;
     border-collapse: collapse;
+}
+.grids figure:last-of-type{
+    border-right: solid 1px #ddd;
+}
+.grids::after {
+    content: "";
+    flex: auto;
 }
 .grids figure img {
     width: 1rem;

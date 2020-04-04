@@ -12,7 +12,7 @@
         <date-pick title="整改时间" time="after" placeholder="请选择完成时间" @returnDate="getZgsqsj"></date-pick>
         <mt-field label="验收说明" placeholder="请输入验收说明" v-model="ysqk"></mt-field>
         <mt-field label="备注" placeholder="请输入备注" v-model="memo"></mt-field>
-        <!-- <uploadimg @toImgArr = "getImgArr"></uploadimg> -->
+        <uploadimg @toImgArr = "getImgArr"></uploadimg>
         <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
     </div>
 </template>
@@ -39,9 +39,9 @@ export default {
             this.zgsqsj = v;
         },
         // 获取图片数组
-        // getImgArr(v){
-        //     this.upImgArr = v;
-        // },
+        getImgArr(v){
+            this.upImgArr = v;
+        },
         update() {
             let _self = this;
             _self.postData["variable.value"] = "true," + this.opinion;
@@ -51,7 +51,7 @@ export default {
             _self.postData["zczgEntity.ysqk"] = this.ysqk;
             _self.postData["zczgEntity.tbr"] = this.tbr;
             _self.postData["zczgEntity.memo"] = this.memo;
-            _self.postData["zczgEntity.img"] = this.upImgArr;
+            _self.postData["zczgEntity.img"] = JSON.stringify(this.upImgArr);
             // 上传接口
             this.$api.danger.completenodyTask(_self.postData).then(res => {
                 res = eval("(" + res + ")");
@@ -73,7 +73,8 @@ export default {
         }
     },
     components: {
-        datePick
+        datePick,
+        uploadimg
     }
 };
 </script>

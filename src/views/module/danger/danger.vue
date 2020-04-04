@@ -419,13 +419,13 @@ export default {
         // 查看方式 得到子组件传入的值
         radioData(v) {
             this.params.queryAll = v;
-            this.$refs.previewChild.cleraDate();
+            this.$refs.previewChild.cleraData();
         },
         paramsDate(v) {
             Object.keys(v).forEach(key => {
                 this.params[key] = v[key];
             });
-            this.$refs.previewChild.cleraDate();
+            this.$refs.previewChild.cleraData();
         }
     },
     components: {
