@@ -14,7 +14,7 @@
         <mt-field label="隐患名称" placeholder="请输入隐患名称" v-model="inspacetcontent"></mt-field>
         <mt-field label="隐患地点" placeholder="请输入隐患地点" v-model="craddr"></mt-field>
         <mt-field label="存在问题" placeholder="请输入存在问题" v-model="czwt"></mt-field>
-        <uploadimg @toImgArr = "getImgArr"></uploadimg>
+        <uploadimg @toImgArr="getImgArr"></uploadimg>
         <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
     </div>
 </template>
@@ -49,22 +49,21 @@ export default {
             crLevelSlots: [
                 {
                     values: [
-                        { text: "请选择", id: "0" },
-                        { text: "一级", id: "1" },
-                        { text: "二级", id: "2" },
-                        { text: "三级", id: "3" },
-                        { text: "四级", id: "4" }
+                        { text: "一级", id: "ZDYHJB001" },
+                        { text: "二级", id: "ZDYHJB002" },
+                        { text: "三级", id: "ZDYHJB003" },
+                        { text: "四级", id: "ZDYHJB004" }
                     ]
                 }
             ],
             classifySlots: [
                 {
                     values: [
-                        { text: "请选择" },
-                        { text: "行为不安全" },
-                        { text: "物品不安全" },
-                        { text: "环境不安全" },
-                        { text: "管理缺陷" }
+                        { text: "管理缺陷", id: "YHLB001" },
+                        { text: "设备设施不安全", id: "YHLB002" },
+                        { text: "员工行为不安全", id: "YHLB003" },
+                        { text: "作业环境不安全", id: "YHLB004" },
+                        { text: "防护用品/器不安全", id: "YHLB005" }
                     ]
                 }
             ],
@@ -83,7 +82,7 @@ export default {
             this.classify = v.text;
         },
         // 获取图片数组
-        getImgArr(v){
+        getImgArr(v) {
             console.log(v);
             this.upImgArr = v;
         },
@@ -98,7 +97,7 @@ export default {
                 "bean.knfs": this.knfs,
                 "bean.crLevel": this.crLevel,
                 "bean.classify": this.classify,
-                "bean.img":JSON.stringify(this.upImgArr),
+                "bean.img": JSON.stringify(this.upImgArr),
                 session: window.localStorage["session_Id"]
             };
             // 上传接口
@@ -113,8 +112,8 @@ export default {
             });
         }
     },
-    computed:{
-        knfsSlots(){
+    computed: {
+        knfsSlots() {
             return this.$store.state.knfsSlots;
         }
     },

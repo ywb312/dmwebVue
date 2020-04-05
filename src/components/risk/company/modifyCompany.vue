@@ -1,8 +1,8 @@
 <template>
-    <div class="addCompany">
-        <div class="maskWrap" v-show="addshow" @click="addVisible=false">
+    <div class="modifyCompany">
+        <div class="maskWrap" v-show="modShow" @click="modVisible=false">
             <div @click.stop class="maskMiddle">
-                <div class="maskTitle">新增风险点</div>
+                <div class="maskTitle">修改危险源</div>
                 <mt-field label="危险源名称" placeholder="请输入危险源名称" v-model="getData.wname"></mt-field>
                 <mt-field label="项目" placeholder="请输入项目" v-model="getData.project"></mt-field>
                 <mt-field label="内容" placeholder="请输入内容" v-model="getData.content"></mt-field>
@@ -18,27 +18,28 @@
 import picker from "@/components/pub/picker.vue";
 import { Toast } from "mint-ui";
 export default {
-    name: "addCompany",
+    name: "modifyCompany",
     data() {
         return {
-            addVisible: false,
+            modVisible: false,
             getData: {
-                wname: "",
-                project: "",
-                content: "",
-                yxfw: "",
-                knfs: "",
-                qzhg: ""
+                wname: this.selcetData.wname,
+                project: this.selcetData.project,
+                content: this.selcetData.content,
+                yxfw: this.selcetData.yxfw,
+                knfs: this.selcetData.knfs,
+                qzhg: this.selcetData.qzhg
             }
         };
     },
-    props: ["addshow", "fid"],
+    props: ["modShow", "selcetData"],
     methods: {
         // 根据当前页面的配置 对请求入参进行添加筛选
         returnData(option) {
             let obj = {
-                "bean.fid":this.fid,
-                session: window.localStorage["session_Id"],
+                "bean.fid": this.selcetData.fid,
+                "bean.wid": this.selcetData.wid,
+                session: window.localStorage["session_Id"]
             };
             for (const key in this.getData) {
                 obj["bean." + key] = this.getData[key];
@@ -56,12 +57,10 @@ export default {
                     return;
                 }
             }
-            this.$api.risk
-                .companyRiskAdd(this.returnData())
-                .then(res => {
-                    this.addVisible = false;
-                    this.$emit("addSuc");
-                });
+            this.$api.risk.companyRiskModify(this.returnData()).then(res => {
+                this.modVisible = false;
+                this.$emit("suc");
+            });
         },
         getYxfw(v) {
             this.getData.yxfw = v.id;
@@ -75,11 +74,16 @@ export default {
     },
     watch: {
         // 监听两个值 确定显示的状态
-        addshow(val) {
+        modShow(val) {
             //popshow为父组件的值，val参数为值
-            this.addVisible = val; //将父组件的值赋给popupVisible 子组件的值
+            if (val) {
+                this.modVisible = val; //将父组件的值赋给popupVisible 子组件的值
+                this.getData.wname = this.selcetData.wname;
+                this.getData.project = this.selcetData.project;
+                this.getData.content = this.selcetData.content;
+            }
         },
-        addVisible(val) {
+        modVisible(val) {
             if (val == false) {
                 this.$emit("popupClose");
             }

@@ -10,19 +10,19 @@
         >
             <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                 <div class="title">
-                    <h4>{{index+1+'.'+item.name}}</h4>
-                    <!-- <p style="min-width:40px">
-                        <mt-badge size="small">{{item.checktype}}</mt-badge>
-                    </p>-->
+                    <h4>{{index+1+'.'+item.deptname}}</h4>
+                    <p style="min-width:40px">
+                        <mt-badge size="small">{{item.stateText}}</mt-badge>
+                    </p>
                 </div>
                 <div class="main">
                     <div>
-                        <span>风险点类型:</span>
-                        <span>{{item.fxtext}}</span>
+                        <span>提交时间:</span>
+                        <span>{{item.createdate}}</span>
                     </div>
                     <div>
-                        <span>创建人:</span>
-                        <span>{{item.createID}}</span>
+                        <span>审核时间:</span>
+                        <span>{{item.auditdate}}</span>
                     </div>
                 </div>
                 <div class="bottom" @click="btnClick(item)">操作</div>
@@ -39,29 +39,11 @@
             <div class="popupItem" @click.stop="riskDelete">删除</div>
             <div class="popupItem" @click.stop="goRouter">查看危险源</div>
         </mt-popup>
-        <div>
-            <add-risk :addshow="addshow" @popupClose="addshow=false" @addSuc="cleraData"></add-risk>
-            <modifyRisk
-                :modShow="modShow"
-                :fid="selcetData.fid"
-                @popupClose="modShow=false"
-                @suc="cleraData"
-            ></modifyRisk>
-            <delete-risk
-                :delShow="delShow"
-                :fid="selcetData.fid"
-                @popupClose="delShow=false"
-                @suc="cleraData"
-            ></delete-risk>
-        </div>
     </div>
 </template>
 <script>
 // 这是基本渲染功能的组件 公用
 import { Popup, Loadmore } from "mint-ui";
-import addRisk from "@/components/risk/risk/addRisk";
-import modifyRisk from "@/components/risk/risk/modifyRisk";
-import deleteRisk from "@/components/risk/risk/deleteRisk";
 export default {
     name: "plantRisk",
     data() {
@@ -78,11 +60,8 @@ export default {
             // 选中的对象
             selcetData: {},
             // 控制操作模态框的显示
-            popshow: false,
+            popshow: false
             // 增删改查组件的显示
-            addshow: false,
-            modShow: false,
-            delShow: false
         };
     },
     // pageData父组件传来的配置项
@@ -94,7 +73,8 @@ export default {
         // 获取当前页面数据函数
         getData(more = true) {
             this.$api.risk
-                .getRisk({
+                .getAudit({
+                    "bean.type": "SH002",
                     rows: 10,
                     page: this.page,
                     session: window.localStorage["session_Id"]
@@ -106,18 +86,18 @@ export default {
                     // 判断rows是否返回数据
                     if (res.rows.length != 0) {
                         res.rows.forEach(element => {
-                            switch (element.fxtype) {
-                                case "FXDLX001":
-                                    element.fxtext = "作业活动";
+                            switch (element.state) {
+                                case "SHZT001":
+                                    element.stateText = "未审核";
                                     break;
-                                case "FXDLX002":
-                                    element.fxtext = "设备";
+                                case "SHZT002":
+                                    element.stateText = "审核通过";
                                     break;
-                                case "FXDLX003":
-                                    element.fxtext = "设施";
+                                case "SHZT003":
+                                    element.stateText = "审核未通过";
                                     break;
-                                case "FXDLX004":
-                                    element.fxtext = "工艺流程";
+                                case "SHZT004":
+                                    element.stateText = "待审核";
                                     break;
                                 default:
                                     break;
@@ -148,28 +128,14 @@ export default {
             this.selcetData = obj;
             this.popshow = true;
         },
-        // 新增风险点
-        addRisk() {
-            this.addshow = true;
-        },
-        // 修改风险点
-        riskModifySave() {
-            this.popshow = false;
-            this.modShow = true;
-        },
-        // 删除风险点
-        riskDelete() {
-            this.popshow = false;
-            this.delShow = true;
-        },
         // 危险源页
         goRouter() {
-            this.$router.push({
-                path: "/risk/companyRisk",
-                query: {
-                    fid: this.selcetData.fid
-                }
-            });
+            // this.$router.push({
+            //     path: "/risk/companyRisk",
+            //     query: {
+            //         fid: this.selcetData.fid
+            //     }
+            // });
         },
         // 上拉加载方法
         loadBottom() {
@@ -193,10 +159,7 @@ export default {
     },
     components: {
         "mt-loadmore": Loadmore,
-        "mt-popup": Popup,
-        addRisk,
-        modifyRisk,
-        deleteRisk
+        "mt-popup": Popup
     }
 };
 </script>

@@ -73,7 +73,7 @@ export default {
                 },
                 {
                     text: "自查自改",
-                    router: "/change",
+                    router: "/backlog/change",
                     routerQuery: { type: "zczg" },
                     show: true
                 }

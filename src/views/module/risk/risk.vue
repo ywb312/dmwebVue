@@ -27,11 +27,15 @@ export default {
                     components: "plantRisk"
                 },
                 {
+                    text: "安环部审核",
+                    components: "audit"
+                },
+                {
                     text: "风险清单",
                     components: "riskList"
                 },
                 {
-                    text: "安全风险公告栏",
+                    text: "安全风险公告栏"
                 },
                 {
                     text: "岗位风险告知卡"
@@ -46,7 +50,8 @@ export default {
     methods: {},
     components: {
         plantRisk: resolve => require(["@/components/risk/plantRisk"], resolve),
-        riskList: resolve => require(["@/components/risk/riskList"], resolve)
+        riskList: resolve => require(["@/components/risk/riskList"], resolve),
+        audit: resolve => require(["@/components/risk/audit"], resolve)
     }
 };
 </script>

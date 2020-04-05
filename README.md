@@ -63,7 +63,7 @@ toTree(data) {
 ## 遗留问题
 检查记录详情planDetail 落实条件
 计划管理 我的计划
-danger 操作弹出框显示条件
+danger 操作弹出框显示条件 审批状态
 inform 操作弹出框显示条件
 uploadimg 上传图片组件接口动态传值
 work 工作台操作弹出框显示条件及页面

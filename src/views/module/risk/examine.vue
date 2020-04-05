@@ -1,7 +1,7 @@
 <template>
-    <div class="companyRisk">
+    <div class="examine">
         <!-- 标题  -->
-        <mt-header title="危险源" fixed>
+        <mt-header title="排查信息" fixed>
             <router-link to slot="left">
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>
             </router-link>
@@ -17,29 +17,14 @@
                 ref="loadmore"
             >
                 <div class="wrapper" v-for="(item,index) in rendering" :key="index">
-                    <div class="title">
-                        <h4>{{index+1+'.'+item.wname}}</h4>
-                    </div>
                     <div class="main">
                         <div>
-                            <span>项目:</span>
-                            <span>{{item.project}}</span>
+                            <span>频率:</span>
+                            <span>{{item.rate}}</span>
                         </div>
                         <div>
-                            <span>内容:</span>
-                            <span>{{item.content}}</span>
-                        </div>
-                        <div>
-                            <span>影响范围:</span>
-                            <span>{{item.yxfwText}}</span>
-                        </div>
-                        <div>
-                            <span>可能导致的危害:</span>
-                            <span>{{item.knfsText}}</span>
-                        </div>
-                        <div>
-                            <span>潜在风险:</span>
-                            <span>{{item.qzhgText}}</span>
+                            <span>单位:</span>
+                            <span>{{item.deptname}}</span>
                         </div>
                     </div>
                     <div class="bottom" @click="btnClick(item)">操作</div>
@@ -49,40 +34,26 @@
             </mt-loadmore>
         </div>
         <!-- 新增按钮 -->
-        <mt-button class="btn" type="primary" size="large" @click="addshow=true">新增危险源</mt-button>
+        <mt-button class="btn" type="primary" size="large" @click="addshow=true">新增排查</mt-button>
         <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->
         <mt-popup v-model="popshow" popup-transition="popup-fade" closeOnClickModal="true">
-            <div class="popupItem" @click.stop="companyModify">修改</div>
-            <div class="popupItem" @click.stop="companyDelete">删除</div>
-            <div class="popupItem" @click.stop="appraise">评价</div>
-            <div class="popupItem" @click.stop="goRouter">查看管控措施</div>
+            <div class="popupItem" @click.stop="measureDelete">删除</div>
         </mt-popup>
         <!-- 组件框 -->
         <div>
-            <add-company
+            <add-examine
                 :addshow="addshow"
-                :fid="$route.query.fid"
+                :gid="$route.query.gid"
                 @popupClose="addshow=false"
                 @addSuc="cleraData"
-            ></add-company>
-            <modify-company
-                :modShow="modShow"
-                :selcetData="selcetData"
-                @popupClose="modShow=false"
-                @suc="cleraData"
-            ></modify-company>
-            <delete-company
+            ></add-examine>
+            <delete-examine
                 :delShow="delShow"
-                :wid="selcetData.wid"
+                :cprid="selcetData.cprid"
                 @popupClose="delShow=false"
                 @suc="cleraData"
-            ></delete-company>
-            <company-approve
-                :appShow="approveShow"
-                :selcetData="selcetData"
-                @popupClose="approveShow=false"
-            ></company-approve>
+            ></delete-examine>
         </div>
     </div>
 </template>
@@ -90,13 +61,10 @@
 // 这是基本渲染功能的组件 公用
 import { Popup, Loadmore } from "mint-ui";
 // 增删改框
-import addCompany from "@/components/risk/company/addCompany";
-import modifyCompany from "@/components/risk/company/modifyCompany";
-import deleteCompany from "@/components/risk/company/deleteCompany";
-// 评价框
-import companyApprove from "@/components/risk/company/companyApprove";
+import addExamine from "@/components/risk/examine/addExamine";
+import deleteExamine from "@/components/risk/examine/deleteExamine";
 export default {
-    name: "companyRisk",
+    name: "examine",
     data() {
         return {
             page: 1,
@@ -114,9 +82,7 @@ export default {
             popshow: false,
             // 增删改查组件的显示
             addshow: false,
-            modShow: false,
-            delShow: false,
-            approveShow: false
+            delShow: false
         };
     },
     created() {
@@ -126,10 +92,10 @@ export default {
         // 获取当前页面数据函数
         getData(more = true) {
             this.$api.risk
-                .getCompanyRisk({
+                .getExamine({
                     rows: 10,
                     page: this.page,
-                    "bean.fid": this.$route.query.fid,
+                    "bean.gid": this.$route.query.gid,
                     session: window.localStorage["session_Id"]
                 })
                 .then(res => {
@@ -140,11 +106,9 @@ export default {
                     if (res.rows.length != 0) {
                         // 判断是新增还是替换  默认为新增
                         if (more) {
-                            this.rendering.push(
-                                ...this.dealRendering(res.rows)
-                            );
+                            this.rendering.push(...res.rows);
                         } else {
-                            this.rendering = this.dealRendering(res.rows);
+                            this.rendering = res.rows;
                         }
                         // 返回数据小于10条 停止上拉刷新
                         if (res.rows.length < 10) {
@@ -165,53 +129,10 @@ export default {
             this.selcetData = obj;
             this.popshow = true;
         },
-        // 修改按钮点击
-        companyModify() {
-            this.popshow = false;
-            this.modShow = true;
-        },
         // 删除按钮点击
-        companyDelete() {
+        measureDelete() {
             this.popshow = false;
             this.delShow = true;
-        },
-        // 评价按钮点击
-        appraise() {
-            this.popshow = false;
-            this.approveShow = true;
-        },
-        // 将接口返回的 影响范围 可能导致的危害 潜在风险转换为文字
-        dealRendering(res) {
-            let yxfwArr = this.yxfwSlots[0].values;
-            let knfsArr = this.knfsSlots[0].values;
-            let qzhgArr = this.qzhgSlots[0].values;
-            res.forEach(element => {
-                yxfwArr.forEach(item => {
-                    if (element.yxfw == item.id) {
-                        element.yxfwText = item.text;
-                    }
-                });
-                knfsArr.forEach(item => {
-                    if (element.knfs == item.id) {
-                        element.knfsText = item.text;
-                    }
-                });
-                qzhgArr.forEach(item => {
-                    if (element.qzhg == item.id) {
-                        element.qzhgText = item.text;
-                    }
-                });
-            });
-            return res;
-        },
-        // 跳转至管控措施
-        goRouter() {
-            this.$router.push({
-                path: "/risk/measure",
-                query: {
-                    wid: this.selcetData.wid
-                }
-            });
         },
         // 上拉加载方法
         loadBottom() {
@@ -233,24 +154,11 @@ export default {
             this.getData(false);
         }
     },
-    computed: {
-        knfsSlots() {
-            return this.$store.state.knfsSlots;
-        },
-        yxfwSlots() {
-            return this.$store.state.yxfwSlots;
-        },
-        qzhgSlots() {
-            return this.$store.state.qzhgSlots;
-        }
-    },
     components: {
         "mt-loadmore": Loadmore,
         "mt-popup": Popup,
-        addCompany,
-        modifyCompany,
-        deleteCompany,
-        companyApprove
+        addExamine,
+        deleteExamine
     }
 };
 </script>

@@ -75,7 +75,7 @@ const routes = [{
 		}
 	},
 	{ //隐患管理 新增隐患
-		path: '/increase',
+		path: '/danger/increase',
 		name: 'increase',
 		component: resolve => require(['../views/module/danger/increase.vue'], resolve),
 		meta: {
@@ -83,7 +83,7 @@ const routes = [{
 		}
 	},
 	{ //隐患管理 隐患详情
-		path: '/detail',
+		path: '/danger/detail',
 		name: 'detail',
 		component: resolve => require(['../views/module/danger/detail.vue'], resolve),
 		meta: {
@@ -91,7 +91,7 @@ const routes = [{
 		}
 	},
 	{ //隐患管理 填报指派
-		path: '/assign',
+		path: '/danger/assign',
 		name: 'assign',
 		component: resolve => require(['../views/module/danger/assign.vue'], resolve),
 		meta: {
@@ -115,7 +115,7 @@ const routes = [{
 		}
 	},
 	{ //计划管理 检查记录详情
-		path: '/planDetail',
+		path: '/plan/planDetail',
 		name: 'planDetail',
 		component: resolve => require(['../views/module/plan/planDetail.vue'], resolve),
 		meta: {
@@ -139,9 +139,25 @@ const routes = [{
 		}
 	},
 	{ //风险管理 危险源
-		path: '/companyRisk',
+		path: '/risk/companyRisk',
 		name: 'companyRisk',
 		component: resolve => require(['../views/module/risk/companyRisk.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //风险管理 管控措施
+		path: '/risk/measure',
+		name: 'measure',
+		component: resolve => require(['../views/module/risk/measure.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //风险管理 排查信息
+		path: '/risk/examine',
+		name: 'examine',
+		component: resolve => require(['../views/module/risk/examine.vue'], resolve),
 		meta: {
 			keepAlive: false
 		}
@@ -221,7 +237,7 @@ const routes = [{
 		}
 	},
 	{ //自查自改
-		path: '/change',
+		path: '/backlog/change',
 		name: 'change',
 		component: resolve => require(['../views/work/change.vue'], resolve),
 		meta: {

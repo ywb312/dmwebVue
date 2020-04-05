@@ -15,6 +15,7 @@
     </div>
 </template>
 <script>
+//title传入的标题 placeholder默认文字 @selectMsg返回数据
 import treePreview from "./treePreview";
 import { mapState } from "vuex";
 import { Popup } from "mint-ui";
@@ -80,7 +81,7 @@ export default {
             });
             return val;
         },
-        reset(){
+        reset() {
             this.selectVal.name = this.placeholder;
         }
     },

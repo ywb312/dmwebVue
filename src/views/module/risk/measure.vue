@@ -1,7 +1,7 @@
 <template>
-    <div class="companyRisk">
+    <div class="measure">
         <!-- 标题  -->
-        <mt-header title="危险源" fixed>
+        <mt-header title="管控措施" fixed>
             <router-link to slot="left">
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>
             </router-link>
@@ -17,29 +17,14 @@
                 ref="loadmore"
             >
                 <div class="wrapper" v-for="(item,index) in rendering" :key="index">
-                    <div class="title">
-                        <h4>{{index+1+'.'+item.wname}}</h4>
-                    </div>
                     <div class="main">
                         <div>
-                            <span>项目:</span>
-                            <span>{{item.project}}</span>
+                            <span>管控措施名称:</span>
+                            <span>{{item.gname}}</span>
                         </div>
                         <div>
-                            <span>内容:</span>
-                            <span>{{item.content}}</span>
-                        </div>
-                        <div>
-                            <span>影响范围:</span>
-                            <span>{{item.yxfwText}}</span>
-                        </div>
-                        <div>
-                            <span>可能导致的危害:</span>
-                            <span>{{item.knfsText}}</span>
-                        </div>
-                        <div>
-                            <span>潜在风险:</span>
-                            <span>{{item.qzhgText}}</span>
+                            <span>管控措施类型:</span>
+                            <span>{{item.gtypeText}}</span>
                         </div>
                     </div>
                     <div class="bottom" @click="btnClick(item)">操作</div>
@@ -49,40 +34,34 @@
             </mt-loadmore>
         </div>
         <!-- 新增按钮 -->
-        <mt-button class="btn" type="primary" size="large" @click="addshow=true">新增危险源</mt-button>
+        <mt-button class="btn" type="primary" size="large" @click="addshow=true">新增管控措施</mt-button>
         <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->
         <mt-popup v-model="popshow" popup-transition="popup-fade" closeOnClickModal="true">
             <div class="popupItem" @click.stop="companyModify">修改</div>
-            <div class="popupItem" @click.stop="companyDelete">删除</div>
-            <div class="popupItem" @click.stop="appraise">评价</div>
-            <div class="popupItem" @click.stop="goRouter">查看管控措施</div>
+            <div class="popupItem" @click.stop="measureDelete">删除</div>
+            <div class="popupItem" @click.stop="goRouter">查看排查计划</div>
         </mt-popup>
         <!-- 组件框 -->
         <div>
-            <add-company
+            <add-measure
                 :addshow="addshow"
-                :fid="$route.query.fid"
+                :wid="$route.query.wid"
                 @popupClose="addshow=false"
                 @addSuc="cleraData"
-            ></add-company>
-            <modify-company
+            ></add-measure>
+            <modify-measure
                 :modShow="modShow"
                 :selcetData="selcetData"
                 @popupClose="modShow=false"
                 @suc="cleraData"
-            ></modify-company>
-            <delete-company
+            ></modify-measure>
+            <delete-measure
                 :delShow="delShow"
-                :wid="selcetData.wid"
+                :gid="selcetData.gid"
                 @popupClose="delShow=false"
                 @suc="cleraData"
-            ></delete-company>
-            <company-approve
-                :appShow="approveShow"
-                :selcetData="selcetData"
-                @popupClose="approveShow=false"
-            ></company-approve>
+            ></delete-measure>
         </div>
     </div>
 </template>
@@ -90,13 +69,11 @@
 // 这是基本渲染功能的组件 公用
 import { Popup, Loadmore } from "mint-ui";
 // 增删改框
-import addCompany from "@/components/risk/company/addCompany";
-import modifyCompany from "@/components/risk/company/modifyCompany";
-import deleteCompany from "@/components/risk/company/deleteCompany";
-// 评价框
-import companyApprove from "@/components/risk/company/companyApprove";
+import addMeasure from "@/components/risk/measure/addMeasure";
+import modifyMeasure from "@/components/risk/measure/modifyMeasure";
+import deleteMeasure from "@/components/risk/measure/deleteMeasure";
 export default {
-    name: "companyRisk",
+    name: "measure",
     data() {
         return {
             page: 1,
@@ -115,8 +92,7 @@ export default {
             // 增删改查组件的显示
             addshow: false,
             modShow: false,
-            delShow: false,
-            approveShow: false
+            delShow: false
         };
     },
     created() {
@@ -126,10 +102,10 @@ export default {
         // 获取当前页面数据函数
         getData(more = true) {
             this.$api.risk
-                .getCompanyRisk({
+                .getMeasure({
                     rows: 10,
                     page: this.page,
-                    "bean.fid": this.$route.query.fid,
+                    "bean.wid": this.$route.query.wid,
                     session: window.localStorage["session_Id"]
                 })
                 .then(res => {
@@ -171,45 +147,28 @@ export default {
             this.modShow = true;
         },
         // 删除按钮点击
-        companyDelete() {
+        measureDelete() {
             this.popshow = false;
             this.delShow = true;
         },
-        // 评价按钮点击
-        appraise() {
-            this.popshow = false;
-            this.approveShow = true;
-        },
         // 将接口返回的 影响范围 可能导致的危害 潜在风险转换为文字
         dealRendering(res) {
-            let yxfwArr = this.yxfwSlots[0].values;
-            let knfsArr = this.knfsSlots[0].values;
-            let qzhgArr = this.qzhgSlots[0].values;
+            let gTypeArr = this.gTypeSlots[0].values;
             res.forEach(element => {
-                yxfwArr.forEach(item => {
-                    if (element.yxfw == item.id) {
-                        element.yxfwText = item.text;
-                    }
-                });
-                knfsArr.forEach(item => {
-                    if (element.knfs == item.id) {
-                        element.knfsText = item.text;
-                    }
-                });
-                qzhgArr.forEach(item => {
-                    if (element.qzhg == item.id) {
-                        element.qzhgText = item.text;
+                gTypeArr.forEach(item => {
+                    if (element.gtype == item.id) {
+                        element.gtypeText = item.text;
                     }
                 });
             });
             return res;
         },
-        // 跳转至管控措施
+        // 危险源页
         goRouter() {
             this.$router.push({
-                path: "/risk/measure",
+                path: "/risk/examine",
                 query: {
-                    wid: this.selcetData.wid
+                    gid: this.selcetData.gid
                 }
             });
         },
@@ -234,23 +193,16 @@ export default {
         }
     },
     computed: {
-        knfsSlots() {
-            return this.$store.state.knfsSlots;
-        },
-        yxfwSlots() {
-            return this.$store.state.yxfwSlots;
-        },
-        qzhgSlots() {
-            return this.$store.state.qzhgSlots;
+        gTypeSlots() {
+            return this.$store.state.gTypeSlots;
         }
     },
     components: {
         "mt-loadmore": Loadmore,
         "mt-popup": Popup,
-        addCompany,
-        modifyCompany,
-        deleteCompany,
-        companyApprove
+        addMeasure,
+        modifyMeasure,
+        deleteMeasure
     }
 };
 </script>

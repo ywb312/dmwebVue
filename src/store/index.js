@@ -37,7 +37,7 @@ export default new Vuex.Store({
 			{
 				title: "风险管理",
 				path: "risk",
-				page: ["车间/厂级风险辨识", "风险清单", "风险比较图", "风险统计", "安全风险公告栏", "岗位风险告知卡"],
+				page: ["车间/厂级风险辨识", "安环部审核列表", "风险清单", "风险比较图", "风险统计", "安全风险公告栏", "岗位风险告知卡"],
 			},
 			{
 				title: "三项人员信息管理",
@@ -75,7 +75,7 @@ export default new Vuex.Store({
 				page: ["事故快报", "事故详情", "成立事故调查组", "现场调查取证", "事故分析", "调查报告", "事故事件库"],
 			}
 		],
-		// 危害 下拉框的配置
+		// 危害 下拉框配置
 		knfsSlots: [{
 			values: [{
 					text: "请选择",
@@ -163,7 +163,7 @@ export default new Vuex.Store({
 				}
 			]
 		}],
-		// 影响范围 下拉框的配置
+		// 影响范围 下拉框配置
 		yxfwSlots: [{
 			values: [{
 					text: "请选择",
@@ -187,7 +187,7 @@ export default new Vuex.Store({
 				}
 			]
 		}],
-		// 潜在后果 下拉框的配置
+		// 潜在后果 下拉框配置
 		qzhgSlots: [{
 			values: [{
 					text: "请选择",
@@ -208,6 +208,116 @@ export default new Vuex.Store({
 				{
 					text: "死亡",
 					id: "QZHG004"
+				}
+			]
+		}],
+		// LEC评价	下拉框配置
+		lecSlotsL: [{
+			values: [{
+					text: "完全可以预料",
+					id: "10"
+				},
+				{
+					text: "相当可能",
+					id: "6"
+				},
+				{
+					text: "可能、但不经常",
+					id: "3"
+				},
+				{
+					text: "可能性小、完全意外",
+					id: "1"
+				},
+				{
+					text: "很不可能，可以设想",
+					id: "0.5"
+				},
+				{
+					text: "极不可能",
+					id: "0.2"
+				},
+				{
+					text: "实际不可能",
+					id: "0.1"
+				}
+			]
+		}],
+		lecSlotsE: [{
+			values: [{
+					text: "连续暴露",
+					id: "10"
+				},
+				{
+					text: "每天工作时间暴露",
+					id: "6"
+				},
+				{
+					text: "每周一次，或偶然暴露",
+					id: "3"
+				},
+				{
+					text: "每月一次暴露",
+					id: "2"
+				},
+				{
+					text: "每年几次暴露",
+					id: "1"
+				},
+				{
+					text: "非常罕见的暴露",
+					id: "0.5"
+				}
+			]
+		}],
+		lecSlotsC: [{
+			values: [{
+					text: "大灾难,许多人死亡",
+					id: "100"
+				},
+				{
+					text: "灾难,数人死亡",
+					id: "40"
+				},
+				{
+					text: "非常严重,一人死亡",
+					id: "15"
+				},
+				{
+					text: "严重重伤",
+					id: "7"
+				},
+				{
+					text: "重大，致残",
+					id: "3"
+				},
+				{
+					text: "引人注意",
+					id: "1"
+				}
+			]
+		}],
+		// 管控措施	下拉框配置
+		gTypeSlots: [{
+			values: [{
+					text: "工程技术措施",
+					id: "GKCSLX001"
+				},
+				{
+					text: "管理措施",
+					id: "GKCSLX002"
+				},
+				{
+					text: "培训教育措施",
+					id: "GKCSLX003"
+				},
+				{
+					text: "个体防护措施",
+					id: "GKCSLX004"
+				},
+				{
+					text: "应急处置措施",
+					id: "GKCSLX005"
 				}
 			]
 		}],

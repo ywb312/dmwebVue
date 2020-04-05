@@ -172,7 +172,7 @@ export default {
             if (!obj.tbr) return;
             this.$store.commit("getSelcetData", obj);
             this.$router.push({
-                name: "planDetail"
+                path: "/plan/planDetail"
             });
         },
         // 上拉加载方法

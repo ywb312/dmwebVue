@@ -18,11 +18,9 @@ export default {
     data() {
         return {
             modVisible: false,
-            resData: [],
             slots: [
                 {
                     values: [
-                        { text: "请选择", id: "" },
                         { text: "作业活动", id: "FXDLX001" },
                         { text: "工艺", id: "FXDLX004" },
                         { text: "设备", id: "FXDLX002" },
@@ -75,7 +73,10 @@ export default {
         // 监听两个值 确定显示的状态
         modShow(val) {
             //popshow为父组件的值，val参数为值
-            this.modVisible = val; //将父组件的值赋给popupVisible 子组件的值
+            if (val) {
+                this.modVisible = val; //将父组件的值赋给popupVisible 子组件的值
+                this.getData.name = this.selcetData.name;
+            }
         },
         modVisible(val) {
             if (val == false) {

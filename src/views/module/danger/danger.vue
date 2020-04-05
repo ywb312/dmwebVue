@@ -5,7 +5,7 @@
             <router-link to slot="left">
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>
             </router-link>
-            <mt-button v-if="a==0" slot="right" @click="$router.push('/increase')">
+            <mt-button v-if="a==0" slot="right" @click="$router.push('/danger/increase')">
                 <img src="@/assets/iconfont/add.svg" />
             </mt-button>
             <mt-button v-else slot="right" @click="popshow=true">
@@ -363,7 +363,7 @@ export default {
             everyConfig: [
                 {
                     text: "查看详情",
-                    router: "/detail",
+                    router: "/danger/detail",
                     show: true
                 },
                 {
@@ -405,7 +405,7 @@ export default {
                 },
                 {
                     text: "隐患指派",
-                    router: "/assign",
+                    router: "/danger/assign",
                     show: true
                 }
             ]
