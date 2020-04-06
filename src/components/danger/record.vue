@@ -38,14 +38,11 @@ export default {
     name: "record",
     data() {
         return {
-            recordVisible: true,
+            recordVisible: false,
             resData: []
         };
     },
     props: ["compShow"],
-    created() {
-        this.getData(this.selcetData);
-    },
     methods: {
         getData(obj) {
             let self = this;
@@ -61,7 +58,10 @@ export default {
         // 监听两个值 确定显示的状态
         compShow(val) {
             //popshow为父组件的值，val参数为值
-            this.recordVisible = val; //将父组件的值赋给popupVisible 子组件的值
+            if(val){
+                this.getData(this.selcetData);
+                this.recordVisible = val; //将父组件的值赋给popupVisible 子组件的值
+            }
         },
         recordVisible(val) {
             if (val == false) {

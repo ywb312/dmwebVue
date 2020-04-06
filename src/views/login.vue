@@ -134,6 +134,6 @@ export default {
     text-indent: 0.5rem;
     letter-spacing: 0.5rem;
     border-radius: 0.1rem;
-    background: rgba(55, 55, 104, 0.8);
+    background: #2585cf;
 }
 </style>
