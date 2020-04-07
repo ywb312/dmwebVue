@@ -67,9 +67,41 @@ function examineDelete(data) {
     return axios.post("biz/risk/rate/delete.action?actiontype=delete", data);
 }
 
-// 安环部审核列表
+// 审核列表
 function getAudit(data) {
     return axios.post("biz/risk/audit/list.action", data);
+}
+
+// 安环部审核列表详情
+function getAuditDetailAn(data) {
+    return axios.post("/biz/risk/companyRisk/shpjlist.action", data);
+}
+// 安环部审核通过
+function auidtPassAn(data) {
+    return axios.post("biz/risk/audit/doModifySave.action", data);
+}
+
+// 非安环部审核列表详情
+function getAuditDetail(data) {
+    return axios.post("biz/risk/companyRisk/cjshlist.action", data);
+}
+
+// 非安环部审核通过
+function auditPass(data) {
+    return axios.post("biz/risk/companyRiskdept/doModifySave.action", data);
+}
+// 非安环部审核不通过
+function auditNoPass(data) {
+    return axios.post("biz/risk/companyRiskdept/nopass.action", data);
+}
+
+// 厂级汇总上报列表
+function collectList(data) {
+    return axios.post("biz/risk/companyRisk/reportpjlist.action", data);
+}
+//厂级汇总上报提交辨识
+function collectUp(data) {
+    return axios.post("biz/risk/audit/doAddgSave.action", data);
 }
 export default {
     getRisk,
@@ -88,5 +120,12 @@ export default {
     getExamine,
     examineAdd,
     examineDelete,
-    getAudit
+    getAudit,
+    auidtPassAn,
+    getAuditDetailAn,
+    getAuditDetail,
+    auditPass,
+    auditNoPass,
+    collectList,
+    collectUp
 }

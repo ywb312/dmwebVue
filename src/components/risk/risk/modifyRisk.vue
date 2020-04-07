@@ -5,7 +5,7 @@
                 <div class="maskTitle">修改风险点</div>
                 <picker title="风险类型" :slots="slots" @returnMsg="getType"></picker>
                 <mt-field label="风险名称" placeholder="请输入风险名称" v-model="getData.name"></mt-field>
-                <mt-button class="btn" type="primary" size="large" @click="postData">确定</mt-button>
+                <mt-button type="primary" size="large" @click="postData">确定</mt-button>
             </div>
         </div>
     </div>

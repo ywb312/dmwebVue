@@ -119,15 +119,4 @@ export default {
     }
 };
 </script>
-<style scoped>
-.popupItem {
-    width: 4.8rem;
-    padding: 0.2rem 0.2rem;
-    font-size: 16px;
-    text-align: center;
-    border-bottom: 1px solid rgb(230, 230, 230);
-}
-.popupItem:last-of-type {
-    border-bottom: none;
-}
-</style>
+<style scoped src="@/assets/css/public.css"/>

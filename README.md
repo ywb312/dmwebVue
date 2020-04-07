@@ -68,3 +68,5 @@ inform 操作弹出框显示条件
 uploadimg 上传图片组件接口动态传值
 work 工作台操作弹出框显示条件及页面
 最后设置权限后重新修改vuex listPage 控制功能的展示
+risk
+    audit界面判断是否为安全环保部

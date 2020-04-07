@@ -63,7 +63,7 @@ export default {
             everyConfig: [
                 {
                     text: "查看详情",
-                    router: "/detail",
+                    router: "/danger/detail",
                     show: true
                 },
                 {

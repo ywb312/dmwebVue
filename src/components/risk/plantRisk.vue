@@ -106,22 +106,11 @@ export default {
                     // 判断rows是否返回数据
                     if (res.rows.length != 0) {
                         res.rows.forEach(element => {
-                            switch (element.fxtype) {
-                                case "FXDLX001":
-                                    element.fxtext = "作业活动";
-                                    break;
-                                case "FXDLX002":
-                                    element.fxtext = "设备";
-                                    break;
-                                case "FXDLX003":
-                                    element.fxtext = "设施";
-                                    break;
-                                case "FXDLX004":
-                                    element.fxtext = "工艺流程";
-                                    break;
-                                default:
-                                    break;
-                            }
+                            this.$common.codeToText(
+                                element,
+                                "fxtype",
+                                this.fxtypeSlots[0].values
+                            );
                         });
                         // 判断是新增还是替换  默认为新增
                         if (more) {
@@ -191,6 +180,11 @@ export default {
             this.getData(false);
         }
     },
+    computed: {
+        fxtypeSlots() {
+            return this.$store.state.fxtypeSlots;
+        }
+    },
     components: {
         "mt-loadmore": Loadmore,
         "mt-popup": Popup,
@@ -200,21 +194,4 @@ export default {
     }
 };
 </script>
-<style scoped>
-.popupItem {
-    width: 4.8rem;
-    padding: 0.2rem 0.2rem;
-    font-size: 16px;
-    text-align: center;
-    border-bottom: 1px solid rgb(230, 230, 230);
-}
-.popupItem:last-of-type {
-    border-bottom: none;
-}
-.btn {
-    background-color: #2585cf;
-    position: fixed;
-    bottom: 0.1rem;
-}
-</style>
 <style scoped src="@/assets/css/public.css"/>

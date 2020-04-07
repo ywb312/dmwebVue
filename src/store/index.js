@@ -321,6 +321,26 @@ export default new Vuex.Store({
 				}
 			]
 		}],
+		// 类型数组 下拉框配置
+		fxtypeSlots: [{
+			values: [{
+					text: "作业活动",
+					id: "FXDLX001"
+				},
+				{
+					text: "工艺",
+					id: "FXDLX004"
+				},
+				{
+					text: "设备",
+					id: "FXDLX002"
+				},
+				{
+					text: "设施",
+					id: "FXDLX003"
+				}
+			]
+		}],
 		// 组织结构树
 		treeData: "",
 		// 点击操作按钮获取的对象

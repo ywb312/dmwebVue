@@ -206,21 +206,4 @@ export default {
     }
 };
 </script>
-<style scoped>
-.popupItem {
-    width: 4.8rem;
-    padding: 0.2rem 0.2rem;
-    font-size: 16px;
-    text-align: center;
-    border-bottom: 1px solid rgb(230, 230, 230);
-}
-.popupItem:last-of-type {
-    border-bottom: none;
-}
-.btn {
-    background-color: #2585cf;
-    position: fixed;
-    bottom: 0.1rem;
-}
-</style>
 <style scoped src="@/assets/css/public.css"/>

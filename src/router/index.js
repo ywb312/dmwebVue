@@ -162,6 +162,30 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //风险管理 审核详情列表
+		path: '/risk/auditDetailList',
+		name: 'auditDeatilListAn',
+		component: resolve => require(['../views/module/risk/auditDetailList.vue'], resolve),
+		meta: {
+			keepAlive: true
+		}
+	},
+	{ //风险管理 安环部审核详情列表
+		path: '/risk/auditDetailListAn',
+		name: 'auditDetailListAn',
+		component: resolve => require(['../views/module/risk/auditDetailListAn.vue'], resolve),
+		meta: {
+			keepAlive: true
+		}
+	},
+	{ //风险管理 审核详情具体页
+		path: '/risk/auditDetail',
+		name: 'auditDetail',
+		component: resolve => require(['../views/module/risk/auditDetail.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
 	{ //三项人员  
 		path: '/person',
 		name: 'person',

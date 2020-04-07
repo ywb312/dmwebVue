@@ -55,7 +55,7 @@
             <div class="popupItem" @click.stop="comShow">审批记录</div>
             <div class="popupItem" @click.stop="postDeal('zczg')">自查自改</div>
             <div class="popupItem" @click.stop="postDeal('sbsj')">上报上级</div>
-            <!-- <div class="popupItem" @click.stop="postDeal('zp')">隐患指派</div> -->
+            <div class="popupItem" @click.stop="goAssign">隐患指派</div>
         </mt-popup>
     </div>
 </template>
@@ -82,9 +82,31 @@ export default {
             popshow: false,
             // 审批记录操作框
             compShow: false,
+            spArr: [
+                {
+                    id: "SPZT001",
+                    text: "审批中"
+                },
+                {
+                    id: "SPZT002",
+                    text: "审批通过"
+                },
+                {
+                    id: "SPZT003",
+                    text: "审批不通过"
+                },
+                {
+                    id: "SPZT004",
+                    text: "未审批"
+                },
+                {
+                    id: "SPZT005",
+                    text: "未提交"
+                }
+            ]
         };
     },
-    created(){
+    created() {
         this.getData();
     },
     methods: {
@@ -104,25 +126,11 @@ export default {
                     // 判断rows是否返回数据
                     if (res.rows.length != 0) {
                         res.rows.forEach(element => {
-                            switch (element.state) {
-                                case "SPZT001":
-                                    element.stateText = "审批中";
-                                    break;
-                                case "SPZT002":
-                                    element.stateText = "审批通过";
-                                    break;
-                                case "SPZT003":
-                                    element.stateText = "审批不通过";
-                                    break;
-                                case "SPZT004":
-                                    element.stateText = "未审批";
-                                    break;
-                                case "SPZT005":
-                                    element.stateText = "未提交";
-                                    break;
-                                default:
-                                    break;
-                            }
+                            this.$common.codeToText(
+                                element,
+                                "state",
+                                this.spArr
+                            );
                         });
                         // 判断是新增还是替换  默认为新增
                         if (more) {
@@ -177,6 +185,13 @@ export default {
                 }
             });
         },
+        // 去指派
+        goAssign() {
+            this.popshow = false;
+            this.$router.push({
+                path: "/danger/assign"
+            });
+        },
         // 操作按钮点击事件
         btnClick(obj) {
             this.selcetData = obj;
@@ -209,21 +224,4 @@ export default {
     }
 };
 </script>
-<style scoped>
-.popupItem {
-    width: 4.8rem;
-    padding: 0.2rem 0.2rem;
-    font-size: 16px;
-    text-align: center;
-    border-bottom: 1px solid rgb(230, 230, 230);
-}
-.popupItem:last-of-type {
-    border-bottom: none;
-}
-.btn {
-    background-color: #2585cf;
-    position: fixed;
-    bottom: 0.1rem;
-}
-</style>
 <style scoped src="@/assets/css/public.css"/>

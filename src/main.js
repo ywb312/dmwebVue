@@ -7,11 +7,12 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import api from './api/api'
+import common from './utils/common'
 
 Vue.use(MintUI)
 Vue.use(axios)
-
 Vue.prototype.$api = api;
+Vue.prototype.$common = common;
 
 Vue.config.productionTip = false
 

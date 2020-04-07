@@ -1,5 +1,5 @@
 <template>
-    <div class="audit">
+    <div class="collect">
         <mt-loadmore
             :top-method="loadTop"
             :bottom-method="loadBottom"
@@ -25,10 +25,6 @@
                         <span>提交时间:</span>
                         <span>{{item.createdate}}</span>
                     </div>
-                    <div>
-                        <span>审核时间:</span>
-                        <span>{{item.auditdate}}</span>
-                    </div>
                 </div>
             </div>
         </mt-loadmore>
@@ -39,9 +35,9 @@
 </template>
 <script>
 // 这是基本渲染功能的组件 公用
-import { Popup, Loadmore } from "mint-ui";
+import { Loadmore } from "mint-ui";
 export default {
-    name: "audit",
+    name: "collect",
     data() {
         return {
             page: 1,
@@ -86,68 +82,45 @@ export default {
             });
             return arr;
         },
-        setPost() {
-            let obj = {
-                "bean.type": "SH001",
-                rows: 10,
-                page: this.page,
-                session: window.localStorage["session_Id"]
-            };
-            //判断是安全环保部
-            if (true) {
-                obj["bean.type"] = "SH002";
-            }
-            return obj;
-        },
         // 获取当前页面数据函数
         getData(more = true) {
-            this.$api.risk.getAudit(this.setPost()).then(res => {
-                if (!res.rows) {
-                    return;
-                }
-                // 判断rows是否返回数据
-                if (res.rows.length != 0) {
-                    let data = this.setRes(res.rows);
-                    // 判断是新增还是替换  默认为新增
-                    if (more) {
-                        this.rendering.push(...data);
-                    } else {
-                        this.rendering = data;
+            this.$api.risk
+                .collectList({ session: window.localStorage["session_Id"] })
+                .then(res => {
+                    if (!res.rows) {
+                        return;
                     }
-                    // 返回数据小于10条 停止上拉刷新
-                    if (data.length < 10) {
+                    // 判断rows是否返回数据
+                    if (res.rows.length != 0) {
+                        let data = this.setRes(res.rows);
+                        // 判断是新增还是替换  默认为新增
+                        if (more) {
+                            this.rendering.push(...data);
+                        } else {
+                            this.rendering = data;
+                        }
+                        // 返回数据小于10条 停止上拉刷新
+                        if (data.length < 10) {
+                            this.allLoaded = true;
+                            this.noMore = true;
+                        } else {
+                            this.allLoaded = false;
+                            this.noMore = false;
+                        }
+                    } else {
+                        this.noDate = true;
                         this.allLoaded = true;
-                        this.noMore = true;
-                    } else {
-                        this.allLoaded = false;
-                        this.noMore = false;
                     }
-                } else {
-                    this.noDate = true;
-                    this.allLoaded = true;
-                }
-            });
+                });
         },
         // 每项按钮点击事件
         btnClick(obj) {
-            this.$store.commit("getSelcetData", obj);
-            //判断是安全环保部
-            if (true) {
-                this.$router.push({
-                    path: "/risk/auditDetailListAn",
-                    query: {
-                        auditid: obj.auditid,
-                        deptid: obj.deptid
-                    }
-                });
-            } else {
-                this.$router.push({
-                    path: "/risk/auditDetailList",
-                    query: {
-                        auditid: obj.auditid
-                    }
-                });
-            }
+            this.$router.push({
+                path: "/risk/auditDetailList",
+                query: {
+                    auditid: obj.auditid
+                }
+            });
         },
         // 上拉加载方法
         loadBottom() {
@@ -170,8 +143,7 @@ export default {
         }
     },
     components: {
-        "mt-loadmore": Loadmore,
-        "mt-popup": Popup
+        "mt-loadmore": Loadmore
     }
 };
 </script>

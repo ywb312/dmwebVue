@@ -5,7 +5,7 @@
                 <div class="maskTitle">新增排查计划</div>
                 <tree title="单位" @selectMsg="getDept"></tree>
                 <picker title="频率" :slots="rateSlots" @returnMsg="getRate"></picker>
-                <mt-button class="btn" type="primary" size="large" @click="postData">确定</mt-button>
+                <mt-button type="primary" size="large" @click="postData">确定</mt-button>
             </div>
         </div>
     </div>

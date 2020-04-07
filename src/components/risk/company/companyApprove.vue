@@ -6,7 +6,7 @@
                 <picker title="可能性" :slots="slotsL" @returnMsg="getL"></picker>
                 <picker title="严重性" :slots="slotsE" @returnMsg="getE"></picker>
                 <picker title="频繁度" :slots="slotsC" @returnMsg="getC"></picker>
-                <mt-button class="btn" type="primary" size="large" @click="postData">确定</mt-button>
+                <mt-button type="primary" size="large" @click="postData">确定</mt-button>
             </div>
         </div>
     </div>
