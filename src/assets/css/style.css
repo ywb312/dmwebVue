@@ -1,12 +1,12 @@
 /* 标题样式 */
 .mint-header {
     background-color: #2585cf;
-    height: 1.1rem;
-    font-size: 22px;
+    height: 1rem;
+    font-size: 20px;
 }
 /* 默认标题间距 */
 .wrap {
-    padding-top: 1.1rem;
+    padding-top: 1rem;
 }
 /* 单选框同行显示 */
 .mint-radiolist {

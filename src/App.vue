@@ -31,7 +31,7 @@ export default {
     },
     watch: {
         isLoading: function(nval) {
-            this.loadingShow(nval.isLoading);
+            this.loadingShow(nval);
         }
     }
 };

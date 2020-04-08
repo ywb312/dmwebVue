@@ -26,13 +26,13 @@ export default {
             }
         };
     },
-    props: ["appShow", "selcetData"],
+    props: ["appShow", "selectData"],
     methods: {
         // 根据当前页面的配置 对请求入参进行添加筛选
         returnData(option) {
             let obj = {
-                "bean.wid": this.selcetData.wid,
-                "bean.wname": this.selcetData.wname,
+                "bean.wid": this.selectData.wid,
+                "bean.wname": this.selectData.wname,
                 session: window.localStorage["session_Id"]
             };
             for (const key in this.getData) {

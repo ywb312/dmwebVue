@@ -6,25 +6,34 @@
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>
             </router-link>
         </mt-header>
-        <!-- 主体 -->
         <div class="wrap">
-            <preview :params="params" :pageData="pageData"></preview>
+            <component ref="child" :is="pageData.components" :pageData="pageData"></component>
         </div>
     </div>
 </template>
 <script>
-import preview from "@/components/pub/preview";
 export default {
     name: "education",
     data() {
         return {
             // 页面配置
             pageData: "",
-            // 传入的对象
-            params: {
-                olddate: "0"
-            },
             page: [
+                {
+                    text: "培训计划管理(消防)",
+                    components: "traplan",
+                    element: "YS002"
+                },
+                {
+                    text: "培训计划管理(环保)",
+                    components: "traplan",
+                    element: "YS001"
+                },
+                {
+                    text: "培训计划管理(安全)",
+                    components: "traplan",
+                    element: "YS003"
+                },
                 {
                     text: "考试"
                 },
@@ -33,12 +42,6 @@ export default {
                 },
                 {
                     text: "我的考试结果"
-                },
-                {
-                    text: "培训计划管理(消防)"
-                },
-                {
-                    text: "培训计划管理(环保)"
                 }
             ]
         };
@@ -49,7 +52,7 @@ export default {
     },
     methods: {},
     components: {
-        preview
+        traplan: resolve => require(["@/components/education/traplan"], resolve)
     }
 };
 </script>

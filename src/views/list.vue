@@ -1,12 +1,12 @@
 <template>
     <div class="list">
         <!-- 标题  -->
-        <mt-header :title="pageData.title">
+        <mt-header :title="pageData.title" fixed>
             <router-link to="/home" slot="left">
                 <mt-button icon="back"></mt-button>
             </router-link>
         </mt-header>
-        <div class="banner">
+        <div class="banner wrap">
             <img src="@/assets/img/incid_management.png" alt />
         </div>
         <mt-cell

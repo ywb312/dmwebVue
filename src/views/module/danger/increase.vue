@@ -1,21 +1,28 @@
 <template>
     <div class="increase">
         <!-- 标题  -->
-        <mt-header title="发现隐患">
+        <mt-header title="发现隐患" fixed>
             <router-link to slot="left">
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>
             </router-link>
         </mt-header>
-        <mt-field label="填表人" placeholder="请输入填表人" v-model="tbr"></mt-field>
-        <mt-radio title="隐患类型" v-model="prtype" :options="prtypeOption"></mt-radio>
-        <pick title="可能发生的事故" :slots="knfsSlots" @returnMsg="getKnfs"></pick>
-        <pick title="隐患等级" :slots="crLevelSlots" @returnMsg="getCrLevel"></pick>
-        <pick v-if="prtype=='YHLX001'" title="隐患分类" :slots="classifySlots" @returnMsg="getClassify"></pick>
-        <mt-field label="隐患名称" placeholder="请输入隐患名称" v-model="inspacetcontent"></mt-field>
-        <mt-field label="隐患地点" placeholder="请输入隐患地点" v-model="craddr"></mt-field>
-        <mt-field label="存在问题" placeholder="请输入存在问题" v-model="czwt"></mt-field>
-        <uploadimg @toImgArr="getImgArr"></uploadimg>
-        <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
+        <div class="wrap">
+            <mt-field label="填表人" placeholder="请输入填表人" v-model="tbr"></mt-field>
+            <mt-radio title="隐患类型" v-model="prtype" :options="prtypeOption"></mt-radio>
+            <pick title="可能发生的事故" :slots="knfsSlots" @returnMsg="getKnfs"></pick>
+            <pick title="隐患等级" :slots="crLevelSlots" @returnMsg="getCrLevel"></pick>
+            <pick
+                v-if="prtype=='YHLX001'"
+                title="隐患分类"
+                :slots="classifySlots"
+                @returnMsg="getClassify"
+            ></pick>
+            <mt-field label="隐患名称" placeholder="请输入隐患名称" v-model="inspacetcontent"></mt-field>
+            <mt-field label="隐患地点" placeholder="请输入隐患地点" v-model="craddr"></mt-field>
+            <mt-field label="存在问题" placeholder="请输入存在问题" v-model="czwt"></mt-field>
+            <uploadimg @toImgArr="getImgArr"></uploadimg>
+            <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
+        </div>
     </div>
 </template>
 <script>
@@ -124,10 +131,4 @@ export default {
     }
 };
 </script>
-<style scoped>
-.btn {
-    background-color: #2585cf;
-    position: fixed;
-    bottom: 0.1rem;
-}
-</style>
+<style scoped src="@/assets/css/public.css"/>

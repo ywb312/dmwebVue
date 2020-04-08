@@ -15,21 +15,37 @@
                 @click="btnClick(item)"
             >
                 <div class="title">
-                    <h4>{{index+1+"."+item.cpname}}</h4>
+                    <h4>{{index+1+'.'+item.name}}</h4>
                     <p style="min-width:40px">
-                        <mt-badge size="small">{{item.checktype}}</mt-badge>
+                        <mt-badge size="normal">{{item.fxtypeText}}</mt-badge>
                     </p>
                 </div>
                 <div class="main">
                     <div>
-                        <span>检查截止时间: {{item.checkdeadline}}</span>
-                        <mt-badge size="small">{{item.planstatus}}</mt-badge>
+                        <span>1.{{item.wname}}</span>
+                        <span>
+                            <mt-badge
+                                :type="item.grade == 1?'error':item.grade==2?'warning':'primary'"
+                                :color="item.grade == 3?'yellow':''"
+                                size="normal"
+                            >{{item.grade+"级"}}</mt-badge>
+                        </span>
+                    </div>
+                    <div v-for="(n,m) in item.child" :key="m">
+                        <span>{{m+2+"."+n.wname}}</span>
+                        <span>
+                            <mt-badge
+                                :type="n.grade == 1?'error':n.grade==2?'warning':'primary'"
+                                :color="item.grade == 3?'yellow':''"
+                                size="normal"
+                            >{{n.grade+"级"}}</mt-badge>
+                        </span>
                     </div>
                 </div>
             </div>
+            <div v-show="noDate" class="noMoreText">暂无数据</div>
+            <div v-show="noMore" class="noMoreText">没有更多数据了</div>
         </mt-loadmore>
-        <div v-show="noDate" class="noMoreText">暂无数据</div>
-        <div v-show="noMore" class="noMoreText">没有更多数据了</div>
     </div>
 </template>
 <script>
@@ -47,9 +63,7 @@ export default {
             // 没有数据
             noDate: false,
             // 没有更多数据了
-            noMore: false,
-            // 控制模态框的显示
-            popshow: false
+            noMore: false
         };
     },
     // pageData父组件传来的配置项
@@ -58,10 +72,40 @@ export default {
         this.getData();
     },
     methods: {
+        // 设置返还参数
+        setRes(res) {
+            let self = this;
+            let returnArr = [];
+            // 先对数组进行排序
+            let sortArr = res.sort((a, b) => {
+                return a.name > b.name ? 1 : -1;
+            });
+            // 如果name,fxtype和上一项的name,fxtype不一致就推入新数组,否则添加子元素
+            sortArr.forEach((item, index, arr) => {
+                self.$common.codeToText(
+                    item,
+                    "fxtype",
+                    self.fxtypeSlots[0].values
+                );
+                if (index == 0) {
+                    item.child = [];
+                    returnArr.push(item);
+                } else if (
+                    item.name == arr[index - 1].name &&
+                    item.fxtype == arr[index - 1].fxtype
+                ) {
+                    returnArr[returnArr.length - 1].child.push(item);
+                } else {
+                    item.child = [];
+                    returnArr.push(item);
+                }
+            });
+            return returnArr;
+        },
         // 获取当前页面数据函数
         getData(more = true) {
-            this.$api.pub
-                .showPage(this.pageData.ajaxurl, {
+            this.$api.risk
+                .getRiskList({
                     rows: 10,
                     page: this.page,
                     session: window.localStorage["session_Id"]
@@ -72,11 +116,12 @@ export default {
                     }
                     // 判断rows是否返回数据
                     if (res.rows.length != 0) {
+                        let data = this.setRes(res.rows);
                         // 判断是新增还是替换  默认为新增
                         if (more) {
-                            this.rendering.push(...res.rows);
+                            this.rendering.push(...data);
                         } else {
-                            this.rendering = res.rows;
+                            this.rendering = data;
                         }
                         // 返回数据小于10条 停止上拉刷新
                         if (res.rows.length < 10) {
@@ -93,7 +138,10 @@ export default {
                 });
         },
         btnClick(obj) {
-            this.$store.commit("getSelcetData", obj);
+            this.$store.commit("getSelectData", obj);
+            this.$router.push({
+                path: "/risk/auditDetail"
+            });
         },
         // 上拉加载方法
         loadBottom() {
@@ -113,6 +161,11 @@ export default {
             this.noDate = false;
             this.rendering = [];
             this.getData(false);
+        }
+    },
+    computed: {
+        fxtypeSlots() {
+            return this.$store.state.fxtypeSlots;
         }
     },
     components: {

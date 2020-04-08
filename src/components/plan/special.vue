@@ -93,7 +93,7 @@ export default {
                 });
         },
         btnClick(obj) {
-            // this.$store.commit("getSelcetData", obj);
+            // this.$store.commit("getSelectData", obj);
         },
         // 上拉加载方法
         loadBottom() {

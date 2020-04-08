@@ -95,13 +95,25 @@ function auditNoPass(data) {
     return axios.post("biz/risk/companyRiskdept/nopass.action", data);
 }
 
-// 厂级汇总上报列表
-function collectList(data) {
-    return axios.post("biz/risk/companyRisk/reportpjlist.action", data);
+// 风险清单
+function getRiskList(data) {
+    return axios.post("biz/risk/info/selectriskreportlist.action", data);
 }
-//厂级汇总上报提交辨识
-function collectUp(data) {
-    return axios.post("biz/risk/audit/doAddgSave.action", data);
+// 风险比较图
+function getRiskChart(data) {
+    return axios.post("biz/risk/info/fxwxytjlist.action", data);
+}
+// 风险公告栏
+function getRiskBoard(data) {
+    return axios.post("biz/risk/companyRisk/ggl.action", data);
+}
+// 风险公告栏 修改信息
+function riskBoardModify(data) {
+    return axios.post("biz/risk/companyRiskdept/doinfoSave.action?actiontype=modifysave", data);
+}
+// 岗位风险告知卡
+function getInformCard(data) {
+    return axios.post("biz/risk/companyRisk/gzk.action", data);
 }
 export default {
     getRisk,
@@ -126,6 +138,9 @@ export default {
     getAuditDetail,
     auditPass,
     auditNoPass,
-    collectList,
-    collectUp
+    getRiskList,
+    getRiskChart,
+    getRiskBoard,
+    riskBoardModify,
+    getInformCard
 }

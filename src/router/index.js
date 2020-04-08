@@ -210,6 +210,14 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //教育培训 计划详情
+		path: '/education/traplanDetail',
+		name: 'traplanDetail',
+		component: resolve => require(['../views/module/education/traplanDetail.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
 	{ //工艺管理
 		path: '/technology',
 		name: 'technology',
@@ -278,9 +286,9 @@ const router = new VueRouter({
 
 // 全局路由钩子函数 控制加载中的显示
 router.beforeEach(function (to, from, next) {
-	store.commit('setIsLoading', {
-		isLoading: true
-	})
+	// store.commit('setIsLoading', {
+	// 	isLoading: true
+	// })
 	next();
 })
 

@@ -125,7 +125,7 @@ export default {
         // 按钮点击事件popup组件显示
         btnClick(obj) {
             obj.yhid = obj.bussinesskey;
-            this.$store.commit("getSelcetData", obj);
+            this.$store.commit("getSelectData", obj);
             this.popshow = true;
         },
         // 上拉加载方法

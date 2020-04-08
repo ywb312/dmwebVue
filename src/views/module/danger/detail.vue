@@ -111,7 +111,7 @@ export default {
     created() {
         let self = this;
         let obj = {
-            "bean.yhid": this.selcetData.yhid,
+            "bean.yhid": this.selectData.yhid,
             "bean.flag": "1"
         };
         self.$api.danger.detail(obj).then(res => {
@@ -159,8 +159,8 @@ export default {
         }
     },
     computed: {
-        selcetData() {
-            return this.$store.state.selcetData;
+        selectData() {
+            return this.$store.state.selectData;
         }
     }
 };

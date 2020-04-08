@@ -4,8 +4,8 @@ export default {
         arr.forEach(item => {
             if (item.id == obj[key]) {
                 obj[key + "Text"] = item.text;
+                return obj;
             }
         });
-        return obj;
     }
 }

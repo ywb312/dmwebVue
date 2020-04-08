@@ -130,7 +130,7 @@ export default {
         },
         // 每项按钮点击事件
         btnClick(obj) {
-            this.$store.commit("getSelcetData", obj);
+            this.$store.commit("getSelectData", obj);
             //判断是安全环保部
             if (true) {
                 this.$router.push({

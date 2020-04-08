@@ -31,7 +31,9 @@
         <div v-show="noDate" class="noMoreText">暂无数据</div>
         <div v-show="noMore" class="noMoreText">没有更多数据了</div>
         <!-- 新增按钮 -->
-        <mt-button class="btn" type="primary" size="large" @click="addRisk">新增风险点</mt-button>
+        <div>
+            <mt-button class="btn" type="primary" size="large" @click="addRisk">新增风险点</mt-button>
+        </div>
         <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->
         <mt-popup v-model="popshow" popup-transition="popup-fade" closeOnClickModal="true">
@@ -43,13 +45,13 @@
             <add-risk :addshow="addshow" @popupClose="addshow=false" @addSuc="cleraData"></add-risk>
             <modifyRisk
                 :modShow="modShow"
-                :fid="selcetData.fid"
+                :selectData="selectData"
                 @popupClose="modShow=false"
                 @suc="cleraData"
             ></modifyRisk>
             <delete-risk
                 :delShow="delShow"
-                :fid="selcetData.fid"
+                :fid="selectData.fid"
                 @popupClose="delShow=false"
                 @suc="cleraData"
             ></delete-risk>
@@ -76,7 +78,7 @@ export default {
             // 没有更多数据了
             noMore: false,
             // 选中的对象
-            selcetData: {},
+            selectData: {},
             // 控制操作模态框的显示
             popshow: false,
             // 增删改查组件的显示
@@ -134,7 +136,7 @@ export default {
         },
         // 操作按钮点击事件
         btnClick(obj) {
-            this.selcetData = obj;
+            this.selectData = obj;
             this.popshow = true;
         },
         // 新增风险点
@@ -156,7 +158,7 @@ export default {
             this.$router.push({
                 path: "/risk/companyRisk",
                 query: {
-                    fid: this.selcetData.fid
+                    fid: this.selectData.fid
                 }
             });
         },

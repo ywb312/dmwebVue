@@ -20,6 +20,16 @@
                     <div>
                         <span>危险源责任单位: {{item.deptname}}</span>
                     </div>
+                    <div v-if="item.grade">
+                        <span>
+                            风险等级:
+                            <mt-badge
+                                :type="item.grade == 1?'error':item.grade==2?'warning':'primary'"
+                                :color="item.grade == 3?'yellow':''"
+                                size="normal"
+                            >{{item.grade+"级"}}</mt-badge>
+                        </span>
+                    </div>
                     <div>
                         <span>项目: {{item.project}}</span>
                     </div>
@@ -34,6 +44,9 @@
                     </div>
                     <div>
                         <span>潜在后果: {{item.qzhgText}}</span>
+                    </div>
+                    <div v-if="item.gtypeText">
+                        <span>管控措施: {{item.gtypeText}}</span>
                     </div>
                 </div>
             </div>
@@ -51,7 +64,8 @@ export default {
         };
     },
     created() {
-        this.rendering = this.setData(this.selcetData);
+        console.log(this.selectData);
+        this.rendering = this.setData(this.selectData);
     },
     methods: {
         setData(obj) {
@@ -75,13 +89,18 @@ export default {
                     "qzhg",
                     this.qzhgSlots[0].values
                 );
+                this.$common.codeToText(
+                    element,
+                    "gtype",
+                    this.gTypeSlots[0].values
+                );
             });
             return arr;
         }
     },
     computed: {
-        selcetData() {
-            return this.$store.state.selcetData;
+        selectData() {
+            return this.$store.state.selectData;
         },
         knfsSlots() {
             return this.$store.state.knfsSlots;
@@ -91,6 +110,9 @@ export default {
         },
         qzhgSlots() {
             return this.$store.state.qzhgSlots;
+        },
+        gTypeSlots() {
+            return this.$store.state.gTypeSlots;
         }
     },
     components: {}

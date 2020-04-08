@@ -1,5 +1,6 @@
 <template>
-    <div class="myPlan">
+    <div class="traplan">
+        <search-box placeholder="请输入计划名称" @callback="searchBack"></search-box>
         <mt-loadmore
             :top-method="loadTop"
             :bottom-method="loadBottom"
@@ -15,28 +16,34 @@
                 @click="btnClick(item)"
             >
                 <div class="title">
-                    <h4>{{index+1+"."+item.cpname}}</h4>
-                    <p style="min-width:40px">
-                        <mt-badge size="small">{{item.checktype}}</mt-badge>
-                    </p>
+                    <h4>{{index+1+"."+item.planname}}</h4>
                 </div>
                 <div class="main">
                     <div>
-                        <span>检查截止时间: {{item.checkdeadline}}</span>
-                        <mt-badge size="small">{{item.planstatus}}</mt-badge>
+                        <span>培训内容: {{item.contextvalue}}</span>
+                    </div>
+                    <div>
+                        <span>开始时间: {{item.starttime}}</span>
+                    </div>
+                    <div>
+                        <span>培训地点: {{item.traplace}}</span>
+                    </div>
+                    <div>
+                        <span>组织单位: {{item.hostdept}}</span>
                     </div>
                 </div>
             </div>
+            <div v-show="noDate" class="noMoreText">暂无数据</div>
+            <div v-show="noMore" class="noMoreText">没有更多数据了</div>
         </mt-loadmore>
-        <div v-show="noDate" class="noMoreText">暂无数据</div>
-        <div v-show="noMore" class="noMoreText">没有更多数据了</div>
     </div>
 </template>
 <script>
 // 这是基本渲染功能的组件 公用
 import { Loadmore } from "mint-ui";
+import searchBox from "@/components/pub/searchBox";
 export default {
-    name: "myPlan",
+    name: "traplan",
     data() {
         return {
             page: 1,
@@ -48,6 +55,7 @@ export default {
             noDate: false,
             // 没有更多数据了
             noMore: false,
+            param: ""
         };
     },
     // pageData父组件传来的配置项
@@ -58,8 +66,14 @@ export default {
     methods: {
         // 获取当前页面数据函数
         getData(more = true) {
-            this.$api.pub
-                .showPage(this.pageData.ajaxurl, this.pageData)
+            this.$api.education
+                .getTraplan({
+                    "bean.param": this.param,
+                    "bean.element": this.pageData.element,
+                    rows: 10,
+                    page: this.page,
+                    session: window.localStorage["session_Id"]
+                })
                 .then(res => {
                     if (!res.rows) {
                         return;
@@ -86,8 +100,16 @@ export default {
                     }
                 });
         },
+        // 搜索框的回调
+        searchBack(str) {
+            this.param = str;
+            this.cleraData();
+        },
         btnClick(obj) {
             this.$store.commit("getSelectData", obj);
+            this.$router.push({
+                path: "/education/traplanDetail"
+            });
         },
         // 上拉加载方法
         loadBottom() {
@@ -110,7 +132,8 @@ export default {
         }
     },
     components: {
-        "mt-loadmore": Loadmore
+        "mt-loadmore": Loadmore,
+        searchBox
     }
 };
 </script>

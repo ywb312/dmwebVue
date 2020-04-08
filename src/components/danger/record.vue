@@ -59,7 +59,7 @@ export default {
         compShow(val) {
             //popshow为父组件的值，val参数为值
             if(val){
-                this.getData(this.selcetData);
+                this.getData(this.selectData);
                 this.recordVisible = val; //将父组件的值赋给popupVisible 子组件的值
             }
         },
@@ -73,8 +73,8 @@ export default {
         "mt-popup": Popup
     },
     computed: {
-        selcetData() {
-            return this.$store.state.selcetData;
+        selectData() {
+            return this.$store.state.selectData;
         }
     }
 };

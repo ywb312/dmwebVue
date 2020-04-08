@@ -31,15 +31,32 @@ export default {
                     components: "audit"
                 },
                 {
+                    text: "车间级汇总上报",
+                    components: "collect",
+                    ajaxUrl: "biz/risk/info/selectreportlist.action",
+                    upUrl: "biz/risk/audit/doallaudit.action"
+                },
+                {
+                    text: "厂级汇总上报",
+                    components: "collect",
+                    ajaxUrl: "biz/risk/companyRisk/reportpjlist.action",
+                    upUrl: "biz/risk/audit/doAddgSave.action"
+                },
+                {
                     text: "风险清单",
                     components: "riskList"
                 },
                 {
-                    text: "安全风险公告栏",
-                    components: "collect"
+                    text: "风险比较图",
+                    components: "riskChart"
                 },
                 {
-                    text: "岗位风险告知卡"
+                    text: "安全风险公告栏",
+                    components: "riskBoard"
+                },
+                {
+                    text: "岗位告知卡",
+                    components: "informCard"
                 }
             ]
         };
@@ -53,7 +70,11 @@ export default {
         plantRisk: resolve => require(["@/components/risk/plantRisk"], resolve),
         riskList: resolve => require(["@/components/risk/riskList"], resolve),
         audit: resolve => require(["@/components/risk/audit"], resolve),
-        collect: resolve => require(["@/components/risk/collect"], resolve)
+        collect: resolve => require(["@/components/risk/collect"], resolve),
+        riskChart: resolve => require(["@/components/risk/riskChart"], resolve),
+        riskBoard: resolve => require(["@/components/risk/riskBoard"], resolve),
+        informCard: resolve =>
+            require(["@/components/risk/informCard"], resolve)
     }
 };
 </script>

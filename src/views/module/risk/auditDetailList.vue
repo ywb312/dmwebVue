@@ -44,11 +44,11 @@
         <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->
         <mt-popup v-model="popshow" popup-transition="popup-fade" closeOnClickModal="true">
-            <div v-if="selcetData.state == 'SHZT004' || selcetData.state == 'SHZT001'">
+            <div v-if="selectData.state == 'SHZT004' || selectData.state == 'SHZT001'">
                 <div class="popupItem" @click.stop="auditPass(true)">审核通过</div>
                 <div class="popupItem" @click.stop="auditPass(false)">审核不通过</div>
             </div>
-            <!-- <div v-if="selcetData.state == 'SHZT002'&&selcetData.wid">
+            <!-- <div v-if="selectData.state == 'SHZT002'&&selectData.wid">
                 <div class="popupItem" @click.stop="appraise">评价</div>
                 <div class="popupItem" @click.stop="goMeasure">管控措施</div>
             </div>-->
@@ -58,7 +58,7 @@
         <!-- <div>
             <company-approve
                 :appShow="approveShow"
-                :selcetData="selcetData"
+                :selectData="selectData"
                 @popupClose="approveShow=false"
             ></company-approve>
         </div>-->
@@ -102,7 +102,7 @@ export default {
                     id: "SHZT004"
                 }
             ],
-            selcetData: {}
+            selectData: {}
         };
     },
     created() {
@@ -111,15 +111,15 @@ export default {
     methods: {
         // 每项按钮点击事件
         btnClick(obj) {
-            this.$store.commit("getSelcetData", obj);
+            this.$store.commit("getSelectData", obj);
             this.popshow = true;
-            this.selcetData = obj;
-            console.log(this.selcetData);
+            this.selectData = obj;
+            console.log(this.selectData);
         },
         // 审核通过/不通过
         auditPass(bol) {
             let obj = {
-                "bean.cid": this.selcetData.cid,
+                "bean.cid": this.selectData.cid,
                 "bean.param": this.$route.query.auditid
             };
             if (bol) {

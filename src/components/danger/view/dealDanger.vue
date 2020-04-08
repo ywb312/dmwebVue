@@ -77,7 +77,7 @@ export default {
             // 没有更多数据了
             noMore: false,
             // 选中的对象
-            selcetData: {},
+            selectData: {},
             // 控制操作模态框的显示
             popshow: false,
             // 审批记录操作框
@@ -168,7 +168,7 @@ export default {
         postDeal(type) {
             this.popshow = false;
             let obj = {
-                "bean.yhid": this.selcetData.yhid
+                "bean.yhid": this.selectData.yhid
             };
             if (type == "zczg") {
                 obj["bean.zgtype"] = "ZGLX002";
@@ -194,7 +194,7 @@ export default {
         },
         // 操作按钮点击事件
         btnClick(obj) {
-            this.selcetData = obj;
+            this.selectData = obj;
             this.popshow = true;
         },
         // 上拉加载方法

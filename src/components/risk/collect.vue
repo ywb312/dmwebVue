@@ -1,5 +1,5 @@
 <template>
-    <div class="collect">
+    <div class="collectChe">
         <mt-loadmore
             :top-method="loadTop"
             :bottom-method="loadBottom"
@@ -8,36 +8,63 @@
             bottomPullText="正在加载更多..."
             ref="loadmore"
         >
-            <div
-                class="wrapper"
-                v-for="(item,index) in rendering"
-                :key="index"
-                @click="btnClick(item)"
-            >
-                <div class="title">
-                    <h4>{{index+1+'.'+item.deptname}}</h4>
-                    <p style="min-width:40px">
-                        <mt-badge size="small">{{item.stateText}}</mt-badge>
-                    </p>
-                </div>
-                <div class="main">
-                    <div>
-                        <span>提交时间:</span>
-                        <span>{{item.createdate}}</span>
+            <div class="wrapper" v-for="(item,index) in rendering" :key="index">
+                <div class="wrapper" v-for="(item,index) in rendering" :key="index">
+                    <div class="title">
+                        <h4>{{index+1+'.'+item.name}}</h4>
+                        <p style="min-width:40px">
+                            <mt-badge size="normal">{{item.fxtypeText}}</mt-badge>
+                        </p>
+                    </div>
+                    <div class="main">
+                        <div>
+                            <span>危险源名称: {{item.wname}}</span>
+                        </div>
+                        <div>
+                            <span>危险源责任单位: {{item.deptname}}</span>
+                        </div>
+                        <div>
+                            <span>
+                                风险等级:
+                                <mt-badge
+                                    :type="item.grade == 1?'error':item.grade==2?'warning':'primary'"
+                                    :color="item.grade == 3?'yellow':''"
+                                    size="normal"
+                                >{{item.grade+"级"}}</mt-badge>
+                            </span>
+                        </div>
+                        <div>
+                            <span>项目: {{item.project}}</span>
+                        </div>
+                        <div>
+                            <span>内容: {{item.content}}</span>
+                        </div>
+                        <div>
+                            <span>影响范围: {{item.yxfwText}}</span>
+                        </div>
+                        <div>
+                            <span>可能导致的事故: {{item.knfsText}}</span>
+                        </div>
+                        <div>
+                            <span>潜在后果: {{item.qzhgText}}</span>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div v-show="noDate" class="noMoreText">暂无数据</div>
+            <div v-show="noMore" class="noMoreText">没有更多数据了</div>
         </mt-loadmore>
-        <div v-show="noDate" class="noMoreText">暂无数据</div>
-        <div v-show="noMore" class="noMoreText">没有更多数据了</div>
-        <!-- 隐藏的组件 -->
+        <!-- 新增按钮 -->
+        <div>
+            <mt-button class="btn" type="primary" size="large" @click="upAffirm">提交辨识</mt-button>
+        </div>
     </div>
 </template>
 <script>
 // 这是基本渲染功能的组件 公用
-import { Loadmore } from "mint-ui";
+import { Loadmore, Toast } from "mint-ui";
 export default {
-    name: "collect",
+    name: "collectChe",
     data() {
         return {
             page: 1,
@@ -70,22 +97,43 @@ export default {
         };
     },
     // pageData父组件传来的配置项
-    props: ["pageData"],
     created() {
         this.getData();
     },
+    props: ["pageData"],
     methods: {
         // 处理请求的数据
         setRes(arr) {
             arr.forEach(element => {
-                this.$common.codeToText(element, "state", this.stateArr);
+                this.$common.codeToText(
+                    element,
+                    "knfs",
+                    this.knfsSlots[0].values
+                );
+                this.$common.codeToText(
+                    element,
+                    "yxfw",
+                    this.yxfwSlots[0].values
+                );
+                this.$common.codeToText(
+                    element,
+                    "qzhg",
+                    this.qzhgSlots[0].values
+                );
+                this.$common.codeToText(
+                    element,
+                    "fxtype",
+                    this.fxtypeSlots[0].values
+                );
             });
             return arr;
         },
         // 获取当前页面数据函数
         getData(more = true) {
-            this.$api.risk
-                .collectList({ session: window.localStorage["session_Id"] })
+            this.$api.pub
+                .showPage(this.pageData.ajaxUrl, {
+                    session: window.localStorage["session_Id"]
+                })
                 .then(res => {
                     if (!res.rows) {
                         return;
@@ -113,14 +161,19 @@ export default {
                     }
                 });
         },
-        // 每项按钮点击事件
-        btnClick(obj) {
-            this.$router.push({
-                path: "/risk/auditDetailList",
-                query: {
-                    auditid: obj.auditid
-                }
-            });
+        // 提交辨识
+        upAffirm() {
+            this.$api.pub
+                .showPage(this.pageData.upUrl, {
+                    session: window.localStorage["session_Id"]
+                })
+                .then(res => {
+                    Toast({
+                        message: "提交成功",
+                        position: "bottom",
+                        duration: 2000
+                    });
+                });
         },
         // 上拉加载方法
         loadBottom() {
@@ -140,6 +193,20 @@ export default {
             this.noDate = false;
             this.rendering = [];
             this.getData(false);
+        }
+    },
+    computed: {
+        knfsSlots() {
+            return this.$store.state.knfsSlots;
+        },
+        yxfwSlots() {
+            return this.$store.state.yxfwSlots;
+        },
+        qzhgSlots() {
+            return this.$store.state.qzhgSlots;
+        },
+        fxtypeSlots() {
+            return this.$store.state.fxtypeSlots;
         }
     },
     components: {

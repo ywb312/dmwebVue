@@ -9,19 +9,19 @@
         <div class="topPage">
             <div>
                 计划名称:
-                <span>{{selcetData.cpname}}</span>
+                <span>{{selectData.cpname}}</span>
             </div>
             <div>
                 检查时间:
-                <span>{{selcetData.checkend}}</span>
+                <span>{{selectData.checkend}}</span>
             </div>
             <div>
                 作业地点:
-                <span>{{selcetData.zydd}}</span>
+                <span>{{selectData.zydd}}</span>
             </div>
             <div>
                 检查人员:
-                <span>{{selcetData.tbr}}</span>
+                <span>{{selectData.tbr}}</span>
             </div>
             <div>
                 <span>检查结果</span>
@@ -76,7 +76,7 @@ export default {
         // 获取当前页面数据函数
         getData() {
             this.$api.plan
-                .doDetail({ "bean.cpid": this.selcetData.cpid })
+                .doDetail({ "bean.cpid": this.selectData.cpid })
                 .then(res => {
                     if (!res.entity) {
                         return;
@@ -122,8 +122,8 @@ export default {
         }
     },
     computed: {
-        selcetData() {
-            return this.$store.state.selcetData;
+        selectData() {
+            return this.$store.state.selectData;
         }
     },
     components: {

@@ -5,6 +5,7 @@ import inform from "./module/inform"
 import danger from "./module/danger"
 import plan from "./module/plan"
 import risk from "./module/risk"
+import education from "./module/education"
 // 工作台页面的请求
 import work from "./work"
 
@@ -14,5 +15,6 @@ export default {
     danger,
     plan,
     risk,
+    education,
     work
 }

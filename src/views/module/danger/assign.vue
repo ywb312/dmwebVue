@@ -11,7 +11,9 @@
         <date-pick title="整改截止时间" time="after" placeholder="请选择整改截止时间" @returnDate="getZgjzsj"></date-pick>
         <mt-field label="填表人员" placeholder="请输入填表人员名称" v-model="tbr"></mt-field>
         <mt-field label="备注" placeholder="请输入备注说明" v-model="memo"></mt-field>
-        <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
+        <div>
+            <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
+        </div>
     </div>
 </template>
 <script>
@@ -66,7 +68,7 @@ export default {
             }
             let _self = this;
             let obj = {
-                "sbzpEntity.yhid": this.selcetData.yhid,
+                "sbzpEntity.yhid": this.selectData.yhid,
                 "sbzpEntity.assignFlag": 0,
                 "sbzpEntity.zgzrdw": this.zgzrdw,
                 "sbzpEntity.zgzrdwName": this.zgzrdwName,
@@ -89,8 +91,8 @@ export default {
         }
     },
     computed: {
-        selcetData() {
-            return this.$store.state.selcetData;
+        selectData() {
+            return this.$store.state.selectData;
         }
     },
     components: {
@@ -99,10 +101,4 @@ export default {
     }
 };
 </script>
-<style scoped>
-.btn {
-    background-color: #2585cf;
-    position: fixed;
-    bottom: 0.1rem;
-}
-</style>
+<style scoped src="@/assets/css/public.css"/>

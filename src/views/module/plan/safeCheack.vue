@@ -9,7 +9,9 @@
         <mt-field label="作业地点" placeholder="请输入作业地点" v-model="zydd"></mt-field>
         <mt-field label="检查人员" placeholder="请输入备注说明" v-model="tbr"></mt-field>
         <mt-field label="检查日期" placeholder="请输入检查日期" v-model="date" readonly></mt-field>
-        <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
+        <div>
+            <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
+        </div>
     </div>
 </template>
 <script>
@@ -20,17 +22,17 @@ export default {
     name: "safeCheack",
     data() {
         return {
-            zydd:"",
-            tbr:"",
-            date:"",
+            zydd: "",
+            tbr: "",
+            date: ""
         };
     },
-    created(){
+    created() {
         let date = new Date();
         let years = new Date().getFullYear();
-        let mon = new Date().getMonth()+1;
+        let mon = new Date().getMonth() + 1;
         let day = new Date().getDay();
-        this.date = years+"-"+mon+"-"+day+" ";
+        this.date = years + "-" + mon + "-" + day + " ";
     },
     methods: {
         update() {
@@ -61,7 +63,7 @@ export default {
             // }
             // let _self = this;
             // let obj = {
-            //     "sbzpEntity.yhid": this.selcetData.yhid,
+            //     "sbzpEntity.yhid": this.selectData.yhid,
             //     session: window.localStorage["session_Id"]
             // };
             // // 上传接口
@@ -77,17 +79,11 @@ export default {
         }
     },
     computed: {
-        selcetData() {
-            return this.$store.state.selcetData;
+        selectData() {
+            return this.$store.state.selectData;
         }
     },
     components: {}
 };
 </script>
-<style scoped>
-.btn {
-    background-color: #2585cf;
-    position: fixed;
-    bottom: 0.1rem;
-}
-</style>
+<style scoped src="@/assets/css/public.css"/>

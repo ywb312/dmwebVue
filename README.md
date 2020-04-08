@@ -56,7 +56,7 @@ toTree(data) {
 }
 
 ## 修改mintUI样式文件 assets/css/style.css
-
+## 所有list一级页面为组件，其余新增、详情..页面是路由
 
 
 
@@ -67,6 +67,8 @@ danger 操作弹出框显示条件 审批状态
 inform 操作弹出框显示条件
 uploadimg 上传图片组件接口动态传值
 work 工作台操作弹出框显示条件及页面
+    safeCheak页面预留
 最后设置权限后重新修改vuex listPage 控制功能的展示
 risk
+    班组辨识不让进入管控措施和排查频率 缺少判断
     audit界面判断是否为安全环保部

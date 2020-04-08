@@ -37,7 +37,7 @@ export default new Vuex.Store({
 			{
 				title: "风险管理",
 				path: "risk",
-				page: ["车间/厂级风险辨识", "安环部审核列表", "风险清单", "风险比较图", "风险统计", "安全风险公告栏", "岗位风险告知卡"],
+				page: ["风险辨识", "安环部审核列表", "车间级汇总上报", "厂级汇总上报", "风险清单", "风险比较图", "安全风险公告栏", "岗位风险告知卡"],
 			},
 			{
 				title: "三项人员信息管理",
@@ -52,7 +52,7 @@ export default new Vuex.Store({
 			{
 				title: "教育培训",
 				path: "education",
-				page: ["考试", "考试结果", "我的考试结果", "培训计划管理(消防)", "培训计划管理(环保)"],
+				page: ["培训计划管理(消防)", "培训计划管理(环保)", "培训计划管理(安全)", "考试", "考试结果", "我的考试结果"],
 			},
 			{
 				title: "生产工艺系统安全管理",
@@ -344,7 +344,7 @@ export default new Vuex.Store({
 		// 组织结构树
 		treeData: "",
 		// 点击操作按钮获取的对象
-		selcetData: {},
+		selectData: {},
 	},
 	mutations: {
 		setListNum(state, num) {
@@ -359,8 +359,8 @@ export default new Vuex.Store({
 		setBacklog(state, data) {
 			state.backlog = data;
 		},
-		getSelcetData(state, data) {
-			state.selcetData = data;
+		getSelectData(state, data) {
+			state.selectData = data;
 		}
 	},
 	actions: {},

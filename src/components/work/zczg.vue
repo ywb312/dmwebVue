@@ -12,8 +12,10 @@
         <date-pick title="整改时间" time="after" placeholder="请选择完成时间" @returnDate="getZgsqsj"></date-pick>
         <mt-field label="验收说明" placeholder="请输入验收说明" v-model="ysqk"></mt-field>
         <mt-field label="备注" placeholder="请输入备注" v-model="memo"></mt-field>
-        <uploadimg @toImgArr = "getImgArr"></uploadimg>
-        <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
+        <uploadimg @toImgArr="getImgArr"></uploadimg>
+        <div>
+            <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
+        </div>
     </div>
 </template>
 <script>
@@ -39,7 +41,7 @@ export default {
             this.zgsqsj = v;
         },
         // 获取图片数组
-        getImgArr(v){
+        getImgArr(v) {
             this.upImgArr = v;
         },
         update() {
@@ -78,10 +80,4 @@ export default {
     }
 };
 </script>
-<style lang="scss" scoped>
-.btn {
-    background-color: #2585cf;
-    position: fixed;
-    bottom: 0.1rem;
-}
-</style>
+<style scoped src="@/assets/css/public.css"/>

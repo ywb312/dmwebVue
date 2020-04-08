@@ -44,10 +44,10 @@
         <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->
         <mt-popup v-model="popshow" popup-transition="popup-fade" closeOnClickModal="true">
-            <div v-if="selcetData.state == 'SHZT004' || selcetData.state == 'SHZT001'">
+            <div v-if="selectData.state == 'SHZT004' || selectData.state == 'SHZT001'">
                 <div class="popupItem" @click.stop="auditPass">审核通过</div>
             </div>
-            <div v-if="selcetData.state == 'SHZT002'&&selcetData.wid">
+            <div v-if="selectData.state == 'SHZT002'&&selectData.wid">
                 <div class="popupItem" @click.stop="appraise">评价</div>
                 <div class="popupItem" @click.stop="goMeasure">管控措施</div>
             </div>
@@ -57,7 +57,7 @@
         <div>
             <company-approve
                 :appShow="approveShow"
-                :selcetData="selcetData"
+                :selectData="selectData"
                 @popupClose="approveShow=false"
             ></company-approve>
         </div>
@@ -101,7 +101,7 @@ export default {
                     id: "SHZT004"
                 }
             ],
-            selcetData: {}
+            selectData: {}
         };
     },
     created() {
@@ -110,14 +110,14 @@ export default {
     methods: {
         // 每项按钮点击事件
         btnClick(obj) {
-            this.$store.commit("getSelcetData", obj);
+            this.$store.commit("getSelectData", obj);
             this.popshow = true;
-            this.selcetData = obj;
+            this.selectData = obj;
         },
         // 审核通过/不通过
         auditPass() {
             let obj = {
-                "bean.auditid": this.selcetData.auditid
+                "bean.auditid": this.selectData.auditid
             };
             this.$api.risk.auidtPassAn(obj).then(res => {
                 this.postSuccess();

@@ -170,7 +170,7 @@ export default {
         // 点击某一项 将数据commit到vuex 跳转页面
         btnClick(obj) {
             if (!obj.tbr) return;
-            this.$store.commit("getSelcetData", obj);
+            this.$store.commit("getSelectData", obj);
             this.$router.push({
                 path: "/plan/planDetail"
             });

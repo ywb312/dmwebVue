@@ -1,35 +1,38 @@
 <template>
-    <div class="modifyMeasure">
+    <div class="boardModify">
         <div class="maskWrap" v-show="modShow" @click="modVisible=false">
             <div @click.stop class="maskMiddle">
-                <div class="maskTitle">修改管控措施</div>
-                <mt-field label="管控措施名称" placeholder="请输入风险名称" v-model="getData.gname"></mt-field>
-                <picker title="管控措施类型" :slots="gTypeSlots" @returnMsg="getType"></picker>
+                <div class="maskTitle">修改公告栏信息</div>
+                <mt-field label="环节或部位" placeholder="请输入环节或部位" v-model="getData.part"></mt-field>
+                <mt-field label="责任人" placeholder="请输入责任人" v-model="getData.zrr"></mt-field>
+                <mt-field label="报告电话" placeholder="请输入报告电话" v-model="getData.reportphone"></mt-field>
+                <mt-field label="有效期" placeholder="请输入有效期" v-model="getData.validity"></mt-field>
                 <mt-button type="primary" size="large" @click="postData">确定</mt-button>
             </div>
         </div>
     </div>
 </template>
 <script>
-import picker from "@/components/pub/picker.vue";
 import { Toast } from "mint-ui";
 export default {
-    name: "modifyMeasure",
+    name: "boardModify",
     data() {
         return {
             modVisible: false,
             getData: {
-                gname: "",
-                gtype: ""
+                part: "",
+                zrr: "",
+                reportphone: "",
+                validity: ""
             }
         };
     },
-    props: ["modShow", "selectData"],
+    props: ["modShow", "cid"],
     methods: {
+        // 根据当前页面的配置 对请求入参进行添加筛选
         returnData(option) {
             let obj = {
-                "bean.wid": this.selectData.wid,
-                "bean.gid": this.selectData.gid,
+                "bean.cid": this.cid,
                 session: window.localStorage["session_Id"]
             };
             for (const key in this.getData) {
@@ -41,20 +44,17 @@ export default {
             for (const key in this.getData) {
                 if (this.getData[key] == "") {
                     Toast({
-                        message: "请继续选择完毕后提交",
+                        message: "请把信息补充完整",
                         position: "bottom",
                         duration: 2000
                     });
                     return;
                 }
             }
-            this.$api.risk.measureModify(this.returnData()).then(res => {
+            this.$api.risk.riskBoardModify(this.returnData()).then(res => {
                 this.modVisible = false;
                 this.$emit("suc");
             });
-        },
-        getType(v) {
-            this.getData.gtype = v.id;
         }
     },
     watch: {
@@ -63,7 +63,6 @@ export default {
             //popshow为父组件的值，val参数为值
             if (val) {
                 this.modVisible = val; //将父组件的值赋给popupVisible 子组件的值
-                this.getData.gname = this.selectData.gname;
             }
         },
         modVisible(val) {
@@ -71,14 +70,6 @@ export default {
                 this.$emit("popupClose");
             }
         }
-    },
-    computed: {
-        gTypeSlots() {
-            return this.$store.state.gTypeSlots;
-        }
-    },
-    components: {
-        picker
     }
 };
 </script>

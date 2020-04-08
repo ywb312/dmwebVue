@@ -23,22 +23,22 @@ export default {
         return {
             modVisible: false,
             getData: {
-                wname: this.selcetData.wname,
-                project: this.selcetData.project,
-                content: this.selcetData.content,
-                yxfw: this.selcetData.yxfw,
-                knfs: this.selcetData.knfs,
-                qzhg: this.selcetData.qzhg
+                wname: this.selectData.wname,
+                project: this.selectData.project,
+                content: this.selectData.content,
+                yxfw: this.selectData.yxfw,
+                knfs: this.selectData.knfs,
+                qzhg: this.selectData.qzhg
             }
         };
     },
-    props: ["modShow", "selcetData"],
+    props: ["modShow", "selectData"],
     methods: {
         // 根据当前页面的配置 对请求入参进行添加筛选
         returnData(option) {
             let obj = {
-                "bean.fid": this.selcetData.fid,
-                "bean.wid": this.selcetData.wid,
+                "bean.fid": this.selectData.fid,
+                "bean.wid": this.selectData.wid,
                 session: window.localStorage["session_Id"]
             };
             for (const key in this.getData) {
@@ -78,9 +78,9 @@ export default {
             //popshow为父组件的值，val参数为值
             if (val) {
                 this.modVisible = val; //将父组件的值赋给popupVisible 子组件的值
-                this.getData.wname = this.selcetData.wname;
-                this.getData.project = this.selcetData.project;
-                this.getData.content = this.selcetData.content;
+                this.getData.wname = this.selectData.wname;
+                this.getData.project = this.selectData.project;
+                this.getData.content = this.selectData.content;
             }
         },
         modVisible(val) {

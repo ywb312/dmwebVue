@@ -49,7 +49,9 @@
             </mt-loadmore>
         </div>
         <!-- 新增按钮 -->
-        <mt-button class="btn" type="primary" size="large" @click="addshow=true">新增危险源</mt-button>
+        <div>
+            <mt-button class="btn" type="primary" size="large" @click="addshow=true">新增危险源</mt-button>
+        </div>
         <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->
         <mt-popup v-model="popshow" popup-transition="popup-fade" closeOnClickModal="true">
@@ -68,19 +70,19 @@
             ></add-company>
             <modify-company
                 :modShow="modShow"
-                :selcetData="selcetData"
+                :selectData="selectData"
                 @popupClose="modShow=false"
                 @suc="cleraData"
             ></modify-company>
             <delete-company
                 :delShow="delShow"
-                :wid="selcetData.wid"
+                :wid="selectData.wid"
                 @popupClose="delShow=false"
                 @suc="cleraData"
             ></delete-company>
             <company-approve
                 :appShow="approveShow"
-                :selcetData="selcetData"
+                :selectData="selectData"
                 @popupClose="approveShow=false"
             ></company-approve>
         </div>
@@ -109,7 +111,7 @@ export default {
             // 没有更多数据了
             noMore: false,
             // 选中的对象
-            selcetData: {},
+            selectData: {},
             // 控制操作模态框的显示
             popshow: false,
             // 增删改查组件的显示
@@ -162,7 +164,7 @@ export default {
         },
         // 操作按钮点击事件
         btnClick(obj) {
-            this.selcetData = obj;
+            this.selectData = obj;
             this.popshow = true;
         },
         // 修改按钮点击
@@ -209,7 +211,7 @@ export default {
             this.$router.push({
                 path: "/risk/measure",
                 query: {
-                    wid: this.selcetData.wid
+                    wid: this.selectData.wid
                 }
             });
         },

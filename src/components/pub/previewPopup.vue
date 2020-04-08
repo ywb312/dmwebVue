@@ -75,7 +75,7 @@ export default {
         // 对数据进行筛选
         setPostData(data) {
             let obj = {};
-            let config = this.selcetData;
+            let config = this.selectData;
             data.forEach(item => {
                 if (!item.fix) {
                     obj[item.key] = config[item.val];
@@ -99,8 +99,8 @@ export default {
         }
     },
     computed: {
-        selcetData() {
-            return this.$store.state.selcetData;
+        selectData() {
+            return this.$store.state.selectData;
         },
         views() {
             let arr = [];

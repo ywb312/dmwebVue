@@ -24,20 +24,20 @@ export default {
         this.postData = {
             "variable.keys": "nodepass,comments",
             "variable.types": "B,S",
-            bussinessid: this.selcetData.bussinesskey,
-            taskId: this.selcetData.id,
-            taskDefinitionKey: this.selcetData.taskDefinitionKey,
-            nodeaction: this.selcetData.nodeaction,
-            bussinesskey: this.selcetData.bussinesskey,
-            processInstanceId: this.selcetData.processInstanceId,
-            processDefinitionId: this.selcetData.processDefinitionId,
-            startUserId: this.selcetData.startUserId,
+            bussinessid: this.selectData.bussinesskey,
+            taskId: this.selectData.id,
+            taskDefinitionKey: this.selectData.taskDefinitionKey,
+            nodeaction: this.selectData.nodeaction,
+            bussinesskey: this.selectData.bussinesskey,
+            processInstanceId: this.selectData.processInstanceId,
+            processDefinitionId: this.selectData.processDefinitionId,
+            startUserId: this.selectData.startUserId,
             sbfs: 2
         };
     },
     computed: {
-        selcetData() {
-            return this.$store.state.selcetData;
+        selectData() {
+            return this.$store.state.selectData;
         }
     },
     components: {

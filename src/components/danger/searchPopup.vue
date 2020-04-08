@@ -10,7 +10,7 @@
                     @returnDate1="getStartDate"
                     @returnDate2="getEndDate"
                 ></double-date-pick>
-                <mt-button class="btn" type="primary" size="large" @click="update">确定</mt-button>
+                <mt-button type="primary" size="large" @click="update">确定</mt-button>
             </div>
         </div>
     </div>

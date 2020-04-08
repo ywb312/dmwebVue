@@ -371,7 +371,7 @@ export default {
 }
 .sty {
     position: sticky;
-    top: 1.1rem;
+    top: 1rem;
     background: white;
     z-index: 100;
 }

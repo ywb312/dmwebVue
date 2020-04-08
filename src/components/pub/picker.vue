@@ -43,7 +43,7 @@ export default {
         slots: {
             type: Array,
             default: () => []
-        },
+        }
     },
     methods: {
         confirm() {
@@ -63,7 +63,7 @@ export default {
     }
 };
 </script>
-<style lang="scss" scoped>
+<style scoped>
 .picker-toolbar-title {
     display: flex;
     flex-direction: row;

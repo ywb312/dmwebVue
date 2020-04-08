@@ -34,7 +34,7 @@ export default {
             }
         };
     },
-    props: ["modShow", "fid"],
+    props: ["modShow", "selectData"],
     methods: {
         postData(obj) {
             if (this.getData.name == "") {
@@ -75,7 +75,7 @@ export default {
             //popshow为父组件的值，val参数为值
             if (val) {
                 this.modVisible = val; //将父组件的值赋给popupVisible 子组件的值
-                this.getData.name = this.selcetData.name;
+                this.getData.name = this.selectData.name;
             }
         },
         modVisible(val) {
