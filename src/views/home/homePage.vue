@@ -117,7 +117,7 @@ export default {
     border-bottom: solid 1px #ddd;
     border-collapse: collapse;
 }
-.grids figure:last-of-type{
+.grids figure:last-of-type {
     border-right: solid 1px #ddd;
 }
 .grids::after {

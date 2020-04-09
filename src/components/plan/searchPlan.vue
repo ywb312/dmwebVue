@@ -208,7 +208,7 @@ export default {
 }
 .searchGroup {
     position: sticky;
-    top: 1.1rem;
+    top: 1rem;
     z-index: 100;
 }
 .btnGroup {

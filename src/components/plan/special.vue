@@ -32,10 +32,10 @@
                     </div>
                 </div>
             </div>
-            <mt-button class="btn" type="primary" size="large" @click="addData">提交</mt-button>
+            <div v-show="noDate" class="noMoreText">暂无数据</div>
+            <div v-show="noMore" class="noMoreText">没有更多数据了</div>
         </mt-loadmore>
-        <div v-show="noDate" class="noMoreText">暂无数据</div>
-        <div v-show="noMore" class="noMoreText">没有更多数据了</div>
+        <mt-button class="btn" type="primary" size="large" @click="addData">新增专项检查计划</mt-button>
     </div>
 </template>
 <script>
@@ -53,7 +53,7 @@ export default {
             // 没有数据
             noDate: false,
             // 没有更多数据了
-            noMore: false,
+            noMore: false
         };
     },
     // pageData父组件传来的配置项
@@ -114,9 +114,7 @@ export default {
             this.rendering = [];
             this.getData(false);
         },
-        addData(){
-            
-        }
+        addData() {}
     },
     components: {
         "mt-loadmore": Loadmore
