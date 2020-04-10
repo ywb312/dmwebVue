@@ -1,5 +1,5 @@
 <template>
-    <div class="planDetail">
+    <div class="planDetail page">
         <!-- 标题  -->
         <mt-header title="检查记录详情" fixed>
             <router-link to slot="left">
@@ -136,7 +136,7 @@ export default {
 <style scoped>
 .topPage {
     position: sticky;
-    top: 1.1rem;
+    top: 50px;
     z-index: 100;
     background: white;
 }
@@ -145,7 +145,7 @@ export default {
     color: #2585cf;
 }
 .topPage div {
-    padding: 0.1rem 0.3rem;
+    padding: 10px 15px;
 }
 .main div {
     display: block;

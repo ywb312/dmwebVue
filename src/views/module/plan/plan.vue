@@ -1,5 +1,5 @@
 <template>
-    <div class="plan">
+    <div class="plan page">
         <!-- 标题  -->
         <mt-header :title="pageData.text" fixed>
             <router-link to slot="left">
@@ -65,6 +65,7 @@ export default {
     }
 };
 </script>
+<style scoped src="@/assets/css/public.css"/>
 <style scoped>
 .plan {
     height: 100%;

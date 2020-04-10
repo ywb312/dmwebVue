@@ -29,7 +29,7 @@
             </div>
         </mt-loadmore>
         <div v-show="noDate" class="noMoreText">暂无数据</div>
-        <div v-show="noMore" class="noMoreText">没有更多数据了</div>
+        <van-divider v-show="noMore">没有更多数据了</van-divider>
     </div>
 </template>
 <script>

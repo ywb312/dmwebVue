@@ -1,11 +1,6 @@
 <template>
     <ul v-if="data.length">
-        <li
-            v-for="(item, i) in data"
-            :key="i"
-            @click.stop="selectItem(item)"
-            v-show="expandFlag"
-        >
+        <li v-for="(item, i) in data" :key="i" @click.stop="selectItem(item)" v-show="expandFlag">
             <div class="item">
                 <!-- 展开的图标 -->
                 <b

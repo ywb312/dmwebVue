@@ -1,16 +1,21 @@
 <template>
     <div class="homePage">
-        <mt-header title="主页"></mt-header>
-        <div class="banner">
+        <mt-header title="主页" fixed></mt-header>
+        <div class="banner wrap">
             <img src="@/assets/img/homeshow.png" alt />
         </div>
         <div class="grids">
-            <figure v-for="(item) in grid" :key="item.id" @click="linkTo(item.id)">
-                <img :src="item.url" alt />
-                <figcaption>
-                    <p>{{item.title}}</p>
-                </figcaption>
-            </figure>
+            <van-grid :border="true" :column-num="3">
+                <van-grid-item
+                    class="grids_item"
+                    v-for="(item) in grid"
+                    :key="item.id"
+                    @click="linkTo(item.id)"
+                >
+                    <van-image class="grids_img" :src="item.url" />
+                    <span>{{item.title}}</span>
+                </van-grid-item>
+            </van-grid>
         </div>
     </div>
 </template>
@@ -22,62 +27,62 @@ export default {
             //九宫格布局
             grid: [
                 {
-                    id: 1,
+                    id: "inform",
                     url: require("@/assets/img/ic_news.png"),
                     title: "通知公告"
                 },
                 {
-                    id: 2,
+                    id: "danger",
                     url: require("@/assets/img/ic_risk.png"),
                     title: "隐患管理"
                 },
                 {
-                    id: 3,
+                    id: "plan",
                     url: require("@/assets/img/ic_survey.png"),
                     title: "计划管理"
                 },
                 {
-                    id: 4,
+                    id: "remind",
                     url: require("@/assets/img/ic_emergcy.png"),
                     title: "提醒预警"
                 },
                 {
-                    id: 5,
+                    id: "risk",
                     url: require("@/assets/img/ic_sitesafe.png"),
                     title: "风险管理"
                 },
                 {
-                    id: 6,
+                    id: "person",
                     url: require("@/assets/img/ic_three_person.png"),
                     title: "三项人员"
                 },
                 {
-                    id: 7,
+                    id: "target",
                     url: require("@/assets/img/ic_train.png"),
                     title: "方针目标"
                 },
                 {
-                    id: 8,
+                    id: "education",
                     url: require("@/assets/img/ic_train_edu.png"),
                     title: "教育培训"
                 },
                 {
-                    id: 9,
+                    id: "technology",
                     url: require("@/assets/img/ic_craft_manager.png"),
                     title: "工艺管理"
                 },
                 {
-                    id: 10,
+                    id: "environment",
                     url: require("@/assets/img/ic_envir_pro.png"),
                     title: "环保管理"
                 },
                 {
-                    id: 11,
+                    id: "emergency",
                     url: require("@/assets/img/ic_emergency_manager.png"),
                     title: "应急管理"
                 },
                 {
-                    id: 12,
+                    id: "accident",
                     url: require("@/assets/img/ic_accident_manager.png"),
                     title: "事故管理"
                 }
@@ -87,9 +92,11 @@ export default {
     mounted() {},
     methods: {
         linkTo(id) {
-            this.$store.commit("setListNum", id);
             this.$router.push({
-                name: "list"
+                name: "list",
+                query: {
+                    page: id
+                }
             });
         }
     }
@@ -101,32 +108,15 @@ export default {
     width: 100%;
 }
 .grids {
-    display: flex;
-    width: 100%;
-    height: 6.7rem;
+    height: 320px;
     overflow: auto;
-    flex-wrap: wrap;
 }
-.grids figure {
-    margin: 0 0 0 -1px;
-    width: 33.33%;
-    box-sizing: border-box;
-    text-align: center;
-    padding: 0.4rem 0.5rem;
-    border-left: solid 1px #ddd;
-    border-bottom: solid 1px #ddd;
-    border-collapse: collapse;
+.grids_img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
 }
-.grids figure:last-of-type {
-    border-right: solid 1px #ddd;
-}
-.grids::after {
-    content: "";
-    flex: auto;
-}
-.grids figure img {
-    width: 1rem;
-    height: 1rem;
-    margin-bottom: 0.2rem;
+.grids_item {
+    font-size: 14px;
 }
 </style>

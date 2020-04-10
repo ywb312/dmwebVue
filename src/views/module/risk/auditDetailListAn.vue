@@ -1,5 +1,5 @@
 <template>
-    <div class="auditDetailListAn">
+    <div class="auditDetailListAn page">
         <mt-header title="审核列表" fixed>
             <router-link to slot="left">
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>
@@ -38,7 +38,7 @@
                     <div class="bottom" @click="btnClick(item)">操作</div>
                 </div>
                 <div v-show="noDate" class="noMoreText">暂无数据</div>
-                <div v-show="noMore" class="noMoreText">没有更多数据了</div>
+                <van-divider v-show="noMore">没有更多数据了</van-divider>
             </mt-loadmore>
         </div>
         <!-- 隐藏的组件 -->

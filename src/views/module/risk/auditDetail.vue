@@ -1,5 +1,5 @@
 <template>
-    <div class="auditDetail">
+    <div class="auditDetail page">
         <mt-header title="审核详情" fixed>
             <router-link to slot="left">
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>
@@ -64,7 +64,6 @@ export default {
         };
     },
     created() {
-        console.log(this.selectData);
         this.rendering = this.setData(this.selectData);
     },
     methods: {

@@ -86,12 +86,8 @@ export default {
 };
 </script>
 <style scoped>
-.home {
-    height: 100%;
-}
 .bottom {
     width: 100%;
-    height: 55px;
     display: flex;
     justify-content: center;
     position: fixed;
@@ -99,13 +95,9 @@ export default {
     color: #999999;
     background-color: #565656;
 }
-.float {
-    position: absolute;
-    top: 2px;
-}
 .item {
     display: block;
-    padding: 7px 0;
+    padding: 5px 0;
     flex: 1;
     text-align: center;
     margin: 0;
@@ -121,6 +113,10 @@ export default {
     font-size: 12px;
     line-height: 1;
     color: inherit;
+}
+.float {
+    position: absolute;
+    top: 2px;
 }
 .selected {
     background-color: #2585cf;

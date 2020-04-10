@@ -1,5 +1,5 @@
 <template>
-    <div class="danger">
+    <div class="danger page">
         <component :is="views"></component>
     </div>
 </template>
@@ -38,3 +38,4 @@ export default {
     }
 };
 </script>
+<style scoped src="@/assets/css/public.css"/>

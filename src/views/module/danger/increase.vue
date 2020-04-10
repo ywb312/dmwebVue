@@ -1,5 +1,5 @@
 <template>
-    <div class="increase">
+    <div class="increase page">
         <!-- 标题  -->
         <mt-header title="发现隐患" fixed>
             <router-link to slot="left">

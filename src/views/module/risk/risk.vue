@@ -1,5 +1,5 @@
 <template>
-    <div class="risk">
+    <div class="risk page">
         <!-- 标题  -->
         <mt-header :title="pageData.text" fixed>
             <router-link to slot="left">
@@ -8,7 +8,7 @@
         </mt-header>
         <!-- 主体 -->
         <div class="wrap">
-            <component ref="child" :is="pageData.components" :pageData="pageData"></component>
+            <component :is="pageData.components" :pageData="pageData"></component>
         </div>
     </div>
 </template>
@@ -78,8 +78,4 @@ export default {
     }
 };
 </script>
-<style scoped>
-.risk {
-    height: 100%;
-}
-</style>
+<style scoped src="@/assets/css/public.css"/>

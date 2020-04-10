@@ -1,5 +1,5 @@
 <template>
-    <div class="safeCheack">
+    <div class="safeCheack page">
         <!-- 标题  -->
         <mt-header title="安全检查">
             <router-link to slot="left">

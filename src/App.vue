@@ -8,7 +8,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import { Indicator } from "mint-ui";
+import { Toast } from "vant";
 export default {
     name: "App",
     computed: {
@@ -20,18 +20,19 @@ export default {
     methods: {
         loadingShow(a) {
             if (a) {
-                Indicator.open({
-                    text: "加载中...",
-                    spinnerType: "fading-circle"
+                Toast.loading({
+                    message: "加载中...",
+                    forbidClick: true,
+                    duration: 0
                 });
             } else {
-                Indicator.close();
+                Toast.clear();
             }
         }
     },
     watch: {
         isLoading: function(nval) {
-            this.loadingShow(nval);
+            // this.loadingShow(nval);
         }
     }
 };

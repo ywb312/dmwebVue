@@ -1,5 +1,5 @@
 <template>
-    <div class="assign">
+    <div class="assign page">
         <!-- 标题  -->
         <mt-header title="填报指派">
             <router-link to slot="left">

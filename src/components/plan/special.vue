@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div v-show="noDate" class="noMoreText">暂无数据</div>
-            <div v-show="noMore" class="noMoreText">没有更多数据了</div>
+            <van-divider v-show="noMore">没有更多数据了</van-divider>
         </mt-loadmore>
         <mt-button class="btn" type="primary" size="large" @click="addData">新增专项检查计划</mt-button>
     </div>
@@ -121,11 +121,4 @@ export default {
     }
 };
 </script>
-<style scoped>
-.btn {
-    background-color: #2585cf;
-    position: fixed;
-    bottom: 0.1rem;
-}
-</style>
 <style scoped src="@/assets/css/public.css"/>

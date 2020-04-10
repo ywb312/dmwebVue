@@ -1,5 +1,5 @@
 <template>
-    <div class="examine">
+    <div class="examine page">
         <!-- 标题  -->
         <mt-header title="排查信息" fixed>
             <router-link to slot="left">
@@ -30,7 +30,7 @@
                     <div class="bottom" @click="btnClick(item)">操作</div>
                 </div>
                 <div v-show="noDate" class="noMoreText">暂无数据</div>
-                <div v-show="noMore" class="noMoreText">没有更多数据了</div>
+                <van-divider v-show="noMore">没有更多数据了</van-divider>
             </mt-loadmore>
         </div>
         <!-- 新增按钮 -->

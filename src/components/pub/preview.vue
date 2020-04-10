@@ -1,5 +1,5 @@
 <template>
-    <div class="preview">
+    <div class="preview page">
         <!-- 主体 -->
         <mt-loadmore
             :top-method="loadTop"
@@ -32,7 +32,7 @@
         </mt-loadmore>
         <pop :popshow="popshow" :everyConfig="everyConfig" @popupClose="popshow=false"></pop>
         <div v-show="noDate" class="noMoreText">暂无数据</div>
-        <div v-show="noMore" class="noMoreText">没有更多数据了</div>
+        <van-divider v-show="noMore">没有更多数据了</van-divider>
     </div>
 </template>
 <script>

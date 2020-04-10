@@ -7,7 +7,7 @@
             <mt-picker
                 :slots="slots"
                 @change="onValuesChange"
-                style="width: 7.5rem;"
+                style="width: 375px;"
                 valueKey="text"
                 showToolbar
             >

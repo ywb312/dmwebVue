@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import MintUI from 'mint-ui'
+import './assets/css/reset.css'
 import 'mint-ui/lib/style.css'
 import './assets/css/style.css'
 import App from './App.vue'
@@ -8,8 +9,28 @@ import store from './store'
 import axios from 'axios'
 import api from './api/api'
 import common from './utils/common'
+import 'amfe-flexible'
+import {
+	Grid,
+	GridItem,
+	Image,
+	Toast,
+	Collapse,
+	CollapseItem,
+	Cell,
+	CellGroup,
+	Divider
+} from 'vant';
 
-Vue.use(MintUI)
+Vue.use(MintUI).use(Grid)
+	.use(GridItem)
+	.use(Image)
+	.use(Toast)
+	.use(Collapse)
+	.use(CollapseItem)
+	.use(Cell)
+	.use(CellGroup)
+	.use(Divider);
 Vue.use(axios)
 Vue.prototype.$api = api;
 Vue.prototype.$common = common;

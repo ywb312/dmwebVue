@@ -58,7 +58,7 @@ export default {
         // 监听两个值 确定显示的状态
         compShow(val) {
             //popshow为父组件的值，val参数为值
-            if(val){
+            if (val) {
                 this.getData(this.selectData);
                 this.recordVisible = val; //将父组件的值赋给popupVisible 子组件的值
             }
@@ -81,8 +81,8 @@ export default {
 </script>
 <style scoped>
 .popup {
-    width: 5.5rem;
-    height: 10rem;
+    width: 310px;
+    height: 550px;
     overflow: scroll;
 }
 ::-webkit-scrollbar {
@@ -90,7 +90,7 @@ export default {
 }
 .title {
     text-align: center;
-    padding: 0.2rem 0;
+    padding: 10px 0;
     border-bottom: solid 1px #ddd;
 }
 .noData {
@@ -106,7 +106,7 @@ export default {
 .chunk div {
     display: flex;
     justify-content: space-between;
-    padding: 0.1rem 0.4rem;
+    padding: 5px 20px;
     background-color: rgb(250, 250, 250);
 }
 </style>

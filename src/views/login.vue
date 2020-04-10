@@ -86,54 +86,54 @@ export default {
     background: rgb(16, 187, 255);
 }
 .title {
-    padding-top: 2.8rem;
+    padding-top: 140px;
     text-align: center;
-    font-size: 0.52rem;
+    font-size: 28px;
     font-weight: bold;
     color: white;
 }
 .main {
     box-sizing: border-box;
-    height: 2.8rem;
-    margin: 0.4rem 0.8rem 0.8rem;
-    padding-top: 0.5rem;
+    height: 160px;
+    margin: 20px 40px 40px;
+    padding-top: 28px;
     background: skyblue;
     text-align: center;
-    border-radius: 0.1rem;
+    border-radius: 6px;
 }
 .main div:last-of-type {
-    margin-top: 0.1rem;
+    margin-top: 5px;
 }
 .main div {
     position: relative;
 }
 .main img {
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 34px;
+    height: 34px;
     position: absolute;
-    left: 0.5rem;
-    top: 0.15rem;
+    left: 20px;
+    top: 8.5px;
 }
 .main .input {
     box-sizing: border-box;
     margin: auto;
-    padding-left: 0.6rem;
-    width: 4.8rem;
-    height: 0.5rem;
-    border-radius: 0.1rem;
+    padding-left: 40px;
+    width: 275px;
+    height: 26px;
+    border-radius: 5px;
     border: none;
 }
 .loginBtn {
-    width: 5.6rem;
-    height: 0.8rem;
+    width: 320px;
+    height: 45px;
     margin: auto;
     text-align: center;
-    line-height: 0.8rem;
+    line-height: 45px;
     color: white;
-    font-size: 0.5rem;
-    text-indent: 0.5rem;
-    letter-spacing: 0.5rem;
-    border-radius: 0.1rem;
+    font-size: 26px;
+    text-indent: 27px;
+    letter-spacing: 27px;
+    border-radius: 5px;
     background: #2585cf;
 }
 </style>

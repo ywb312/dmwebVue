@@ -4,84 +4,18 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover, user-scalable=0" />
+  <!-- <van-number-keyboard safe-area-inset-bottom /> -->
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-  <title>vuedmweb</title>
-  <style>
-    body,
-    ul,
-    ol,
-    li,
-    p,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    form,
-    fieldset,
-    table,
-    td,
-    img,
-    div {
-      margin: 0;
-      padding: 0;
-      border: 0;
-    }
-
-    body {
-      height: 100%;
-      box-sizing: border-box;
-      background: #fff;
-      color: #333;
-      font-size: 14px;
-      font-family: "SimSun", "宋体", "Arial Narrow";
-    }
-
-    ul,
-    ol {
-      list-style-type: none;
-    }
-
-    select,
-    input,
-    img,
-    select {
-      vertical-align: middle;
-    }
-
-    a {
-      text-decoration: none;
-    }
-  </style>
+  <title>安全环保信息化综合管理系统</title>
 </head>
 
 <body>
-  <noscript>
-    <strong>We're sorry but vuedmweb doesn't work properly without JavaScript enabled. Please enable it to
-      continue.</strong>
-  </noscript>
+  <script>
+    let screenHeight = window.outerHeight;
+    document.documentElement.style.height = screenHeight + "px";
+  </script>
   <div id="app"></div>
-  <!-- built files will be auto injected -->
 </body>
-<script>
-  let screenHeight = window.outerHeight;
-  ! function (n) {
-    var e = n.document,
-      t = e.documentElement,
-      i = 720,
-      d = i / 100,
-      o = "orientationchange" in n ? "orientationchange" : "resize",
-      a = function () {
-        var n = t.clientWidth || 320;
-        n > 720 && (n = 720);
-        // t.style.fontSize = n / d + "px"
-        // 后面设置html高度
-        t.style.cssText = 'font-size:' + n / d + 'px!important;height:' + screenHeight + 'px;'
-      };
-    e.addEventListener && (n.addEventListener(o, a, !1), e.addEventListener("DOMContentLoaded", a, !1))
-  }(window);
-</script>
-
 </html>

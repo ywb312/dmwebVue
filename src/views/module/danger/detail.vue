@@ -1,5 +1,5 @@
 <template>
-    <div class="detail">
+    <div class="detail page">
         <!-- 标题  -->
         <mt-header title="隐患详情" fixed>
             <router-link to slot="left">
@@ -167,7 +167,7 @@ export default {
 </script>
 <style scoped>
 .box {
-    margin: 0.3rem;
+    margin: 15px;
     padding: 10px;
     border: solid 1px #2585cf;
     border-radius: 10px;
@@ -195,3 +195,4 @@ export default {
     margin: auto;
 }
 </style>
+<style scoped src="@/assets/css/public.css"/>
