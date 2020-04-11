@@ -1,13 +1,8 @@
 import axios from '../http'
-
-function getTraplan(data) { //安全检查提交隐患
-    return axios.post("biz/operate/tra/traplan/list.action", data);
-}
-
-function getTraTable(data) {
-    return axios.post("biz/operate/tra/traplanmana/list.action", data);
+//安全生产方针
+function getpatpolicyList(data) {
+    return axios.post("biz/operate/patpolicy/list.action", data);
 }
 export default {
-    getTraplan,
-    getTraTable
+    getpatpolicyList,
 }

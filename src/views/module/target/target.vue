@@ -19,29 +19,24 @@ export default {
         return {
             // 页面配置
             pageData: "",
-            // 传入的对象
-            params: {
-                olddate: "0"
-            },
+            // 切换组件页面配置数组
             page: [
                 {
                     text: "安全生产方针发布、修订(环保)",
-                    id: "patpolicy1",
-                    components: "patpolicy"
+                    id: "patpolicy1"
                 },
                 {
                     text: "安全生产方针发布、修订(消防)",
-                    id: "patpolicy2",
-                    components: "patpolicy"
+                    id: "patpolicy2"
                 },
                 {
                     text: "安全生产方针发布、修订(安全)",
-                    id: "patpolicy3",
-                    components: "patpolicy"
+                    id: "patpolicy3"
                 },
                 {
                     text: "安全生产方针意见征集(环保)",
-                    id: "patopinion1"
+                    id: "patopinion1",
+                    components: "patopinion"
                 },
                 {
                     text: "安全生产方针意见征集(消防)",
@@ -147,6 +142,7 @@ export default {
             this.page.forEach(item => {
                 if (item.id == id) {
                     let i = id.charAt(id.length - 1);
+                    item.components = id.substring(0, id.length - 1);
                     item.element = "YS00" + i;
                     this.pageData = item;
                 }
@@ -155,8 +151,26 @@ export default {
     },
     computed: {},
     components: {
+        // 安全生产方针
         patpolicy: resolve =>
-            require(["@/components/target/patpolicy"], resolve)
+            require(["@/components/target/patpolicy"], resolve),
+        patopinion: resolve =>
+            require(["@/components/target/patopinion"], resolve),
+        opinionobj: resolve =>
+            require(["@/components/target/opinionobj"], resolve),
+        // 安全生产目标
+        annualobj: resolve =>
+            require(["@/components/target/annualobj"], resolve), //发布单位
+        thinobj: resolve => require(["@/components/target/thinobj"], resolve), //右上角显示什么
+        assessmentobj: resolve =>
+            require(["@/components/target/assessmentobj"], resolve),
+        // 环保目标方针 是否需要发布状态
+        envmeasure: resolve =>
+            require(["@/components/target/envmeasure"], resolve), //附件信息字段及年度
+        envYearWorkPlan: resolve =>
+            require(["@/components/target/envYearWorkPlan"], resolve), //附件信息字段及年度
+        envPolicyAims: resolve =>
+            require(["@/components/target/envPolicyAims"], resolve) //附件信息字段及年度
     }
 };
 </script>

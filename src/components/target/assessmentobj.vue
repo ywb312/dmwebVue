@@ -1,29 +1,24 @@
 <template>
-    <div class="traplan">
-        <search-box placeholder="请输入计划名称" @callback="searchBack"></search-box>
+    <div class="assessmentobj">
+        <SearchBox placeholder="请输入内容搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
-                <div
-                    class="wrapper"
-                    v-for="(item,index) in rendering"
-                    :key="index"
-                    @click="btnClick(item)"
-                >
+                <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                     <div class="title">
-                        <h4>{{index+1+"."+item.planname}}</h4>
+                        <h4>{{index+1+"."+item.objname}}</h4>
                     </div>
                     <div class="main">
                         <div>
-                            <span>培训内容: {{item.contextvalue}}</span>
+                            <p>{{item.year+"年度"}}</p>
                         </div>
                         <div>
-                            <span>开始时间: {{item.starttime}}</span>
+                            <p>创建时间: {{item.createtime}}</p>
                         </div>
                         <div>
-                            <span>培训地点: {{item.traplace}}</span>
+                            <p>考核日期: {{item.reviewtime}}</p>
                         </div>
                         <div>
-                            <span>组织单位: {{item.hostdept}}</span>
+                            <p>考核人员: {{item.reviewer}}</p>
                         </div>
                     </div>
                 </div>
@@ -36,16 +31,15 @@
 </template>
 <script>
 // 这是基本渲染功能的组件 公用
-import ViewBox from "@/components/pub/ViewBox.vue";
 import SearchBox from "@/components/pub/SearchBox";
+import ViewBox from "@/components/pub/ViewBox.vue";
 export default {
-    name: "traplan",
+    name: "assessmentobj",
     data() {
         return {
-            // 渲染的数据
             rendering: [],
             postData: {
-                url: "biz/operate/tra/traplan/list.action",
+                url: "biz/operate/assessmentobj/list.action",
                 obj: {
                     "bean.param": "",
                     "bean.element": this.pageData.element
@@ -66,10 +60,10 @@ export default {
             this.$refs.view.cleraData();
         },
         btnClick(obj) {
-            this.$store.commit("getSelectData", obj);
-            this.$router.push({
-                path: "/education/traplanDetail"
-            });
+            // this.$store.commit("getSelectData", obj);
+            // this.$router.push({
+            //     path: "/education/traplanDetail"
+            // });
         }
     },
     components: {

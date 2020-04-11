@@ -19,7 +19,10 @@ import {
 	CollapseItem,
 	Cell,
 	CellGroup,
-	Divider
+	Divider,
+	Tabbar, 
+	TabbarItem,
+	Empty
 } from 'vant';
 
 Vue.use(MintUI).use(Grid)
@@ -30,6 +33,9 @@ Vue.use(MintUI).use(Grid)
 	.use(CollapseItem)
 	.use(Cell)
 	.use(CellGroup)
+	.use(Tabbar)
+	.use(TabbarItem)
+	.use(Empty)
 	.use(Divider);
 Vue.use(axios)
 Vue.prototype.$api = api;

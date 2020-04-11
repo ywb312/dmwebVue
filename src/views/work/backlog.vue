@@ -81,9 +81,10 @@ export default {
         };
     },
     created() {
-        this.rendering = this.settingRes(this.backlog.rows);
         if (!this.backlog.rows) {
             this.getData();
+        } else {
+            this.rendering = this.settingRes(this.backlog.rows);
         }
     },
     methods: {

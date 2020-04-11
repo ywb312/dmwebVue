@@ -94,6 +94,13 @@ export default {
     display: block;
     width: 100%;
 }
+.content {
+    height: 420px;
+    overflow: auto;
+}
+::-webkit-scrollbar {
+    width: 0px;
+}
 .icon {
     width: 18px;
     height: 18px;

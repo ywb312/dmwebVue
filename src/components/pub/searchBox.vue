@@ -1,7 +1,7 @@
 <template>
-    <div class="searchBox">
+    <div class="SearchBox">
         <div class="box">
-            <input type="text" :placeholder="placeholder" v-model="value" />
+            <input type="text" v-bind="$attrs" v-model="value" />
             <span @click="btnClick">查询</span>
         </div>
     </div>
@@ -9,17 +9,12 @@
 <script>
 // 需要传入placeholder默认显示  点击查询后返回回调callback
 export default {
-    name: "searchBox",
+    name: "SearchBox",
+    inheritAttrs: false,
     data() {
         return {
             value: ""
         };
-    },
-    props: {
-        placeholder: {
-            type: String,
-            default: "请输入"
-        }
     },
     methods: {
         btnClick() {

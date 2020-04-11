@@ -1,5 +1,5 @@
 <template>
-    <div class="education">
+    <div class="education page">
         <!-- 标题  -->
         <mt-header :title="pageData.text" fixed>
             <router-link to slot="left">
@@ -56,8 +56,4 @@ export default {
     }
 };
 </script>
-<style scoped>
-.education {
-    height: 100%;
-}
-</style>
+<style scoped src="@/assets/css/public.css"/>

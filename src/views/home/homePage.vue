@@ -108,8 +108,9 @@ export default {
     width: 100%;
 }
 .grids {
-    height: 320px;
+    height: 360px;
     overflow: auto;
+    margin-bottom: 50px;
 }
 .grids_img {
     width: 60px;
