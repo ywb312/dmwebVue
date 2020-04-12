@@ -28,7 +28,7 @@
                 <div class="bottom" @click="btnClick(item)">操作</div>
             </div>
         </mt-loadmore>
-        <div v-show="noDate" class="noMoreText">暂无数据</div>
+        <div v-show="noData" class="noMoreText">暂无数据</div>
         <van-divider v-show="noMore">没有更多数据了</van-divider>
         <!-- 新增按钮 -->
         <div>
@@ -74,7 +74,7 @@ export default {
             // 停止上拉加
             allLoaded: false,
             // 没有数据
-            noDate: false,
+            noData: false,
             // 没有更多数据了
             noMore: false,
             // 选中的对象
@@ -129,7 +129,7 @@ export default {
                             this.noMore = false;
                         }
                     } else {
-                        this.noDate = true;
+                        this.noData = true;
                         this.allLoaded = true;
                     }
                 });
@@ -177,7 +177,7 @@ export default {
         cleraData() {
             this.page = 1;
             this.noMore = false;
-            this.noDate = false;
+            this.noData = false;
             this.rendering = [];
             this.getData(false);
         }

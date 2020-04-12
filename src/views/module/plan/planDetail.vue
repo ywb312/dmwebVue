@@ -6,27 +6,29 @@
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>
             </router-link>
         </mt-header>
-        <div class="topPage">
-            <div>
-                计划名称:
-                <span>{{selectData.cpname}}</span>
+        <van-sticky :offset-top="49">
+            <div class="topPage">
+                <div>
+                    计划名称:
+                    <span>{{selectData.cpname}}</span>
+                </div>
+                <div>
+                    检查时间:
+                    <span>{{selectData.checkend}}</span>
+                </div>
+                <div>
+                    作业地点:
+                    <span>{{selectData.zydd}}</span>
+                </div>
+                <div>
+                    检查人员:
+                    <span>{{selectData.tbr}}</span>
+                </div>
+                <div>
+                    <span>检查结果</span>
+                </div>
             </div>
-            <div>
-                检查时间:
-                <span>{{selectData.checkend}}</span>
-            </div>
-            <div>
-                作业地点:
-                <span>{{selectData.zydd}}</span>
-            </div>
-            <div>
-                检查人员:
-                <span>{{selectData.tbr}}</span>
-            </div>
-            <div>
-                <span>检查结果</span>
-            </div>
-        </div>
+        </van-sticky>
         <mt-loadmore
             :top-method="loadTop"
             :bottom-method="loadBottom"
@@ -53,8 +55,8 @@
                     </div>
                 </div>
             </div>
+            <van-empty v-show="noData" description="暂无数据" />
         </mt-loadmore>
-        <div v-show="noDate" class="noMoreText">暂无数据</div>
     </div>
 </template>
 <script>
@@ -66,7 +68,7 @@ export default {
         return {
             rendering: [],
             allLoaded: false,
-            noDate: false
+            noData: false
         };
     },
     created() {
@@ -78,15 +80,11 @@ export default {
             this.$api.plan
                 .doDetail({ "bean.cpid": this.selectData.cpid })
                 .then(res => {
-                    if (!res.entity) {
-                        return;
-                    }
-                    // 判断rows是否返回数据
-                    if (res.entity.length != 0) {
+                    if (res.entity && res.entity.length != 0) {
                         this.setRendering(res.entity);
                         this.allLoaded = true;
                     } else {
-                        this.noDate = true;
+                        this.noData = true;
                         this.allLoaded = true;
                     }
                 });
@@ -107,7 +105,6 @@ export default {
         // 上拉加载方法
         loadBottom() {
             this.$refs.loadmore.onBottomLoaded();
-            this.getData();
         },
         // 下拉刷新方法
         loadTop() {
@@ -116,7 +113,7 @@ export default {
         },
         // 清空所需渲染数据并重新渲染
         cleraData() {
-            this.noDate = false;
+            this.noData = false;
             this.rendering = [];
             this.getData();
         }
@@ -135,9 +132,6 @@ export default {
 <style scoped src="@/assets/css/public.css"/>
 <style scoped>
 .topPage {
-    position: sticky;
-    top: 50px;
-    z-index: 100;
     background: white;
 }
 .topPage span,

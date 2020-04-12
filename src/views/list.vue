@@ -10,34 +10,28 @@
             <img src="@/assets/img/incid_management.png" alt />
         </div>
         <div class="content">
-            <div v-if="isShow">
+            <div v-for="(item,index) in pageData.page" :key="item.text" :title="item.text">
                 <van-cell
-                    v-for="(item,index) in pageData.page"
-                    :key="item.text"
+                    v-if="!item.child"
                     :title="item.text"
                     is-link
-                    :to="{path:pageData.path,query:{a:index}}"
+                    :to="{path:pageData.path,query:{id: item.id}}"
                 >
                     <img slot="icon" src="@/assets/img/incid_rep.png" class="icon" />
                 </van-cell>
+                <van-collapse v-else v-model="activeName" accordion>
+                    <van-collapse-item :title="item.text" :name="index">
+                        <img slot="icon" src="@/assets/img/incid_rep.png" class="icon" />
+                        <van-cell
+                            v-for="(n,m) in item.child"
+                            :key="m"
+                            :value="n.text"
+                            size="small"
+                            @click="listClick(n)"
+                        ></van-cell>
+                    </van-collapse-item>
+                </van-collapse>
             </div>
-            <van-collapse v-else v-model="activeName" accordion>
-                <van-collapse-item
-                    v-for="(item,index) in pageData.page"
-                    :key="index"
-                    :title="item.text"
-                    :name="index"
-                >
-                    <img slot="icon" src="@/assets/img/incid_rep.png" class="icon" />
-                    <van-cell
-                        v-for="(n,m) in item.child"
-                        :key="m"
-                        :value="n.text"
-                        size="small"
-                        @click="listClick(n)"
-                    ></van-cell>
-                </van-collapse-item>
-            </van-collapse>
         </div>
     </div>
 </template>
@@ -50,15 +44,7 @@ export default {
         };
     },
     created() {
-        let id = this.$route.query.page;
-        this.listPage.forEach(element => {
-            if (element.path == id) {
-                this.pageData = element;
-            }
-        });
-        if (this.pageData.page[0].child) {
-            this.isShow = false;
-        }
+        this.pageData();
     },
     methods: {
         listClick(n) {
@@ -66,11 +52,40 @@ export default {
                 path: this.pageData.path,
                 query: { id: n.id }
             });
+        },
+        pageData() {
+            if (this.onePage.path == "risk") {
+                let arr = [];
+                let pageData = this.onePage;
+                pageData.page.forEach(element => {
+                    element.condition.forEach(item => {
+                        if (item.show == window.localStorage["roleLevel"]) {
+                            let text = item.text || "";
+                            element.text = text + element.text;
+                            arr.push(element);
+                        }
+                    });
+                });
+                pageData.page = arr;
+                this.pageData = pageData;
+            } else {
+                this.pageData = this.onePage;
+            }
         }
     },
     computed: {
         listPage() {
             return this.$store.state.listPage;
+        },
+        onePage() {
+            let id = this.$route.query.page;
+            let obj = {};
+            this.listPage.forEach(element => {
+                if (element.path == id) {
+                    obj = element;
+                }
+            });
+            return obj;
         }
     },
     // 控制list缓存

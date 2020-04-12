@@ -12,8 +12,8 @@ export default {
         };
     },
     created() {
-        let a = this.$route.query.a;
-        if (a == "0") {
+        let id = this.$route.query.id;
+        if (id == "zdrisknotice") {
             this.views = "dealDanger";
         } else {
             this.views = "dangerPub";

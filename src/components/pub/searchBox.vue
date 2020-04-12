@@ -1,9 +1,11 @@
 <template>
     <div class="SearchBox">
-        <div class="box">
-            <input type="text" v-bind="$attrs" v-model="value" />
-            <span @click="btnClick">查询</span>
-        </div>
+        <van-sticky :offset-top="50">
+            <div class="box">
+                <input type="text" v-bind="$attrs" v-model="value" />
+                <span @click="btnClick">查询</span>
+            </div>
+        </van-sticky>
     </div>
 </template>
 <script>

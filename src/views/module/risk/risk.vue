@@ -24,48 +24,72 @@ export default {
             page: [
                 {
                     text: "风险辨识",
+                    // window.localStorage["roleLevel"] == "1"
+                    //     ? "班组级风险辨识"
+                    //     : "车间/厂级风险辨识",
+                    id: "info",
                     components: "plantRisk"
                 },
                 {
-                    text: "安环部审核",
+                    text:
+                        window.localStorage["roleLevel"] == "4"
+                            ? "安环部审核"
+                            : window.localStorage["roleLevel"] == "3"
+                            ? "厂级审核"
+                            : "车间级审核",
+                    id: "auditpj",
                     components: "audit"
                 },
                 {
                     text: "车间级汇总上报",
+                    id: "reportrisk",
                     components: "collect",
                     ajaxUrl: "biz/risk/info/selectreportlist.action",
                     upUrl: "biz/risk/audit/doallaudit.action"
                 },
                 {
                     text: "厂级汇总上报",
+                    id: "reporpjtrisk",
                     components: "collect",
                     ajaxUrl: "biz/risk/companyRisk/reportpjlist.action",
                     upUrl: "biz/risk/audit/doAddgSave.action"
                 },
                 {
                     text: "风险清单",
+                    id: "riskreport",
                     components: "riskList"
                 },
                 {
                     text: "风险比较图",
+                    id: "fxwxytj",
                     components: "riskChart"
                 },
                 {
                     text: "安全风险公告栏",
+                    id: "ggl",
                     components: "riskBoard"
                 },
                 {
                     text: "岗位告知卡",
+                    id: "gzk",
                     components: "informCard"
                 }
             ]
         };
     },
     created() {
-        let a = this.$route.query.a;
-        this.pageData = this.page[a]; //当前页面的配置
+        this.getPageData();
     },
-    methods: {},
+    methods: {
+        getPageData() {
+            let id = this.$route.query.id;
+            this.page.forEach(item => {
+                if (item.id == id) {
+                    this.pageData = item;
+                }
+            });
+        }
+    },
     components: {
         plantRisk: resolve => require(["@/components/risk/plantRisk"], resolve),
         riskList: resolve => require(["@/components/risk/riskList"], resolve),

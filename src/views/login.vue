@@ -31,26 +31,7 @@ export default {
     methods: {
         login() {
             let _this = this;
-            // 对账号验空
-            if (!_this.username) {
-                // 弹出提示
-                Toast({
-                    message: "请输入用户名",
-                    position: "bottom",
-                    duration: 4000
-                });
-                return;
-            }
-            // 对密码验空
-            if (!_this.password) {
-                // 弹出提示
-                Toast({
-                    message: "请输入密码",
-                    position: "bottom",
-                    duration: 4000
-                });
-                return;
-            }
+            this.alertMsg();
             _this.$api.pub
                 .login({
                     username: _this.username,
@@ -59,11 +40,13 @@ export default {
                 })
                 .then(function(res) {
                     if (res.result) {
-                        localStorage.session_Id = res.session_Id;
-                        localStorage.deptname = res.result.deptname;
-                        localStorage.rolename = res.result.rolename;
-                        localStorage.username = res.result.username;
-                        localStorage.loginname = res.result.loginname;
+                        var storage = window.localStorage;
+                        storage.session_Id = res.session_Id;
+                        storage.deptname = res.result.deptname;
+                        storage.username = res.result.username;
+                        storage.loginname = res.result.loginname;
+                        // localStorage.rolename = res.result.rolename;
+                        _this.setDeptId(res.result.rolename);
                         _this.$router.push({
                             name: "home"
                         });
@@ -76,6 +59,45 @@ export default {
                         return;
                     }
                 });
+        },
+        setDeptId(name) {
+            var storage = window.localStorage;
+            storage.rolename = name;
+            if (name == "班组级") {
+                storage.roleLevel = "1";
+            } else if (
+                name == "车间级" ||
+                name == "工区级" ||
+                name == "科室级"
+            ) {
+                storage.roleLevel = "2";
+            } else if (name == "厂级") {
+                storage.roleLevel = "3";
+            } else if (name == "安环部") {
+                storage.roleLevel = "4";
+            }
+        },
+        alertMsg() {
+            // 对账号验空
+            if (!this.username) {
+                // 弹出提示
+                Toast({
+                    message: "请输入用户名",
+                    position: "bottom",
+                    duration: 4000
+                });
+                return;
+            }
+            // 对密码验空
+            if (!this.password) {
+                // 弹出提示
+                Toast({
+                    message: "请输入密码",
+                    position: "bottom",
+                    duration: 4000
+                });
+                return;
+            }
         }
     }
 };

@@ -60,11 +60,12 @@ export default {
             // 查找组件的显示
             popshow: false,
             // 筛选出页面配置
-            pageData: "",
+            pageData: {},
             // 所有页面进入的配置
             page: [
                 {
                     text: "隐患详情查询",
+                    id: "processrisk",
                     ajaxurl: "biz/rm/processrisk/list.action",
                     updata: ["queryAll", "crstate", "crqy", "str", "end"],
                     headerLeft: {
@@ -94,6 +95,7 @@ export default {
                 },
                 {
                     text: "重大隐患评估记录",
+                    id: "zdriskassess",
                     ajaxurl: "biz/rm/zdriskassess/list.action",
                     updata: ["str", "end"],
                     headerLeft: {
@@ -135,6 +137,7 @@ export default {
                 },
                 {
                     text: "重大隐患督办记录",
+                    id: "zdriskfeet",
                     ajaxurl: "biz/rm/zdriskfeet/list.action",
                     updata: ["str", "end"],
                     headerLeft: {
@@ -172,6 +175,7 @@ export default {
                 },
                 {
                     text: "隐患整改指令记录",
+                    id: "zdriskreform",
                     ajaxurl: "biz/rm/zdriskreform/list.action",
                     updata: ["str", "end", "zgzrdw"],
                     headerLeft: {
@@ -209,6 +213,7 @@ export default {
                 },
                 {
                     text: "隐患申请复查记录",
+                    id: "zdriskreview",
                     ajaxurl: "biz/rm/zdriskreview/list.action",
                     updata: ["str", "end", "zgzrdw"],
                     headerLeft: {
@@ -250,6 +255,7 @@ export default {
                 },
                 {
                     text: "隐患验收结果记录",
+                    id: "zdriskaccept",
                     ajaxurl: "biz/rm/zdriskaccept/list.action",
                     updata: ["str", "end", "zgzrdw"],
                     headerLeft: {
@@ -291,6 +297,7 @@ export default {
                 },
                 {
                     text: "重大隐患闭环记录",
+                    id: "zdriskclose",
                     ajaxurl: "biz/rm/zdriskclose/list.action",
                     updata: ["str", "end"],
                     headerLeft: {
@@ -342,10 +349,17 @@ export default {
         };
     },
     created() {
-        this.a = this.$route.query.a;
-        this.pageData = this.page[this.a - 1]; //当前页面的配置
+        this.getPageData();
     },
     methods: {
+        getPageData() {
+            let id = this.$route.query.id;
+            this.page.forEach(item => {
+                if (item.id == id) {
+                    this.pageData = item;
+                }
+            });
+        },
         // 查看方式 得到子组件传入的值
         radioData(v) {
             this.params.queryAll = v;

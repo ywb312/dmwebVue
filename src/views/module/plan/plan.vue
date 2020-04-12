@@ -8,7 +8,7 @@
         </mt-header>
         <!-- 主体 -->
         <div class="wrap">
-            <component ref="child" :is="currentView" :pageData="pageData"></component>
+            <component ref="child" :is="pageData.components" :pageData="pageData"></component>
         </div>
     </div>
 </template>
@@ -20,44 +20,40 @@ export default {
     name: "plan",
     data() {
         return {
-            //动态组件名
-            currentView: "myPlan",
             // 页面配置
             pageData: "",
             page: [
                 {
                     text: "检查计划",
-                    ajaxurl: "biz/sc/checkplan/list.action"
+                    id: "myPlan",
+                    components: "myPlan"
                 },
                 {
                     text: "计划查询",
-                    ajaxurl: "biz/sc/checkplan/getChildPlanRecord.action",
+                    id: "scdetail",
+                    components: "searchPlan"
                 },
                 {
                     text: "专项检查计划",
-                    ajaxurl: "biz/sc/checkplantemp/list.action",
+                    id: "special",
+                    components: "special"
                 }
             ]
         };
     },
     created() {
-        let a = this.$route.query.a;
-        this.pageData = this.page[a]; //当前页面的配置
-        switch (a) {
-            case "0":
-                this.currentView = "myPlan";
-                break;
-            case "1":
-                this.currentView = "searchPlan";
-                break;
-            case "2":
-                this.currentView = "special";
-                break;
-            default:
-                break;
+        this.getPageData();
+    },
+    methods: {
+        getPageData() {
+            let id = this.$route.query.id;
+            this.page.forEach(item => {
+                if (item.id == id) {
+                    this.pageData = item;
+                }
+            });
         }
     },
-    methods: {},
     components: {
         myPlan,
         searchPlan,

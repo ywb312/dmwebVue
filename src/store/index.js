@@ -64,7 +64,8 @@ export default new Vuex.Store({
 					text: "计划查询",
 					id: "scdetail"
 				}, {
-					text: "专项检查计划"
+					text: "专项检查计划",
+					id: "special"
 				}],
 			},
 			{
@@ -77,34 +78,84 @@ export default new Vuex.Store({
 				path: "risk",
 				page: [{
 						text: "风险辨识",
-						id: "info"
+						id: "info",
+						condition: [{
+							show: "1",
+							text: "班组级"
+						}, {
+							show: "2",
+							text: "车间/厂级"
+						}, {
+							show: "3",
+							text: "车间/厂级"
+						}],
 					}, {
-						text: "安环部审核列表",
+						text: "审核列表",
 						id: "auditpj",
+						condition: [{
+							show: "2",
+							text: "车间级"
+						}, {
+							show: "3",
+							text: "厂级"
+						}, {
+							show: "4",
+							text: "安环部"
+						}],
 					},
 					{
 						text: "车间级汇总上报",
 						id: "reportrisk",
+						condition: [{
+							show: "2",
+						}],
 					},
 					{
 						text: "厂级汇总上报",
 						id: "reporpjtrisk",
+						condition: [{
+							show: "3",
+						}],
 					},
 					{
 						text: "风险清单",
 						id: "riskreport",
+						condition: [{
+							show: "3",
+						}, {
+							show: "4",
+						}],
 					},
 					{
 						text: "风险比较图",
 						id: "fxwxytj",
+						condition: [{
+							show: "3",
+						}, {
+							show: "4",
+						}],
 					},
 					{
 						text: "安全风险公告栏",
 						id: "ggl",
+						condition: [{
+							show: "3",
+						}, {
+							show: "4",
+						}],
 					},
 					{
 						text: "岗位风险告知卡",
 						id: "gzk",
+						condition: [{
+							show: "1",
+						}, {
+							show: "2",
+						}, {
+							show: "3",
+						}, {
+							show: "4",
+						}],
 					}
 				],
 			},
@@ -225,7 +276,100 @@ export default new Vuex.Store({
 			{
 				title: "生产工艺系统安全管理",
 				path: "technology",
-				page: ["项目三同时管理", "排水安全管理", "供电安全管理", "顶板、采空区管理", "通风安全管理", "提升运输安全管理"],
+				page: [{
+					text: "项目三同时管理",
+					child: [{
+						text: "重大安全环保项目申请",
+						id: "apply1"
+					}, {
+						text: "职业卫生项目的申请",
+						id: "apply2"
+					// }, {
+					// 	text: "安全预评价报告备案",
+					// 	id: "record1"
+					// }, {
+					// 	text: "环保预评价报告备案",
+					// 	id: "record2"
+					}, {
+						text: "安全环保设施设计审查",
+						id: "examine1"
+					}, {
+						text: "职业卫生设施设计审查",
+						id: "examine2"
+					}, {
+						text: "消防项目设计审查",
+						id: "examine3"
+					}, {
+						text: "安全环保设施竣工验收信息",
+						id: "completed1"
+					}, {
+						text: "职业卫生设施竣工验收信息",
+						id: "completed2"
+					}, {
+						text: "消防项目竣工验收信息",
+						id: "completed3"
+					}]
+				}, {
+					text: "排水安全管理",
+					child: [{
+						text: "水泵检查记录",
+						id: "draincheck1"
+					}, {
+						text: "水泵排水记录",
+						id: "draininfo"
+					}, {
+						text: "水仓检查记录",
+						id: "draincheck2"
+					}, {
+						text: "水仓清淤记录",
+						id: "dibholedesilt"
+					}]
+				}, {
+					text: "供电安全管理",
+					child: [{
+						text: "供电线路维护",
+						id: "powermaintain"
+					}, {
+						text: "变电室检查",
+						id: "powerroomcheck"
+					}]
+				}, {
+					text: "顶板、采空区管理",
+					child: [{
+						text: "顶板分级信息",
+						id: "roofgrading"
+					}, {
+						text: "采空区分布信息",
+						id: "taskdistributioninfo"
+					}, {
+						text: "采空区监控信息",
+						id: "taskmonitorinfo"
+					}]
+				}, {
+					text: "通风安全管理",
+					id: "prodaeration"
+				}, {
+					text: "提升运输安全管理",
+					child: [{
+						text: "运输线路检查记录",
+						id: "transrecord"
+					}, {
+						text: "提升运输设备设施检测检验报告",
+						id: "impequipment"
+					}]
+				}, {
+					text: "安全避险“六大系统”安全管理",
+					child: [{
+						text: "系统监测数据添加、查看",
+						id: "monitordata"
+					}, {
+						text: "系统检查结果添加、查看",
+						id: "checkresult"
+					}, {
+						text: "六大系统设备设施的检查、维护",
+						id: "equfailure"
+					}]
+				}],
 			},
 			{
 				title: "环保管理",

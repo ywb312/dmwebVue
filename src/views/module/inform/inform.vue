@@ -5,7 +5,7 @@
             <router-link to slot="left">
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>
             </router-link>
-             <mt-button slot="right" @click="comp">
+            <mt-button slot="right" @click="comp">
                 <img src="@/assets/iconfont/add.svg" />
             </mt-button>
         </mt-header>
@@ -30,6 +30,7 @@ export default {
             page: [
                 {
                     text: "通知公告管理",
+                    id: "publicnotify",
                     ajaxurl: "biz/pub/publicnotify/list.action",
                     // ajax入参 updata
                     // 标题左侧
@@ -72,6 +73,7 @@ export default {
                 },
                 {
                     text: "新闻动态",
+                    id: "pubcontext",
                     ajaxurl: "biz/pub/pubcontext/publist.action",
                     updata: ["olddate"],
                     headerLeft: {
@@ -113,16 +115,21 @@ export default {
         };
     },
     created() {
-        let a = this.$route.query.a;
-        this.pageData = this.page[a]; //当前页面的配置
+        this.getPageData();
     },
     methods: {
-        comp(){
+        comp() {
             if (this.$route.query.a == 0) {
-                
             } else {
-                
             }
+        },
+        getPageData() {
+            let id = this.$route.query.id;
+            this.page.forEach(item => {
+                if (item.id == id) {
+                    this.pageData = item;
+                }
+            });
         }
     },
     components: {

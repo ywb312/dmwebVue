@@ -60,6 +60,7 @@ export default {
             this.$api.pub
                 .showPage(this.postData.url, this.setObj())
                 .then(res => {
+                    // 有数据和没数据都要返回
                     if (res.rows && res.rows.length != 0) {
                         // 判断是新增还是替换  默认为新增
                         if (more) {
@@ -79,6 +80,7 @@ export default {
                     } else {
                         if (res.records == 0) {
                             this.noData = true;
+                            this.$emit("getRendering", this.rendering);
                         }
                         this.allLoaded = true;
                         return;
@@ -100,6 +102,7 @@ export default {
         cleraData() {
             this.page = 1;
             this.noMore = false;
+            this.rendering = [];
             this.getData(false);
         }
     },
