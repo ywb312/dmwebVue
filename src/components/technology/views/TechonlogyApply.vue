@@ -1,5 +1,5 @@
 <template>
-    <div class="TechonlogyApply">
+    <div>
         <SearchBox placeholder="请输入项目名称搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
@@ -39,7 +39,7 @@ export default {
         return {
             rendering: [],
             postData: {
-                url: "biz/operate/environapply/list.action",
+                url: "",
                 obj: {
                     "bean.param": ""
                 }
@@ -47,7 +47,9 @@ export default {
         };
     },
     created() {
-        if (this.pageData.element == "2") {
+        if (this.pageData.element == "1") {
+            this.postData.url = "biz/operate/environapply/list.action";
+        } else if (this.pageData.element == "2") {
             this.postData.url = "biz/operate/safeapply/list.action";
         }
     },

@@ -102,11 +102,11 @@ export default {
                 },
                 {
                     text: "运输线路检查记录",
-                    id: "transrecord"
+                    id: "transrecord1"
                 },
                 {
                     text: "提升运输设备设施检测检验报告",
-                    id: "impequipment"
+                    id: "transrecord2"
                 },
                 {
                     text: "系统监测数据添加、查看",
@@ -211,6 +211,27 @@ export default {
         prodaeration: resolve =>
             require([
                 "@/components/technology/views/TechonlogyVentilation"
+            ], resolve),
+        // 提升运输安全管理
+        transrecord: resolve =>
+            require([
+                "@/components/technology/views/TechonlogyTransRecord"
+            ], resolve),
+        // 安全避险“六大系统”安全管理
+        // 系统监测数据添加、查看
+        monitordata: resolve =>
+            require([
+                "@/components/technology/views/TechonlogyMonitorData"
+            ], resolve),
+        // 系统检查结果添加、查看
+        checkresult: resolve =>
+            require([
+                "@/components/technology/views/TechonlogyCheckResult"
+            ], resolve),
+        // 六大系统设备设施的检查、维护
+        equfailure: resolve =>
+            require([
+                "@/components/technology/views/TechonlogyEqufailure"
             ], resolve)
     }
 };

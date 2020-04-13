@@ -57,6 +57,7 @@ export default {
             if (this.onePage.path == "risk") {
                 let arr = [];
                 let pageData = this.onePage;
+                // 遍历对象数组
                 pageData.page.forEach(element => {
                     element.condition.forEach(item => {
                         if (item.show == window.localStorage["roleLevel"]) {
@@ -70,6 +71,7 @@ export default {
                 this.pageData = pageData;
             } else {
                 this.pageData = this.onePage;
+                console.log(this.pageData);
             }
         }
     },
@@ -82,7 +84,8 @@ export default {
             let obj = {};
             this.listPage.forEach(element => {
                 if (element.path == id) {
-                    obj = element;
+                    // 后续修改对象 必须深拷贝出来 否则会覆盖原有数据
+                    obj = JSON.parse(JSON.stringify(element));
                 }
             });
             return obj;

@@ -1,5 +1,5 @@
 <template>
-    <div class="opinionobj">
+    <div>
         <SearchBox placeholder="请输入内容搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">

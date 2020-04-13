@@ -1,5 +1,5 @@
 <template>
-    <div class="TechonlogyPowerMaintain">
+    <div>
         <SearchBox placeholder="请输入供电线路名称搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">

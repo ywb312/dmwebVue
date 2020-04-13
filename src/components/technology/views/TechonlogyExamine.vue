@@ -1,5 +1,5 @@
 <template>
-    <div class="TechonlogyExamine">
+    <div>
         <SearchBox placeholder="请输入项目名称搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">

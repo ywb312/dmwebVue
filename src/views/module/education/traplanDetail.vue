@@ -114,7 +114,7 @@ export default {
     },
     methods: {
         setRendering(obj) {
-            this.$common.codeToText(obj, "tratype", this.solts);
+            this.$common.code2Text(obj, "tratype", this.solts);
             return obj;
         },
         getData() {

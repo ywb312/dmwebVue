@@ -1,5 +1,5 @@
 <template>
-    <div class="myPlan">
+    <div>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div

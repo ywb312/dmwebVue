@@ -76,4 +76,7 @@ work(工作台)
 plan(我的计划)
     我的检查计划及专项检查计划
 technology(生产工艺)
-    
+
+## 上线注意事项
+    1.App.vue create注释打开 解决vuex刷新问题
+    2.App.vue 加载中动画的显示

@@ -1,5 +1,5 @@
 <template>
-    <div class="riskList">
+    <div>
         <mt-loadmore
             :top-method="loadTop"
             :bottom-method="loadBottom"
@@ -82,7 +82,7 @@ export default {
             });
             // 如果name,fxtype和上一项的name,fxtype不一致就推入新数组,否则添加子元素
             sortArr.forEach((item, index, arr) => {
-                self.$common.codeToText(
+                self.$common.code2Text(
                     item,
                     "fxtype",
                     self.fxtypeSlots[0].values

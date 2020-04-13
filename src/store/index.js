@@ -284,12 +284,12 @@ export default new Vuex.Store({
 					}, {
 						text: "职业卫生项目的申请",
 						id: "apply2"
-					// }, {
-					// 	text: "安全预评价报告备案",
-					// 	id: "record1"
-					// }, {
-					// 	text: "环保预评价报告备案",
-					// 	id: "record2"
+						// }, {
+						// 	text: "安全预评价报告备案",
+						// 	id: "record1"
+						// }, {
+						// 	text: "环保预评价报告备案",
+						// 	id: "record2"
 					}, {
 						text: "安全环保设施设计审查",
 						id: "examine1"
@@ -352,10 +352,10 @@ export default new Vuex.Store({
 					text: "提升运输安全管理",
 					child: [{
 						text: "运输线路检查记录",
-						id: "transrecord"
+						id: "transrecord1"
 					}, {
 						text: "提升运输设备设施检测检验报告",
-						id: "impequipment"
+						id: "transrecord2"
 					}]
 				}, {
 					text: "安全避险“六大系统”安全管理",
@@ -374,12 +374,117 @@ export default new Vuex.Store({
 			{
 				title: "环保管理",
 				path: "environment",
-				page: ["在线设施台账", "固体废物产生利用统计表", "项目建设情况", "排口台账", "评先创优情况", "危险废物处置统计表"],
+				page: [{
+						text: "在线设施台账",
+						id: "onlinefacility",
+					},
+					{
+						text: "固体废物产生利用统计表",
+						id: "sowageut",
+					},
+					{
+						text: "项目建设情况",
+						id: "projectconst",
+					},
+					{
+						text: "排口台账",
+						id: "drainageacc",
+					},
+					{
+						text: "评先创优情况",
+						id: "comfirstsitu",
+					},
+					{
+						text: "危险废物处置统计表",
+						id: "hazwastedis",
+					}
+				],
 			},
 			{
 				title: "应急管理",
 				path: "emergency",
-				page: ["应急预案", "应急队伍", "应急演练方案", "应急演练记录", "应急演练评价", "应急资源登记"],
+				page: [{
+					text: "应急预案",
+					child: [{
+						text: "应急预案维护(环保)",
+						id: "emergplanlist1",
+					}, {
+						text: "应急预案维护(消防)",
+						id: "emergplanlist2",
+					}, {
+						text: "应急预案维护(安全)",
+						id: "emergplanlist3",
+					}, {
+						text: "应急预案审批(环保)",
+						id: "emergplancreate1",
+					}, {
+						text: "应急预案审批(消防)",
+						id: "emergplancreate2",
+					}, {
+						text: "应急预案审批(安全)",
+						id: "emergplancreate3",
+					}]
+				}, {
+					text: "应急队伍",
+					child: [{
+						text: "应急救援队伍信息(环保)",
+						id: "emergagency1",
+					}, {
+						text: "应急救援队伍信息(消防)",
+						id: "emergagency2",
+					}, {
+						text: "应急救援队伍信息(安全)",
+						id: "emergagency3",
+					}]
+				}, {
+					text: "应急演练方案",
+					child: [{
+						text: "应急演练方案(环保)",
+						id: "drillplan1",
+					}, {
+						text: "应急演练方案(消防)",
+						id: "drillplan2",
+					}, {
+						text: "应急演练方案(安全)",
+						id: "drillplan3",
+					}]
+				}, {
+					text: "应急演练记录",
+					child: [{
+						text: "应急演练记录(环保)",
+						id: "drillrecord1",
+					}, {
+						text: "应急演练记录(消防)",
+						id: "drillrecord2",
+					}, {
+						text: "应急演练记录(安全)",
+						id: "drillrecord3",
+					}]
+				}, {
+					text: "应急演练评价",
+					child: [{
+						text: "应急演练评价(环保)",
+						id: "drillevaluate1",
+					}, {
+						text: "应急演练评价(消防)",
+						id: "drillevaluate2",
+					}, {
+						text: "应急演练评价(安全)",
+						id: "drillevaluate3",
+					}]
+				}, {
+					text: "应急资源登记",
+					child: [{
+						text: "应急资源登记(环保)",
+						id: "materialinfo1",
+					}, {
+						text: "应急资源登记(消防)",
+						id: "materialinfo2",
+					}, {
+						text: "应急资源登记(安全)",
+						id: "materialinfo3",
+					}]
+				}],
 			},
 			{
 				title: "事故管理",

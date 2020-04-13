@@ -1,5 +1,5 @@
 <template>
-    <div class="TechonlogyDrainInfo">
+    <div>
         <SearchBox placeholder="请输入排水原因搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">

@@ -1,5 +1,5 @@
 <template>
-    <div class="TechonlogyGoafWatch">
+    <div>
         <SearchBox placeholder="请输入采空区搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">

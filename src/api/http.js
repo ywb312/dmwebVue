@@ -2,9 +2,6 @@ import axios from 'axios'
 import qs from 'qs'
 import store from '../store/index'
 
-import {
-    MessageBox
-} from 'mint-ui';
 // 公共url前缀
 axios.defaults.baseURL = '/dmweb/';
 

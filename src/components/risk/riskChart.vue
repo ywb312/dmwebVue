@@ -1,5 +1,5 @@
 <template>
-    <div class="riskChart">
+    <div>
         <mt-loadmore
             :top-method="loadTop"
             :bottom-method="loadBottom"

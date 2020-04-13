@@ -1,5 +1,5 @@
 <template>
-    <div class="TechonlogyRoofGrading">
+    <div>
         <SearchBox placeholder="请输入采空区名称搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
@@ -67,8 +67,8 @@ export default {
     methods: {
         getRendering(arr) {
             arr.forEach(element => {
-                // this.$common.codeToText(element, "crruentstatus", this.dqztArr);
-                this.$common.codeToText(element, "miningtype", this.ckffArr);
+                // this.$common.code2Text(element, "crruentstatus", this.dqztArr);
+                this.$common.code2Text(element, "miningtype", this.ckffArr);
             });
             this.rendering = arr;
         },

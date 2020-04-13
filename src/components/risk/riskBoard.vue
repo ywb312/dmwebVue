@@ -1,5 +1,5 @@
 <template>
-    <div class="riskBoard">
+    <div>
         <mt-loadmore
             :top-method="loadTop"
             :bottom-method="loadBottom"
@@ -79,17 +79,17 @@ export default {
         // 处理请求的数据
         setRes(arr) {
             arr.forEach(element => {
-                this.$common.codeToText(
+                this.$common.code2Text(
                     element,
                     "knfs",
                     this.knfsSlots[0].values
                 );
-                this.$common.codeToText(
+                this.$common.code2Text(
                     element,
                     "yxfw",
                     this.yxfwSlots[0].values
                 );
-                this.$common.codeToText(
+                this.$common.code2Text(
                     element,
                     "qzhg",
                     this.qzhgSlots[0].values

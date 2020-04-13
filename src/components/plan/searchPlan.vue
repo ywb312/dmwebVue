@@ -1,5 +1,5 @@
 <template>
-    <div class="searchPlan page">
+    <div class="page">
         <div class="searchGroup">
             <div class="btnGroup">
                 <span
@@ -143,9 +143,6 @@ export default {
 };
 </script>
 <style scoped>
-.searchPlan {
-    height: 100%;
-}
 .searchGroup {
     position: sticky;
     top: 50px;

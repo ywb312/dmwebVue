@@ -234,10 +234,50 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //环保管理 项目建设情况详情
+		path: '/environment/ProjectConstDetail',
+		name: 'ProjectConstDetail',
+		component: resolve => require(['../views/module/environment/ProjectConstDetail.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //环保管理 创先评优详情
+		path: '/environment/ComfirstDetail',
+		name: 'ComfirstDetail',
+		component: resolve => require(['../views/module/environment/ComfirstDetail.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
 	{ //应急管理
 		path: '/emergency',
 		name: 'emergency',
 		component: resolve => require(['../views/module/emergency/emergency.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //应急管理 应急预案详情
+		path: '/emergency/emergPlanDetail',
+		name: 'emergPlanDetail',
+		component: resolve => require(['../views/module/emergency/emergPlanDetail.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //应急管理 救援队伍信息
+		path: '/emergency/emergAgencyMan',
+		name: 'emergAgencyMan',
+		component: resolve => require(['../views/module/emergency/emergAgencyMan.vue'], resolve),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //应急管理 应急演练方案详情
+		path: '/emergency/emergDrillDetail',
+		name: 'emergDrillDetail',
+		component: resolve => require(['../views/module/emergency/emergDrillDetail.vue'], resolve),
 		meta: {
 			keepAlive: false
 		}

@@ -1,5 +1,5 @@
 <template>
-    <div class="audit">
+    <div>
         <mt-loadmore
             :top-method="loadTop"
             :bottom-method="loadBottom"
@@ -82,7 +82,7 @@ export default {
         // 处理请求的数据
         setRes(arr) {
             arr.forEach(element => {
-                this.$common.codeToText(element, "state", this.stateArr);
+                this.$common.code2Text(element, "state", this.stateArr);
             });
             return arr;
         },

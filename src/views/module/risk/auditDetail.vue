@@ -73,22 +73,22 @@ export default {
             delete obj.child;
             arr.push(obj);
             arr.forEach(element => {
-                this.$common.codeToText(
+                this.$common.code2Text(
                     element,
                     "knfs",
                     this.knfsSlots[0].values
                 );
-                this.$common.codeToText(
+                this.$common.code2Text(
                     element,
                     "yxfw",
                     this.yxfwSlots[0].values
                 );
-                this.$common.codeToText(
+                this.$common.code2Text(
                     element,
                     "qzhg",
                     this.qzhgSlots[0].values
                 );
-                this.$common.codeToText(
+                this.$common.code2Text(
                     element,
                     "gtype",
                     this.gTypeSlots[0].values

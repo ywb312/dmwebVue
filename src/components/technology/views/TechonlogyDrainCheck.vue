@@ -1,5 +1,5 @@
 <template>
-    <div class="TechonlogyDrainCheck">
+    <div>
         <SearchBox
             :placeholder="pageData.element=='1'?'请输入水泵检查内容搜索':'请输入水仓检查内容搜索'"
             @callback="searchBack"

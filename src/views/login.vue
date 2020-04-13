@@ -27,7 +27,22 @@ export default {
             password: ""
         };
     },
-    mounted() {},
+    // 设置免登陆 如果本地有数据自动跳转
+    created() {
+        let storage = window.localStorage;
+        if (
+            storage.session_Id &&
+            storage.deptname &&
+            storage.username &&
+            storage.loginname &&
+            storage.rolename &&
+            storage.roleLevel
+        ) {
+            this.$router.push({
+                name: "home"
+            });
+        }
+    },
     methods: {
         login() {
             let _this = this;
@@ -40,13 +55,17 @@ export default {
                 })
                 .then(function(res) {
                     if (res.result) {
-                        var storage = window.localStorage;
-                        storage.session_Id = res.session_Id;
-                        storage.deptname = res.result.deptname;
-                        storage.username = res.result.username;
-                        storage.loginname = res.result.loginname;
-                        // localStorage.rolename = res.result.rolename;
-                        _this.setDeptId(res.result.rolename);
+                        if (window.localStorage) {
+                            var storage = window.localStorage;
+                            storage.session_Id = res.session_Id;
+                            storage.deptname = res.result.deptname;
+                            storage.username = res.result.username;
+                            storage.loginname = res.result.loginname;
+                            storage.rolename = res.result.rolename;
+                            storage.roleLevel = _this.getDeptId(
+                                res.result.rolename
+                            );
+                        }
                         _this.$router.push({
                             name: "home"
                         });
@@ -60,22 +79,22 @@ export default {
                     }
                 });
         },
-        setDeptId(name) {
-            var storage = window.localStorage;
-            storage.rolename = name;
+        getDeptId(name) {
+            let roleLevel = "";
             if (name == "班组级") {
-                storage.roleLevel = "1";
+                roleLevel = "1";
             } else if (
                 name == "车间级" ||
                 name == "工区级" ||
                 name == "科室级"
             ) {
-                storage.roleLevel = "2";
+                roleLevel = "2";
             } else if (name == "厂级") {
-                storage.roleLevel = "3";
+                roleLevel = "3";
             } else if (name == "安环部") {
-                storage.roleLevel = "4";
+                roleLevel = "4";
             }
+            return roleLevel;
         },
         alertMsg() {
             // 对账号验空

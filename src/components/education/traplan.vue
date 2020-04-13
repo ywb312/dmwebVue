@@ -1,5 +1,5 @@
 <template>
-    <div class="traplan">
+    <div>
         <search-box placeholder="请输入计划名称" @callback="searchBack"></search-box>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">

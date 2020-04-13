@@ -12,6 +12,7 @@
             <slot name="tip"></slot>
         </div>
         <van-empty v-show="noData" description="暂无数据" />
+        <van-empty image="error" v-show="noRes" description="数据有误" />
     </mt-loadmore>
 </template>
 <script>
@@ -28,7 +29,8 @@ export default {
             allLoaded: false,
             // 没有更多数据了
             noMore: false,
-            noData: false
+            noData: false,
+            noRes: false
         };
     },
     // pageData父组件传来的配置项
@@ -60,6 +62,10 @@ export default {
             this.$api.pub
                 .showPage(this.postData.url, this.setObj())
                 .then(res => {
+                    if (typeof res != "object") {
+                        this.noRes = true;
+                        return;
+                    }
                     // 有数据和没数据都要返回
                     if (res.rows && res.rows.length != 0) {
                         // 判断是新增还是替换  默认为新增
@@ -102,6 +108,7 @@ export default {
         cleraData() {
             this.page = 1;
             this.noMore = false;
+            this.noData = false;
             this.rendering = [];
             this.getData(false);
         }

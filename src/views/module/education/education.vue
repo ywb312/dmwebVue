@@ -21,18 +21,15 @@ export default {
             page: [
                 {
                     text: "培训计划管理(消防)",
-                    components: "traplan",
-                    element: "YS002"
+                    id: "traplan2"
                 },
                 {
                     text: "培训计划管理(环保)",
-                    components: "traplan",
-                    element: "YS001"
+                    id: "traplan1"
                 },
                 {
                     text: "培训计划管理(安全)",
-                    components: "traplan",
-                    element: "YS003"
+                    id: "traplan3"
                 },
                 {
                     text: "考试"
@@ -47,10 +44,25 @@ export default {
         };
     },
     created() {
-        let a = this.$route.query.a;
-        this.pageData = this.page[a]; //当前页面的配置
+        this.getPageData();
     },
-    methods: {},
+    methods: {
+        getPageData() {
+            let id = this.$route.query.id;
+            this.page.forEach(item => {
+                if (item.id == id) {
+                    let i = id.charAt(id.length - 1);
+                    if (!isNaN(i * 1)) {
+                        item.components = id.substring(0, id.length - 1);
+                        item.element = i;
+                    } else {
+                        item.components = item.id;
+                    }
+                    this.pageData = item;
+                }
+            });
+        }
+    },
     components: {
         traplan: resolve => require(["@/components/education/traplan"], resolve)
     }

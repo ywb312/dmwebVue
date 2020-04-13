@@ -126,7 +126,7 @@ export default {
                     // 判断rows是否返回数据
                     if (res.rows.length != 0) {
                         res.rows.forEach(element => {
-                            this.$common.codeToText(
+                            this.$common.code2Text(
                                 element,
                                 "state",
                                 this.spArr
