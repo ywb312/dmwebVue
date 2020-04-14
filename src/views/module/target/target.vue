@@ -1,5 +1,5 @@
 <template>
-    <div class="target page">
+    <div class="page">
         <!-- 标题  -->
         <mt-header :title="pageData.text" fixed>
             <router-link to slot="left">

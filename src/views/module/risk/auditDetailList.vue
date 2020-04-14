@@ -1,5 +1,5 @@
 <template>
-    <div class="auditDetailList page">
+    <div class="page">
         <mt-header title="审核列表" fixed>
             <router-link to slot="left">
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>
@@ -114,7 +114,6 @@ export default {
             this.$store.commit("getSelectData", obj);
             this.popshow = true;
             this.selectData = obj;
-            console.log(this.selectData);
         },
         // 审核通过/不通过
         auditPass(bol) {

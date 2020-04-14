@@ -1,5 +1,5 @@
 <template>
-    <div class="auditDetail page">
+    <div class="page">
         <mt-header title="审核详情" fixed>
             <router-link to slot="left">
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>

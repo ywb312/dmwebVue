@@ -489,16 +489,96 @@ export default new Vuex.Store({
 			{
 				title: "事故管理",
 				path: "accident",
-				page: ["事故快报", "事故详情", "成立事故调查组", "现场调查取证", "事故分析", "调查报告", "事故事件库"],
+				page: [{
+					text: "事故快报",
+					child: [{
+						text: "事故快报(环保)",
+						id: "accireport1",
+					}, {
+						text: "事故快报(消防)",
+						id: "accireport2",
+					}, {
+						text: "事故快报(安全)",
+						id: "accireport3",
+					}]
+				}, {
+					text: "事故详情",
+					child: [{
+						text: "事故详情(环保)",
+						id: "accidetabs1",
+					}, {
+						text: "事故详情(消防)",
+						id: "accidetabs2",
+					}, {
+						text: "事故详情(安全)",
+						id: "accidetabs3",
+					}]
+				}, {
+					text: "成立事故调查组",
+					child: [{
+						text: "成立事故调查组(环保)",
+						id: "relateduser1",
+					}, {
+						text: "成立事故调查组(消防)",
+						id: "relateduser2",
+					}, {
+						text: "成立事故调查组(安全)",
+						id: "relateduser3",
+					}]
+				}, {
+					text: "现场调查取证",
+					child: [{
+						text: "现场调查取证(环保)",
+						id: "accihapevi1",
+					}, {
+						text: "现场调查取证(消防)",
+						id: "accihapevi2",
+					}, {
+						text: "现场调查取证(安全)",
+						id: "accihapevi3",
+					}]
+				}, {
+					text: "事故分析",
+					child: [{
+						text: "事故分析(环保)",
+						id: "accisutabs1",
+					}, {
+						text: "事故分析(消防)",
+						id: "accisutabs2",
+					}, {
+						text: "事故分析(安全)",
+						id: "accisutabs3",
+					}]
+				}, {
+					text: "调查报告",
+					child: [{
+						text: "调查报告(环保)",
+						id: "accsureport1",
+					}, {
+						text: "调查报告(消防)",
+						id: "accsureport2",
+					}, {
+						text: "调查报告(安全)",
+						id: "accsureport3",
+					}]
+				}, {
+					text: "事故事件库",
+					child: [{
+						text: "事故事件库(环保)",
+						id: "accistore1",
+					}, {
+						text: "事故事件库(消防)",
+						id: "accistore2",
+					}, {
+						text: "事故事件库(安全)",
+						id: "accistore3",
+					}]
+				}],
 			}
 		],
 		// 危害 下拉框配置
 		knfsSlots: [{
 			values: [{
-					text: "请选择",
-					id: ""
-				},
-				{
 					text: "物体打击",
 					id: "KNFS001"
 				},
@@ -756,6 +836,154 @@ export default new Vuex.Store({
 					text: "设施",
 					id: "FXDLX003"
 				}
+			]
+		}],
+		// 事故类型	下拉框配置
+		sglbSlots: [{
+			values: [{
+					text: "物体打击",
+					id: "SGLB001"
+				},
+				{
+					text: "车辆伤害",
+					id: "SGLB002"
+				},
+				{
+					text: "机械伤害",
+					id: "SGLB003"
+				},
+				{
+					text: "高处坠落",
+					id: "SGLB004"
+				},
+				{
+					text: "冒顶片帮",
+					id: "SGLB005"
+				},
+				{
+					text: "中毒窒息",
+					id: "SGLB006"
+				},
+				{
+					text: "放炮事故",
+					id: "SGLB007"
+				},
+				{
+					text: "起重伤害",
+					id: "SGLB008"
+				},
+				{
+					text: "火灾",
+					id: "SGLB009"
+				},
+				{
+					text: "灼烫",
+					id: "SGLB010"
+				},
+				{
+					text: "触电",
+					id: "SGLB011"
+				},
+				{
+					text: "其它伤害",
+					id: "SGLB012"
+				},
+				{
+					text: "淹溺",
+					id: "SGLB013"
+				},
+				{
+					text: "坍塌",
+					id: "SGLB014"
+				},
+				{
+					text: "透水",
+					id: "SGLB015"
+				},
+				{
+					text: "火药爆炸",
+					id: "SGLB016"
+				},
+				{
+					text: "瓦斯爆炸",
+					id: "SGLB017"
+				},
+				{
+					text: "锅炉爆炸",
+					id: "SGLB018"
+				},
+				{
+					text: "容器爆炸",
+					id: "SGLB019"
+				},
+				{
+					text: "其他爆炸",
+					id: "SGLB020"
+				},
+				{
+					text: "自然灾害",
+					id: "SGLB021"
+				},
+				{
+					text: "地质灾害",
+					id: "SGLB022"
+				},
+				{
+					text: "综合",
+					id: "SGLB023"
+				},
+			]
+		}],
+		// 事故伤亡类型	下拉框配置
+		sgdjSlots: [{
+			values: [{
+					text: "轻伤",
+					id: "SGDJ001"
+				},
+				{
+					text: "重伤",
+					id: "SGDJ002"
+				},
+				{
+					text: "一般事故",
+					id: "SGDJ003"
+				},
+				{
+					text: "较大事故",
+					id: "SGDJ004"
+				},
+				{
+					text: "重大事故",
+					id: "SGDJ005"
+				},
+				{
+					text: "特别重大事故",
+					id: "SGDJ006"
+				},
+				{
+					text: "一般设备事故",
+					id: "SGDJ007"
+				},
+				{
+					text: "重大设备事故",
+					id: "SGDJ008"
+				},
+				{
+					text: "特大设备事故",
+					id: "SGDJ009"
+				},
+				{
+					text: "一般险肇事故",
+					id: "SGDJ010"
+				},
+				{
+					text: "重大险肇事故",
+					id: "SGDJ011"
+				},
+				{
+					text: "微伤",
+					id: "SGDJ012"
+				},
 			]
 		}],
 		// 组织结构树

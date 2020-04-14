@@ -20,7 +20,7 @@ import {
 	Cell,
 	CellGroup,
 	Divider,
-	Tabbar, 
+	Tabbar,
 	TabbarItem,
 	Sticky,
 	Empty

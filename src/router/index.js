@@ -61,7 +61,7 @@ const routes = [{
 	{ //通知公告
 		path: '/inform',
 		name: 'inform',
-		component: resolve => require(['../views/module/inform/inform.vue'], resolve),
+		component: () => import('@/views/module/inform/inform.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -69,7 +69,7 @@ const routes = [{
 	{ //隐患管理
 		path: '/danger',
 		name: 'danger',
-		component: resolve => require(['../views/module/danger/danger.vue'], resolve),
+		component: () => import('@/views/module/danger/danger.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -77,7 +77,7 @@ const routes = [{
 	{ //隐患管理 新增隐患
 		path: '/danger/increase',
 		name: 'increase',
-		component: resolve => require(['../views/module/danger/increase.vue'], resolve),
+		component: () => import('@/views/module/danger/increase.vue'),
 		meta: {
 			keepAlive: true
 		}
@@ -85,7 +85,7 @@ const routes = [{
 	{ //隐患管理 隐患详情
 		path: '/danger/detail',
 		name: 'detail',
-		component: resolve => require(['../views/module/danger/detail.vue'], resolve),
+		component: () => import('@/views/module/danger/detail.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -93,7 +93,7 @@ const routes = [{
 	{ //隐患管理 填报指派
 		path: '/danger/assign',
 		name: 'assign',
-		component: resolve => require(['../views/module/danger/assign.vue'], resolve),
+		component: () => import('@/views/module/danger/assign.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -101,7 +101,7 @@ const routes = [{
 	{ //计划管理
 		path: '/plan',
 		name: 'plan',
-		component: resolve => require(['../views/module/plan/plan.vue'], resolve),
+		component: () => import('@/views/module/plan/plan.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -109,7 +109,7 @@ const routes = [{
 	{ //计划管理 安全检查
 		path: '/safeCheack',
 		name: 'safeCheack',
-		component: resolve => require(['../views/module/plan/safeCheack.vue'], resolve),
+		component: () => import('@/views/module/plan/safeCheack.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -117,7 +117,7 @@ const routes = [{
 	{ //计划管理 检查记录详情
 		path: '/plan/planDetail',
 		name: 'planDetail',
-		component: resolve => require(['../views/module/plan/planDetail.vue'], resolve),
+		component: () => import('@/views/module/plan/planDetail.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -125,7 +125,7 @@ const routes = [{
 	{ //提醒预警
 		path: '/remind',
 		name: 'remind',
-		component: resolve => require(['../views/module/remind/remind.vue'], resolve),
+		component: () => import('@/views/module/remind/remind.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -133,7 +133,7 @@ const routes = [{
 	{ //风险管理
 		path: '/risk',
 		name: 'risk',
-		component: resolve => require(['../views/module/risk/risk.vue'], resolve),
+		component: () => import('@/views/module/risk/risk.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -141,7 +141,7 @@ const routes = [{
 	{ //风险管理 危险源
 		path: '/risk/companyRisk',
 		name: 'companyRisk',
-		component: resolve => require(['../views/module/risk/companyRisk.vue'], resolve),
+		component: () => import('@/views/module/risk/companyRisk.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -149,7 +149,7 @@ const routes = [{
 	{ //风险管理 管控措施
 		path: '/risk/measure',
 		name: 'measure',
-		component: resolve => require(['../views/module/risk/measure.vue'], resolve),
+		component: () => import('@/views/module/risk/measure.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -157,7 +157,7 @@ const routes = [{
 	{ //风险管理 排查信息
 		path: '/risk/examine',
 		name: 'examine',
-		component: resolve => require(['../views/module/risk/examine.vue'], resolve),
+		component: () => import('@/views/module/risk/examine.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -165,7 +165,7 @@ const routes = [{
 	{ //风险管理 审核详情列表
 		path: '/risk/auditDetailList',
 		name: 'auditDeatilListAn',
-		component: resolve => require(['../views/module/risk/auditDetailList.vue'], resolve),
+		component: () => import('@/views/module/risk/auditDetailList.vue'),
 		meta: {
 			keepAlive: true
 		}
@@ -173,7 +173,7 @@ const routes = [{
 	{ //风险管理 安环部审核详情列表
 		path: '/risk/auditDetailListAn',
 		name: 'auditDetailListAn',
-		component: resolve => require(['../views/module/risk/auditDetailListAn.vue'], resolve),
+		component: () => import('@/views/module/risk/auditDetailListAn.vue'),
 		meta: {
 			keepAlive: true
 		}
@@ -181,7 +181,7 @@ const routes = [{
 	{ //风险管理 审核详情具体页
 		path: '/risk/auditDetail',
 		name: 'auditDetail',
-		component: resolve => require(['../views/module/risk/auditDetail.vue'], resolve),
+		component: () => import('@/views/module/risk/auditDetail.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -189,7 +189,7 @@ const routes = [{
 	{ //三项人员  
 		path: '/person',
 		name: 'person',
-		component: resolve => require(['../views/module/person/person.vue'], resolve),
+		component: () => import('@/views/module/person/person.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -197,7 +197,7 @@ const routes = [{
 	{ //方针目标
 		path: '/target',
 		name: 'target',
-		component: resolve => require(['../views/module/target/target.vue'], resolve),
+		component: () => import('@/views/module/target/target.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -205,7 +205,7 @@ const routes = [{
 	{ //教育培训
 		path: '/education',
 		name: 'education',
-		component: resolve => require(['../views/module/education/education.vue'], resolve),
+		component: () => import('@/views/module/education/education.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -213,7 +213,7 @@ const routes = [{
 	{ //教育培训 计划详情
 		path: '/education/traplanDetail',
 		name: 'traplanDetail',
-		component: resolve => require(['../views/module/education/traplanDetail.vue'], resolve),
+		component: () => import('@/views/module/education/traplanDetail.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -221,7 +221,7 @@ const routes = [{
 	{ //工艺管理
 		path: '/technology',
 		name: 'technology',
-		component: resolve => require(['../views/module/technology/technology.vue'], resolve),
+		component: () => import('@/views/module/technology/technology.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -229,7 +229,7 @@ const routes = [{
 	{ //环保管理
 		path: '/environment',
 		name: 'environment',
-		component: resolve => require(['../views/module/environment/environment.vue'], resolve),
+		component: () => import('@/views/module/environment/environment.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -237,7 +237,7 @@ const routes = [{
 	{ //环保管理 项目建设情况详情
 		path: '/environment/ProjectConstDetail',
 		name: 'ProjectConstDetail',
-		component: resolve => require(['../views/module/environment/ProjectConstDetail.vue'], resolve),
+		component: () => import('@/views/module/environment/ProjectConstDetail.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -245,7 +245,7 @@ const routes = [{
 	{ //环保管理 创先评优详情
 		path: '/environment/ComfirstDetail',
 		name: 'ComfirstDetail',
-		component: resolve => require(['../views/module/environment/ComfirstDetail.vue'], resolve),
+		component: () => import('@/views/module/environment/ComfirstDetail.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -253,7 +253,7 @@ const routes = [{
 	{ //应急管理
 		path: '/emergency',
 		name: 'emergency',
-		component: resolve => require(['../views/module/emergency/emergency.vue'], resolve),
+		component: () => import('@/views/module/emergency/emergency.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -261,7 +261,7 @@ const routes = [{
 	{ //应急管理 应急预案详情
 		path: '/emergency/emergPlanDetail',
 		name: 'emergPlanDetail',
-		component: resolve => require(['../views/module/emergency/emergPlanDetail.vue'], resolve),
+		component: () => import('@/views/module/emergency/emergPlanDetail.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -269,7 +269,7 @@ const routes = [{
 	{ //应急管理 救援队伍信息
 		path: '/emergency/emergAgencyMan',
 		name: 'emergAgencyMan',
-		component: resolve => require(['../views/module/emergency/emergAgencyMan.vue'], resolve),
+		component: () => import('@/views/module/emergency/emergAgencyMan.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -277,7 +277,7 @@ const routes = [{
 	{ //应急管理 应急演练方案详情
 		path: '/emergency/emergDrillDetail',
 		name: 'emergDrillDetail',
-		component: resolve => require(['../views/module/emergency/emergDrillDetail.vue'], resolve),
+		component: () => import('@/views/module/emergency/emergDrillDetail.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -285,7 +285,15 @@ const routes = [{
 	{ //事故管理
 		path: '/accident',
 		name: 'accident',
-		component: resolve => require(['../views/module/accident/accident.vue'], resolve),
+		component: () => import('@/views/module/accident/accident.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //事故管理 事故详情
+		path: '/accident/accidentDetail',
+		name: 'accidentDetail',
+		component: () => import('@/views/module/accident/accidentDetail.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -295,7 +303,7 @@ const routes = [{
 	{ //待办事项
 		path: '/backlog',
 		name: 'backlog',
-		component: resolve => require(['../views/work/backlog.vue'], resolve),
+		component: () => import('@/views/work/backlog.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -303,7 +311,7 @@ const routes = [{
 	{ //已办事项
 		path: '/finished',
 		name: 'finished',
-		component: resolve => require(['../views/work/finished.vue'], resolve),
+		component: () => import('@/views/work/finished.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -311,7 +319,7 @@ const routes = [{
 	{ //自查自改
 		path: '/backlog/change',
 		name: 'change',
-		component: resolve => require(['../views/work/change.vue'], resolve),
+		component: () => import('@/views/work/change.vue'),
 		meta: {
 			keepAlive: false
 		}

@@ -71,7 +71,6 @@ export default {
                 this.pageData = pageData;
             } else {
                 this.pageData = this.onePage;
-                console.log(this.pageData);
             }
         }
     },
