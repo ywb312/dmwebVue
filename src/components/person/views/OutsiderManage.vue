@@ -1,18 +1,29 @@
-<template>
+w<template>
     <div>
-        <SearchBox placeholder="请输入项目名称搜索" @callback="searchBack"></SearchBox>
+        <SearchBox placeholder="请输入外来参观人员单位名称搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
-                <div class="wrapper" v-for="(item,index) in rendering" :key="index">
-                    <div class="title">
-                        <h4>{{index+1+"."+item.projectName}}</h4>
-                    </div>
+                <div
+                    class="wrapper"
+                    v-for="(item,index) in rendering"
+                    :key="index"
+                    @click="btnClick(item)"
+                >
                     <div class="main">
                         <div>
-                            <p>申请日期: {{item.createDate}}</p>
+                            <p>外来参观单位名称: {{item.danwei}}</p>
                         </div>
                         <div>
-                            <p>项目内容: {{item.content}}</p>
+                            <p>外来参观人员姓名: {{item.name}}</p>
+                        </div>
+                        <div>
+                            <p>参观日期: {{item.visitDate}}</p>
+                        </div>
+                        <div>
+                            <p>矿内接待单位: {{item.recepdept}}</p>
+                        </div>
+                        <div>
+                            <p>陪同人员: {{item.recepman}}</p>
                         </div>
                         <div>
                             <p>
@@ -33,24 +44,16 @@
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 export default {
-    name: "TechonlogyApply",
+    name: "OutsiderManage",
     data() {
         return {
+            // 渲染的数据
             rendering: [],
             postData: {
-                url: "",
-                obj: {
-                    "bean.param": ""
-                }
+                url: "biz/people/outsiderManage/list.action",
+                obj: {}
             }
         };
-    },
-    created() {
-        if (this.pageData.element == "1") {
-            this.postData.url = "biz/operate/environapply/list.action";
-        } else if (this.pageData.element == "2") {
-            this.postData.url = "biz/operate/safeapply/list.action";
-        }
     },
     // pageData父组件传来的配置项
     props: ["pageData"],

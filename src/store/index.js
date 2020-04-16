@@ -160,9 +160,164 @@ export default new Vuex.Store({
 				],
 			},
 			{
-				title: "三项人员信息管理",
+				title: "作业现场管理",
 				path: "person",
-				page: ["特种作业人员信息", "持证人员信息", "主要负责人信息"],
+				page: [{
+						text: "特种作业安全管理",
+						child: [{
+							text: "特种人员管理",
+							id: "specialPeople"
+						}, {
+							text: "持证上岗人员",
+							id: "certifiedPeople"
+						// }, {
+						// 	text: "特种作业人员培训计划",
+						// 	id: "traproject"
+						// }, {
+						// 	text: "特种作业人员培训记录",
+						// 	id: "trarecord"
+						// }, {
+						// 	text: "特种作业人员培训结果",
+						// 	id: "trasummary"
+						}]
+					},
+					{
+						text: "关键任务作业安全管理",
+						child: [{
+							text: "许可作业清单录入",
+							id: "permissioninfo"
+						}, {
+							text: "安全操作规程",
+							id: "safetypro"
+						}, {
+							text: "许可作业申请、审批",
+							id: "permissionapply"
+						}, {
+							text: "任务观察记录录入",
+							id: "taskobserve"
+						}, {
+							text: "作业指导书",
+							id: "operinstruc"
+						}]
+					},
+					{
+						text: "工作票管理",
+						child: [{
+							text: "工作票的申请",
+							id: "operationticket"
+						}, {
+							text: "工作票执行总结",
+							id: "worksummary"
+						}]
+					},
+					{
+						text: "劳动防护用品管理",
+						child: [{
+							text: "劳动防护用品发放记录",
+							id: "articleRecord"
+						}, {
+							text: "劳动防护用品需求调查",
+							id: "articlesurvey"
+						}, {
+							text: "劳动防护用品评估",
+							id: "articleevaluate"
+						}, {
+							text: "劳动防护用品发放使用标准",
+							id: "articleStandard"
+						}]
+					},
+					{
+						text: "领导带班下井",
+						child: [{
+							text: "带班计划",
+							id: "leaderplan"
+						}, {
+							text: "带班交接记录",
+							id: "leaderrecord"
+						}]
+					},
+					{
+						text: "外来人员参观管理",
+						child: [{
+							text: "外来人员下井记录",
+							id: "outsiderManage"
+						}, {
+							text: "外来人员安全培训记录",
+							id: "outsidertrain"
+						}]
+					},
+					{
+						text: "环境保护与水土保持",
+						child: [{
+							text: "地质灾害检查",
+							id: "geologyCheck"
+						}]
+					},
+					{
+						text: "危险化学品管理",
+						child: [{
+							text: "危险化学品库存",
+							id: "dangerousIn"
+						}, {
+							text: "危险化学品领用",
+							id: "dangerousOut"
+						}]
+					},
+					{
+						text: "交接班管理",
+						child: [{
+							text: "交接班记录",
+							id: "classMeettingInfo"
+						}]
+					},
+					{
+						text: "安全警示标志管理",
+						child: [{
+							text: "安全标志申请界面",
+							id: "safetySignApply"
+						}, {
+							text: "安全标志发放登记",
+							id: "safetySignOffer"
+						}]
+					},
+					{
+						text: "照明管理",
+						child: [{
+							text: "照明设施配备清单",
+							id: "illuminecabinet"
+						}, {
+							text: "照明设施检查记录",
+							id: "illuminecheck"
+						}]
+					},
+					{
+						text: "消防器材管理",
+						child: [{
+							text: "防灭火器器材配置记录",
+							id: "hydcabinet"
+						}, {
+							text: "防灭火器器材更换记录",
+							id: "hydrant"
+						}]
+					},
+					{
+						text: "爆破作业管理",
+						child: [{
+							text: "中深孔爆破申请(全部)",
+							id: "taskblastappinfo"
+						}]
+					},
+					{
+						text: "基础信息维护",
+						child: [{
+							text: "井下作业面安全确认项维护",
+							id: "taskworksafetyconfirmitems"
+						}, {
+							text: "安全标志标识库",
+							id: "tasksafemarkinfo",
+						}]
+					},
+				],
 			},
 			{
 				title: "安全环保生产方针与目标",

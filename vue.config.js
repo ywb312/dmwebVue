@@ -1,6 +1,9 @@
+// vue-cli3配置文件
 module.exports = {
     publicPath: './',
     devServer: {
+        port: 8081,
+        open: true,
         proxy: {
             '/dmweb': { //代理api
                 target: "http://localhost:8080/dmweb", //服务器api地址

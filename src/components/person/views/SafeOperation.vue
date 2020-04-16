@@ -3,16 +3,24 @@
         <SearchBox placeholder="请输入项目名称搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
-                <div class="wrapper" v-for="(item,index) in rendering" :key="index">
+                <div
+                    class="wrapper"
+                    v-for="(item,index) in rendering"
+                    :key="index"
+                    @click="btnClick(item)"
+                >
                     <div class="title">
                         <h4>{{index+1+"."+item.projectName}}</h4>
+                        <!-- <p style="min-width:40px">
+                            <mt-badge size="small">{{item.moduleid}}</mt-badge>
+                        </p>-->
                     </div>
                     <div class="main">
                         <div>
-                            <p>申请日期: {{item.createDate}}</p>
+                            <p>上传人: {{item.createname}}</p>
                         </div>
                         <div>
-                            <p>项目内容: {{item.content}}</p>
+                            <p>发布日期: {{item.createDate}}</p>
                         </div>
                         <div>
                             <p>
@@ -33,24 +41,16 @@
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 export default {
-    name: "TechonlogyApply",
+    name: "SafeOperation",
     data() {
         return {
+            // 渲染的数据
             rendering: [],
             postData: {
-                url: "",
-                obj: {
-                    "bean.param": ""
-                }
+                url: "biz/operate/safetypro/list.action",
+                obj: {}
             }
         };
-    },
-    created() {
-        if (this.pageData.element == "1") {
-            this.postData.url = "biz/operate/environapply/list.action";
-        } else if (this.pageData.element == "2") {
-            this.postData.url = "biz/operate/safeapply/list.action";
-        }
     },
     // pageData父组件传来的配置项
     props: ["pageData"],

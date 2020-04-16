@@ -1,24 +1,35 @@
 <template>
     <div>
-        <SearchBox placeholder="请输入项目名称搜索" @callback="searchBack"></SearchBox>
+        <SearchBox placeholder="请输入操作任务搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
-                <div class="wrapper" v-for="(item,index) in rendering" :key="index">
+                <div
+                    class="wrapper"
+                    v-for="(item,index) in rendering"
+                    :key="index"
+                    @click="btnClick(item)"
+                >
                     <div class="title">
-                        <h4>{{index+1+"."+item.projectName}}</h4>
+                        <h4>{{index+1+"."+item.task_name}}</h4>
                     </div>
                     <div class="main">
                         <div>
-                            <p>申请日期: {{item.createDate}}</p>
+                            <p>调令号: {{item.order_no}}</p>
                         </div>
                         <div>
-                            <p>项目内容: {{item.content}}</p>
+                            <p>操作票时间: {{item.ticket_time}}</p>
                         </div>
                         <div>
-                            <p>
-                                附件名称:
-                                <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
-                            </p>
+                            <p>命令票编号: {{item.command_code}}</p>
+                        </div>
+                        <div>
+                            <p>申请人: {{item.apply_man}}</p>
+                        </div>
+                        <div>
+                            <p>申请单位: {{item.apply_org}}</p>
+                        </div>
+                        <div>
+                            <p>申请时间: {{item.apply_time}}</p>
                         </div>
                     </div>
                 </div>
@@ -33,24 +44,16 @@
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 export default {
-    name: "TechonlogyApply",
+    name: "OperationTicket",
     data() {
         return {
+            // 渲染的数据
             rendering: [],
             postData: {
-                url: "",
-                obj: {
-                    "bean.param": ""
-                }
+                url: "biz/operate/taskoperationticketinfo/list.action",
+                obj: {}
             }
         };
-    },
-    created() {
-        if (this.pageData.element == "1") {
-            this.postData.url = "biz/operate/environapply/list.action";
-        } else if (this.pageData.element == "2") {
-            this.postData.url = "biz/operate/safeapply/list.action";
-        }
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
