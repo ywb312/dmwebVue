@@ -63,7 +63,7 @@ export default {
                 },
                 {
                     text: "工作票的申请",
-                    id: "operationticket"
+                    id: "workticket"
                 },
                 {
                     text: "工作票执行总结",
@@ -170,7 +170,6 @@ export default {
             });
         }
     },
-    // 特种人员管理，持证上岗人员，许可作业申请、审批，工作票申请，劳动防护用品发放记录，劳动防护用品发放使用标准，带班交接记录，交接班记录,安全标志申请界面，安全标志发放登记，照明设施配备清单，防灭火器器材配置记录
     components: {
         // // 特种人员管理
         specialPeople: resolve =>
@@ -203,15 +202,15 @@ export default {
         operinstruc: resolve =>
             require(["@/components/person/views/OperationInstruc"], resolve),
         // 工作票的申请
-        operationticket: resolve =>
-            require(["@/components/person/views/OperationTicket"], resolve),
+        workticket: resolve =>
+            require(["@/components/person/views/WorkTicket"], resolve),
         // 工作票执行总结
         worksummary: resolve =>
             require(["@/components/person/views/WorkSummary"], resolve),
         // 劳动防护用品发放记录
         articleRecord: resolve =>
             require(["@/components/person/views/ArticleRecord"], resolve),
-        // // 劳动防护用品需求调查
+        // 劳动防护用品需求调查
         articlesurvey: resolve =>
             require(["@/components/person/views/ArticleSurvey"], resolve),
         // 劳动防护用品评估
@@ -220,10 +219,10 @@ export default {
         // 劳动防护用品发放使用标准
         articleStandard: resolve =>
             require(["@/components/person/views/ArticleStandard"], resolve),
-        // // 带班计划
+        // 带班计划
         leaderplan: resolve =>
             require(["@/components/person/views/LeaderPlan"], resolve),
-        // // 带班交接记录
+        // 带班交接记录
         leaderrecord: resolve =>
             require(["@/components/person/views/LeaderRecord"], resolve),
         // 外来人员下井记录
@@ -232,7 +231,7 @@ export default {
         // 外来人员安全培训记录
         outsidertrain: resolve =>
             require(["@/components/person/views/OutsiderTrain"], resolve),
-        // // 地质灾害检查
+        // 地质灾害检查
         geologyCheck: resolve =>
             require(["@/components/person/views/GeologyCheck"], resolve),
         // 危险化学品库存
@@ -244,7 +243,7 @@ export default {
         // 交接班记录
         classMeettingInfo: resolve =>
             require(["@/components/person/views/ClassMeettingInfo"], resolve),
-        // // 安全标志申请界面
+        // 安全标志申请界面
         safetySignApply: resolve =>
             require(["@/components/person/views/SafetySignApply"], resolve),
         // 安全标志发放登记                 提交状态？

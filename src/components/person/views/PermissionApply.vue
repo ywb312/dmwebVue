@@ -9,15 +9,15 @@
                     :key="index"
                     @click="btnClick(item)"
                 >
-                    <!-- <div class="title">
-                        <h4>{{index+1+"."+item.title}}</h4>
-                        <p style="min-width:40px">
-                            <mt-badge size="small">{{item.moduleid}}</mt-badge>
-                        </p>
-                    </div>-->
+                    <div class="title">
+                        <h4>{{index+1+"."+item.apdanwei}}</h4>
+                    </div>
                     <div class="main">
                         <div>
-                            <p>许可任务: {{item.task}}</p>
+                            <p>作业名称: {{item.workname}}</p>
+                        </div>
+                        <div>
+                            <p>施工单位: {{item.sgdanwei}}</p>
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,12 @@ export default {
             this.rendering = [];
             this.$refs.view.cleraData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {
+            this.$store.commit("getSelectData", obj);
+            this.$router.push({
+                path: "/person/permissionDetail"
+            });
+        }
     },
     components: {
         SearchBox,

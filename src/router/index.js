@@ -194,6 +194,70 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //三项人员	特种人员详情
+		path: '/person/specialTypeDetail',
+		name: 'specialTypeDetail',
+		component: () => import('@/views/module/person/specialTypeDetail.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //三项人员	许可作业申请、审批详情
+		path: '/person/permissionDetail',
+		name: 'permissionDetail',
+		component: () => import('@/views/module/person/permissionDetail.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //三项人员	工作票详情
+		path: '/person/workTicketDetail',
+		name: 'workTicketDetail',
+		component: () => import('@/views/module/person/workTicketDetail.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //三项人员	劳动防护用品详情
+		path: '/person/articlDetail',
+		name: 'articlDetail',
+		component: () => import('@/views/module/person/articlDetail.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //三项人员	交接班记录详情
+		path: '/person/replaceDetail',
+		name: 'replaceDetail',
+		component: () => import('@/views/module/person/replaceDetail.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //三项人员	安全标志申请单详情
+		path: '/person/safetySignApplyDetail',
+		name: 'safetySignApplyDetail',
+		component: () => import('@/views/module/person/safetySignApplyDetail.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //三项人员	照明编号维护
+		path: '/person/illumineNumber',
+		name: 'illumineNumber',
+		component: () => import('@/views/module/person/illumineNumber.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //三项人员	灭火器编号维护
+		path: '/person/hydrantNumber',
+		name: 'hydrantNumber',
+		component: () => import('@/views/module/person/hydrantNumber.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
 	{ //方针目标
 		path: '/target',
 		name: 'target',

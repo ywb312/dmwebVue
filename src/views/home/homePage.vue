@@ -54,7 +54,7 @@ export default {
                 {
                     id: "person",
                     url: require("@/assets/img/ic_three_person.png"),
-                    title: "三项人员"
+                    title: "作业现场管理"
                 },
                 {
                     id: "target",

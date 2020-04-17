@@ -63,7 +63,7 @@ export default {
                             storage.loginname = res.result.loginname;
                             storage.rolename = res.result.rolename;
                             storage.roleLevel = _this.getDeptId(
-                                res.result.rolename
+                                res.result.deptname
                             );
                         }
                         _this.$router.push({
@@ -80,18 +80,22 @@ export default {
                 });
         },
         getDeptId(name) {
-            let roleLevel = "";
-            if (name == "班组级") {
+            let roleLevel = "1";
+            if (name.indexOf("班组") != -1) {
                 roleLevel = "1";
             } else if (
-                name == "车间级" ||
-                name == "工区级" ||
-                name == "科室级"
+                name.indexOf("车间") != -1 ||
+                name.indexOf("工区") != -1 ||
+                name.indexOf("科室") != -1
             ) {
                 roleLevel = "2";
-            } else if (name == "厂级") {
+            } else if (name.indexOf("厂级") != -1) {
                 roleLevel = "3";
-            } else if (name == "安环部") {
+            } else if (
+                name.indexOf("安全环保部") != -1 ||
+                name.indexOf("安环部") != -1 ||
+                name.indexOf("安全生产委员会") != -1
+            ) {
                 roleLevel = "4";
             }
             return roleLevel;

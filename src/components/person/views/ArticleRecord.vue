@@ -70,7 +70,15 @@ export default {
             this.rendering = [];
             this.$refs.view.cleraData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {
+            this.$store.commit("getSelectData", obj);
+            this.$router.push({
+                path: "/person/articlDetail",
+                query: {
+                    type: "1"
+                }
+            });
+        }
     },
     components: {
         SearchBox,

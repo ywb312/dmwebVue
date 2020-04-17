@@ -53,7 +53,15 @@ export default {
         getRendering(v) {
             this.rendering = v;
         },
-        btnClick(obj) {}
+        btnClick(obj) {
+            this.$store.commit("getSelectData", obj);
+            this.$router.push({
+                path: "/person/articlDetail",
+                query: {
+                    type: "2"
+                }
+            });
+        }
     },
     components: {
         ViewBox

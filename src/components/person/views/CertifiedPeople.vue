@@ -10,29 +10,17 @@
                     @click="btnClick(item)"
                 >
                     <div class="title">
-                        <h4>{{index+1+"."+item.title}}</h4>
-                        <p style="min-width:40px">
-                            <mt-badge size="small">{{item.moduleid}}</mt-badge>
-                        </p>
+                        <h4>{{index+1+"."+item.peopleName}}</h4>
                     </div>
                     <div class="main">
                         <div>
-                            <p>子栏目: {{item.remarks}}</p>
+                            <p>性别: {{item.peopleSex == "XB001" ?'男':'女'}}</p>
                         </div>
                         <div>
-                            <p>发布人: {{item.pubman}}</p>
+                            <p>服务部门: {{item.industry}}</p>
                         </div>
                         <div>
-                            <p>发布单位: {{item.pubdept}}</p>
-                        </div>
-                        <div>
-                            <p>发布时间: {{item.pubtime}}</p>
-                        </div>
-                        <div>
-                            <p>修改人: {{item.updateman}}</p>
-                        </div>
-                        <div>
-                            <p>修改时间: {{item.updatetime}}</p>
+                            <p>证件有效期: {{item.endDate}}</p>
                         </div>
                     </div>
                 </div>
@@ -70,7 +58,15 @@ export default {
             this.rendering = [];
             this.$refs.view.cleraData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {
+            this.$store.commit("getSelectData", obj);
+            this.$router.push({
+                path: "/person/specialTypeDetail",
+                query: {
+                    type: "2"
+                }
+            });
+        }
     },
     components: {
         SearchBox,

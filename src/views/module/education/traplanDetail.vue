@@ -1,5 +1,5 @@
 <template>
-    <div class="traplanDetail">
+    <div class="page">
         <mt-header title="培训计划详情" fixed>
             <router-link to slot="left">
                 <mt-button icon="back" @click="$router.back(-1)"></mt-button>

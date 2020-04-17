@@ -11,10 +11,10 @@ w<template>
                 >
                     <div class="main">
                         <div>
-                            <p>灭火器编号: {{item.cabinetcode}}</p>
+                            <p>灭火器箱编号: {{item.cabinetcode}}</p>
                         </div>
                         <div>
-                            <p>照明设施类型: {{item.cabinettype}}</p>
+                            <p>灭火器材类型: {{item.cabinettype}}</p>
                         </div>
                         <div>
                             <p>数量: {{item.cabinetcount}}</p>
@@ -61,7 +61,14 @@ export default {
             this.rendering = [];
             this.$refs.view.cleraData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {
+            this.$router.push({
+                path: "/person/hydrantNumber",
+                query: {
+                    filters: obj.cabinetid
+                }
+            });
+        }
     },
     components: {
         SearchBox,

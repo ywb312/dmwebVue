@@ -204,7 +204,7 @@ export default new Vuex.Store({
 						text: "工作票管理",
 						child: [{
 							text: "工作票的申请",
-							id: "operationticket"
+							id: "workticket"
 						}, {
 							text: "工作票执行总结",
 							id: "worksummary"

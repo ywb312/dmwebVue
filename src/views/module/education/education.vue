@@ -54,7 +54,7 @@ export default {
                     let i = id.charAt(id.length - 1);
                     if (!isNaN(i * 1)) {
                         item.components = id.substring(0, id.length - 1);
-                        item.element = i;
+                        item.element = "YS00" + i;
                     } else {
                         item.components = item.id;
                     }

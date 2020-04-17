@@ -61,7 +61,14 @@ export default {
             this.rendering = [];
             this.$refs.view.cleraData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {
+            this.$router.push({
+                path: "/person/illumineNumber",
+                query: {
+                    filters: obj.cabinetid
+                }
+            });
+        }
     },
     components: {
         SearchBox,

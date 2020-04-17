@@ -11,31 +11,16 @@
                 >
                     <div class="title">
                         <h4>{{index+1+"."+item.specialName}}</h4>
-                        <p style="min-width:40px">
-                            <mt-badge size="small">{{item.deptName}}</mt-badge>
-                        </p>
                     </div>
                     <div class="main">
                         <div>
-                            <p>性别: {{item.specialSex == "XB001" ?'男':'女'}} | 学历: {{item.education}}</p>
-                        </div>
-                        <div>
-                            <p>身份证号: {{item.idcard}}</p>
+                            <p>性别: {{item.specialSex == "XB001" ?'男':'女'}}</p>
                         </div>
                         <div>
                             <p>准操项目: {{item.project}}</p>
                         </div>
                         <div>
-                            <p>证件编号: {{item.specialIdCard}}</p>
-                        </div>
-                        <div>
-                            <p>发证日期: {{item.startDate}}</p>
-                        </div>
-                        <div>
-                            <p>复审日期: {{item.endDate}}</p>
-                        </div>
-                        <div>
-                            <p>备注: {{item.memo}}</p>
+                            <p>所属单位: {{item.deptName}}</p>
                         </div>
                     </div>
                 </div>
@@ -73,7 +58,15 @@ export default {
             this.rendering = [];
             this.$refs.view.cleraData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {
+            this.$store.commit("getSelectData", obj);
+            this.$router.push({
+                path: "/person/specialTypeDetail",
+                query:{
+                    type:"1"
+                }
+            });
+        }
     },
     components: {
         SearchBox,

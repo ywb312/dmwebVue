@@ -17,22 +17,16 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>班组长: {{item.classteamer}} | 主持人: {{item.hostman}}</p>
+                            <p>班组长: {{item.classteamer}}</p>
+                        </div>
+                        <div>
+                            <p>主持人: {{item.hostman}}</p>
                         </div>
                         <div>
                             <p>参会领导: {{item.leaders}}</p>
                         </div>
                         <div>
-                            <p>应到人数: {{item.shouldcomenumber}} | 实到人数: {{item.actuallycomenumber}}</p>
-                        </div>
-                        <div>
-                            <p>记录人: {{item.creater}}</p>
-                        </div>
-                        <div>
                             <p>记录时间: {{item.createtime}}</p>
-                            <p style="min-width:40px">
-                                <mt-badge size="small">{{item.issubmit=="0"?"未提交":"已提交"}}</mt-badge>
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -91,7 +85,12 @@ export default {
             this.rendering = [];
             this.$refs.view.cleraData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {
+            this.$store.commit("getSelectData", obj);
+            this.$router.push({
+                path: "/person/replaceDetail"
+            });
+        }
     },
     components: {
         SearchBox,

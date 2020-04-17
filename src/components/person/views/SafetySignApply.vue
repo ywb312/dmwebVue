@@ -74,7 +74,15 @@ export default {
             });
             this.rendering = arr;
         },
-        btnClick(obj) {}
+        btnClick(obj) {
+            this.$router.push({
+                path: "/person/safetySignApplyDetail",
+                query: {
+                    filters: obj.form_id,
+                    type: "1"
+                }
+            });
+        }
     },
     components: {
         ViewBox

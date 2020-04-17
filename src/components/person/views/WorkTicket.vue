@@ -44,7 +44,7 @@
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 export default {
-    name: "OperationTicket",
+    name: "WorkTicket",
     data() {
         return {
             // 渲染的数据
@@ -67,7 +67,14 @@ export default {
             this.rendering = [];
             this.$refs.view.cleraData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {
+            this.$router.push({
+                path: "/person/workTicketDetail",
+                query: {
+                    filters: obj.ticket_id
+                }
+            });
+        }
     },
     components: {
         SearchBox,
