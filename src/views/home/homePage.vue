@@ -85,7 +85,12 @@ export default {
                     id: "accident",
                     url: require("@/assets/img/ic_accident_manager.png"),
                     title: "事故管理"
-                }
+                },
+                {
+                    id: "laws",
+                    url: require("@/assets/img/ic_accident_manager.png"),
+                    title: "法律法规"
+                },
             ]
         };
     },

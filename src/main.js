@@ -23,7 +23,9 @@ import {
 	Tabbar,
 	TabbarItem,
 	Sticky,
-	Empty
+	Empty,
+	Tab,
+	Tabs
 } from 'vant';
 
 Vue.use(MintUI).use(Grid)
@@ -38,6 +40,8 @@ Vue.use(MintUI).use(Grid)
 	.use(TabbarItem)
 	.use(Empty)
 	.use(Sticky)
+	.use(Tab)
+	.use(Tabs)
 	.use(Divider);
 Vue.use(axios)
 Vue.prototype.$api = api;

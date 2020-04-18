@@ -13,9 +13,6 @@
     </div>
 </template>
 <script>
-import myPlan from "@/components/plan/myPlan.vue";
-import searchPlan from "@/components/plan/searchPlan.vue";
-import special from "@/components/plan/special.vue";
 export default {
     name: "plan",
     data() {
@@ -55,9 +52,10 @@ export default {
         }
     },
     components: {
-        myPlan,
-        searchPlan,
-        special
+        myPlan: resolve => require(["@/components/plan/myPlan.vue"], resolve),
+        searchPlan: resolve =>
+            require(["@/components/plan/searchPlan.vue"], resolve),
+        special: resolve => require(["@/components/plan/special.vue"], resolve)
     }
 };
 </script>

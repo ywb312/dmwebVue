@@ -4,7 +4,9 @@
     height: 50px;
     font-size: 20px;
 }
-
+.mint-header.is-fixed{
+    z-index: 100;
+}
 .mint-header-button {
     flex: none;
 }

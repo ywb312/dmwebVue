@@ -362,6 +362,22 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //法律法规
+		path: '/laws',
+		name: 'laws',
+		component: () => import('@/views/module/laws/laws.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //法律法规	法律法规识别记录清单
+		path: '/laws/lawsList',
+		name: 'lawsList',
+		component: () => import('@/views/module/laws/lawsList.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
 
 	// 工作台部分路由
 	{ //待办事项

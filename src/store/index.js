@@ -170,15 +170,15 @@ export default new Vuex.Store({
 						}, {
 							text: "持证上岗人员",
 							id: "certifiedPeople"
-						// }, {
-						// 	text: "特种作业人员培训计划",
-						// 	id: "traproject"
-						// }, {
-						// 	text: "特种作业人员培训记录",
-						// 	id: "trarecord"
-						// }, {
-						// 	text: "特种作业人员培训结果",
-						// 	id: "trasummary"
+							// }, {
+							// 	text: "特种作业人员培训计划",
+							// 	id: "traproject"
+							// }, {
+							// 	text: "特种作业人员培训记录",
+							// 	id: "trarecord"
+							// }, {
+							// 	text: "特种作业人员培训结果",
+							// 	id: "trasummary"
 						}]
 					},
 					{
@@ -411,6 +411,59 @@ export default new Vuex.Store({
 					}, {
 						text: "环境方针目标(安全)",
 						id: "envPolicyAims3"
+					}]
+				}],
+			},
+			{
+				title: "法律法规",
+				path: "laws",
+				page: [{
+					text: "法律法规库",
+					child: [{
+						text: "法律法规库(环保)",
+						id: "rules1",
+					}, {
+						text: "法律法规库(消防)",
+						id: "rules2",
+					}, {
+						text: "法律法规库(安全)",
+						id: "rules3",
+					}]
+				}, {
+					text: "法律法规识别",
+					child: [{
+						text: "法律法规识别(环保)",
+						id: "identify1",
+					}, {
+						text: "法律法规识别(消防)",
+						id: "identify2",
+					}, {
+						text: "法律法规识别(安全)",
+						id: "identify3",
+					}]
+				}, {
+					text: "符合性评价",
+					child: [{
+						text: "符合性评价(环保)",
+						id: "evalu1",
+					}, {
+						text: "符合性评价(消防)",
+						id: "evalu2",
+					}, {
+						text: "符合性评价(安全)",
+						id: "evalu3",
+					}]
+				}, {
+					text: "法律法规、标准清单",
+					child: [{
+						text: "法律法规、标准清单",
+						id: "standardList",
+					}]
+				}, {
+					text: "安全环保部制度清单",
+					child: [{
+						text: "安全环保部制度清单",
+						id: "systemList",
 					}]
 				}],
 			},
