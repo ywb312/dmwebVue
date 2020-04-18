@@ -378,6 +378,14 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //设备设施安全管理
+		path: '/facility',
+		name: 'facility',
+		component: () => import('@/views/module/facility/facility.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
 
 	// 工作台部分路由
 	{ //待办事项
