@@ -895,6 +895,170 @@ export default new Vuex.Store({
 						id: "devsafetysignsjc3",
 					}]
 				}]
+			},
+			{ //组织保障管理
+				title: "组织保障管理",
+				path: "team",
+				page: [{
+					text: "安全管理制度",
+					child: [{
+						text: "安全管理体系文件清单维护",
+						id: "filelist",
+					}, {
+						text: "安全管理体系制度文件审批",
+						id: "filecreate",
+					}, {
+						text: "安全生产责任制清单维护",
+						id: "safprodclist",
+					}, {
+						text: "安全生产责任制审批",
+						id: "safprodccreate",
+					}, {
+						text: "安全操作规程清单维护",
+						id: "safoperulelist",
+					}, {
+						text: "安全操作规程审批",
+						id: "safoperulcreate",
+					}, {
+						text: "作业指导书清单维护",
+						id: "opeinstrulist",
+					}, {
+						text: "作业指导书审批",
+						id: "opeinstrucreate",
+					}]
+				}, {
+					text: "企业证照",
+					child: [{
+						text: "企业证照",
+						id: "companyLicense",
+					}]
+				}, {
+					text: "安全管理机构信息",
+					child: [{
+						text: "安全生产委员会信息",
+						id: "orgsafetycommitteeinfo",
+					}, {
+						text: "环境委员会信息",
+						id: "orgenvironcommitteeinfo",
+					}, {
+						text: "消防管理机构信息",
+						id: "orgfirecontrolinfo",
+					}]
+				}, {
+					text: "特殊职位人员信息",
+					child: [{
+						text: "主要负责人证照",
+						id: "peoplephoto",
+					}, {
+						text: "安全员资质",
+						id: "secoffqua",
+					}, {
+						text: "员工代表",
+						id: "staffrep",
+					}, {
+						text: "事故调查员",
+						id: "accnve",
+					}, {
+						text: "职业卫生管理员",
+						id: "occhealadmin",
+					}]
+				}, {
+					text: "主要承包商档案",
+					child: [{
+						text: "承包商资质维护",
+						id: "orgcontractor",
+					}, {
+						text: "承包商安全生产表现评估",
+						id: "orgcontractorCon",
+					}, {
+						text: "承包商资质查看",
+						id: "orgcontractorfile",
+					}]
+				}, {
+					text: "员工档案",
+					child: [{
+						text: "综合档案",
+						id: "colligate",
+					}, {
+						text: "安全资格证档案",
+						id: "qualifications",
+					}, {
+						text: "职业健康档案",
+						id: "healthexamperiod",
+					}, {
+						text: "违章档案",
+						id: "peccancy",
+					}, {
+						text: "工伤职业病档案",
+						id: "workinjury",
+					}]
+				}, {
+					text: "安全计划",
+					child: [{
+						text: "安全计划发布",
+						id: "publish",
+					}, {
+						text: "安全计划完成情况评估",
+						id: "evaluate",
+					}, {
+						text: "安全计划完成情况反馈",
+						id: "feedback",
+					}]
+				}, {
+					text: "安全会议",
+					child: [{
+						text: "会议纪要发布",
+						id: "meetinginfo",
+					}, {
+						text: "会议提出的问题解决措施的跟进",
+						id: "resolvemeasure",
+					}]
+				}, {
+					text: "安全合理化建议",
+					child: [{
+						text: "安全合理化建议的收集",
+						id: "collect",
+					}, {
+						text: "安全合理化建议的评审奖励",
+						id: "rewards",
+					}]
+				}, {
+					text: "尾矿库信息",
+					child: [{
+						text: "尾矿库建设信息",
+						id: "tailingjs",
+					}, {
+						text: "尾矿库安全评价信息",
+						id: "tailingevaluate",
+					}]
+				}, {
+					text: "系统管理评审",
+					child: [{
+						text: "管理评审计划",
+						id: "systemjudgeplan",
+					}, {
+						text: "管理评审会议记录",
+						id: "systemjudgemeeting",
+					}, {
+						text: "管理评审报告",
+						id: "systemjudgereport",
+					}]
+				}, {
+					text: "相关方管理",
+					child: [{
+						text: "相关方维护",
+						id: "stakeholder",
+					}, {
+						text: "相关方项目部月份从业人员登记",
+						id: "stakeholderMonth",
+					}, {
+						text: "相关方项目部人员统计表",
+						id: "statisticsPeople",
+					}, {
+						text: "相关方单位情况一览表（矿业公司）",
+						id: "stakeholderInfo",
+					}]
+				}]
 			}
 		],
 		// 危害 下拉框配置

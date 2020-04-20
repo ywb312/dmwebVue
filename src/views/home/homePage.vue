@@ -95,6 +95,11 @@ export default {
                     id: "facility",
                     url: require("@/assets/img/ic_accident_manager.png"),
                     title: "设备设施管理"
+                },
+                {
+                    id: "team",
+                    url: require("@/assets/img/ic_accident_manager.png"),
+                    title: "组织保障管理"
                 }
             ]
         };

@@ -11,13 +11,13 @@
                     <div class="title">
                         <h4>{{index+1+"."+item.cpname}}</h4>
                         <p style="min-width:40px">
-                            <mt-badge size="small">{{item.checktype}}</mt-badge>
+                            <van-tag round type="primary">{{item.checktype}}</van-tag>
                         </p>
                     </div>
                     <div class="main">
                         <div>
                             <span>检查截止时间: {{item.checkdeadline}}</span>
-                            <mt-badge size="small">{{item.planstatus}}</mt-badge>
+                            <van-tag round type="primary">{{item.planstatus}}</van-tag>
                         </div>
                     </div>
                 </div>

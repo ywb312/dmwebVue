@@ -1,37 +1,27 @@
 <template>
     <div>
+        <SearchBox placeholder="请输入承包商名字搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
-                <div
-                    class="wrapper"
-                    v-for="(item,index) in rendering"
-                    :key="index"
-                    @click="btnClick(item)"
-                >
+                <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                     <div class="title">
-                        <h4>{{index+1+"."+item.title}}</h4>
-                        <p style="min-width:40px">
-                            <van-tag round type="primary">{{item.moduleid}}</van-tag>
-                        </p>
+                        <h4>{{index+1+"."+item.contractorname}}</h4>
                     </div>
                     <div class="main">
                         <div>
-                            <span>子栏目: {{item.remarks}}</span>
+                            <p>创建时间: {{item.createtime}}</p>
                         </div>
                         <div>
-                            <span>发布人: {{item.pubman}}</span>
+                            <p>创建人:{{item.createpeople}}</p>
                         </div>
                         <div>
-                            <span>发布单位: {{item.pubdept}}</span>
+                            <p>修改时间:{{item.edittime}}</p>
                         </div>
                         <div>
-                            <span>发布时间: {{item.pubtime}}</span>
+                            <p>修改人:{{item.editpeople}}</p>
                         </div>
                         <div>
-                            <span>修改人: {{item.updateman}}</span>
-                        </div>
-                        <div>
-                            <span>修改时间: {{item.updatetime}}</span>
+                            <p>总分:{{item.totalscore}}</p>
                         </div>
                     </div>
                 </div>
@@ -43,16 +33,16 @@
     </div>
 </template>
 <script>
-// 这是基本渲染功能的组件
+import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 export default {
-    name: "PubContext",
+    name: "ContractorFile",
     data() {
         return {
             // 渲染的数据
             rendering: [],
             postData: {
-                url: "biz/pub/pubcontext/publist.action",
+                url: "biz/operate/OrgcontractorConz/list.action",
                 obj: {}
             }
         };
@@ -60,12 +50,18 @@ export default {
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
-        getRendering(v) {
-            this.rendering = v;
+        getRendering(arr) {
+            this.rendering = arr;
         },
-        btnClick(obj) {}
+        // 搜索框的回调
+        searchBack(str) {
+            this.postData.obj["bean.param"] = str;
+            this.rendering = [];
+            this.$refs.view.cleraData();
+        }
     },
     components: {
+        SearchBox,
         ViewBox
     }
 };

@@ -150,8 +150,14 @@ export default {
     },
     components: {
         // 设备、设施、器具台帐管理
-        devlist: resolve =>
-            require(["@/components/facility/views/Devlist"], resolve)
+        devlist: resolve =>//无扩展信息
+            require(["@/components/facility/views/Devlist"], resolve),
+        // 设备、设施、器具购置与租赁
+        devpurchase: resolve =>
+            require(["@/components/facility/views/DevPurchase"], resolve),
+        // 设备、设施、器具检验检测记录
+        devexpair: resolve =>
+            require(["@/components/facility/views/DevExpair"], resolve),
     }
 };
 </script>

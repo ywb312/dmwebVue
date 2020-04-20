@@ -43,8 +43,8 @@
                     <div class="title">
                         <h4>{{index+1+"."+item.cpname}}</h4>
                         <p style=" min-width:85px;">
-                            <mt-badge size="small">{{item.checktype}}</mt-badge>
-                            <mt-badge size="small">{{item.planstatus}}</mt-badge>
+                            <van-tag round type="primary">{{item.checktype}}</van-tag>
+                            <van-tag round type="primary">{{item.planstatus}}</van-tag>
                         </p>
                     </div>
                     <div class="main">

@@ -18,20 +18,20 @@
                     <div class="title">
                         <h4>{{index+1+'.'+item.name}}</h4>
                         <p style="min-width:40px">
-                            <mt-badge size="normal">{{item.fxtypeText}}</mt-badge>
+                            <van-tag round type="primary">{{item.fxtypeText}}</van-tag>
                         </p>
                     </div>
                     <div class="main">
                         <div>
                             <span>1.{{item.wname}}</span>
                             <span>
-                                <mt-badge size="normal">{{item.stateText}}</mt-badge>
+                                <van-tag round type="primary">{{item.stateText}}</van-tag>
                             </span>
                         </div>
                         <div v-for="(n,m) in item.child" :key="m">
                             <span>{{m+2+"."+n.wname}}</span>
                             <span>
-                                <mt-badge size="normal">{{item.stateText}}</mt-badge>
+                                <van-tag round type="primary">{{item.stateText}}</van-tag>
                             </span>
                         </div>
                     </div>

@@ -1,30 +1,36 @@
 <template>
     <div>
-        <SearchBox placeholder="请输入内容搜索" @callback="searchBack"></SearchBox>
+        <SearchBox placeholder="请输入单位名称搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                     <div class="title">
-                        <h4>{{index+1+"."+item.objname}}</h4>
+                        <h4>{{index+1+"."+item.companyName}}</h4>
                     </div>
                     <div class="main">
                         <div>
-                            <p>{{item.year+"年度"}}</p>
+                            <p>主要负责人: {{item.legalPerson}}</p>
+                        </div>
+                        <div>
+                            <p>单位地址: {{item.companyAddress}}</p>
+                        </div>
+                        <div>
+                            <p>经济类型: {{item.companyType}}</p>
+                        </div>
+                        <div>
+                            <p>许可范围:{{item.permission}}</p>
+                        </div>
+                        <div>
+                            <p>有效始期:{{item.startDate}}</p>
+                        </div>
+                        <div>
+                            <p>有效至期:{{item.endDate}}</p>
+                        </div>
+                        <div v-for="(m,n) in item.attach" :key="m">
                             <p>
-                                <van-tag round type="primary">{{item.dept}}</van-tag>
+                                文件:
+                                <a :href="m">{{item.attachname[n]}}</a>
                             </p>
-                        </div>
-                        <div>
-                            <p>目标指标: {{item.aim}}</p>
-                        </div>
-                        <div>
-                            <p>目标措施: {{item.measures}}</p>
-                        </div>
-                        <div>
-                            <p>进度安排: {{item.schedule}}</p>
-                        </div>
-                        <div>
-                            <p>投资预算: {{item.estimate+"万元"}}</p>
                         </div>
                     </div>
                 </div>
@@ -36,40 +42,40 @@
     </div>
 </template>
 <script>
-// 这是基本渲染功能的组件 公用
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 export default {
-    name: "thinobj",
+    name: "CompanyLicense",
     data() {
         return {
+            // 渲染的数据
             rendering: [],
             postData: {
-                url: "biz/operate/thinobj/list.action",
-                obj: {
-                    "bean.param": "",
-                    "bean.element": this.pageData.element
-                }
+                url: "biz/create/companyLicense/list.action",
+                obj: {}
             }
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
-        getRendering(v) {
-            this.rendering = v;
+        getRendering(arr) {
+            arr.forEach(item => {
+                if (item.attach) {
+                    item.attach = item.attach.split(",");
+                    item.attachname = item.attachname.split(",");
+                } else {
+                    item.attach = [];
+                    item.attachname = [];
+                }
+            });
+            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {
             this.postData.obj["bean.param"] = str;
             this.rendering = [];
             this.$refs.view.cleraData();
-        },
-        btnClick(obj) {
-            // this.$store.commit("getSelectData", obj);
-            // this.$router.push({
-            //     path: "/education/traplanDetail"
-            // });
         }
     },
     components: {

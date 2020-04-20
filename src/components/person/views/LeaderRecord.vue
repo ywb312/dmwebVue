@@ -12,7 +12,7 @@
                     <div class="title">
                         <h4>{{index+1+"."+item.classteamname}}</h4>
                         <p style="min-width:40px">
-                            <mt-badge size="small">{{item.classesText}}</mt-badge>
+                            <van-tag round type="primary">{{item.classesText}}</van-tag>
                         </p>
                     </div>
                     <div class="main">

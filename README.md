@@ -2,7 +2,7 @@
     将本地vue服务端口/dmweb代理为localhost:8080/dmweb(后台服务端口)  可访问localhost:8080下的接口 不会发生跨域问题
     将api的http.js中的baseURL "dmweb"替换为"localhost:8080/dmweb"
 
-## module为最初的12个模块详情页,每个子页面详情都在其data中(还包括页面列表的格式和获取列表的url)
+## module为模块详情页,每个子页面详情都在其data中(还包括页面列表的格式和获取列表的url)
     通知公告 -- 'inform'
 	隐患管理 -- 'danger'
 	计划管理 -- 'plan'
@@ -63,7 +63,7 @@ toTree(data) {
 ## 遗留问题
 检查记录详情planDetail 落实条件
 计划管理 我的计划
-danger(隐患管理)
+danger(隐患管理)FileApprove
     操作弹出框显示条件 审批状态
 inform(通知公告)
     详情
@@ -78,6 +78,16 @@ plan(我的计划)
 technology(生产工艺)
 accident 事故管理
     详情跳转
+target  方针目标 target.vue文件
+emergency 应急管理    
+    应急资源登记   报废状态怎么判断
+    应急演练记录    详情页评价状态未知
+team    组织保障管理
+    FileApprove 审批无数据
+    MeetingInfo 会议纪要发布 接口问题
+
+
+
 
 ## 上线注意事项
     1.App.vue create注释打开 解决vuex刷新问题

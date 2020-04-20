@@ -1,6 +1,6 @@
 <template>
     <div>
-        <SearchBox placeholder="请输入许可任务搜索" @callback="searchBack"></SearchBox>
+        <SearchBox placeholder="请输入员工姓名,工号,单位,工种搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div
@@ -9,30 +9,33 @@
                     :key="index"
                     @click="btnClick(item)"
                 >
-                    <!-- <div class="title">
-                        <h4>{{index+1+"."+item.title}}</h4>
-                        <p style="min-width:40px">
-                            <van-tag round type="primary">{{item.moduleid}}</van-tag>
-                        </p>
-                    </div>-->
                     <div class="main">
                         <div>
-                            <p>许可任务: {{item.task}}</p>
+                            <p>姓名: {{item.staffname}}</p>
                         </div>
                         <div>
-                            <p>许可范围: {{item.scope}}</p>
+                            <p>性别: {{item.sexText}}</p>
                         </div>
                         <div>
-                            <p>批准许可人: {{item.approver}}</p>
+                            <p>身份证号: {{item.idcard}}</p>
                         </div>
                         <div>
-                            <p>许可措施: {{item.measure}}</p>
+                            <p>工号:{{item.staffcode}}</p>
                         </div>
                         <div>
-                            <p>分配责任人: {{item.duty}}</p>
+                            <p>单位:{{item.deptname}}</p>
                         </div>
                         <div>
-                            <p>备注: {{item.memo}}</p>
+                            <p>工种:{{item.station}}</p>
+                        </div>
+                        <div>
+                            <p>总工龄:{{item.workingAge}}</p>
+                        </div>
+                        <div>
+                            <p>联系方式:{{item.relaphone}}</p>
+                        </div>
+                        <div>
+                            <p>体检周期:{{item.examperiod}}</p>
                         </div>
                     </div>
                 </div>
@@ -47,13 +50,13 @@
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 export default {
-    name: "PermissionInfo",
+    name: "HealthExamPeriod",
     data() {
         return {
             // 渲染的数据
             rendering: [],
             postData: {
-                url: "biz/create/permissioninfo/list.action",
+                url: "biz/sm/staff/periodlist.action",
                 obj: {}
             }
         };
@@ -61,8 +64,15 @@ export default {
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
-        getRendering(v) {
-            this.rendering = v;
+        getRendering(arr) {
+            arr.forEach(element => {
+                if (element.sex == "XB001") {
+                    element.sexText = "男";
+                } else if (element.sex == "XB002") {
+                    element.sexText = "女";
+                }
+            });
+            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {
@@ -70,7 +80,14 @@ export default {
             this.rendering = [];
             this.$refs.view.cleraData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {
+            this.$router.push({
+                path: "/team/healthDetail",
+                query: {
+                    filters: obj.idcard
+                }
+            });
+        }
     },
     components: {
         SearchBox,

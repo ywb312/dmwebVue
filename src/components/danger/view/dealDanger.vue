@@ -22,7 +22,7 @@
                     <div class="title">
                         <h4>{{index+1+'.'+item.crname}}</h4>
                         <p style="min-width:40px">
-                            <mt-badge size="small">{{item.stateText}}</mt-badge>
+                            <van-tag round type="primary">{{item.stateText}}</van-tag>
                         </p>
                     </div>
                     <div class="main">

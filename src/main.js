@@ -15,6 +15,7 @@ import {
 	GridItem,
 	Image,
 	Toast,
+	Tag,
 	Collapse,
 	CollapseItem,
 	Cell,
@@ -32,6 +33,7 @@ Vue.use(MintUI).use(Grid)
 	.use(GridItem)
 	.use(Image)
 	.use(Toast)
+	.use(Tag)
 	.use(Collapse)
 	.use(CollapseItem)
 	.use(Cell)

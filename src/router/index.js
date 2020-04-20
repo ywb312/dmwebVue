@@ -386,6 +386,30 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //组织保障管理
+		path: '/team',
+		name: 'team',
+		component: () => import('@/views/module/team/team.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //组织保障管理	员工综合档案详情
+		path: '/team/colligateDetail',
+		name: 'colligateDetail',
+		component: () => import('@/views/module/team/colligateDetail.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //组织保障管理	个人体检档案
+		path: '/team/healthDetail',
+		name: 'healthDetail',
+		component: () => import('@/views/module/team/healthDetail.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
 
 	// 工作台部分路由
 	{ //待办事项

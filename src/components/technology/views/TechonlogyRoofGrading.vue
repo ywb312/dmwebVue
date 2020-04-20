@@ -7,7 +7,7 @@
                     <div class="title">
                         <h4>{{index+1+"."+item.pname}}</h4>
                         <p>
-                            <mt-badge size="small">{{item.nums=="0"?"未评估":"已评估"}}</mt-badge>
+                            <van-tag round type="primary">{{item.nums=="0"?"未评估":"已评估"}}</van-tag>
                         </p>
                     </div>
                     <div class="main">

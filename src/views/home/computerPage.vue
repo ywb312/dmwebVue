@@ -6,7 +6,7 @@
         </div>
         <mt-cell title="待办事项" is-link to="/backlog">
             <img slot="icon" src="@/assets/img/wb_todo.png" width="20" height="20" />
-            <mt-badge v-if="backlog.records>0" type="error" size="normal">{{backlog.records}}</mt-badge>
+            <van-tag v-if="backlog.records>0" type="danger">{{backlog.records}}</van-tag>
         </mt-cell>
         <mt-cell title="已办事项" is-link to="/finished">
             <img slot="icon" src="@/assets/img/wb_done.png" width="20" height="20" />
