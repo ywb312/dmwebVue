@@ -410,6 +410,30 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //组织保障管理	尾矿库建设详情
+		path: '/team/tailingDetail',
+		name: 'tailingDetail',
+		component: () => import('@/views/module/team/tailingDetail.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //组织保障管理	相关方项目部月份从业人员登记子表
+		path: '/team/peopleDetail',
+		name: 'peopleDetail',
+		component: () => import('@/views/module/team/peopleDetail.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //组织保障管理	相关方项目部人员统计子表
+		path: '/team/statistics',
+		name: 'statistics',
+		component: () => import('@/views/module/team/statistics.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
 
 	// 工作台部分路由
 	{ //待办事项

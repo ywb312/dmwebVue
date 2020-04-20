@@ -68,57 +68,57 @@ export default {
                 {
                     text: "安全生产委员会信息",
                     id: "orgsafetycommitteeinfo",
-                    components:"committeeInfo"
+                    components: "committeeInfo"
                 },
                 {
                     text: "环境委员会信息",
                     id: "orgenvironcommitteeinfo",
-                    components:"committeeInfo"
+                    components: "committeeInfo"
                 },
                 {
                     text: "消防管理机构信息",
                     id: "orgfirecontrolinfo",
-                    components:"committeeInfo"
+                    components: "committeeInfo"
                 },
                 {
                     text: "主要负责人证照",
                     id: "peoplephoto",
-                    components:"specialPeople"
+                    components: "specialPeople"
                 },
                 {
                     text: "安全员资质",
                     id: "secoffqua",
-                    components:"specialPeople"
+                    components: "specialPeople"
                 },
                 {
                     text: "员工代表",
                     id: "staffrep",
-                    components:"specialPeople"
+                    components: "specialPeople"
                 },
                 {
                     text: "事故调查员",
                     id: "accnve",
-                    components:"specialPeople"
+                    components: "specialPeople"
                 },
                 {
                     text: "职业卫生管理员",
                     id: "occhealadmin",
-                    components:"specialPeople"
+                    components: "specialPeople"
                 },
                 {
                     text: "承包商资质维护",
                     id: "orgcontractor",
-                    components:"contractor"
+                    components: "contractor"
                 },
                 {
                     text: "承包商安全生产表现评估",
                     id: "orgcontractorCon",
-                    components:"contractorCon"
+                    components: "contractorCon"
                 },
                 {
                     text: "承包商资质查看",
                     id: "orgcontractorfile",
-                    components:"contractorFile"
+                    components: "contractorFile"
                 },
                 {
                     text: "综合档案",
@@ -238,47 +238,98 @@ export default {
         committeeInfo: resolve =>
             require(["@/components/team/views/CommitteeInfo"], resolve),
         // 特殊职务人员信息
-        specialPeople:resolve =>
+        specialPeople: resolve =>
             require(["@/components/team/views/SpecialPeople"], resolve),
         // 承包商资质维护
-        contractor:resolve =>
+        contractor: resolve =>
             require(["@/components/team/views/contractor/Contractor"], resolve),
         // 承包商安全生产表现评估
-        contractorCon:resolve =>
-            require(["@/components/team/views/contractor/ContractorCon"], resolve),
+        contractorCon: resolve =>
+            require([
+                "@/components/team/views/contractor/ContractorCon"
+            ], resolve),
         // 承包商资质查看
-        contractorFile:resolve =>
-            require(["@/components/team/views/contractor/ContractorFile"], resolve),
+        contractorFile: resolve =>
+            require([
+                "@/components/team/views/contractor/ContractorFile"
+            ], resolve),
         // 综合档案
-        colligate:resolve =>
+        colligate: resolve =>
             require(["@/components/team/views/staff/Colligate"], resolve),
         // 安全资格证档案
-        qualifications:resolve =>
+        qualifications: resolve =>
             require(["@/components/team/views/staff/Qualifications"], resolve),
         // 职业健康档案
-        healthexamperiod:resolve =>
-            require(["@/components/team/views/staff/HealthExamPeriod"], resolve),
+        healthexamperiod: resolve =>
+            require([
+                "@/components/team/views/staff/HealthExamPeriod"
+            ], resolve),
         // 违章档案
-        peccancy:resolve =>
+        peccancy: resolve =>
             require(["@/components/team/views/staff/Peccancy"], resolve),
         // 工伤职业病档案
-        workinjury:resolve =>
+        workinjury: resolve =>
             require(["@/components/team/views/staff/WorkInjury"], resolve),
         // 安全计划发布
-        publish:resolve =>
+        publish: resolve =>
             require(["@/components/team/views/safe/Publish"], resolve),
         // 安全计划完成情况评估
-        evaluate:resolve =>
+        evaluate: resolve =>
             require(["@/components/team/views/safe/Evaluate"], resolve),
         // 安全计划完成情况反馈
-        feedback:resolve =>
+        feedback: resolve =>
             require(["@/components/team/views/safe/Feedback"], resolve),
         // 会议纪要发布
-        meetinginfo:resolve =>
+        meetinginfo: resolve =>
             require(["@/components/team/views/safe/MeetingInfo"], resolve),
         // 会议提出的问题解决措施的跟进
-        resolvemeasure:resolve =>
+        resolvemeasure: resolve =>
             require(["@/components/team/views/safe/ResolveMeasure"], resolve),
+        // 安全合理化建议的收集
+        collect: resolve =>
+            require(["@/components/team/views/safe/Collect"], resolve),
+        // 安全合理化建议的评审奖励
+        rewards: resolve =>
+            require(["@/components/team/views/safe/Rewards"], resolve),
+        // 尾矿库建设信息
+        tailingjs: resolve =>
+            require(["@/components/team/views/tailing/TailingJs"], resolve),
+        // 尾矿库安全评价信息
+        tailingevaluate: resolve =>
+            require([
+                "@/components/team/views/tailing/TailingEvaluate"
+            ], resolve),
+        // 管理评审计划
+        systemjudgeplan: resolve =>
+            require([
+                "@/components/team/views/manage/SystemJudgePlan"
+            ], resolve),
+        // 管理评审会议记录
+        systemjudgemeeting: resolve =>
+            require([
+                "@/components/team/views/manage/SystemJudgeMeeting"
+            ], resolve),
+        // 管理评审报告
+        systemjudgereport: resolve =>
+            require([
+                "@/components/team/views/manage/SystemJudgeReport"
+            ], resolve),
+        // 相关方维护
+        stakeholder: resolve =>
+            require(["@/components/team/views/relate/Stakeholder"], resolve),
+        // 相关方项目部月份从业人员登记
+        stakeholderMonth: resolve =>
+            require([
+                "@/components/team/views/relate/StakeholderMonth"
+            ], resolve),
+        // 相关方项目部人员统计表
+        statisticsPeople: resolve =>
+            require([
+                "@/components/team/views/relate/StatisticsPeople"
+            ], resolve),
+        // 相关方单位情况一览表（矿业公司）
+        stakeholderInfo: resolve =>
+            require(["@/components/team/views/relate/StakeholderInfo"], resolve)
     }
 };
 </script>
