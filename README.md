@@ -8,13 +8,17 @@
 	计划管理 -- 'plan'
 	提醒预警 -- 'remind'
 	风险管理 -- 'risk'
-	三项人员 -- 'person'
+	作业现场 -- 'person'
 	方针目标 -- 'target'
 	教育培训 -- 'education'
 	工艺管理 -- 'technology'
 	环保管理 -- 'environment'
 	应急管理 -- 'emergency'
 	事故管理 -- 'accident'
+	法律法规 -- 'laws'
+	设备设施 -- 'facility'
+	组织保障 -- 'team'
+	职业卫生 -- 'health'
     如需修改功能的名称,功能在store/index.js和module其功能名文件夹 功能文件下同时修改
 
 ## 开发的通用设置
@@ -86,6 +90,7 @@ team    组织保障管理
     FileApprove 审批无数据
     MeetingInfo 会议纪要发布 接口问题
 
+health后用弹窗来查看详情
 
 
 

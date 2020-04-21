@@ -19,7 +19,6 @@
     </div>
 </template>
 <script>
-import { Toast } from "mint-ui";
 import datePick from "@/components/pub/datePick";
 import uploadimg from "@/components/pub/uploadimg";
 export default {
@@ -58,15 +57,15 @@ export default {
             this.$api.danger.completenodyTask(_self.postData).then(res => {
                 res = eval("(" + res + ")");
                 if (res.success) {
-                    let instance = Toast({
+                    let instance = this.$toast({
                         message: res.id
                     });
                     setTimeout(() => {
-                        instance.close();
+                        instance.clear();
                         _self.$router.back(-1);
                     }, 1000);
                 } else {
-                    Toast({
+                    this.$toast({
                         message: res.errormessage,
                         duration: 2000
                     });

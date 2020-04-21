@@ -19,7 +19,6 @@
 <script>
 import tree from "@/components/pub/tree";
 import datePick from "@/components/pub/datePick";
-import { Toast } from "mint-ui";
 export default {
     name: "assign",
     data() {
@@ -42,28 +41,16 @@ export default {
         },
         update() {
             if (this.zgzrdw == "") {
-                Toast({
-                    message: "请选择整改责任单位",
-                    duration: 2000
-                });
+                this.$toast("请选择整改责任单位");
                 return;
             } else if (this.zgzlyq == "") {
-                Toast({
-                    message: "请输入整改治理要求",
-                    duration: 2000
-                });
+                this.$toast("请输入整改治理要求");
                 return;
             } else if (this.tbr == "") {
-                Toast({
-                    message: "请输入填表人员名称",
-                    duration: 2000
-                });
+                this.$toast("请输入填表人员名称");
                 return;
             } else if (this.zgdate == "") {
-                Toast({
-                    message: "请选择整改截止时间",
-                    duration: 2000
-                });
+                this.$toast("请选择整改截止时间");
                 return;
             }
             let _self = this;
@@ -80,11 +67,9 @@ export default {
             };
             // 上传接口
             this.$api.danger.doexp(obj).then(function() {
-                let instance = Toast({
-                    message: "操作成功"
-                });
+                let instance = this.$toast("操作成功");
                 setTimeout(() => {
-                    instance.close();
+                    instance.clear();
                     _self.$router.back(-1);
                 }, 1000);
             });

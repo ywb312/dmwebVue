@@ -64,6 +64,28 @@
     color: #2585cf;
 }
 
+/* vantUi 弹出框 */
+.popup {
+    width: 300px;
+    height: 520px;
+    box-sizing: border-box;
+    padding: 8px;
+    overflow: auto;
+}
+
+.popup div {
+    padding: 4px 0;
+}
+
+.popupTitle {
+    text-align: center;
+    font-size: 20px;
+    padding: 12px 0;
+    color: white;
+    background-color: #2585cf;
+}
+
+/* mintUI弹出框 */
 .popupItem {
     width: 270px;
     padding: 10px;

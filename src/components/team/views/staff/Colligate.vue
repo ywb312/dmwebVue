@@ -125,11 +125,7 @@ export default {
     methods: {
         getRendering(arr) {
             arr.forEach(element => {
-                if (element.sex == "XB001") {
-                    element.sexText = "男";
-                } else if (element.sex == "XB002") {
-                    element.sexText = "女";
-                }
+                this.$common.setSex(element);
                 this.$common.code2Text(element, "nation", this.mzArr);
                 this.$common.code2Text(element, "education", this.xlArr);
             });

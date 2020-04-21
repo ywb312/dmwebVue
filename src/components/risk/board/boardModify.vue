@@ -13,7 +13,6 @@
     </div>
 </template>
 <script>
-import { Toast } from "mint-ui";
 export default {
     name: "boardModify",
     data() {
@@ -43,10 +42,9 @@ export default {
         postData(obj) {
             for (const key in this.getData) {
                 if (this.getData[key] == "") {
-                    Toast({
+                    this.$toast({
                         message: "请把信息补充完整",
                         position: "bottom",
-                        duration: 2000
                     });
                     return;
                 }

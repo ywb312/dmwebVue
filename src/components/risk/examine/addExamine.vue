@@ -13,7 +13,6 @@
 <script>
 import picker from "@/components/pub/picker.vue";
 import tree from "@/components/pub/tree.vue";
-import { Toast } from "mint-ui";
 export default {
     name: "addExamine",
     data() {
@@ -71,10 +70,9 @@ export default {
         postData(obj) {
             for (const key in this.getData) {
                 if (this.getData[key] == "") {
-                    Toast({
+                    this.$toast({
                         message: "请把信息补充完整",
                         position: "bottom",
-                        duration: 2000
                     });
                     return;
                 }

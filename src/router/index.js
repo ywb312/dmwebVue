@@ -434,6 +434,38 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //职业卫生
+		path: '/health',
+		name: 'health',
+		component: () => import('@/views/module/health/health.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //职业卫生	项目部员工信息登记表子表
+		path: '/health/projectStaff',
+		name: 'projectStaff',
+		component: () => import('@/views/module/health/projectStaff.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //职业卫生	体检计划子表
+		path: '/health/healthPlan',
+		name: 'healthPlan',
+		component: () => import('@/views/module/health/healthPlan.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //职业卫生	体检上报子表
+		path: '/health/healthReport',
+		name: 'healthReport',
+		component: () => import('@/views/module/health/healthReport.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
 
 	// 工作台部分路由
 	{ //待办事项

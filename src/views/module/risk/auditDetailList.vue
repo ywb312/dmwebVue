@@ -66,7 +66,7 @@
 </template>
 <script>
 // 这是基本渲染功能的组件 公用
-import { Popup, Loadmore, Toast } from "mint-ui";
+import { Popup, Loadmore } from "mint-ui";
 // 评价框
 import companyApprove from "@/components/risk/company/companyApprove";
 export default {
@@ -191,10 +191,9 @@ export default {
         postSuccess() {
             this.popshow = false;
             this.cleraData();
-            Toast({
+            this.$toast({
                 message: "操作成功",
                 position: "bottom",
-                duration: 2000
             });
         },
         // 设置返还参数

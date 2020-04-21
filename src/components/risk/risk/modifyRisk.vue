@@ -12,7 +12,6 @@
 </template>
 <script>
 import picker from "@/components/pub/picker.vue";
-import { Toast } from "mint-ui";
 export default {
     name: "modifyRisk",
     data() {
@@ -38,18 +37,16 @@ export default {
     methods: {
         postData(obj) {
             if (this.getData.name == "") {
-                Toast({
+                this.$toast({
                     message: "请输入风险名称",
                     position: "bottom",
-                    duration: 2000
                 });
                 return;
             }
             if (this.getData.fxtype == "") {
-                Toast({
+                this.$toast({
                     message: "请选择风险类型",
                     position: "bottom",
-                    duration: 2000
                 });
                 return;
             }

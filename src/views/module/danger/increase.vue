@@ -26,7 +26,6 @@
     </div>
 </template>
 <script>
-import { Toast } from "mint-ui";
 import pick from "@/components/pub/picker";
 import uploadimg from "@/components/pub/uploadimg";
 export default {
@@ -109,11 +108,9 @@ export default {
             };
             // 上传接口
             this.$api.danger.doAddSaveSingle(obj).then(function() {
-                let instance = Toast({
-                    message: "操作成功"
-                });
+                let instance = this.$toast("操作成功");
                 setTimeout(() => {
-                    instance.close();
+                    instance.clear();
                     _self.$router.back(-1);
                 }, 1000);
             });
@@ -127,7 +124,6 @@ export default {
     components: {
         pick,
         uploadimg,
-        Toast
     }
 };
 </script>

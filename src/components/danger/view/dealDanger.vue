@@ -177,11 +177,7 @@ export default {
             }
             this.$api.danger.doexp(obj).then(res => {
                 if (res.message) {
-                    Toast({
-                        message: res.message,
-                        position: "bottom",
-                        duration: 4000
-                    });
+                    this.$toast(res.message);
                 }
             });
         },

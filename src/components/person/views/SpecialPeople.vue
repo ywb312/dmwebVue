@@ -14,7 +14,7 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>性别: {{item.specialSex == "XB001" ?'男':'女'}}</p>
+                            <p>性别: {{item.sexText}}</p>
                         </div>
                         <div>
                             <p>准操项目: {{item.project}}</p>
@@ -49,8 +49,11 @@ export default {
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
-        getRendering(v) {
-            this.rendering = v;
+        getRendering(arr) {
+            arr.forEach(element => {
+                this.$common.setSex(element, "specialSex");
+            });
+            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {
@@ -62,8 +65,8 @@ export default {
             this.$store.commit("getSelectData", obj);
             this.$router.push({
                 path: "/person/specialTypeDetail",
-                query:{
-                    type:"1"
+                query: {
+                    type: "1"
                 }
             });
         }

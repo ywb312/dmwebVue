@@ -62,7 +62,7 @@
 </template>
 <script>
 // 这是基本渲染功能的组件 公用
-import { Loadmore, Toast } from "mint-ui";
+import { Loadmore } from "mint-ui";
 export default {
     name: "collectChe",
     data() {
@@ -168,10 +168,9 @@ export default {
                     session: window.localStorage["session_Id"]
                 })
                 .then(res => {
-                    Toast({
+                    this.$toast({
                         message: "提交成功",
-                        position: "bottom",
-                        duration: 2000
+                        position: "bottom"
                     });
                 });
         },

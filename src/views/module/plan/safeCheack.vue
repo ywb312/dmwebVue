@@ -17,7 +17,6 @@
 <script>
 import tree from "@/components/pub/tree";
 import datePick from "@/components/pub/datePick";
-import { Toast } from "mint-ui";
 export default {
     name: "safeCheack",
     data() {
@@ -37,25 +36,25 @@ export default {
     methods: {
         update() {
             // if (this.zgzrdw == "") {
-            //     Toast({
+            //     this.$toast({
             //         message: "请选择整改责任单位",
             //         duration: 2000
             //     });
             //     return;
             // } else if (this.zgzlyq == "") {
-            //     Toast({
+            //     this.$toast({
             //         message: "请输入整改治理要求",
             //         duration: 2000
             //     });
             //     return;
             // } else if (this.tbr == "") {
-            //     Toast({
+            //     this.$toast({
             //         message: "请输入填表人员名称",
             //         duration: 2000
             //     });
             //     return;
             // } else if (this.zgdate == "") {
-            //     Toast({
+            //     this.$toast({
             //         message: "请选择整改截止时间",
             //         duration: 2000
             //     });
@@ -68,7 +67,7 @@ export default {
             // };
             // // 上传接口
             // this.$api.danger.doexp(obj).then(function() {
-            //     let instance = Toast({
+            //     let instance = this.$toast({
             //         message: "操作成功"
             //     });
             //     setTimeout(() => {

@@ -13,7 +13,7 @@
     </div>
 </template>
 <script>
-import { Popup, Toast } from "mint-ui";
+import { Popup } from "mint-ui";
 // props三个参数 popshow控制组件显示隐藏 everyConfig弹窗的配置项
 // 引入的组件要有emit popupClose函数
 import record from "@/components/danger/record";
@@ -64,11 +64,7 @@ export default {
                 .showPage(obj.postUrl, this.setPostData(obj.value))
                 .then(res => {
                     if (res.message) {
-                        Toast({
-                            message: res.message,
-                            position: "bottom",
-                            duration: 4000
-                        });
+                        this.$toast(res.message);
                     }
                 });
         },
@@ -114,7 +110,6 @@ export default {
     },
     components: {
         "mt-popup": Popup,
-        Toast,
         record
     }
 };

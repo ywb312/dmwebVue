@@ -54,7 +54,7 @@ export default {
                 {
                     id: "person",
                     url: require("@/assets/img/ic_three_person.png"),
-                    title: "作业现场管理"
+                    title: "作业现场"
                 },
                 {
                     id: "target",
@@ -94,13 +94,18 @@ export default {
                 {
                     id: "facility",
                     url: require("@/assets/img/ic_accident_manager.png"),
-                    title: "设备设施管理"
+                    title: "设备设施"
                 },
                 {
                     id: "team",
                     url: require("@/assets/img/ic_accident_manager.png"),
-                    title: "组织保障管理"
-                }
+                    title: "组织保障"
+                },
+                {
+                    id: "health",
+                    url: require("@/assets/img/ic_accident_manager.png"),
+                    title: "职业卫生"
+                },
             ]
         };
     },

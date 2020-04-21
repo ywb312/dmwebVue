@@ -26,10 +26,13 @@ import {
 	Sticky,
 	Empty,
 	Tab,
-	Tabs
+	Tabs,
+	Popup,
+	ActionSheet
 } from 'vant';
-
-Vue.use(MintUI).use(Grid)
+// {Radio,Popup,Loadmore,DatetimePicker,MessageBox} mintUI使用的组件
+Vue.use(MintUI)
+	.use(Grid) //vant部分
 	.use(GridItem)
 	.use(Image)
 	.use(Toast)
@@ -44,6 +47,8 @@ Vue.use(MintUI).use(Grid)
 	.use(Sticky)
 	.use(Tab)
 	.use(Tabs)
+	.use(ActionSheet)
+	.use(Popup)
 	.use(Divider);
 Vue.use(axios)
 Vue.prototype.$api = api;

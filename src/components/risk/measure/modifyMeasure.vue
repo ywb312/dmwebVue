@@ -12,7 +12,6 @@
 </template>
 <script>
 import picker from "@/components/pub/picker.vue";
-import { Toast } from "mint-ui";
 export default {
     name: "modifyMeasure",
     data() {
@@ -40,10 +39,9 @@ export default {
         postData(obj) {
             for (const key in this.getData) {
                 if (this.getData[key] == "") {
-                    Toast({
+                    this.$toast({
                         message: "请继续选择完毕后提交",
                         position: "bottom",
-                        duration: 2000
                     });
                     return;
                 }

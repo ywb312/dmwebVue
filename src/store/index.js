@@ -1059,6 +1059,101 @@ export default new Vuex.Store({
 						id: "stakeholderInfo",
 					}]
 				}]
+			},
+			{
+				title: "职业卫生",
+				path: "health",
+				page: [{
+					text: "人员信息",
+					child: [{
+						text: "公司员工信息登记表",
+						id: "companyinfo",
+					}, {
+						text: "项目部员工信息登记表",
+						id: "projectinfo",
+					}, {
+						text: "外来单位参观检查人员信息表",
+						id: "outsideinfo",
+					}, {
+						text: "炸药库人员信息登记表",
+						id: "explosiveinfo",
+					}, {
+						text: "职业卫生在岗培训登记表",
+						id: "hygieneinfo",
+					}, {
+						text: "在岗培训登记表",
+						id: "guardinfo",
+					}, {
+						text: "检修人员登记表",
+						id: "overhaulinfo",
+					}, {
+						text: "清洁工岗前培训登记表",
+						id: "cleaninfo",
+					}, {
+						text: "转岗培训登记表",
+						id: "transferinfo",
+					}, {
+						text: "保卫部人员信息登记表",
+						id: "defendinfo",
+					}]
+				}, {
+					text: "健康监护",
+					child: [{
+						text: "体检计划",
+						id: "examplan",
+					}, {
+						text: "体检上报",
+						id: "report",
+					}, {
+						text: "体检结果",
+						id: "examdisease",
+					}, {
+						text: "职业健康检查结果汇总",
+						id: "checkResult",
+					}, {
+						text: "职业健康检查异常结果汇总",
+						id: "checkAbnormal",
+					}]
+				}, {
+					text: "职业卫生监测",
+					child: [{
+						text: "工作场所噪声监测记录",
+						id: "workvoice",
+					}, {
+						text: "放射源放射性监测",
+						id: "radioinfo",
+					}, {
+						text: "生产粉尘浓度检测",
+						id: "dustinfo",
+					}, {
+						text: "水质监测",
+						id: "waterinfo",
+					}, {
+						text: "通风测尘监测记录",
+						id: "ventilateinfo",
+					}, {
+						text: "职业病危害因素监测表（集团公司功能）",
+						id: "harmElement",
+					}]
+				}, {
+					text: "基础信息维护",
+					child: [{
+						text: "体检周期维护",
+						id: "examperiod",
+					}, {
+						text: "检测仪器管理",
+						id: "equipinfo",
+					}, {
+						text: "设备设施维护",
+						id: "equip",
+					}, {
+						text: "作业场所职业危害阈值维护",
+						id: "dangernum",
+					}, {
+						text: "水质监测项目维护",
+						id: "waternumber",
+					}]
+				}]
 			}
 		],
 		// 危害 下拉框配置

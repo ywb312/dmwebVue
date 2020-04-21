@@ -7,5 +7,12 @@ export default {
                 return obj;
             }
         });
+    },
+    setSex: function (obj, key = "sex") {
+        if (obj[key] == "XB001") {
+            obj.sexText = "男";
+        } else if (obj[key] == "XB001") {
+            obj.sexText = "女";
+        }
     }
 }

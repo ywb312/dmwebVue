@@ -19,7 +19,6 @@
 import pick from "@/components/pub/picker";
 import tree from "@/components/pub/tree";
 import doubleDatePick from "@/components/pub/doubleDatePick";
-import { Toast } from "mint-ui";
 export default {
     name: "searchPopup",
     data() {
@@ -107,11 +106,7 @@ export default {
             let start = new Date(obj.str.replace(/\-/g, ".")).getTime();
             let end = new Date(obj.end.replace(/\-/g, ".")).getTime();
             if (start > end) {
-                Toast({
-                    message: "截止日期小于起始日期",
-                    position: "bottom",
-                    duration: 2000
-                });
+                this.$toast("截止日期小于起始日期");
                 return;
             }
             this.$emit("popupClose");

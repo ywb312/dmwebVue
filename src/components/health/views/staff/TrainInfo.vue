@@ -1,33 +1,30 @@
 <template>
     <div>
-        <SearchBox placeholder="请输入姓名搜索" @callback="searchBack"></SearchBox>
+        <SearchBox placeholder="请输入培训人员搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div class="wrapper" v-for="(item,index) in rendering" :key="index">
+                    <div class="title">
+                        <h4>{{index+1+"."+item.traPeople}}</h4>
+                    </div>
                     <div class="main">
                         <div>
-                            <p>姓名: {{item.peopleName}}</p>
+                            <p>培训日期: {{item.traDate}}</p>
                         </div>
                         <div>
-                            <p>性别: {{item.sexText}}</p>
+                            <p>主讲人: {{item.speaker}}</p>
                         </div>
                         <div>
-                            <p>出生日期:{{item.birthday}}</p>
+                            <p>培训地点: {{item.traPlace}}</p>
                         </div>
                         <div>
-                            <p>身份证号:{{item.idcard}}</p>
+                            <p>培训内容: {{item.traContent}}</p>
                         </div>
                         <div>
-                            <p>职务:{{item.position}}</p>
+                            <p>培训单位: {{item.traUnit}}</p>
                         </div>
                         <div>
-                            <p>行业类别:{{item.industry}}</p>
-                        </div>
-                        <div>
-                            <p>初领日期:{{item.startDate}}</p>
-                        </div>
-                        <div>
-                            <p>有效期至:{{item.endDate}}</p>
+                            <p>备注: {{item.memo}}</p>
                         </div>
                     </div>
                 </div>
@@ -42,13 +39,13 @@
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 export default {
-    name: "SpecialPeople",
+    name: "TrainInfo",
     data() {
         return {
             // 渲染的数据
             rendering: [],
             postData: {
-                url: "",
+                url: "biz/operate/health/guardinfo/list.action",
                 obj: {}
             }
         };
@@ -56,28 +53,14 @@ export default {
     // pageData父组件传来的配置项
     props: ["pageData"],
     created() {
-        // 主要负责人证照
-        if (this.pageData.id == "peoplephoto") {
-            this.postData.url = "biz/people/peoplephoto/list.action";
-            // 安全员资质
-        } else if (this.pageData.id == "secoffqua") {
-            this.postData.url = "biz/people/secoffqua/list.action";
-            // 员工代表
-        } else if (this.pageData.id == "staffrep") {
-            this.postData.url = "biz/people/staffrep/list.action";
-            // 事故调查员
-        } else if (this.pageData.id == "accnve") {
-            this.postData.url = "biz/people/accnve/list.action";
-            // 职业卫生管理员
-        } else if (this.pageData.id == "occhealadmin") {
-            this.postData.url = "biz/people/occhealadmin/list.action";
+        if (pageData.id == "hygieneinfo") {
+            this.postData.obj["bean.mark"] = "0";
+        } else if (pageData.id == "guardinfo") {
+            this.postData.obj["bean.mark"] = "1";
         }
     },
     methods: {
         getRendering(arr) {
-            arr.forEach(item => {
-                this.$common.setSex(element, "peopleSex");
-            });
             this.rendering = arr;
         },
         // 搜索框的回调

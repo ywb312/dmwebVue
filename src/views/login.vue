@@ -18,7 +18,6 @@
     </div>
 </template>
 <script>
-import { Toast } from "mint-ui";
 export default {
     data() {
         return {
@@ -70,7 +69,7 @@ export default {
                             name: "home"
                         });
                     } else {
-                        Toast({
+                        this.$toast({
                             message: "账户或密码不正确",
                             position: "bottom",
                             duration: 4000
@@ -104,7 +103,7 @@ export default {
             // 对账号验空
             if (!this.username) {
                 // 弹出提示
-                Toast({
+                this.$toast({
                     message: "请输入用户名",
                     position: "bottom",
                     duration: 4000
@@ -114,7 +113,7 @@ export default {
             // 对密码验空
             if (!this.password) {
                 // 弹出提示
-                Toast({
+                this.$toast({
                     message: "请输入密码",
                     position: "bottom",
                     duration: 4000

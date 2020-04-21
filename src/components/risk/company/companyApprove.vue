@@ -13,7 +13,6 @@
 </template>
 <script>
 import picker from "@/components/pub/picker.vue";
-import { Toast } from "mint-ui";
 export default {
     name: "companyApprove",
     data() {
@@ -43,20 +42,18 @@ export default {
         postData(obj) {
             for (const key in this.getData) {
                 if (this.getData[key] == "") {
-                    Toast({
+                    this.$toast({
                         message: "请继续选择完毕后提交",
                         position: "bottom",
-                        duration: 2000
                     });
                     return;
                 }
             }
             this.$api.risk.approveAdd(this.returnData()).then(res => {
                 this.appVisible = false;
-                Toast({
+                this.$toast({
                     message: "评价成功",
                     position: "bottom",
-                    duration: 2000
                 });
             });
         },
