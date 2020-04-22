@@ -1,6 +1,6 @@
 <template>
     <div>
-        <SearchBox placeholder="请输入姓名搜索" @callback="searchBack"></SearchBox>
+        <SearchBox placeholder="请输入监测人,仪器型号,仪器编号,批次号搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div
@@ -11,19 +11,19 @@
                 >
                     <div class="main">
                         <div>
-                            <p>年度: {{item.year}}</p>
+                            <p>批次号: {{item.batchid}}</p>
                         </div>
                         <div>
-                            <p>部门: {{item.deptid}}</p>
+                            <p>仪器型号: {{item.instrument}}</p>
                         </div>
                         <div>
-                            <p>职业危害: {{item.professiondamage}}</p>
+                            <p>仪器编号: {{item.instruid}}</p>
                         </div>
                         <div>
-                            <p>检查机构: {{item.checkDept}}</p>
+                            <p>监测人: {{item.mpeople}}</p>
                         </div>
                         <div>
-                            <p>上报状态: {{item.repstate}}</p>
+                            <p>监测时间: {{item.mtime}}</p>
                         </div>
                     </div>
                 </div>
@@ -41,44 +41,38 @@
             close-on-click-action
         />
         <!-- 弹窗组件 -->
-        <Popup :popshow="popshow" @close="popshow=false">
+        <!-- <Popup :popshow="popshow" @close="popshow=false">
             <div slot="title" class="popupTitle">详情</div>
             <div slot="views" class="popup">
                 <div>
-                    <p>年度: {{selectData.year}}</p>
+                    <p>姓名: {{selectData.name}}</p>
                 </div>
                 <div>
-                    <p>部门: {{selectData.deptid}}</p>
+                    <p>培训时间: {{selectData.traDate}}</p>
                 </div>
                 <div>
-                    <p>职业危害: {{selectData.professiondamage}}</p>
+                    <p>培训地点: {{selectData.traPlace}}</p>
                 </div>
                 <div>
-                    <p>检查机构: {{selectData.checkDept}}</p>
+                    <p>培训内容: {{selectData.traContent}}</p>
                 </div>
                 <div>
-                    <p>上报状态: {{selectData.repstate}}</p>
+                    <p>工种: {{selectData.profession}}</p>
                 </div>
                 <div>
-                    <p>入职体检人数: {{selectData.newnum}}</p>
+                    <p>出生年月: {{selectData.birthday}}</p>
                 </div>
                 <div>
-                    <p>换岗体检人数: {{selectData.changenum}}</p>
+                    <p>身份证号: {{selectData.idcard}}</p>
                 </div>
                 <div>
-                    <p>岗中体检人数: {{selectData.staynum}}</p>
+                    <p>联系号码: {{selectData.phone}}</p>
                 </div>
                 <div>
-                    <p>离岗体检人数: {{selectData.leftnum}}</p>
-                </div>
-                <div>
-                    <p>应急体检人数: {{selectData.emergenum}}</p>
-                </div>
-                <div>
-                    <p>总人数: {{selectData.num}}</p>
+                    <p>备注: {{selectData.memo}}</p>
                 </div>
             </div>
-        </Popup>
+        </Popup>-->
     </div>
 </template>
 <script>
@@ -86,19 +80,19 @@ import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 import Popup from "@/components/pub/Popup.vue";
 export default {
-    name: "Report",
+    name: "WorkVoice",
     data() {
         return {
             // 渲染的数据
             rendering: [],
             postData: {
-                url: "biz/operate/health/report/list.action",
+                url: "biz/operate/health/workvoice/list.action",
                 obj: {}
             },
             show: false,
-            popshow: false,
-            actions: [{ name: "查看详情" }, { name: "体检详细名单" }],
-            selectData: {}
+            // popshow: false,
+            actions: [{ name: "检测结果" }]
+            // selectData: {}
         };
     },
     // pageData父组件传来的配置项
@@ -118,13 +112,11 @@ export default {
             this.selectData = obj;
         },
         onSelect(item) {
-            if (item.name == "查看详情") {
-                this.popshow = true;
-            } else if (item.name == "体检详细名单") {
+            if (item.name == "检测结果") {
                 this.$router.push({
-                    path: "/health/healthReport",
+                    path: "/health/voiceResult",
                     query: {
-                        filters: this.selectData.reportid
+                        filters: this.selectData.voiceid
                     }
                 });
             }

@@ -28,6 +28,8 @@ import {
 	Tab,
 	Tabs,
 	Popup,
+	DropdownMenu,
+	DropdownItem,
 	ActionSheet
 } from 'vant';
 // {Radio,Popup,Loadmore,DatetimePicker,MessageBox} mintUI使用的组件
@@ -49,6 +51,8 @@ Vue.use(MintUI)
 	.use(Tabs)
 	.use(ActionSheet)
 	.use(Popup)
+	.use(DropdownMenu)
+	.use(DropdownItem)
 	.use(Divider);
 Vue.use(axios)
 Vue.prototype.$api = api;

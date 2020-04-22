@@ -466,6 +466,14 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //职业卫生	工作场所噪声检测子表
+		path: '/health/voiceResult',
+		name: 'voiceResult',
+		component: () => import('@/views/module/health/voiceResult.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
 
 	// 工作台部分路由
 	{ //待办事项

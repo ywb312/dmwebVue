@@ -179,7 +179,21 @@ export default {
             require(["@/components/health/views/health/Examplan"], resolve),
         // 体检上报
         report: resolve =>
-            require(["@/components/health/views/health/Report"], resolve)
+            require(["@/components/health/views/health/Report"], resolve),
+        // 体检结果
+        examdisease: resolve =>
+            require(["@/components/health/views/health/ExamDisease"], resolve),
+        // 职业健康检查结果汇总
+        checkResult: resolve =>
+            require(["@/components/health/views/health/CheckResult"], resolve),
+        // 职业健康检查异常结果汇总
+        checkAbnormal: resolve =>
+            require([
+                "@/components/health/views/health/CheckAbnormal"
+            ], resolve),
+        // 工作场所噪声监测记录
+        workvoice: resolve =>
+            require(["@/components/health/views/test/WorkVoice"], resolve)
     }
 };
 </script>
