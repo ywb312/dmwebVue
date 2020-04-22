@@ -106,6 +106,11 @@ export default {
                     url: require("@/assets/img/ic_accident_manager.png"),
                     title: "职业卫生"
                 },
+                {
+                    id: "inject",
+                    url: require("@/assets/img/ic_accident_manager.png"),
+                    title: "安全环保投入"
+                }
             ]
         };
     },

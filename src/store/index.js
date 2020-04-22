@@ -1060,7 +1060,7 @@ export default new Vuex.Store({
 					}]
 				}]
 			},
-			{
+			{ //职业卫生
 				title: "职业卫生",
 				path: "health",
 				page: [{
@@ -1152,6 +1152,35 @@ export default new Vuex.Store({
 					}, {
 						text: "水质监测项目维护",
 						id: "waternumber",
+					}]
+				}]
+			},
+			{
+				title: "安全环保投入",
+				path: "inject",
+				page: [{
+					text: "安全投入使用计划管理",
+					id: "safeinvestment"
+				}, {
+					text: "安全措施项目记录管理",
+					id: "safemeasures"
+				}, {
+					text: "安全科研技改项目记录管理",
+					id: "saferesearch"
+				}, {
+					text: "工伤保险管理",
+					child: [{
+						text: "安全生产责任险批号管理",
+						id: "safenum",
+					// }, {
+					// 	text: "安全生产责任险名单上报",
+					// 	id: "safelist",
+					}, {
+						text: "安全生产责任险登记",
+						id: "saferesp",
+					}, {
+						text: "工伤保险理赔信息记录",
+						id: "safeinsurance",
 					}]
 				}]
 			}

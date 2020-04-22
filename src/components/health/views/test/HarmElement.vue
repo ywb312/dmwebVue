@@ -75,7 +75,7 @@
 import ViewBox from "@/components/pub/ViewBox.vue";
 import Popup from "@/components/pub/Popup.vue";
 export default {
-    name: "RadioInfo",
+    name: "HarmElement",
     data() {
         return {
             // 渲染的数据

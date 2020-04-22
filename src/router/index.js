@@ -506,6 +506,14 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //安全环保投入
+		path: '/inject',
+		name: 'inject',
+		component: () => import('@/views/module/inject/inject.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
 
 	// 工作台部分路由
 	{ //待办事项
