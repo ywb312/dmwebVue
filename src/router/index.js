@@ -469,7 +469,39 @@ const routes = [{
 	{ //职业卫生	工作场所噪声检测子表
 		path: '/health/voiceResult',
 		name: 'voiceResult',
-		component: () => import('@/views/module/health/voiceResult.vue'),
+		component: () => import('@/views/module/health/test/voiceResult.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //职业卫生	放射源放射性检测子表
+		path: '/health/radioResult',
+		name: 'radioResult',
+		component: () => import('@/views/module/health/test/radioResult.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //职业卫生	生产性粉尘浓度检测子表
+		path: '/health/dustResult',
+		name: 'dustResult',
+		component: () => import('@/views/module/health/test/dustResult.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //职业卫生	水质检测子表
+		path: '/health/waterResult',
+		name: 'waterResult',
+		component: () => import('@/views/module/health/test/waterResult.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //职业卫生	通风子表
+		path: '/health/ventilateResult',
+		name: 'ventilateResult',
+		component: () => import('@/views/module/health/test/ventilateResult.vue'),
 		meta: {
 			keepAlive: false
 		}

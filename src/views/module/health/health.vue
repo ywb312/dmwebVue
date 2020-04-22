@@ -193,7 +193,37 @@ export default {
             ], resolve),
         // 工作场所噪声监测记录
         workvoice: resolve =>
-            require(["@/components/health/views/test/WorkVoice"], resolve)
+            require(["@/components/health/views/test/WorkVoice"], resolve),
+        // 放射源放射性监测
+        radioinfo: resolve =>
+            require(["@/components/health/views/test/RadioInfo"], resolve),
+        // 生产粉尘浓度检测
+        dustinfo: resolve =>
+            require(["@/components/health/views/test/DustInfo"], resolve),
+        // 水质监测
+        waterinfo: resolve =>
+            require(["@/components/health/views/test/WaterInfo"], resolve),
+        // 通风测尘监测记录
+        ventilateinfo: resolve =>
+            require(["@/components/health/views/test/VentilateInfo"], resolve),
+        // 职业病危害因素监测表（集团公司功能）
+        harmElement: resolve =>
+            require(["@/components/health/views/test/HarmElement"], resolve),
+        // 体检周期维护
+        examperiod: resolve =>
+            require(["@/components/health/views/base/ExamPeriod"], resolve),
+        // 检测仪器管理
+        equipinfo: resolve =>
+            require(["@/components/health/views/base/EquipInfo"], resolve),
+        // 设备设施维护
+        equip: resolve =>
+            require(["@/components/health/views/base/Equip"], resolve),
+        // 作业场所职业危害阈值维护
+        dangernum: resolve =>
+            require(["@/components/health/views/base/DangerNum"], resolve),
+        // 水质监测项目维护
+        waternumber: resolve =>
+            require(["@/components/health/views/base/WaterNumber"], resolve),
     }
 };
 </script>

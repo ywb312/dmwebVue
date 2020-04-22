@@ -47,17 +47,16 @@ import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 import Popup from "@/components/pub/Popup.vue";
 export default {
-    name: "WorkVoice",
+    name: "RadioInfo",
     data() {
         return {
             // 渲染的数据
             rendering: [],
             postData: {
-                url: "biz/operate/health/workvoice/list.action",
+                url: "biz/operate/health/radioinfo/list.action",
                 obj: {}
             },
             show: false,
-            // popshow: false,
             actions: [{ name: "检测结果" }],
             selectData: {}
         };
@@ -81,9 +80,9 @@ export default {
         onSelect(item) {
             if (item.name == "检测结果") {
                 this.$router.push({
-                    path: "/health/voiceResult",
+                    path: "/health/radioResult",
                     query: {
-                        filters: this.selectData.voiceid
+                        filters: this.selectData.radioid
                     }
                 });
             }

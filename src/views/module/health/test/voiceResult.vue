@@ -113,10 +113,6 @@ export default {
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                //    this.$common.setSex(element);
-                //     this.$common.code2Text(element, "edugrade", this.xlArr);
-            });
             this.rendering = arr;
         },
         btnClick(obj) {

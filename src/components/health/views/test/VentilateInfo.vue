@@ -1,6 +1,5 @@
 <template>
     <div>
-        <SearchBox placeholder="请输入检测人,仪器型号,仪器编号,批次号搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div
@@ -11,19 +10,16 @@
                 >
                     <div class="main">
                         <div>
-                            <p>批次号: {{item.batchid}}</p>
+                            <p>单位名称: {{item.companyName}}</p>
                         </div>
                         <div>
-                            <p>仪器型号: {{item.instrument}}</p>
+                            <p>单位负责人: {{item.principal}}</p>
                         </div>
                         <div>
-                            <p>仪器编号: {{item.instruid}}</p>
+                            <p>检测人: {{item.preparer}}</p>
                         </div>
                         <div>
-                            <p>检测人: {{item.mpeople}}</p>
-                        </div>
-                        <div>
-                            <p>检测时间: {{item.mtime}}</p>
+                            <p>检测时间: {{item.fillingDate}}</p>
                         </div>
                     </div>
                 </div>
@@ -43,21 +39,19 @@
     </div>
 </template>
 <script>
-import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 import Popup from "@/components/pub/Popup.vue";
 export default {
-    name: "WorkVoice",
+    name: "VentilateInfo",
     data() {
         return {
             // 渲染的数据
             rendering: [],
             postData: {
-                url: "biz/operate/health/workvoice/list.action",
+                url: "biz/operate/health/ventilate/list.action",
                 obj: {}
             },
             show: false,
-            // popshow: false,
             actions: [{ name: "检测结果" }],
             selectData: {}
         };
@@ -68,12 +62,6 @@ export default {
         getRendering(arr) {
             this.rendering = arr;
         },
-        // 搜索框的回调
-        searchBack(str) {
-            this.postData.obj["bean.param"] = str;
-            this.rendering = [];
-            this.$refs.view.cleraData();
-        },
         btnClick(obj) {
             this.show = true;
             this.selectData = obj;
@@ -81,16 +69,15 @@ export default {
         onSelect(item) {
             if (item.name == "检测结果") {
                 this.$router.push({
-                    path: "/health/voiceResult",
+                    path: "/health/ventilateResult",
                     query: {
-                        filters: this.selectData.voiceid
+                        filters: this.selectData.venid
                     }
                 });
             }
         }
     },
     components: {
-        SearchBox,
         ViewBox,
         Popup
     }

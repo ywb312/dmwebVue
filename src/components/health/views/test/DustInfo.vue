@@ -1,6 +1,6 @@
 <template>
     <div>
-        <SearchBox placeholder="请输入检测人,仪器型号,仪器编号,批次号搜索" @callback="searchBack"></SearchBox>
+        <SearchBox placeholder="请输入录入人,仪器型号,仪器编号,批次号搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div
@@ -20,10 +20,10 @@
                             <p>仪器编号: {{item.instruid}}</p>
                         </div>
                         <div>
-                            <p>检测人: {{item.mpeople}}</p>
+                            <p>录入人: {{item.logpeople}}</p>
                         </div>
                         <div>
-                            <p>检测时间: {{item.mtime}}</p>
+                            <p>录入时间: {{item.logtime}}</p>
                         </div>
                     </div>
                 </div>
@@ -47,17 +47,16 @@ import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 import Popup from "@/components/pub/Popup.vue";
 export default {
-    name: "WorkVoice",
+    name: "DustInfo",
     data() {
         return {
             // 渲染的数据
             rendering: [],
             postData: {
-                url: "biz/operate/health/workvoice/list.action",
+                url: "biz/operate/health/dustinfo/list.action",
                 obj: {}
             },
             show: false,
-            // popshow: false,
             actions: [{ name: "检测结果" }],
             selectData: {}
         };
@@ -81,9 +80,9 @@ export default {
         onSelect(item) {
             if (item.name == "检测结果") {
                 this.$router.push({
-                    path: "/health/voiceResult",
+                    path: "/health/dustResult",
                     query: {
-                        filters: this.selectData.voiceid
+                        filters: this.selectData.dustid
                     }
                 });
             }

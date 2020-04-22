@@ -1,6 +1,6 @@
 <template>
     <div>
-        <SearchBox placeholder="请输入检测人,仪器型号,仪器编号,批次号搜索" @callback="searchBack"></SearchBox>
+        <SearchBox placeholder="请输入检测人搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div
@@ -11,19 +11,25 @@
                 >
                     <div class="main">
                         <div>
-                            <p>批次号: {{item.batchid}}</p>
-                        </div>
-                        <div>
                             <p>仪器型号: {{item.instrument}}</p>
                         </div>
                         <div>
                             <p>仪器编号: {{item.instruid}}</p>
                         </div>
                         <div>
+                            <p>采样点: {{item.location}}</p>
+                        </div>
+                        <div>
+                            <p>水样: {{item.exampleText}}</p>
+                        </div>
+                        <div>
                             <p>检测人: {{item.mpeople}}</p>
                         </div>
                         <div>
                             <p>检测时间: {{item.mtime}}</p>
+                        </div>
+                        <div>
+                            <p>提交状态: {{item.issubmit}}</p>
                         </div>
                     </div>
                 </div>
@@ -47,25 +53,45 @@ import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 import Popup from "@/components/pub/Popup.vue";
 export default {
-    name: "WorkVoice",
+    name: "WaterInfo",
     data() {
         return {
             // 渲染的数据
             rendering: [],
             postData: {
-                url: "biz/operate/health/workvoice/list.action",
+                url: "biz/operate/health/waterinfo/list.action",
                 obj: {}
             },
             show: false,
-            // popshow: false,
-            actions: [{ name: "检测结果" }],
-            selectData: {}
+            actions: [{ name: "水质检测结果" }],
+            selectData: {},
+            sylxArr: [
+                {
+                    id: "SYLX001",
+                    text: "进水"
+                },
+                {
+                    id: "SYLX002",
+                    text: "出水"
+                },
+                {
+                    id: "SYLX003",
+                    text: "井下水"
+                },
+                {
+                    id: "SYLX004",
+                    text: "地表水"
+                }
+            ]
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
         getRendering(arr) {
+            arr.forEach(element => {
+                this.$common.code2Text(element, "example", this.sylxArr);
+            });
             this.rendering = arr;
         },
         // 搜索框的回调
@@ -79,11 +105,11 @@ export default {
             this.selectData = obj;
         },
         onSelect(item) {
-            if (item.name == "检测结果") {
+            if (item.name == "水质检测结果") {
                 this.$router.push({
-                    path: "/health/voiceResult",
+                    path: "/health/waterResult",
                     query: {
-                        filters: this.selectData.voiceid
+                        filters: this.selectData.waterid
                     }
                 });
             }
