@@ -70,7 +70,22 @@ export default {
     components: {
         // 安全投入使用计划管理
         safeinvestment: resolve =>
-            require(["@/components/inject/views/SafeInvestment"], resolve)
+            require(["@/components/inject/views/SafeInvestment"], resolve),
+        // 安全措施项目记录管理
+        safemeasures: resolve =>
+            require(["@/components/inject/views/SafeMeasures"], resolve),
+        // 安全科研技改项目记录管理
+        saferesearch: resolve =>
+            require(["@/components/inject/views/SafeResearch"], resolve),
+        // 安全生产责任险批号管理
+        safenum: resolve =>
+            require(["@/components/inject/views/SafeNum"], resolve),
+        // 安全生产责任险登记
+        saferesp: resolve =>
+            require(["@/components/inject/views/SafeResp"], resolve),
+        // 工伤保险理赔信息记录
+        safeinsurance: resolve =>
+            require(["@/components/inject/views/SafeInsurance"], resolve)
     }
 };
 </script>

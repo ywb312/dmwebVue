@@ -1,33 +1,33 @@
 <template>
     <div>
-        <SearchBox placeholder="请输入项目/措施名称、项目内容/预期效果/目的搜索" @callback="searchBack"></SearchBox>
+        <SearchBox placeholder="请输入姓名搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                     <div class="main">
                         <div>
-                            <p>项目/措施名称: {{item.cost_name}}</p>
+                            <p>姓名: {{item.insurance_name}}</p>
                         </div>
                         <div>
-                            <p>项目内容/预期效果/目的: {{item.content}}</p>
+                            <p>单位: {{item.deptName}}</p>
                         </div>
                         <div>
-                            <p>费用预算: {{item.precost}}</p>
+                            <p>工伤时间: {{item.injury_time}}</p>
                         </div>
                         <div>
-                            <p>启动时间: {{item.starttime}}</p>
+                            <p>工伤认定时间: {{item.firm_time}}</p>
                         </div>
                         <div>
-                            <p>竣工时间: {{item.endtime}}</p>
+                            <p>工伤鉴定时间: {{item.identify}}</p>
                         </div>
                         <div>
-                            <p>责任人: {{item.incharid}}</p>
+                            <p>伤残等级: {{item.levelText}}</p>
                         </div>
                         <div>
-                            <p>安全措施费用类别: {{item.cost_typeText}}</p>
+                            <p>待遇: {{item.treatment}}</p>
                         </div>
                         <div>
-                            <p>使用地点或场所: {{item.place}}</p>
+                            <p>备注: {{item.remark}}</p>
                         </div>
                     </div>
                 </div>
@@ -42,55 +42,59 @@
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 export default {
-    name: "SafeInvestment",
+    name: "SafeInsurance",
     data() {
         return {
             // 渲染的数据
             rendering: [],
             postData: {
-                url: "biz/operate/safe/safeinvestment/list.action",
+                url: "biz/operate/safe/safeinsurance/list.action",
                 obj: {}
             },
-            aqcsfylb: [
+            scdjArr: [
                 {
-                    id: "AQCSFYLB001",
-                    text: "安全工程"
+                    id: "SCDJ001",
+                    text: "一级"
                 },
                 {
-                    id: "AQCSFYLB002",
-                    text: "安全管理"
+                    id: "SCDJ002",
+                    text: "二级"
                 },
                 {
-                    id: "AQCSFYLB003",
-                    text: "安全设备"
+                    id: "SCDJ003",
+                    text: "三级"
                 },
                 {
-                    id: "AQCSFYLB004",
-                    text: "个体防护用品"
+                    id: "SCDJ004",
+                    text: "四级"
                 },
                 {
-                    id: "AQCSFYLB005",
-                    text: "安全标志及标识"
+                    id: "SCDJ005",
+                    text: "五级"
                 },
                 {
-                    id: "AQCSFYLB006",
-                    text: "安全奖励"
+                    id: "SCDJ006",
+                    text: "六级"
                 },
                 {
-                    id: "AQCSFYLB007",
-                    text: "安全教育培训"
+                    id: "SCDJ007",
+                    text: "七级"
                 },
                 {
-                    id: "AQCSFYLB008",
-                    text: "安全科技"
+                    id: "SCDJ008",
+                    text: "八级"
                 },
                 {
-                    id: "AQCSFYLB009",
-                    text: "应急设备设施"
+                    id: "SCDJ009",
+                    text: "九级"
                 },
                 {
-                    id: "AQCSFYLB010",
-                    text: "其他与安全生产直接相关的支出"
+                    id: "SCDJ010",
+                    text: "十级"
+                },
+                {
+                    id: "SCDJ011",
+                    text: "无"
                 }
             ]
         };
@@ -100,7 +104,14 @@ export default {
     methods: {
         getRendering(arr) {
             arr.forEach(element => {
-                this.$common.code2Text(element, "cost_type", this.aqcsfylb);
+                this.$common.code2Text(element, "level", this.scdjArr);
+                let obj = this.$common.getDeptName(
+                    this.treeData,
+                    element.insurance_org
+                );
+                if (typeof obj == "object") {
+                    element.deptName = obj.name;
+                }
             });
             this.rendering = arr;
         },
@@ -114,6 +125,11 @@ export default {
     components: {
         SearchBox,
         ViewBox
+    },
+    computed: {
+        treeData() {
+            return this.$store.state.treeData;
+        }
     }
 };
 </script>

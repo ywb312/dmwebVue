@@ -38,6 +38,15 @@ export default {
         //     });
         // }
     },
+    mounted() {
+        let _self = this;
+        // 获取tree的数据
+        this.$api.pub.getTree().then(function(res) {
+            let data = eval("(" + res + ")");
+            let sortData = _self.$common.toTree(data.cells);
+            _self.$store.commit("setTree", sortData);
+        });
+    },
     methods: {
         loadingShow(a) {
             if (a) {
