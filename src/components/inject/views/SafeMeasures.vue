@@ -101,7 +101,13 @@ export default {
         getRendering(arr) {
             arr.forEach(element => {
                 this.$common.code2Text(element, "protype", this.aqcsfylb);
-                element.idName = this.$common.getDeptName(this.treeData,element.org_id).name;
+                let obj = this.$common.getDeptName(
+                    this.treeData,
+                    element.org_id
+                );
+                if (obj.name) {
+                    element.idName = obj.name;
+                }
             });
             this.rendering = arr;
         },
@@ -116,8 +122,8 @@ export default {
         SearchBox,
         ViewBox
     },
-    computed:{
-        treeData(){
+    computed: {
+        treeData() {
             return this.$store.state.treeData;
         }
     }

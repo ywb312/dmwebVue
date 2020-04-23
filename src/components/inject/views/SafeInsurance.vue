@@ -109,7 +109,7 @@ export default {
                     this.treeData,
                     element.insurance_org
                 );
-                if (typeof obj == "object") {
+                if (obj.name) {
                     element.deptName = obj.name;
                 }
             });

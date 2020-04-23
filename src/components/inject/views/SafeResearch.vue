@@ -98,10 +98,13 @@ export default {
         getRendering(arr) {
             arr.forEach(element => {
                 this.$common.code2Text(element, "protype", this.aqcsfylb);
-                element.idName = this.$common.getDeptName(
+                let obj = this.$common.getDeptName(
                     this.treeData,
                     element.org_id
-                ).name;
+                );
+                if (obj.name) {
+                    element.idName = obj.name;
+                }
             });
             this.rendering = arr;
         },

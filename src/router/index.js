@@ -514,6 +514,14 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //消防管理
+		path: '/fire',
+		name: 'fire',
+		component: () => import('@/views/module/fire/fire.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
 
 	// 工作台部分路由
 	{ //待办事项

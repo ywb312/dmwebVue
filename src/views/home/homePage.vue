@@ -110,7 +110,12 @@ export default {
                     id: "inject",
                     url: require("@/assets/img/ic_accident_manager.png"),
                     title: "安全环保投入"
-                }
+                },
+                {
+                    id: "fire",
+                    url: require("@/assets/img/ic_accident_manager.png"),
+                    title: "消防管理"
+                },
             ]
         };
     },

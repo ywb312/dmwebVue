@@ -1,24 +1,30 @@
 <template>
     <div>
-        <SearchBox placeholder="请输入记录编号搜索" @callback="searchBack"></SearchBox>
+        <SearchBox placeholder="请输入单位名称搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                     <div class="main">
                         <div>
-                            <p>记录编号: {{item.safeformid}}</p>
+                            <p>外来施工单位名称: {{item.projectName}}</p>
                         </div>
                         <div>
-                            <p>保单号: {{item.safeformcode}}</p>
+                            <p>施工单位负责人: {{item.principal}}</p>
                         </div>
                         <div>
-                            <p>投保时间: {{item.starttime}}</p>
+                            <p>负责人联系电话: {{item.phone}}</p>
                         </div>
                         <div>
-                            <p>投保期限: {{item.endtime}}</p>
+                            <p>施工开始时间: {{item.startDate}}</p>
                         </div>
                         <div>
-                            <p>是否登记: {{item.issubmit}}</p>
+                            <p>施工结束时间: {{item.endDate}}</p>
+                        </div>
+                        <div>
+                            <p>
+                                附件名称:
+                                <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -33,13 +39,13 @@
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 export default {
-    name: "SafeResp",
+    name: "FireForeignPact",
     data() {
         return {
             // 渲染的数据
             rendering: [],
             postData: {
-                url: "biz/operate/safe/saferesp/list.action",
+                url: "biz/operate/fireforeignpact/list.action",
                 obj: {}
             }
         };
