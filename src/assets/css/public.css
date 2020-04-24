@@ -16,7 +16,6 @@
     padding: 5px 15px;
     background-color: rgb(250, 250, 250);
 }
-
 .bottom {
     width: 100%;
     padding: 10px 15px;
@@ -85,6 +84,9 @@
     background-color: #2585cf;
 }
 
+.cellValue{
+    color: #323233;
+}
 /* mintUI弹出框 */
 .popupItem {
     width: 270px;

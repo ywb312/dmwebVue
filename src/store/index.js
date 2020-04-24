@@ -71,7 +71,16 @@ export default new Vuex.Store({
 			{ //提醒预警
 				title: "提醒预警",
 				path: "remind",
-				page: ["隐患预警", "检查逾期预警", "隐患逾期预警"],
+				page: [{
+					text: "隐患预警",
+					id: "warninginfo"
+				}, {
+					text: "检查逾期预警",
+					id: "checkplannotice"
+				}, {
+					text: "隐患逾期预警",
+					id: "zdriskolddatenotice"
+				}],
 			},
 			{ //风险管理
 				title: "风险管理",

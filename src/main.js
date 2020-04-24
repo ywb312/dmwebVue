@@ -3,6 +3,7 @@ import MintUI from 'mint-ui'
 import './assets/css/reset.css'
 import 'mint-ui/lib/style.css'
 import './assets/css/style.css'
+// import './assets/css/public.css'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -30,6 +31,11 @@ import {
 	Popup,
 	DropdownMenu,
 	DropdownItem,
+	Button,
+	Dialog,
+	DatetimePicker,
+	Col,
+	Row,
 	ActionSheet
 } from 'vant';
 // {Radio,Popup,Loadmore,DatetimePicker,MessageBox} mintUI使用的组件
@@ -53,6 +59,11 @@ Vue.use(MintUI)
 	.use(Popup)
 	.use(DropdownMenu)
 	.use(DropdownItem)
+	.use(Button)
+	.use(Dialog)
+	.use(Col)
+	.use(Row)
+	.use(DatetimePicker)
 	.use(Divider);
 Vue.use(axios)
 Vue.prototype.$api = api;

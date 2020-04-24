@@ -1,9 +1,13 @@
 <template>
     <div class="tree">
-        <mt-cell :title="title" is-link @click.native="popupVisible = true;">
-            <span style="color:black">{{selectVal.name}}</span>
-        </mt-cell>
-        <mt-popup class="fill" v-model="popupVisible" closeOnClickModal="true" position="right">
+        <van-cell
+            :title="title"
+            is-link
+            @click.native="popupVisible = true;"
+            value-class="cellValue"
+            :value="selectVal.name"
+        />
+        <van-popup class="fill" v-model="popupVisible" position="right" get-container="body">
             <tree-preview
                 :data="lists"
                 v-model="selectVal"
@@ -11,14 +15,13 @@
                 label-key="name"
                 @finish="popupVisible = false"
             />
-        </mt-popup>
+        </van-popup>
     </div>
 </template>
 <script>
 //title传入的标题 placeholder默认文字 @selectMsg返回数据
 import treePreview from "./treePreview";
 import { mapState } from "vuex";
-import { Popup } from "mint-ui";
 export default {
     name: "tree",
     data() {
@@ -32,9 +35,12 @@ export default {
         let self = this;
         this.selectVal.name = this.placeholder;
         // 判断vuex中是否存在数据 如果不存在就获取
-        if (this.treeData != "") {
-            this.lists = this.treeData;
-            return;
+        this.lists = this.treeData;
+    },
+    methods: {
+        setName() {
+            this.selectVal = {};
+            this.selectVal.name = this.placeholder;
         }
     },
     props: {
@@ -50,13 +56,14 @@ export default {
     watch: {
         selectVal: {
             handler(newValue, oldValue) {
-                this.$emit("selectMsg", newValue);
+                if (newValue.id) {
+                    this.$emit("selectMsg", newValue);
+                }
             },
             deep: true
         }
     },
     components: {
-        "mt-popup": Popup,
         treePreview
     },
     computed: {
@@ -64,6 +71,7 @@ export default {
     }
 };
 </script>
+<style scoped src="@/assets/css/public.css"/>
 <style scoped>
 .fill {
     width: 70%;
