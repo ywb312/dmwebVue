@@ -116,15 +116,18 @@ export default {
                 },
                 {
                     text: "外派培训",
-                    id: "expatriatetra"
+                    id: "expatriatetra",
+                    components:"allTrain"
                 },
                 {
                     text: "单位培训",
-                    id: "unittrain"
+                    id: "unittrain",
+                    components:"allTrain"
                 },
                 {
                     text: "外来施工单位培训",
-                    id: "foreigntrain"
+                    id: "foreigntrain",
+                    components:"allTrain"
                 },
                 {
                     text: "消防安全专业工作月报表",
@@ -196,8 +199,17 @@ export default {
         record: resolve =>
             require(["@/components/fire/views/record/Record"], resolve),
         // 宣传报道
-        // publicityreport: resolve =>
-        //     require(["@/components/fire/views/record/Record"], resolve)
+        publicityreport: resolve =>
+            require(["@/components/fire/views/train/PublicityReport"], resolve),
+        // 消防宣传培训->所有培训页面
+        allTrain: resolve =>
+            require(["@/components/fire/views/train/AllTrain"], resolve),
+        // 消防安全专业工作月报表
+        firemonthreport: resolve =>
+            require(["@/components/fire/views/FireMonthReport"], resolve),
+        // 建筑消防设施完好过程控制季报表
+        fireseasonreport: resolve =>
+            require(["@/components/fire/views/FireSeasonReport"], resolve),
     }
 };
 </script>
