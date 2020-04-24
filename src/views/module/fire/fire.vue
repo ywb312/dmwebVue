@@ -210,6 +210,18 @@ export default {
         // 建筑消防设施完好过程控制季报表
         fireseasonreport: resolve =>
             require(["@/components/fire/views/FireSeasonReport"], resolve),
+        // 人员密集场所登记表
+        staffdenseplace: resolve =>
+            require(["@/components/fire/views/StaffDensePlace"], resolve),
+        // 易燃易爆场所登记表
+        dangerplace: resolve =>
+            require(["@/components/fire/views/DangerPlace"], resolve),
+        // 重要场所消防验收情况统计
+        fireaccept: resolve =>
+            require(["@/components/fire/views/FireAccept"], resolve),
+        // 动火作业许可证
+        firepermit: resolve =>
+            require(["@/components/fire/views/FirePermit"], resolve),
     }
 };
 </script>
