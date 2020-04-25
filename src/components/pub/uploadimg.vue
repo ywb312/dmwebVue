@@ -1,6 +1,6 @@
 <template>
     <div class="uploadimg">
-        <mt-cell title="选择图片"></mt-cell>
+        <van-cell title="选择图片"></van-cell>
         <ul class="load-list">
             <li v-for="(item,index) in imgArr" :key="index">
                 <div class="load-container">

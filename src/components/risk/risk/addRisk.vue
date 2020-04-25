@@ -4,7 +4,7 @@
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">新增风险点</div>
                 <picker title="风险类型" :slots="fxtypeSlots" @returnMsg="getType"></picker>
-                <mt-field label="风险名称" placeholder="请输入风险名称" v-model="getData.name"></mt-field>
+                <van-field label="风险名称" placeholder="请输入风险名称" v-model="getData.name"/>
                 <mt-button type="primary" size="large" @click="postData">确定</mt-button>
             </div>
         </div>

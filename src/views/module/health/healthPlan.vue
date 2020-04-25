@@ -9,7 +9,7 @@
             left-arrow
             @click-left="$router.back(-1)"
         />
-        <div class="wrap">
+        <div>
             <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
                 <div slot="views">
                     <div

@@ -1,8 +1,8 @@
 <template>
     <div class="datePick">
-        <mt-cell :title="title" is-link @click.native="openPicker">
+        <van-cell :title="title" is-link @click.native="openPicker">
             <span style="color:black">{{message}}</span>
-        </mt-cell>
+        </van-cell>
         <mt-datetime-picker
             ref="picker"
             :type="type"
@@ -77,7 +77,7 @@ export default {
             this.message = date;
             this.$emit("returnDate", this.message);
         },
-        reset(){
+        reset() {
             this.message = this.placeholder;
         }
     },

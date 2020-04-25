@@ -38,5 +38,6 @@ export default {
 <style scoped>
 .correlation {
     padding: 10px 0;
+    background-color: white;
 }
 </style>

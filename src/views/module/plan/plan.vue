@@ -10,7 +10,7 @@
             @click-left="$router.back(-1)"
         />
         <!-- 主体 -->
-        <div class="wrap">
+        <div>
             <component ref="child" :is="pageData.components" :pageData="pageData"></component>
         </div>
     </div>

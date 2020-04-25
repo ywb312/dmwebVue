@@ -40,7 +40,7 @@
             bottomPullText="正在加载更多..."
             ref="loadmore"
         >
-            <div class="wrap">
+            <div>
                 <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                     <div class="main">
                         <div>

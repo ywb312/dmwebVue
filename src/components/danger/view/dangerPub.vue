@@ -16,11 +16,9 @@
         </van-nav-bar>
         <div>
             <!-- 查看方式 -->
-            <correlation
-                class="sty"
-                @radioChange="radioData"
-                v-if="pageData.updata.indexOf('queryAll')>=0"
-            ></correlation>
+            <van-sticky :offset-top="46">
+                <correlation @radioChange="radioData" v-if="pageData.updata.indexOf('queryAll')>=0"></correlation>
+            </van-sticky>
             <!-- 主体 -->
             <preview
                 :pageData="pageData"
@@ -384,14 +382,3 @@ export default {
     }
 };
 </script>
-<style scoped>
-.dangerPub {
-    height: 100%;
-}
-.sty {
-    position: sticky;
-    top: 50px;
-    background: white;
-    z-index: 100;
-}
-</style>

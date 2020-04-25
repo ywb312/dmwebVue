@@ -3,9 +3,9 @@
         <div class="maskWrap" v-show="addshow" @click="addVisible=false">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">新增危险源</div>
-                <mt-field label="危险源名称" placeholder="请输入危险源名称" v-model="getData.wname"></mt-field>
-                <mt-field label="项目" placeholder="请输入项目" v-model="getData.project"></mt-field>
-                <mt-field label="内容" placeholder="请输入内容" v-model="getData.content"></mt-field>
+                <van-field label="危险源名称" placeholder="请输入危险源名称" v-model="getData.wname"/>
+                <van-field label="项目" placeholder="请输入项目" v-model="getData.project"/>
+                <van-field label="内容" placeholder="请输入内容" v-model="getData.content"/>
                 <picker title="影响范围" :slots="yxfwSlots" @returnMsg="getYxfw"></picker>
                 <picker title="可能导致的危害" :slots="knfsSlots" @returnMsg="getKnfs"></picker>
                 <picker title="潜在后果" :slots="qzhgSlots" @returnMsg="getQzhg"></picker>

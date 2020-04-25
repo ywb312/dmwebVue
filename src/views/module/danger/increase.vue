@@ -9,8 +9,8 @@
             left-arrow
             @click-left="$router.back(-1)"
         />
-        <div class="wrap">
-            <mt-field label="填表人" placeholder="请输入填表人" v-model="tbr"></mt-field>
+        <div>
+            <van-field label="填表人" placeholder="请输入填表人" v-model="tbr" />
             <mt-radio title="隐患类型" v-model="prtype" :options="prtypeOption"></mt-radio>
             <pick title="可能发生的事故" :slots="knfsSlots" @returnMsg="getKnfs"></pick>
             <pick title="隐患等级" :slots="crLevelSlots" @returnMsg="getCrLevel"></pick>
@@ -20,9 +20,9 @@
                 :slots="classifySlots"
                 @returnMsg="getClassify"
             ></pick>
-            <mt-field label="隐患名称" placeholder="请输入隐患名称" v-model="inspacetcontent"></mt-field>
-            <mt-field label="隐患地点" placeholder="请输入隐患地点" v-model="craddr"></mt-field>
-            <mt-field label="存在问题" placeholder="请输入存在问题" v-model="czwt"></mt-field>
+            <van-field label="隐患名称" placeholder="请输入隐患名称" v-model="inspacetcontent" />
+            <van-field label="隐患地点" placeholder="请输入隐患地点" v-model="craddr" />
+            <van-field label="存在问题" placeholder="请输入存在问题" v-model="czwt" />
             <uploadimg @toImgArr="getImgArr"></uploadimg>
             <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
         </div>
@@ -56,25 +56,17 @@ export default {
             ],
             // 下拉框的配置
             crLevelSlots: [
-                {
-                    values: [
-                        { text: "一级", id: "ZDYHJB001" },
-                        { text: "二级", id: "ZDYHJB002" },
-                        { text: "三级", id: "ZDYHJB003" },
-                        { text: "四级", id: "ZDYHJB004" }
-                    ]
-                }
+                { text: "一级", id: "ZDYHJB001" },
+                { text: "二级", id: "ZDYHJB002" },
+                { text: "三级", id: "ZDYHJB003" },
+                { text: "四级", id: "ZDYHJB004" }
             ],
             classifySlots: [
-                {
-                    values: [
-                        { text: "管理缺陷", id: "YHLB001" },
-                        { text: "设备设施不安全", id: "YHLB002" },
-                        { text: "员工行为不安全", id: "YHLB003" },
-                        { text: "作业环境不安全", id: "YHLB004" },
-                        { text: "防护用品/器不安全", id: "YHLB005" }
-                    ]
-                }
+                { text: "管理缺陷", id: "YHLB001" },
+                { text: "设备设施不安全", id: "YHLB002" },
+                { text: "员工行为不安全", id: "YHLB003" },
+                { text: "作业环境不安全", id: "YHLB004" },
+                { text: "防护用品/器不安全", id: "YHLB005" }
             ],
             upImgArr: []
         };

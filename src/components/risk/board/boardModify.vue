@@ -3,10 +3,10 @@
         <div class="maskWrap" v-show="modShow" @click="modVisible=false">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">修改公告栏信息</div>
-                <mt-field label="环节或部位" placeholder="请输入环节或部位" v-model="getData.part"></mt-field>
-                <mt-field label="责任人" placeholder="请输入责任人" v-model="getData.zrr"></mt-field>
-                <mt-field label="报告电话" placeholder="请输入报告电话" v-model="getData.reportphone"></mt-field>
-                <mt-field label="有效期" placeholder="请输入有效期" v-model="getData.validity"></mt-field>
+                <van-field label="环节或部位" placeholder="请输入环节或部位" v-model="getData.part"/>
+                <van-field label="责任人" placeholder="请输入责任人" v-model="getData.zrr"/>
+                <van-field label="报告电话" placeholder="请输入报告电话" v-model="getData.reportphone"/>
+                <van-field label="有效期" placeholder="请输入有效期" v-model="getData.validity"/>
                 <mt-button type="primary" size="large" @click="postData">确定</mt-button>
             </div>
         </div>

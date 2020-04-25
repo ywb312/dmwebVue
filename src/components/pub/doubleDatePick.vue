@@ -1,11 +1,11 @@
 <template>
     <div class="datePick">
-        <mt-cell :title="config[0].title" is-link @click.native="openPicker1">
+        <van-cell :title="config[0].title" is-link @click.native="openPicker1">
             <span style="color:black">{{message1}}</span>
-        </mt-cell>
-        <mt-cell :title="config[1].title" is-link @click.native="openPicker2">
+        </van-cell>
+        <van-cell :title="config[1].title" is-link @click.native="openPicker2">
             <span style="color:black">{{message2}}</span>
-        </mt-cell>
+        </van-cell>
         <mt-datetime-picker
             ref="picker1"
             type="date"

@@ -5,16 +5,27 @@
             <p>体系运行管理信息系统</p>
         </div>
         <div class="main">
-            <div>
-                <mt-field class="input" placeholder="请输入用户名" v-model="username"></mt-field>
-                <img src="@/assets/img/icon-test_1.png" alt />
-            </div>
-            <div>
-                <mt-field class="input" placeholder="请输入密码" type="password" v-model="password"></mt-field>
-                <img src="@/assets/img/icon-test.png" alt />
-            </div>
+            <van-form @submit="onSubmit">
+                <van-field
+                    label="用户名"
+                    v-model="username"
+                    name="username"
+                    placeholder="请输入用户名"
+                    :rules="[{ required: true, message: '请输入用户名' }]"
+                />
+                <van-field
+                    label="密码"
+                    v-model="password"
+                    type="password"
+                    name="password"
+                    placeholder="请输入密码"
+                    :rules="[{ required: true, message: '请输入密码' }]"
+                />
+                <div style="margin: 16px;">
+                    <van-button round block type="info" native-type="submit">提交</van-button>
+                </div>
+            </van-form>
         </div>
-        <p class="loginBtn" @click="login">登录</p>
     </div>
 </template>
 <script>
@@ -43,13 +54,12 @@ export default {
         }
     },
     methods: {
-        login() {
+        onSubmit(values) {
             let _this = this;
-            this.alertMsg();
             _this.$api.pub
                 .login({
-                    username: _this.username,
-                    password: _this.password,
+                    username: values.username,
+                    password: values.password,
                     "user-agent": "mobile"
                 })
                 .then(function(res) {
@@ -69,10 +79,9 @@ export default {
                             name: "home"
                         });
                     } else {
-                        this.$toast({
+                        _this.$toast({
                             message: "账户或密码不正确",
-                            position: "bottom",
-                            duration: 4000
+                            position: "bottom"
                         });
                         return;
                     }
@@ -98,28 +107,6 @@ export default {
                 roleLevel = "4";
             }
             return roleLevel;
-        },
-        alertMsg() {
-            // 对账号验空
-            if (!this.username) {
-                // 弹出提示
-                this.$toast({
-                    message: "请输入用户名",
-                    position: "bottom",
-                    duration: 4000
-                });
-                return;
-            }
-            // 对密码验空
-            if (!this.password) {
-                // 弹出提示
-                this.$toast({
-                    message: "请输入密码",
-                    position: "bottom",
-                    duration: 4000
-                });
-                return;
-            }
         }
     }
 };
@@ -138,46 +125,10 @@ export default {
 }
 .main {
     box-sizing: border-box;
-    height: 160px;
-    margin: 20px 40px 40px;
-    padding-top: 28px;
+    margin: 20px 40px;
+    padding: 28px 10px;
     background: skyblue;
     text-align: center;
     border-radius: 6px;
-}
-.main div:last-of-type {
-    margin-top: 5px;
-}
-.main div {
-    position: relative;
-}
-.main img {
-    width: 34px;
-    height: 34px;
-    position: absolute;
-    left: 20px;
-    top: 8.5px;
-}
-.main .input {
-    box-sizing: border-box;
-    margin: auto;
-    padding-left: 40px;
-    width: 275px;
-    height: 26px;
-    border-radius: 5px;
-    border: none;
-}
-.loginBtn {
-    width: 320px;
-    height: 45px;
-    margin: auto;
-    text-align: center;
-    line-height: 45px;
-    color: white;
-    font-size: 26px;
-    text-indent: 27px;
-    letter-spacing: 27px;
-    border-radius: 5px;
-    background: #2585cf;
 }
 </style>

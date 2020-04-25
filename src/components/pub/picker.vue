@@ -1,38 +1,30 @@
 <template>
     <div class="picker">
-        <mt-cell :title="title" is-link @click.native="popupVisible = true;">
-            <span style="color:black">{{message.text}}</span>
-        </mt-cell>
-        <mt-popup v-model="popupVisible" closeOnClickModal="true" position="bottom">
-            <mt-picker
-                :slots="slots"
-                @change="onValuesChange"
-                style="width: 375px;"
-                valueKey="text"
-                showToolbar
-            >
-                <div class="picker-toolbar-title">
-                    <div class="usi-btn-cancel" @click="popupVisible = false;">取消</div>
-                    <div class="usi-btn-sure" @click="confirm">确定</div>
-                </div>
-            </mt-picker>
-        </mt-popup>
+        <van-field
+            readonly
+            clickable
+            :label="title"
+            :value="value.text"
+            placeholder="请选择"
+            @click="popupVisible = true"
+        />
+        <van-popup v-model="popupVisible" position="bottom">
+            <van-picker
+                show-toolbar
+                :columns="slots"
+                @cancel="popupVisible = false"
+                @confirm="onConfirm"
+            />
+        </van-popup>
     </div>
 </template>
 <script>
-import { Popup } from "mint-ui";
-// text为显示的文字 id为代表其代码 returnMsg为返回选中的数据
 export default {
     name: "picker",
     data() {
         return {
-            message: {
-                text: "请选择"
-            },
-            showToolbar: true,
-            popupVisible: false,
-            // 暂存选项 用于第二次打开
-            storge: ""
+            value: "",
+            popupVisible: false
         };
     },
     props: {
@@ -46,34 +38,14 @@ export default {
         }
     },
     methods: {
-        confirm() {
+        onConfirm(value) {
+            this.value = value;
             this.popupVisible = false;
-            this.message = this.storge;
-            this.$emit("returnMsg", this.message);
-        },
-        onValuesChange(picker, values) {
-            this.storge = values[0];
-            if (values[0] > values[1]) {
-                picker.setSlotValue(1, values[0]);
-            }
+            this.$emit("returnMsg", value);
         }
     },
-    components: {
-        "mt-popup": Popup
-    }
+    components: {}
 };
 </script>
 <style scoped>
-.picker-toolbar-title {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    height: 40px;
-    line-height: 40px;
-    font-size: 16px;
-}
-.usi-btn-cancel,
-.usi-btn-sure {
-    color: #2585cf;
-}
 </style>

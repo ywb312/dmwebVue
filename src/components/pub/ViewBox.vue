@@ -1,6 +1,17 @@
 <template>
-    <van-pull-refresh v-model="refreshing" success-text="刷新成功" @refresh="cleraData">
-        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+    <van-pull-refresh
+        style="min-height:500px"
+        v-model="refreshing"
+        success-text="刷新成功"
+        @refresh="cleraData"
+    >
+        <van-list
+            v-model="loading"
+            :finished="finished"
+            finished-text="没有更多了"
+            :immediate-check="false"
+            @load="onLoad"
+        >
             <slot name="views"></slot>
         </van-list>
         <van-empty v-show="noData" description="暂无数据" />
@@ -15,9 +26,9 @@ export default {
             page: 1,
             // 渲染的数据
             rendering: [],
-            // 停止加载
+            // 上拉加载
             loading: false,
-            // 停止上拉加
+            // 下拉刷新
             refreshing: false,
             // 没有更多数据了
             finished: false,
@@ -56,6 +67,9 @@ export default {
             this.$api.pub
                 .showPage(this.postData.url, this.setObj())
                 .then(res => {
+                    this.refreshing = false;
+                    this.loading = false;
+                    // 数据有误
                     if (typeof res != "object") {
                         this.noRes = true;
                         return;
@@ -64,10 +78,8 @@ export default {
                     if (res.rows && res.rows.length != 0) {
                         // 判断是新增还是替换  默认为新增
                         if (more) {
-                            this.loading = false;
                             this.rendering.push(...res.rows);
                         } else {
-                            this.refreshing = false;
                             this.rendering = res.rows;
                         }
                         this.$emit("getRendering", this.rendering);
@@ -76,6 +88,7 @@ export default {
                             this.finished = true;
                         }
                     } else {
+                        // 数据为空
                         if (res.records == 0) {
                             this.noData = true;
                             this.$emit("getRendering", this.rendering);

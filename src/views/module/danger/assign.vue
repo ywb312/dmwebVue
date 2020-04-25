@@ -10,10 +10,10 @@
             @click-left="$router.back(-1)"
         />
         <tree title="整改责任单位" @selectMsg="getCompany"></tree>
-        <mt-field label="整改治理要求" placeholder="请输入整改治理要求" v-model="zgzlyq"></mt-field>
+        <van-field label="整改治理要求" placeholder="请输入整改治理要求" v-model="zgzlyq" />
         <date-pick title="整改截止时间" time="after" placeholder="请选择整改截止时间" @returnDate="getZgjzsj"></date-pick>
-        <mt-field label="填表人员" placeholder="请输入填表人员名称" v-model="tbr"></mt-field>
-        <mt-field label="备注" placeholder="请输入备注说明" v-model="memo"></mt-field>
+        <van-field label="填表人员" placeholder="请输入填表人员名称" v-model="tbr" />
+        <van-field label="备注" placeholder="请输入备注说明" v-model="memo" />
         <div>
             <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
         </div>

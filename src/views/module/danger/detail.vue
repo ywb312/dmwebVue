@@ -12,14 +12,14 @@
         <div>
             <div class="box">
                 <h2 class="color">隐患描述</h2>
-                <mt-field label="作业地点" v-model="pro.craddr" readonly></mt-field>
-                <mt-field label="隐患名称" v-model="pro.crname" readonly></mt-field>
-                <mt-field label="检查单位" v-model="pro.crqy" readonly></mt-field>
-                <mt-field label="检查人员" v-model="pro.tbr" readonly></mt-field>
-                <mt-field label="隐患类型" v-model="pro.prtype" readonly></mt-field>
-                <mt-field label="隐患来源" v-model="pro.sourcetype" readonly></mt-field>
-                <mt-field label="检查日期" v-model="pro.pcdate" readonly></mt-field>
-                <mt-field label="存在问题" v-model="pro.crdesc" readonly></mt-field>
+                <van-field label="作业地点" v-model="pro.craddr" readonly/>
+                <van-field label="隐患名称" v-model="pro.crname" readonly/>
+                <van-field label="检查单位" v-model="pro.crqy" readonly/>
+                <van-field label="检查人员" v-model="pro.tbr" readonly/>
+                <van-field label="隐患类型" v-model="pro.prtype" readonly/>
+                <van-field label="隐患来源" v-model="pro.sourcetype" readonly/>
+                <van-field label="检查日期" v-model="pro.pcdate" readonly/>
+                <van-field label="存在问题" v-model="pro.crdesc" readonly/>
                 <div v-if="pro.yhImg.length>0">
                     <h4 class="color">检查现场图片</h4>
                     <div class="imgs">
@@ -33,13 +33,13 @@
                 <img class="arrow" src="@/assets/iconfont/downarrow.svg" alt />
                 <div class="box">
                     <h2 class="color">{{item.text}}</h2>
-                    <mt-field
+                    <van-field
                         v-for="n in item.config"
                         :key="n.label"
                         :label="n.label"
                         v-model="n.key"
                         readonly
-                    ></mt-field>
+                    />
                 </div>
             </div>
         </div>

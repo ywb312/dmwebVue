@@ -17,7 +17,7 @@
             :auto-fill="allLoaded"
             bottomPullText="正在加载更多..."
             ref="loadmore"
-            class="wrap"
+           
         >
             <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                 <div class="title">

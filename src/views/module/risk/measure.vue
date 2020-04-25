@@ -10,7 +10,7 @@
             @click-left="$router.back(-1)"
         />
         <!-- 渲染当前页面 -->
-        <div class="wrap">
+        <div>
             <mt-loadmore
                 :top-method="loadTop"
                 :bottom-method="loadBottom"

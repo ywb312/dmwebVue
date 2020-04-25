@@ -3,7 +3,7 @@
         <div class="maskWrap" v-show="modShow" @click="modVisible=false">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">修改管控措施</div>
-                <mt-field label="管控措施名称" placeholder="请输入风险名称" v-model="getData.gname"></mt-field>
+                <van-field label="管控措施名称" placeholder="请输入风险名称" v-model="getData.gname" />
                 <picker title="管控措施类型" :slots="gTypeSlots" @returnMsg="getType"></picker>
                 <mt-button type="primary" size="large" @click="postData">确定</mt-button>
             </div>
@@ -41,7 +41,7 @@ export default {
                 if (this.getData[key] == "") {
                     this.$toast({
                         message: "请继续选择完毕后提交",
-                        position: "bottom",
+                        position: "bottom"
                     });
                     return;
                 }

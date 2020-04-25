@@ -9,9 +9,9 @@
             left-arrow
             @click-left="$router.back(-1)"
         />
-        <mt-field label="作业地点" placeholder="请输入作业地点" v-model="zydd"></mt-field>
-        <mt-field label="检查人员" placeholder="请输入备注说明" v-model="tbr"></mt-field>
-        <mt-field label="检查日期" placeholder="请输入检查日期" v-model="date" readonly></mt-field>
+        <van-field label="作业地点" placeholder="请输入作业地点" v-model="zydd"></van-field>
+        <van-field label="检查人员" placeholder="请输入备注说明" v-model="tbr"></van-field>
+        <van-field label="检查日期" placeholder="请输入检查日期" v-model="date" readonly></van-field>
         <div>
             <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
         </div>

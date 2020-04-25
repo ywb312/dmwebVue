@@ -12,7 +12,10 @@ import api from './api/api'
 import common from './utils/common'
 import 'amfe-flexible'
 import {
+	Form,
+	Field,
 	NavBar,
+	Icon,
 	Grid,
 	GridItem,
 	Image,
@@ -41,11 +44,15 @@ import {
 	PullRefresh,
 	RadioGroup,
 	Radio,
+	Picker,
 	ActionSheet
 } from 'vant';
 // {Radio,Popup,Loadmore,DatetimePicker,MessageBox} mintUI使用的组件
 Vue.use(MintUI)
-	.use(NavBar) //vant部分
+	.use(Form) //vant部分
+	.use(Field)
+	.use(NavBar)
+	.use(Icon)
 	.use(Grid)
 	.use(GridItem)
 	.use(Image)
@@ -74,6 +81,7 @@ Vue.use(MintUI)
 	.use(PullRefresh)
 	.use(RadioGroup)
 	.use(Radio)
+	.use(Picker)
 	.use(Divider);
 Vue.use(axios)
 Vue.prototype.$api = api;

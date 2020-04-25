@@ -4,13 +4,13 @@
         <div class="banner">
             <img src="@/assets/img/incid_management.png" alt />
         </div>
-        <mt-cell title="待办事项" is-link to="/backlog">
-            <img slot="icon" src="@/assets/img/wb_todo.png" width="20" height="20" />
+        <van-cell title="待办事项" is-link to="/backlog">
+            <img slot="icon" src="@/assets/img/wb_todo.png" class="icon" />
             <van-tag v-if="backlog.records>0" type="danger">{{backlog.records}}</van-tag>
-        </mt-cell>
-        <mt-cell title="已办事项" is-link to="/finished">
-            <img slot="icon" src="@/assets/img/wb_done.png" width="20" height="20" />
-        </mt-cell>
+        </van-cell>
+        <van-cell title="已办事项" is-link to="/finished">
+            <img slot="icon" src="@/assets/img/wb_done.png" class="icon" />
+        </van-cell>
     </div>
 </template>
 <script>
@@ -32,5 +32,11 @@ export default {
 .banner img {
     display: block;
     width: 100%;
+}
+.icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    padding-top: 2px;
 }
 </style>

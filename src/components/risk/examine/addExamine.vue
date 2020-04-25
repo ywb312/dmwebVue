@@ -24,32 +24,28 @@ export default {
             },
             rateSlots: [
                 {
-                    values: [
-                        {
-                            text: "一班",
-                            id: ""
-                        },
-                        {
-                            text: "二班",
-                            id: ""
-                        },
-                        {
-                            text: "三班",
-                            id: ""
-                        },
-                        {
-                            text: "周",
-                            id: ""
-                        },
-                        {
-                            text: "月",
-                            id: ""
-                        },
-                        {
-                            text: "年",
-                            id: ""
-                        }
-                    ]
+                    text: "一班",
+                    id: ""
+                },
+                {
+                    text: "二班",
+                    id: ""
+                },
+                {
+                    text: "三班",
+                    id: ""
+                },
+                {
+                    text: "周",
+                    id: ""
+                },
+                {
+                    text: "月",
+                    id: ""
+                },
+                {
+                    text: "年",
+                    id: ""
                 }
             ]
         };
@@ -72,7 +68,7 @@ export default {
                 if (this.getData[key] == "") {
                     this.$toast({
                         message: "请把信息补充完整",
-                        position: "bottom",
+                        position: "bottom"
                     });
                     return;
                 }

@@ -4,7 +4,7 @@
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">修改风险点</div>
                 <picker title="风险类型" :slots="slots" @returnMsg="getType"></picker>
-                <mt-field label="风险名称" placeholder="请输入风险名称" v-model="getData.name"></mt-field>
+                <van-field label="风险名称" placeholder="请输入风险名称" v-model="getData.name" />
                 <mt-button type="primary" size="large" @click="postData">确定</mt-button>
             </div>
         </div>
@@ -18,14 +18,10 @@ export default {
         return {
             modVisible: false,
             slots: [
-                {
-                    values: [
-                        { text: "作业活动", id: "FXDLX001" },
-                        { text: "工艺", id: "FXDLX004" },
-                        { text: "设备", id: "FXDLX002" },
-                        { text: "设施", id: "FXDLX003" }
-                    ]
-                }
+                { text: "作业活动", id: "FXDLX001" },
+                { text: "工艺", id: "FXDLX004" },
+                { text: "设备", id: "FXDLX002" },
+                { text: "设施", id: "FXDLX003" }
             ],
             getData: {
                 name: "",
@@ -39,14 +35,14 @@ export default {
             if (this.getData.name == "") {
                 this.$toast({
                     message: "请输入风险名称",
-                    position: "bottom",
+                    position: "bottom"
                 });
                 return;
             }
             if (this.getData.fxtype == "") {
                 this.$toast({
                     message: "请选择风险类型",
-                    position: "bottom",
+                    position: "bottom"
                 });
                 return;
             }
