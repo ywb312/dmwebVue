@@ -1,13 +1,16 @@
 <template>
     <div class="page">
         <!-- 标题  -->
-        <mt-header title="劳护用品发放详情" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
+        <van-nav-bar
+            title="劳护用品发放详情"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
         <!-- 主体 -->
-        <div class="wrap">
+        <div>
             <div v-if="$route.query.type=='1'" class="main">
                 <div>
                     <p>工作服: {{selectData.coveral}}</p>

@@ -1,13 +1,16 @@
 <template>
     <div class="page">
         <!-- 标题  -->
-        <mt-header title="救援队伍人员" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
+        <van-nav-bar
+            title="救援队伍人员"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
         <!-- 主体 -->
-        <div class="wrap">
+        <div>
             <SearchBox placeholder="请输入演练名称/预案名称搜索" @callback="searchBack"></SearchBox>
             <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
                 <div slot="views">

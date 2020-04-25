@@ -1,13 +1,16 @@
 <template>
     <div class="companyRisk page">
         <!-- 标题  -->
-        <mt-header title="危险源" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
+        <van-nav-bar
+            title="危险源"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
         <!-- 渲染当前页面 -->
-        <div class="wrap">
+        <div>
             <mt-loadmore
                 :top-method="loadTop"
                 :bottom-method="loadBottom"

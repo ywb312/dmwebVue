@@ -1,11 +1,14 @@
 <template>
     <div class="increase page">
         <!-- 标题  -->
-        <mt-header title="发现隐患" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
+        <van-nav-bar
+            title="发现隐患"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
         <div class="wrap">
             <mt-field label="填表人" placeholder="请输入填表人" v-model="tbr"></mt-field>
             <mt-radio title="隐患类型" v-model="prtype" :options="prtypeOption"></mt-radio>
@@ -123,7 +126,7 @@ export default {
     },
     components: {
         pick,
-        uploadimg,
+        uploadimg
     }
 };
 </script>

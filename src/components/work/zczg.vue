@@ -1,11 +1,14 @@
 <template>
     <div class="zczg">
         <!-- 标题  -->
-        <mt-header title="发现隐患">
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
+        <van-nav-bar
+            title="发现隐患"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
         <mt-field label="填表人" placeholder="请输入填表人" v-model="tbr"></mt-field>
         <mt-field label="审批意见" placeholder="请输入审批意见" v-model="opinion"></mt-field>
         <mt-field label="整改情况" placeholder="请输入整改情况" v-model="zgpsqk"></mt-field>

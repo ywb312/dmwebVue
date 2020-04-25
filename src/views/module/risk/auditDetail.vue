@@ -1,11 +1,14 @@
 <template>
     <div class="page">
-        <mt-header title="审核详情" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
-        <div class="wrap">
+        <van-nav-bar
+            title="审核详情"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
+        <div>
             <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                 <div class="title">
                     <h4>{{index+1+'.'+item.name}}</h4>

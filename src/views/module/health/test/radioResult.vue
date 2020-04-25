@@ -1,12 +1,15 @@
 <template>
     <div class="page">
         <!-- 标题  -->
-        <mt-header title="放射源放射性检测结果" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
-        <div class="wrap">
+        <van-nav-bar
+            title="放射源放射性检测结果"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
+        <div>
             <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
                 <div slot="views">
                     <div

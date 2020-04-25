@@ -12,6 +12,7 @@ import api from './api/api'
 import common from './utils/common'
 import 'amfe-flexible'
 import {
+	NavBar,
 	Grid,
 	GridItem,
 	Image,
@@ -44,7 +45,8 @@ import {
 } from 'vant';
 // {Radio,Popup,Loadmore,DatetimePicker,MessageBox} mintUI使用的组件
 Vue.use(MintUI)
-	.use(Grid) //vant部分
+	.use(NavBar) //vant部分
+	.use(Grid)
 	.use(GridItem)
 	.use(Image)
 	.use(Toast)

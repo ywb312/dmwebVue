@@ -1,13 +1,16 @@
 <template>
     <div class="page">
         <!-- 标题  -->
-        <mt-header title="从业人员登记列表" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
+        <van-nav-bar
+            title="从业人员登记列表"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
         <!-- 主体 -->
-        <div class="wrap">
+        <div>
             <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
                 <div slot="views">
                     <div class="wrapper" v-for="(item,index) in rendering" :key="index">

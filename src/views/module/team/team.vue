@@ -1,13 +1,16 @@
 <template>
     <div class="page">
         <!-- 标题  -->
-        <mt-header :title="pageData.text" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
+        <van-nav-bar
+            :title="pageData.text"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
         <!-- 主体 -->
-        <div class="wrap">
+        <div>
             <component :is="pageData.components" :pageData="pageData"></component>
         </div>
     </div>

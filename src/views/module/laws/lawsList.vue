@@ -1,12 +1,15 @@
 <template>
     <div class="page">
         <!-- 标题  -->
-        <mt-header title="法律法规识别记录清单" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
-        <div class="wrap">
+        <van-nav-bar
+            title="法律法规识别记录清单"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
+        <div>
             <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
                 <div slot="views">
                     <div class="wrapper" v-for="(item,index) in rendering" :key="index">

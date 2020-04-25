@@ -1,11 +1,14 @@
 <template>
     <div class="list page">
         <!-- 标题  -->
-        <mt-header :title="pageData.title" fixed>
-            <router-link to="/home" slot="left">
-                <mt-button icon="back"></mt-button>
-            </router-link>
-        </mt-header>
+        <van-nav-bar
+            :title="pageData.title"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.push({path:'/home'})"
+        />
         <div class="banner wrap">
             <img src="@/assets/img/incid_management.png" alt />
         </div>

@@ -1,11 +1,14 @@
 <template>
-    <div class="finished page">
+    <div class="page">
         <!-- 标题  -->
-        <mt-header title="已办事项" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
+        <van-nav-bar
+            title="已办事项"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
         <!-- 主体 -->
         <mt-loadmore
             :top-method="loadTop"
@@ -14,7 +17,6 @@
             :auto-fill="allLoaded"
             bottomPullText="正在加载更多..."
             ref="loadmore"
-            class="wrap"
         >
             <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                 <div class="title">

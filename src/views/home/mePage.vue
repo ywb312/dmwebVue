@@ -1,6 +1,6 @@
 <template>
     <div class="mePage">
-        <mt-header title="我的"></mt-header>
+        <van-nav-bar title="我的" fixed placeholder />
         <div class="banner">
             <img src="@/assets/img/homeshow.png" alt />
         </div>

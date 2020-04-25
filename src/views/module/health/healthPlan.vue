@@ -1,11 +1,14 @@
 <template>
     <div class="page">
         <!-- 标题  -->
-        <mt-header title="部门安排" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
+        <van-nav-bar
+            title="部门安排"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
         <div class="wrap">
             <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
                 <div slot="views">

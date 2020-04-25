@@ -1,11 +1,14 @@
 <template>
     <div class="assign page">
         <!-- 标题  -->
-        <mt-header title="填报指派">
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
+        <van-nav-bar
+            title="填报指派"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
         <tree title="整改责任单位" @selectMsg="getCompany"></tree>
         <mt-field label="整改治理要求" placeholder="请输入整改治理要求" v-model="zgzlyq"></mt-field>
         <date-pick title="整改截止时间" time="after" placeholder="请选择整改截止时间" @returnDate="getZgjzsj"></date-pick>

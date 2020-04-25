@@ -1,11 +1,14 @@
 <template>
-    <div class="safeCheack page">
+    <div class="page">
         <!-- 标题  -->
-        <mt-header title="安全检查">
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
+        <van-nav-bar
+            title="安全检查"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
         <mt-field label="作业地点" placeholder="请输入作业地点" v-model="zydd"></mt-field>
         <mt-field label="检查人员" placeholder="请输入备注说明" v-model="tbr"></mt-field>
         <mt-field label="检查日期" placeholder="请输入检查日期" v-model="date" readonly></mt-field>

@@ -1,11 +1,14 @@
 <template>
     <div class="page">
-        <mt-header title="审核列表" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
-        <div class="wrap">
+        <van-nav-bar
+            title="审核列表"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
+        <div>
             <mt-loadmore
                 :top-method="loadTop"
                 :bottom-method="loadBottom"
@@ -193,7 +196,7 @@ export default {
             this.cleraData();
             this.$toast({
                 message: "操作成功",
-                position: "bottom",
+                position: "bottom"
             });
         },
         // 设置返还参数

@@ -1,15 +1,20 @@
 <template>
     <div class="dangerPub">
         <!-- 标题  -->
-        <mt-header :title="pageData.text" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-            <mt-button slot="right" @click="popshow=true">
+        <van-nav-bar
+            :title="pageData.text"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+            @click-right="popshow=true"
+        >
+            <template #right>
                 <img src="@/assets/iconfont/search.svg" />
-            </mt-button>
-        </mt-header>
-        <div class="wrap">
+            </template>
+        </van-nav-bar>
+        <div>
             <!-- 查看方式 -->
             <correlation
                 class="sty"

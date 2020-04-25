@@ -1,10 +1,12 @@
 <template>
     <div>
         <!-- 查询 -->
-        <van-row type="flex" justify="space-around">
-            <van-button plain hairline color="#2585cf" @click="searchShow=true">查询</van-button>
-            <!-- <van-button plain hairline color="#2585cf" @click="">一键取消逾期</van-button> -->
-        </van-row>
+        <van-sticky :offset-top="46">
+            <van-button plain color="#2585cf" @click="searchShow=true" block>查询</van-button>
+        </van-sticky>
+        <!-- <van-row type="flex" justify="space-around">
+            <van-button plain hairline color="#2585cf" @click="">一键取消逾期</van-button>
+        </van-row>-->
         <!-- 页面 -->
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
@@ -43,7 +45,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
         <!-- 功能组件 -->
         <div>

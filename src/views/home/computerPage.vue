@@ -1,6 +1,6 @@
 <template>
     <div class="computerPage">
-        <mt-header title="工作台"></mt-header>
+        <van-nav-bar title="工作台" fixed placeholder />
         <div class="banner">
             <img src="@/assets/img/incid_management.png" alt />
         </div>
@@ -21,9 +21,9 @@ export default {
             badge: 0
         };
     },
-    computed:{
-        backlog(){
-            return this.$store.state.backlog
+    computed: {
+        backlog() {
+            return this.$store.state.backlog;
         }
     }
 };

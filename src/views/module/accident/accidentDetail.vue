@@ -1,12 +1,15 @@
 <template>
     <div class="page">
         <!-- 标题  -->
-        <mt-header title="事故详情" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
-        <div class="wrapper wrap">
+        <van-nav-bar
+            title="事故详情"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
+        <div class="wrapper">
             <van-divider
                 :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px', margin:'4px 0'}"
             >基本信息</van-divider>

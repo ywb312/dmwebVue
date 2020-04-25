@@ -1,7 +1,7 @@
 <template>
     <div class="homePage">
-        <mt-header title="主页" fixed></mt-header>
-        <div class="banner wrap">
+        <van-nav-bar title="主页" fixed placeholder />
+        <div class="banner">
             <img src="@/assets/img/homeshow.png" alt />
         </div>
         <div class="grids">
@@ -115,7 +115,7 @@ export default {
                     id: "fire",
                     url: require("@/assets/img/ic_accident_manager.png"),
                     title: "消防管理"
-                },
+                }
             ]
         };
     },

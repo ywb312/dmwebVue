@@ -1,12 +1,15 @@
 <template>
     <div class="planDetail page">
         <!-- 标题  -->
-        <mt-header title="检查记录详情" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
-        <van-sticky :offset-top="49">
+        <van-nav-bar
+            title="检查记录详情"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
+        <van-sticky :offset-top="46">
             <div class="topPage">
                 <div>
                     计划名称:

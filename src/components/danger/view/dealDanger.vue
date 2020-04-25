@@ -1,15 +1,20 @@
 <template>
     <div class="dealDanger">
         <!-- 标题  -->
-        <mt-header title="隐患处理" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-            <mt-button slot="right" @click="$router.push('/danger/increase')">
+        <van-nav-bar
+            title="隐患处理"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+            @click-right="$router.push('/danger/increase')"
+        >
+            <template #right>
                 <img src="@/assets/iconfont/add.svg" />
-            </mt-button>
-        </mt-header>
-        <div class="wrap">
+            </template>
+        </van-nav-bar>
+        <div>
             <mt-loadmore
                 :top-method="loadTop"
                 :bottom-method="loadBottom"

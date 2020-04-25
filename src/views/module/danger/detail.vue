@@ -1,12 +1,15 @@
 <template>
     <div class="detail page">
         <!-- 标题  -->
-        <mt-header title="隐患详情" fixed>
-            <router-link to slot="left">
-                <mt-button icon="back" @click="$router.back(-1)"></mt-button>
-            </router-link>
-        </mt-header>
-        <div class="wrap">
+        <van-nav-bar
+            title="隐患详情"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
+        <div>
             <div class="box">
                 <h2 class="color">隐患描述</h2>
                 <mt-field label="作业地点" v-model="pro.craddr" readonly></mt-field>
