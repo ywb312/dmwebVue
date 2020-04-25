@@ -36,6 +36,10 @@ import {
 	DatetimePicker,
 	Col,
 	Row,
+	List,
+	PullRefresh,
+	RadioGroup,
+	Radio,
 	ActionSheet
 } from 'vant';
 // {Radio,Popup,Loadmore,DatetimePicker,MessageBox} mintUI使用的组件
@@ -64,6 +68,10 @@ Vue.use(MintUI)
 	.use(Col)
 	.use(Row)
 	.use(DatetimePicker)
+	.use(List)
+	.use(PullRefresh)
+	.use(RadioGroup)
+	.use(Radio)
 	.use(Divider);
 Vue.use(axios)
 Vue.prototype.$api = api;

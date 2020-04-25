@@ -1,36 +1,42 @@
 <template>
     <div class="correlation">
-        <mt-radio title="查看方式" v-model="value" :options="['与我相关', '查看全部']" @change="toParent"></mt-radio>
+        <van-radio-group v-model="radio" direction="horizontal" @change="toParent">
+            <van-row style="width:100%;" type="flex" justify="space-around">
+                <van-col span="6">查看方式</van-col>
+                <van-col span="8">
+                    <van-radio name="1">与我相关</van-radio>
+                </van-col>
+                <van-col span="8">
+                    <van-radio name="2">查看全部</van-radio>
+                </van-col>
+            </van-row>
+        </van-radio-group>
     </div>
 </template>
 <script>
-import { Radio } from 'mint-ui';
 export default {
     name: "correlation",
     data() {
         return {
-            value:"与我相关"
+            radio: "1"
         };
     },
-    methods:{
-        toParent(){
+    methods: {
+        toParent() {
             let queryAll = "";
-            if(this.value=="与我相关"){
+            if (this.radio == "1") {
                 queryAll = "null";
-            }else{
+            } else if (this.radio == "2") {
                 queryAll = "all";
             }
-            this.$emit('radioChange', queryAll);
+            this.$emit("radioChange", queryAll);
         }
     },
-    components:{ 
-        "mt-radio": Radio
-    }
+    components: {}
 };
 </script>
 <style scoped>
 .correlation {
-    height: 100%;
-    overflow: hidden;
+    padding: 10px 0;
 }
 </style>

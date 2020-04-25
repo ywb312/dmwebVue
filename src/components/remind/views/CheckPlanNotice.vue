@@ -2,8 +2,8 @@
     <div>
         <!-- 查询 -->
         <van-row type="flex" justify="space-around">
-            <van-button plain hairline color="#2585cf" @click="popshow=true">查询</van-button>
-            <!-- <van-button plain hairline color="#2585cf">一键取消逾期</van-button> -->
+            <van-button plain hairline color="#2585cf" @click="searchShow=true">查询</van-button>
+            <!-- <van-button plain hairline color="#2585cf" @click="">一键取消逾期</van-button> -->
         </van-row>
         <!-- 页面 -->
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
@@ -43,16 +43,15 @@
                     </div>
                 </div>
             </div>
-            <div slot="tip">
-                <van-divider>没有更多数据了</van-divider>
-            </div>
+            
         </ViewBox>
         <!-- 功能组件 -->
         <div>
             <van-dialog
-                v-model="popshow"
+                v-model="searchShow"
                 title="查询条件"
                 show-cancel-button
+                :overlay-style="{'z-index':'999'}"
                 confirmButtonText="查询"
                 cancelButtonText="取消"
                 @confirm="searchBack"
@@ -70,7 +69,7 @@
                 <van-datetime-picker
                     v-model="currentDate"
                     type="date"
-                    :max-date="maxDate"
+                    :maxDate="maxDate"
                     :formatter="formatter"
                     @confirm="getDate"
                     @cancel="dateShow=false"
@@ -96,7 +95,7 @@ export default {
                 }
             },
             // 查询弹窗
-            popshow: false,
+            searchShow: false,
             // 日期选择器
             dateShow: false,
             currentDate: new Date(),
@@ -119,21 +118,11 @@ export default {
             this.$refs.tree.setName();
             this.$set(this.postData.obj, "bean.checkdept", "");
             this.$set(this.postData.obj, "bean.createdate", "");
-            this.popshow = false;
+            this.searchShow = false;
         },
         // 组织机构树返回
         getCompany(v) {
             this.postData.obj["bean.checkdept"] = v.id;
-        },
-        formatter(type, val) {
-            if (type === "year") {
-                return `${val}年`;
-            } else if (type === "month") {
-                return `${val}月`;
-            } else if (type === "day") {
-                return `${val}日`;
-            }
-            return val;
         },
         //获取日期
         getDate(val) {
@@ -144,6 +133,18 @@ export default {
                 this.formatDate(val)
             );
         },
+        // 对时间选择器设置
+        formatter(type, val) {
+            if (type === "year") {
+                return `${val}年`;
+            } else if (type === "month") {
+                return `${val}月`;
+            } else if (type === "day") {
+                return `${val}日`;
+            }
+            return val;
+        },
+        // 设置时间选择器的格式
         formatDate(date) {
             return `${date.getFullYear()}-${date.getMonth() +
                 1}-${date.getDate()}`;

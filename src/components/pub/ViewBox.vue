@@ -1,23 +1,13 @@
 <template>
-    <mt-loadmore
-        :top-method="loadTop"
-        :bottom-method="loadBottom"
-        :bottom-all-loaded="allLoaded"
-        :auto-fill="allLoaded"
-        bottomPullText="正在加载更多..."
-        ref="loadmore"
-    >
-        <slot name="views"></slot>
-        <div v-show="noMore">
-            <slot name="tip"></slot>
-        </div>
+    <van-pull-refresh v-model="refreshing" success-text="刷新成功" @refresh="cleraData">
+        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+            <slot name="views"></slot>
+        </van-list>
         <van-empty v-show="noData" description="暂无数据" />
         <van-empty image="error" v-show="noRes" description="数据有误" />
-    </mt-loadmore>
+    </van-pull-refresh>
 </template>
 <script>
-// 这是基本渲染功能的组件 公用
-import { Loadmore } from "mint-ui";
 export default {
     name: "ViewBox",
     data() {
@@ -25,11 +15,15 @@ export default {
             page: 1,
             // 渲染的数据
             rendering: [],
+            // 停止加载
+            loading: false,
             // 停止上拉加
-            allLoaded: false,
+            refreshing: false,
             // 没有更多数据了
-            noMore: false,
+            finished: false,
+            // 暂无数据
             noData: false,
+            // 数据有误
             noRes: false
         };
     },
@@ -70,52 +64,41 @@ export default {
                     if (res.rows && res.rows.length != 0) {
                         // 判断是新增还是替换  默认为新增
                         if (more) {
+                            this.loading = false;
                             this.rendering.push(...res.rows);
                         } else {
+                            this.refreshing = false;
                             this.rendering = res.rows;
                         }
                         this.$emit("getRendering", this.rendering);
                         // 返回数据小于10条 停止上拉刷新
                         if (res.rows.length < 10) {
-                            this.allLoaded = true;
-                            this.noMore = true;
-                        } else {
-                            this.allLoaded = false;
-                            this.noMore = false;
+                            this.finished = true;
                         }
                     } else {
                         if (res.records == 0) {
                             this.noData = true;
                             this.$emit("getRendering", this.rendering);
                         }
-                        this.allLoaded = true;
                         return;
                     }
                 });
         },
         // 上拉加载方法
-        loadBottom() {
+        onLoad() {
             this.page++;
-            this.$refs.loadmore.onBottomLoaded();
             this.getData();
         },
-        // 下拉刷新方法
-        loadTop() {
-            this.cleraData();
-            this.$refs.loadmore.onTopLoaded();
-        },
-        // 清空所需渲染数据并重新渲染
+        // 清空所需渲染数据并重新渲染 下拉直接执行此方法
         cleraData() {
             this.page = 1;
-            this.noMore = false;
+            this.finished = false;
             this.noData = false;
             this.rendering = [];
             this.getData(false);
         }
     },
-    components: {
-        "mt-loadmore": Loadmore
-    }
+    components: {}
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>

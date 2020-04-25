@@ -27,9 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div slot="tip">
-                <van-divider>没有更多数据了</van-divider>
-            </div>
+            
         </ViewBox>
         <mt-button class="btn" type="primary" size="large" @click="addData">新增专项检查计划</mt-button>
     </div>

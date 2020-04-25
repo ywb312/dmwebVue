@@ -29,9 +29,7 @@
                     </div>
                 </div>
             </div>
-            <div slot="tip">
-                <van-divider>没有更多数据了</van-divider>
-            </div>
+            
         </ViewBox>
     </div>
 </template>
