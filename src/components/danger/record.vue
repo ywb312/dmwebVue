@@ -1,45 +1,44 @@
 <template>
     <div class="record">
-        <mt-popup
-            class="popup"
-            v-model="recordVisible"
-            popup-transition="popup-fade"
-            closeOnClickModal="true"
-        >
-            <h2 class="title">审批意见</h2>
-            <div class="noData" v-if="resData.length==0">无审批记录</div>
-            <div class="chunk" v-for="item in resData" :key="item.id">
-                <div>
-                    <h3>{{item.name}}</h3>
+        <Popup :popshow="recordVisible" @close="recordVisible=false">
+            <div slot="title" class="popupTitle">审批意见</div>
+            <div slot="views" class="popup">
+                <div class="chunk" v-for="item in resData" :key="item.id">
+                    <div>
+                        <h4>{{item.name}}</h4>
+                    </div>
+                    <div>
+                        <span class="minWidth">审批人: {{item.username}}</span>
+                    </div>
+                    <div>
+                        <span class="minWidth">审批时间: {{item.endtime}}</span>
+                    </div>
+                    <div>
+                        <span class="minWidth">审批结果: {{item.message1}}</span>
+                    </div>
+                    <div>
+                        <span class="minWidth">审批意见: {{item.message2}}</span>
+                    </div>
                 </div>
-                <div>
-                    <span class="minWidth">审批人:</span>
-                    <span style="max-width:250px;">{{item.username}}</span>
-                </div>
-                <div>
-                    <span class="minWidth">审批时间:</span>
-                    <span style="max-width:250px;">{{item.endtime}}</span>
-                </div>
-                <div>
-                    <span class="minWidth">审批结果:</span>
-                    <span style="max-width:250px;">{{item.message1}}</span>
-                </div>
-                <div>
-                    <span class="minWidth">审批意见:</span>
-                    <span style="max-width:250px;">{{item.message2}}</span>
-                </div>
+                <van-empty v-show="noData" description="无审批记录" />
+                <van-empty image="error" v-show="noRes" description="数据有误" />
             </div>
-        </mt-popup>
+        </Popup>
     </div>
 </template>
 <script>
-import { Popup } from "mint-ui";
+import Popup from "@/components/pub/Popup.vue";
 export default {
     name: "record",
     data() {
         return {
             recordVisible: false,
-            resData: []
+            resData: [],
+            // 加载中
+            // 无数据
+            noData: false,
+            // 数据有误
+            noRes: false
         };
     },
     props: ["compShow"],
@@ -50,6 +49,14 @@ export default {
             this.$api.danger
                 .getHicomments({ bussinesskey: obj.yhid })
                 .then(res => {
+                    if (typeof res != "object") {
+                        this.noRes = true;
+                        return;
+                    }
+                    if (res.rows.length == 0) {
+                        this.noData = true;
+                        return;
+                    }
                     self.resData = res.rows;
                 });
         }
@@ -70,7 +77,7 @@ export default {
         }
     },
     components: {
-        "mt-popup": Popup
+        Popup
     },
     computed: {
         selectData() {
@@ -79,19 +86,10 @@ export default {
     }
 };
 </script>
+<style scoped src="@/assets/css/public.css"/>
 <style scoped>
-.popup {
-    width: 310px;
-    height: 550px;
-    overflow: scroll;
-}
 ::-webkit-scrollbar {
     width: 0px;
-}
-.title {
-    text-align: center;
-    padding: 10px 0;
-    border-bottom: solid 1px #ddd;
 }
 .noData {
     padding-top: 10px;
@@ -100,13 +98,10 @@ export default {
 .minWidth {
     min-width: 70px;
 }
-.chunk {
-    margin-bottom: 10px;
-}
 .chunk div {
     display: flex;
     justify-content: space-between;
-    padding: 5px 20px;
+    padding: 4px 0;
     background-color: rgb(250, 250, 250);
 }
 </style>

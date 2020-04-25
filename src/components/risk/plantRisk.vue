@@ -32,7 +32,7 @@
         <van-divider v-show="noMore">没有更多数据了</van-divider>
         <!-- 新增按钮 -->
         <div>
-            <mt-button class="btn" type="primary" size="large" @click="addRisk">新增风险点</mt-button>
+            <van-button class="btn" type="info" size="large" @click="addRisk">新增风险点</van-button>
         </div>
         <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->

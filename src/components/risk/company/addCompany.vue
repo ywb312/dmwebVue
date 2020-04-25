@@ -9,7 +9,7 @@
                 <picker title="影响范围" :slots="yxfwSlots" @returnMsg="getYxfw"></picker>
                 <picker title="可能导致的危害" :slots="knfsSlots" @returnMsg="getKnfs"></picker>
                 <picker title="潜在后果" :slots="qzhgSlots" @returnMsg="getQzhg"></picker>
-                <mt-button type="primary" size="large" @click="postData">确定</mt-button>
+                <van-button type="info" size="large" @click="postData">确定</van-button>
             </div>
         </div>
     </div>

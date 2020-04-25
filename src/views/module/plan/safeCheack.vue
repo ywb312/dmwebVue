@@ -13,7 +13,7 @@
         <van-field label="检查人员" placeholder="请输入备注说明" v-model="tbr"></van-field>
         <van-field label="检查日期" placeholder="请输入检查日期" v-model="date" readonly></van-field>
         <div>
-            <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
+            <van-button class="btn" type="info" size="large" @click="update">提交</van-button>
         </div>
     </div>
 </template>

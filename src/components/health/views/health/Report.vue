@@ -28,7 +28,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
         <!-- 操作面板 -->
         <van-action-sheet

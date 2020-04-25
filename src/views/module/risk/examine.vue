@@ -38,7 +38,7 @@
         </div>
         <!-- 新增按钮 -->
         <div>
-            <mt-button class="btn" type="primary" size="large" @click="addshow=true">新增排查</mt-button>
+            <van-button class="btn" type="info" size="large" @click="addshow=true">新增排查</van-button>
         </div>
         <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->

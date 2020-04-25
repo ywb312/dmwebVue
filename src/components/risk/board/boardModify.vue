@@ -7,7 +7,7 @@
                 <van-field label="责任人" placeholder="请输入责任人" v-model="getData.zrr"/>
                 <van-field label="报告电话" placeholder="请输入报告电话" v-model="getData.reportphone"/>
                 <van-field label="有效期" placeholder="请输入有效期" v-model="getData.validity"/>
-                <mt-button type="primary" size="large" @click="postData">确定</mt-button>
+                <van-button type="info" size="large" @click="postData">确定</van-button>
             </div>
         </div>
     </div>

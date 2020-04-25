@@ -59,29 +59,23 @@
                 @cancel="removeVal"
             >
                 <div slot="default">
-                    <van-cell title="开始日期" value-class="cellValue" @click="dateShow = true">
-                        <span>{{postData.obj["bean.createdate"]}}</span>
-                    </van-cell>
+                    <date-pick
+                        title="开始日期"
+                        ref="dateChild"
+                        time="before"
+                        placeholder="请选择时间"
+                        @returnDate="getDate"
+                    ></date-pick>
                     <tree title="部门" ref="tree" @selectMsg="getCompany"></tree>
                 </div>
             </van-dialog>
-            <!-- 日期选择 -->
-            <van-popup v-model="dateShow" position="bottom">
-                <van-datetime-picker
-                    v-model="currentDate"
-                    type="date"
-                    :maxDate="maxDate"
-                    :formatter="formatter"
-                    @confirm="getDate"
-                    @cancel="dateShow=false"
-                />
-            </van-popup>
         </div>
     </div>
 </template>
 <script>
 import ViewBox from "@/components/pub/ViewBox.vue";
 import tree from "@/components/pub/tree";
+import datePick from "@/components/pub/datePick";
 export default {
     name: "CheckPlanNotice",
     data() {
@@ -116,7 +110,8 @@ export default {
         },
         // 取消操作
         removeVal() {
-            this.$refs.tree.setName();
+            this.$refs.tree.reset();
+            this.$refs.dateChild.reset();
             this.$set(this.postData.obj, "bean.checkdept", "");
             this.$set(this.postData.obj, "bean.createdate", "");
             this.searchShow = false;
@@ -127,35 +122,15 @@ export default {
         },
         //获取日期
         getDate(val) {
-            this.dateShow = false;
-            this.$set(
-                this.postData.obj,
-                "bean.createdate",
-                this.formatDate(val)
-            );
-        },
-        // 对时间选择器设置
-        formatter(type, val) {
-            if (type === "year") {
-                return `${val}年`;
-            } else if (type === "month") {
-                return `${val}月`;
-            } else if (type === "day") {
-                return `${val}日`;
-            }
-            return val;
-        },
-        // 设置时间选择器的格式
-        formatDate(date) {
-            return `${date.getFullYear()}-${date.getMonth() +
-                1}-${date.getDate()}`;
+            this.postData.obj["bean.createdate"] = val;
         }
         // biz/sc/checkplan/yjqxtx.action 一键取消逾期
         // bean.qxr bean.qxyy bean.qxksrq bean.qxjzrq
     },
     components: {
         ViewBox,
-        tree
+        tree,
+        datePick
     }
 };
 </script>

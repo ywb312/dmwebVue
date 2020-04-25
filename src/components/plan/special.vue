@@ -29,7 +29,7 @@
             </div>
             
         </ViewBox>
-        <mt-button class="btn" type="primary" size="large" @click="addData">新增专项检查计划</mt-button>
+        <van-button class="btn" type="info" size="large" @click="addData">新增专项检查计划</van-button>
     </div>
 </template>
 <script>

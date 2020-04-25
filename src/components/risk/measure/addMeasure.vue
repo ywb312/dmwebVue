@@ -5,7 +5,7 @@
                 <div class="maskTitle">新增管控措施</div>
                 <van-field label="管控措施名称" placeholder="请输入管控措施名称" v-model="getData.gname"/>
                 <picker title="管控措施类型" :slots="gTypeSlots" @returnMsg="getGtype"></picker>
-                <mt-button type="primary" size="large" @click="postData">确定</mt-button>
+                <van-button type="info" size="large" @click="postData">确定</van-button>
             </div>
         </div>
     </div>

@@ -15,72 +15,72 @@
             </template>
         </van-nav-bar>
         <div>
-            <mt-loadmore
-                :top-method="loadTop"
-                :bottom-method="loadBottom"
-                :bottom-all-loaded="allLoaded"
-                :auto-fill="allLoaded"
-                bottomPullText="正在加载更多..."
-                ref="loadmore"
-            >
-                <div class="wrapper" v-for="(item,index) in rendering" :key="index">
-                    <div class="title">
-                        <h4>{{index+1+'.'+item.crname}}</h4>
-                        <p style="min-width:40px">
-                            <van-tag round type="primary">{{item.stateText}}</van-tag>
-                        </p>
-                    </div>
-                    <div class="main">
-                        <div>
-                            <span>隐患描述:</span>
-                            <span>{{item.crdesc}}</span>
+            <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
+                <div slot="views">
+                    <div
+                        class="wrapper"
+                        v-for="(item,index) in rendering"
+                        :key="index"
+                        @click="btnClick(item)"
+                    >
+                        <div class="title">
+                            <h4>{{index+1+'.'+item.crname}}</h4>
+                            <p style="min-width:40px">
+                                <van-tag round type="primary">{{item.stateText}}</van-tag>
+                            </p>
                         </div>
-                        <div>
-                            <span>隐患场所:</span>
-                            <span>{{item.craddr}}</span>
-                        </div>
-                        <div>
-                            <span>审批时间:</span>
-                            <span>{{item.pcdate}}</span>
+                        <div class="main">
+                            <div>
+                                <span>隐患描述: {{item.crdesc}}</span>
+                            </div>
+                            <div>
+                                <span>隐患场所: {{item.craddr}}</span>
+                            </div>
+                            <div>
+                                <span>审批时间: {{item.pcdate}}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="bottom" @click="btnClick(item)">操作</div>
                 </div>
-                <div v-show="noData" class="noMoreText">暂无数据</div>
-                <van-divider v-show="noMore">没有更多数据了</van-divider>
-            </mt-loadmore>
+            </ViewBox>
         </div>
         <!-- 隐藏的组件 -->
+        <van-action-sheet
+            v-model="show"
+            :actions="actions"
+            @select="onSelect"
+            cancel-text="取消"
+            close-on-click-action
+        />
         <div>
-            <record :compShow="compShow" @popupClose="compShow=false"></record>
+            <record :compShow="compShow" @popupClose="compShow=false" />
         </div>
-        <!-- 操作按钮点击 -->
-        <mt-popup v-model="popshow" popup-transition="popup-fade" closeOnClickModal="true">
-            <div class="popupItem" @click.stop="goDetail">查看详情</div>
-            <div class="popupItem" @click.stop="comShow">审批记录</div>
-            <div class="popupItem" @click.stop="postDeal('zczg')">自查自改</div>
-            <div class="popupItem" @click.stop="postDeal('sbsj')">上报上级</div>
-            <div class="popupItem" @click.stop="goAssign">隐患指派</div>
-        </mt-popup>
     </div>
 </template>
 <script>
 // 渲染组件
-import { Popup, Loadmore } from "mint-ui";
+import ViewBox from "@/components/pub/ViewBox.vue";
 import record from "@/components/danger/record";
 export default {
     name: "dealDanger",
     data() {
         return {
-            page: 1,
             // 渲染的数据
             rendering: [],
-            // 停止上拉加
-            allLoaded: false,
-            // 没有数据
-            noData: false,
-            // 没有更多数据了
-            noMore: false,
+            postData: {
+                url: "biz/im/zdrisknotice/list_notice_two.action",
+                obj: {
+                    "bean.olddate": "0"
+                }
+            },
+            show: false,
+            actions: [
+                { name: "查看详情" },
+                { name: "审批记录" },
+                { name: "自查自改" },
+                { name: "上报上级" },
+                { name: "隐患指派" }
+            ],
             // 选中的对象
             selectData: {},
             // 控制操作模态框的显示
@@ -111,63 +111,13 @@ export default {
             ]
         };
     },
-    created() {
-        this.getData();
-    },
     methods: {
         // 获取当前页面数据函数
-        getData(more = true) {
-            this.$api.danger
-                .getDeal({
-                    "bean.olddate": "0",
-                    rows: 10,
-                    page: this.page,
-                    session: window.localStorage["session_Id"]
-                })
-                .then(res => {
-                    if (!res.rows) {
-                        return;
-                    }
-                    // 判断rows是否返回数据
-                    if (res.rows.length != 0) {
-                        res.rows.forEach(element => {
-                            this.$common.code2Text(
-                                element,
-                                "state",
-                                this.spArr
-                            );
-                        });
-                        // 判断是新增还是替换  默认为新增
-                        if (more) {
-                            this.rendering.push(...res.rows);
-                        } else {
-                            this.rendering = res.rows;
-                        }
-                        // 返回数据小于10条 停止上拉刷新
-                        if (res.rows.length < 10) {
-                            this.allLoaded = true;
-                            this.noMore = true;
-                        } else {
-                            this.allLoaded = false;
-                            this.noMore = false;
-                        }
-                    } else {
-                        this.noData = true;
-                        this.allLoaded = true;
-                    }
-                });
-        },
-        // 查看详情
-        goDetail() {
-            this.popshow = false;
-            this.$router.push({
-                path: "/danger/detail"
+        getRendering(arr) {
+            arr.forEach(element => {
+                this.$common.code2Text(element, "state", this.spArr);
             });
-        },
-        // 审批记录
-        comShow() {
-            this.popshow = false;
-            this.compShow = true;
+            this.rendering = arr;
         },
         // 自查自改和上报
         postDeal(type) {
@@ -186,41 +136,31 @@ export default {
                 }
             });
         },
-        // 去指派
-        goAssign() {
-            this.popshow = false;
-            this.$router.push({
-                path: "/danger/assign"
-            });
-        },
-        // 操作按钮点击事件
         btnClick(obj) {
+            this.show = true;
+            this.$store.commit("getSelectData", obj);
             this.selectData = obj;
-            this.popshow = true;
         },
-        // 上拉加载方法
-        loadBottom() {
-            this.page++;
-            this.$refs.loadmore.onBottomLoaded();
-            this.getData();
-        },
-        // 下拉刷新方法
-        loadTop() {
-            this.cleraData();
-            this.$refs.loadmore.onTopLoaded();
-        },
-        // 清空所需渲染数据并重新渲染
-        cleraData() {
-            this.page = 1;
-            this.noMore = false;
-            this.noData = false;
-            this.rendering = [];
-            this.getData(false);
+        onSelect(item) {
+            if (item.name == "查看详情") {
+                this.$router.push({
+                    path: "/danger/detail"
+                });
+            } else if (item.name == "审批记录") {
+                this.compShow = true;
+            } else if (item.name == "自查自改") {
+                this.postDeal("zczg");
+            } else if (item.name == "上报上级") {
+                this.postDeal("sbsj");
+            } else if (item.name == "隐患指派") {
+                this.$router.push({
+                    path: "/danger/assign"
+                });
+            }
         }
     },
     components: {
-        "mt-loadmore": Loadmore,
-        "mt-popup": Popup,
+        ViewBox,
         record
     }
 };

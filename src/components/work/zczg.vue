@@ -9,15 +9,15 @@
             left-arrow
             @click-left="$router.back(-1)"
         />
-        <van-field label="填表人" placeholder="请输入填表人" v-model="tbr"/>
-        <van-field label="审批意见" placeholder="请输入审批意见" v-model="opinion"/>
-        <van-field label="整改情况" placeholder="请输入整改情况" v-model="zgpsqk"/>
+        <van-field label="填表人" placeholder="请输入填表人" v-model="tbr" />
+        <van-field label="审批意见" placeholder="请输入审批意见" v-model="opinion" />
+        <van-field label="整改情况" placeholder="请输入整改情况" v-model="zgpsqk" />
         <date-pick title="整改时间" time="after" placeholder="请选择完成时间" @returnDate="getZgsqsj"></date-pick>
-        <van-field label="验收说明" placeholder="请输入验收说明" v-model="ysqk"/>
-        <van-field label="备注" placeholder="请输入备注" v-model="memo"/>
+        <van-field label="验收说明" placeholder="请输入验收说明" v-model="ysqk" />
+        <van-field label="备注" placeholder="请输入备注" v-model="memo" />
         <uploadimg @toImgArr="getImgArr"></uploadimg>
         <div>
-            <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
+            <van-button class="btn" type="info" size="large" @click="update">提交</van-button>
         </div>
     </div>
 </template>

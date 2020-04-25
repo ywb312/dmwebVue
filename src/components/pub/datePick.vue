@@ -1,37 +1,39 @@
 <template>
-    <div class="datePick">
-        <van-cell :title="title" is-link @click.native="openPicker">
-            <span style="color:black">{{message}}</span>
-        </van-cell>
-        <mt-datetime-picker
-            ref="picker"
-            :type="type"
-            v-model="pickerValue"
-            :startDate="startDate"
-            :endDate="endDate"
-            yearFormat="{value}年"
-            monthFormat="{value}月"
-            dateFormat="{value}日"
-            hourFormat="{value}时"
-            minuteFormat="{value}分"
-            @confirm="handleConfirm"
-        ></mt-datetime-picker>
+    <div>
+        <van-field
+            readonly
+            clickable
+            name="datetimePicker"
+            :value="value"
+            :label="title"
+            placeholder="点击选择时间"
+            @click="showPicker = true"
+        />
+        <van-popup v-model="showPicker" position="bottom" get-container="#app">
+            <van-datetime-picker
+                v-model="currentDate"
+                :type="type"
+                :formatter="formatter"
+                :min-date="minDate"
+                :max-date="maxDate"
+                @confirm="onConfirm"
+                @cancel="showPicker = false"
+            />
+        </van-popup>
     </div>
 </template>
 <script>
 // 默认为日期选择器 type为选择器类型 time是可选之前/之后/任意 placeholder默认文字 title名称
-import { DatetimePicker } from "mint-ui";
 export default {
-    name: "datePick",
     data() {
         return {
-            message: "请选择",
-            pickerValue: new Date(),
-            startDate: new Date(new Date().getFullYear() - 10, 0, 1),
-            endDate: new Date(new Date().getFullYear() + 10, 11, 31)
+            value: "",
+            showPicker: false,
+            currentDate: new Date(),
+            minDate: new Date(new Date().getFullYear() - 10, 0, 1),
+            maxDate: new Date(new Date().getFullYear() + 10, 11, 31)
         };
     },
-    props: ["title", "time", "placeholder", "type"],
     props: {
         title: {
             type: String,
@@ -41,48 +43,61 @@ export default {
             type: String,
             default: ""
         },
-        placeholder: {
-            type: String,
-            default: "请选择时间"
-        },
         type: {
             type: String,
             default: "date"
         }
     },
     created() {
-        this.message = this.placeholder;
         switch (this.time) {
             case "left":
             case "before":
-                this.endDate = new Date();
+                this.maxDate = new Date();
                 break;
             case "right":
             case "after":
-                this.startDate = new Date();
+                this.minDate = new Date();
                 break;
             default:
                 break;
         }
     },
     methods: {
-        openPicker() {
-            this.$refs.picker.open();
+        // 确定时间
+        onConfirm(time) {
+            this.value = this.formatDate(time);
+            this.showPicker = false;
+            this.$emit("returnDate", this.value);
         },
-        handleConfirm(value) {
-            let year = value.getFullYear();
-            let month = value.getMonth() + 1;
-            let day = value.getDate();
-            let date = year + "-" + month + "-" + day;
-            this.message = date;
-            this.$emit("returnDate", this.message);
+        // 对时间选择器设置
+        formatter(type, val) {
+            if (type === "year") {
+                return `${val}年`;
+            } else if (type === "month") {
+                return `${val}月`;
+            } else if (type === "day") {
+                return `${val}日`;
+            } else if (type === "hour") {
+                return `${val}时`;
+            } else if (type === "minute") {
+                return `${val}分`;
+            }
+            return val;
         },
+        // 设置选中时间的格式
+        formatDate(date) {
+            if (this.type == "date") {
+                return `${date.getFullYear()}-${date.getMonth() +
+                    1}-${date.getDate()}`;
+            } else if (this.type == "datetime") {
+                return `${date.getFullYear()}-${date.getMonth() +
+                    1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
+            }
+        },
+        // 清空时间
         reset() {
-            this.message = this.placeholder;
+            this.value = "";
         }
-    },
-    components: {
-        "mt-datetime-picker": DatetimePicker
     }
 };
 </script>

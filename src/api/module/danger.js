@@ -1,8 +1,4 @@
 import axios from '../http'
-function getDeal(data){
-    return axios.post("biz/im/zdrisknotice/list_notice_two.action", data);
-}
-
 function doAddSaveSingle(data) { //安全检查提交隐患
     return axios.post("biz/sc/checkplandetail/doAddSaveSingle.action", data);
 }
@@ -41,7 +37,6 @@ function completenodyTask(data) {
 }
 
 export default {
-    getDeal,
     doAddSaveSingle,
     getExePlan,
     doAddSave,

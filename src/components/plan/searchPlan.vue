@@ -28,8 +28,8 @@
                 @returnDate="getDate"
             ></date-pick>
             <div class="searchBtn">
-                <mt-button type="primary" size="small" @click.stop="clearCheacked">清空</mt-button>
-                <mt-button type="primary" size="small" @click.stop="searchClick">查询</mt-button>
+                <van-button type="info" size="small" @click.stop="clearCheacked">清空</van-button>
+                <van-button type="info" size="small" @click.stop="searchClick">查询</van-button>
             </div>
         </div>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
@@ -61,7 +61,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -89,8 +88,8 @@ export default {
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
-        getRendering(v) {
-            this.rendering = v;
+        getRendering(arr) {
+            this.rendering = arr;
         },
         // 头部查询功能
         inquire(str) {

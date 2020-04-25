@@ -1,5 +1,5 @@
 <template>
-    <div class="Popup">
+    <div>
         <van-popup round closeable v-model="show" @close="close">
             <slot name="title"></slot>
             <slot name="views"></slot>
@@ -8,7 +8,6 @@
 </template>
 <script>
 export default {
-    name: "Popup",
     data() {
         return {
             show: false

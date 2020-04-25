@@ -24,7 +24,7 @@
             <van-field label="隐患地点" placeholder="请输入隐患地点" v-model="craddr" />
             <van-field label="存在问题" placeholder="请输入存在问题" v-model="czwt" />
             <uploadimg @toImgArr="getImgArr"></uploadimg>
-            <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
+            <van-button class="btn" type="info" size="large" @click="update">提交</van-button>
         </div>
     </div>
 </template>

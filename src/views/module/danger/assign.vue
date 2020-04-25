@@ -15,7 +15,7 @@
         <van-field label="填表人员" placeholder="请输入填表人员名称" v-model="tbr" />
         <van-field label="备注" placeholder="请输入备注说明" v-model="memo" />
         <div>
-            <mt-button class="btn" type="primary" size="large" @click="update">提交</mt-button>
+            <van-button class="btn" type="info" size="large" @click="update">提交</van-button>
         </div>
     </div>
 </template>

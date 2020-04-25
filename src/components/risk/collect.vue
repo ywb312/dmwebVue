@@ -56,7 +56,7 @@
         </mt-loadmore>
         <!-- 新增按钮 -->
         <div>
-            <mt-button class="btn" type="primary" size="large" @click="upAffirm">提交辨识</mt-button>
+            <van-button class="btn" type="info" size="large" @click="upAffirm">提交辨识</van-button>
         </div>
     </div>
 </template>

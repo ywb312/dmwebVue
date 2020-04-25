@@ -1,13 +1,15 @@
 <template>
     <div class="tree">
-        <van-cell
-            :title="title"
-            is-link
-            @click.native="popupVisible = true;"
-            value-class="cellValue"
+        <van-field
+            readonly
+            clickable
+            :label="title"
+            name="datetimePicker"
             :value="selectVal.name"
+            :placeholder="placeholder"
+            @click="treeShow"
         />
-        <van-popup class="fill" v-model="popupVisible" position="right" get-container="body">
+        <van-popup class="fill" v-model="popupVisible" position="right" get-container="#app">
             <tree-preview
                 :data="lists"
                 v-model="selectVal"
@@ -28,19 +30,27 @@ export default {
         return {
             popupVisible: false,
             lists: [],
-            selectVal: {}
+            selectVal: {
+                name: ""
+            }
         };
     },
     created() {
-        let self = this;
-        this.selectVal.name = this.placeholder;
         // 判断vuex中是否存在数据 如果不存在就获取
         this.lists = this.treeData;
     },
     methods: {
-        setName() {
-            this.selectVal = {};
-            this.selectVal.name = this.placeholder;
+        treeShow() {
+            if (this.treeData.length == 0) {
+                this.lists = this.treeData;
+                if (this.lists.length == 0) {
+                    return this.$toast("数据暂未加载完成,请稍后再试");
+                }
+            }
+            this.popupVisible = true;
+        },
+        reset() {
+            this.selectVal = { name: "" };
         }
     },
     props: {
