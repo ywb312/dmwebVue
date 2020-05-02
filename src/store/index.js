@@ -1713,7 +1713,7 @@ export default new Vuex.Store({
 			}
 		],
 		// 组织结构树
-		treeData: "",
+		treeData: [],
 		// 点击操作按钮获取的对象
 		selectData: {},
 	},

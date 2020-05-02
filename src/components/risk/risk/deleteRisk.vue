@@ -2,7 +2,6 @@
     <div class="deleteRisk"></div>
 </template>
 <script>
-import { MessageBox } from "mint-ui";
 export default {
     name: "deleteRisk",
     data() {
@@ -15,12 +14,16 @@ export default {
         },
         fid: {
             type: String,
-            default: "",
+            default: ""
         }
     },
     methods: {
         getData() {
-            MessageBox.confirm("确定执行此操作?")
+            this.$dialog
+                .confirm({
+                    title: "删除",
+                    message: "确定执行此操作?"
+                })
                 .then(resolve => {
                     this.$api.risk
                         .riskDelete({
@@ -28,7 +31,7 @@ export default {
                             ssession: window.localStorage["session_Id"]
                         })
                         .then(res => {
-                            this.$emit("suc")
+                            this.$emit("suc");
                         });
                 })
                 .catch(reject => {});

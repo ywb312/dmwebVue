@@ -4,7 +4,7 @@
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">新增风险点</div>
                 <picker title="风险类型" :slots="fxtypeSlots" @returnMsg="getType"></picker>
-                <van-field label="风险名称" placeholder="请输入风险名称" v-model="getData.name"/>
+                <van-field label="风险名称" placeholder="请输入风险名称" v-model="getData.name" />
                 <van-button type="info" size="large" @click="postData">确定</van-button>
             </div>
         </div>
@@ -30,14 +30,14 @@ export default {
             if (this.getData.name == "") {
                 this.$toast({
                     message: "请输入风险名称",
-                    position: "bottom",
+                    position: "bottom"
                 });
                 return;
             }
             if (this.getData.fxtype == "") {
                 this.$toast({
                     message: "请选择风险类型",
-                    position: "bottom",
+                    position: "bottom"
                 });
                 return;
             }

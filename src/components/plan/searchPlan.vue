@@ -142,7 +142,7 @@ export default {
 <style scoped>
 .searchGroup {
     position: sticky;
-    top: 50px;
+    top: 46px;
     font-size: 14px;
     z-index: 100;
 }

@@ -83,8 +83,6 @@ export default {
             ],
             // 选中的对象
             selectData: {},
-            // 控制操作模态框的显示
-            popshow: false,
             // 审批记录操作框
             compShow: false,
             spArr: [
@@ -121,7 +119,12 @@ export default {
         },
         // 自查自改和上报
         postDeal(type) {
-            this.popshow = false;
+            if (this.selectData.state == "SPZT001") {
+                this.$toast(
+                    "该记录处于审批中，数据不能修改！请在工作台-待办事项中完成！"
+                );
+                return;
+            }
             let obj = {
                 "bean.yhid": this.selectData.yhid
             };

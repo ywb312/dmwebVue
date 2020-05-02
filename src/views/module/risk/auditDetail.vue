@@ -79,22 +79,22 @@ export default {
                 this.$common.code2Text(
                     element,
                     "knfs",
-                    this.knfsSlots[0].values
+                    this.knfsSlots
                 );
                 this.$common.code2Text(
                     element,
                     "yxfw",
-                    this.yxfwSlots[0].values
+                    this.yxfwSlots
                 );
                 this.$common.code2Text(
                     element,
                     "qzhg",
-                    this.qzhgSlots[0].values
+                    this.qzhgSlots
                 );
                 this.$common.code2Text(
                     element,
                     "gtype",
-                    this.gTypeSlots[0].values
+                    this.gTypeSlots
                 );
             });
             return arr;

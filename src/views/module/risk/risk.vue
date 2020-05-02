@@ -46,16 +46,12 @@ export default {
                 {
                     text: "车间级汇总上报",
                     id: "reportrisk",
-                    components: "collect",
-                    ajaxUrl: "biz/risk/info/selectreportlist.action",
-                    upUrl: "biz/risk/audit/doallaudit.action"
+                    components: "collect"
                 },
                 {
                     text: "厂级汇总上报",
                     id: "reporpjtrisk",
-                    components: "collect",
-                    ajaxUrl: "biz/risk/companyRisk/reportpjlist.action",
-                    upUrl: "biz/risk/audit/doAddgSave.action"
+                    components: "collect"
                 },
                 {
                     text: "风险清单",

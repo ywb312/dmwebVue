@@ -2,7 +2,6 @@
     <div class="deleteMeasure"></div>
 </template>
 <script>
-import { MessageBox } from "mint-ui";
 export default {
     name: "deleteMeasure",
     data() {
@@ -20,7 +19,11 @@ export default {
     },
     methods: {
         getData() {
-            MessageBox.confirm("确定执行此操作?")
+            this.$dialog
+                .confirm({
+                    title: "删除",
+                    message: "确定执行此操作?"
+                })
                 .then(resolve => {
                     this.$api.risk
                         .measureDelete({

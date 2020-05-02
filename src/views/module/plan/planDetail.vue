@@ -1,5 +1,5 @@
 <template>
-    <div class="planDetail page">
+    <div class="page">
         <!-- 标题  -->
         <van-nav-bar
             title="检查记录详情"
@@ -32,45 +32,37 @@
                 </div>
             </div>
         </van-sticky>
-        <mt-loadmore
-            :top-method="loadTop"
-            :bottom-method="loadBottom"
-            :bottom-all-loaded="allLoaded"
-            :auto-fill="allLoaded"
-            bottomPullText="正在加载更多..."
-            ref="loadmore"
-        >
-            <div>
-                <div class="wrapper" v-for="(item,index) in rendering" :key="index">
-                    <div class="main">
-                        <div>
-                            管控措施:
-                            <span>{{index+1+'.'+item.gkcs.inspacetcontent}}</span>
-                        </div>
-                        <div>
-                            危险源:
-                            <span>{{item.maindanger}}</span>
-                        </div>
-                        <div>
-                            检查结果:
-                            <span>已落实</span>
-                        </div>
+        <van-pull-refresh v-model="isLoading" @refresh="cleraData">
+            <div class="wrapper" v-for="(item,index) in rendering" :key="index">
+                <div class="main">
+                    <div>
+                        管控措施:
+                        <span>{{index+1+'.'+item.gkcs.inspacetcontent}}</span>
+                    </div>
+                    <div>
+                        危险源:
+                        <span>{{item.maindanger}}</span>
+                    </div>
+                    <div>
+                        检查结果:
+                        <span>已落实</span>
                     </div>
                 </div>
             </div>
             <van-empty v-show="noData" description="暂无数据" />
-        </mt-loadmore>
+            <van-empty image="error" v-show="noRes" description="数据有误" />
+        </van-pull-refresh>
     </div>
 </template>
 <script>
-import { Loadmore } from "mint-ui";
 export default {
     name: "planDetail",
     data() {
         return {
             rendering: [],
-            allLoaded: false,
-            noData: false
+            isLoading: false,
+            noData: false,
+            noRes: false
         };
     },
     created() {
@@ -82,12 +74,16 @@ export default {
             this.$api.plan
                 .doDetail({ "bean.cpid": this.selectData.cpid })
                 .then(res => {
+                    this.isLoading = false;
+                    // 数据有误
+                    if (typeof res != "object") {
+                        this.noRes = true;
+                        return;
+                    }
                     if (res.entity && res.entity.length != 0) {
                         this.setRendering(res.entity);
-                        this.allLoaded = true;
                     } else {
                         this.noData = true;
-                        this.allLoaded = true;
                     }
                 });
         },
@@ -104,17 +100,9 @@ export default {
             });
             this.rendering = render;
         },
-        // 上拉加载方法
-        loadBottom() {
-            this.$refs.loadmore.onBottomLoaded();
-        },
-        // 下拉刷新方法
-        loadTop() {
-            this.cleraData();
-            this.$refs.loadmore.onTopLoaded();
-        },
         // 清空所需渲染数据并重新渲染
         cleraData() {
+            this.noRes = false;
             this.noData = false;
             this.rendering = [];
             this.getData();
@@ -124,10 +112,6 @@ export default {
         selectData() {
             return this.$store.state.selectData;
         }
-    },
-    components: {
-        Loadmore,
-        "mt-loadmore": Loadmore
     }
 };
 </script>

@@ -1,11 +1,18 @@
 <template>
     <div class="searchPopup">
-        <div class="maskWrap" v-show="searchShow" @click="searchShow=false">
+        <div class="maskWrap" v-show="searchShow" @click="searchClose">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">隐患条件查询</div>
-                <tree v-if="companyShow" title="查询单位" @selectMsg="getCompany"></tree>
-                <pick v-if="statusShow" title="隐患状态" :slots="statusSlots" @returnMsg="getStatus"></pick>
+                <tree v-show="companyShow" ref="tree" title="查询单位" @selectMsg="getCompany"></tree>
+                <pick
+                    v-show="statusShow"
+                    ref="pick"
+                    title="隐患状态"
+                    :slots="statusSlots"
+                    @returnMsg="getStatus"
+                ></pick>
                 <double-date-pick
+                    ref="date"
                     :config="dbDateConifg"
                     @returnDate1="getStartDate"
                     @returnDate2="getEndDate"
@@ -25,9 +32,7 @@ export default {
         return {
             searchShow: false,
             popupVisible: "",
-            startDate: "",
-            endDate: "",
-            yhStatus: "",
+            postData: {},
             statusSlots: [
                 {
                     text: "请选择",
@@ -70,7 +75,6 @@ export default {
                     id: "9"
                 }
             ],
-            zgzrdw: "",
             dbDateConifg: [
                 { title: "起始日期", placeholder: "请选择开始日期" },
                 { title: "截至日期", placeholder: "请选择截至日期" }
@@ -81,44 +85,41 @@ export default {
     methods: {
         // 返回隐患状态
         getStatus(v) {
-            this.yhStatus = v.id;
+            this.postData.crstate = v.id;
         },
         getCompany(v) {
-            this.zgzrdw = v.id;
+            this.postData.zgzrdw = v.id;
         },
         getStartDate(v) {
-            this.startDate = v;
+            this.postData.str = v;
         },
         getEndDate(v) {
-            this.endDate = v;
+            this.postData.end = v;
         },
         update() {
-            let obj = {
-                crstate: this.yhStatus,
-                str: this.startDate,
-                end: this.endDate,
-                zgzrdw: this.zgzrdw
-            };
-            let start = new Date(obj.str.replace(/\-/g, ".")).getTime();
-            let end = new Date(obj.end.replace(/\-/g, ".")).getTime();
-            if (start > end) {
-                this.$toast("截止日期小于起始日期");
-                return;
-            }
             this.$emit("popupClose");
-            this.$emit("returnMsg", obj);
+            this.$emit("returnMsg", this.postData);
+            this.reset();
+        },
+        searchClose() {
+            this.searchShow = false;
+            this.$emit("popupClose");
+            this.reset();
+        },
+        reset() {
+            Object.keys(this.postData).forEach(key => {
+                this.postData[key] = "";
+            });
+            this.$refs.pick.reset();
+            this.$refs.tree.reset();
+            this.$refs.date.reset();
         }
     },
     watch: {
-        // 监听两个值 确定显示的状态
+        // 确定显示的状态
         popshow(val) {
             //popshow为父组件的值，val参数为值
             this.searchShow = val; //将父组件的值赋给popupVisible 子组件的值
-        },
-        searchShow(val) {
-            if (val == false) {
-                this.$emit("popupClose");
-            }
         }
     },
     components: {

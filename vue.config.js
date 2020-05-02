@@ -15,6 +15,7 @@ module.exports = {
             }
         },
     },
+    productionSourceMap: false,
     css: {
         loaderOptions: {
             postcss: {
@@ -25,7 +26,8 @@ module.exports = {
                     })
                 ]
             }
-        }
+        },
+        // extract: false,
     },
     lintOnSave: false
 }

@@ -35,17 +35,16 @@ export default {
             }
         };
     },
-    created() {
-        // 判断vuex中是否存在数据 如果不存在就获取
-        this.lists = this.treeData;
-    },
     methods: {
         treeShow() {
-            if (this.treeData.length == 0) {
+            if (this.treeData.length != 0) {
                 this.lists = this.treeData;
-                if (this.lists.length == 0) {
-                    return this.$toast("数据暂未加载完成,请稍后再试");
-                }
+            } else {
+                this.$api.pub.getTree().then(function(res) {
+                    let data = eval("(" + res + ")");
+                    let sortData = _self.$common.toTree(data.cells);
+                    this.lists = sortData;
+                });
             }
             this.popupVisible = true;
         },

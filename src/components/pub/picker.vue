@@ -42,6 +42,9 @@ export default {
             this.value = value;
             this.popupVisible = false;
             this.$emit("returnMsg", value);
+        },
+        reset() {
+            this.value = "";
         }
     },
     components: {}

@@ -1,6 +1,6 @@
 <template>
-    <div class="danger page">
-        <component :is="views"></component>
+    <div class="page">
+        <component :is="pageData.components" :pageData="pageData"></component>
     </div>
 </template>
 <script>
@@ -8,22 +8,82 @@ export default {
     name: "danger",
     data() {
         return {
-            views: ""
+            pageData: "",
+            page: [
+                {
+                    text: "隐患处理",
+                    id: "zdrisknotice"
+                },
+                {
+                    text: "隐患详情查询",
+                    id: "processrisk"
+                },
+                {
+                    text: "重大隐患评估记录",
+                    id: "zdriskassess"
+                },
+                {
+                    text: "重大隐患督办记录",
+                    id: "zdriskfeet"
+                },
+                {
+                    text: "隐患整改指令记录",
+                    id: "zdriskreform"
+                },
+                {
+                    text: "隐患申请复查记录",
+                    id: "zdriskreview"
+                },
+                {
+                    text: "隐患验收结果记录",
+                    id: "zdriskaccept"
+                },
+                {
+                    text: "重大隐患闭环记录",
+                    id: "zdriskclose"
+                }
+            ]
         };
     },
     created() {
-        let id = this.$route.query.id;
-        if (id == "zdrisknotice") {
-            this.views = "dealDanger";
-        } else {
-            this.views = "dangerPub";
+        this.getPageData();
+    },
+    methods: {
+        getPageData() {
+            let id = this.$route.query.id;
+            this.page.forEach(item => {
+                if (item.id == id) {
+                    item.components = item.id;
+                    this.pageData = item;
+                }
+            });
         }
     },
     components: {
-        dangerPub: resolve =>
-            require(["@/components/danger/view/dangerPub"], resolve),
-        dealDanger: resolve =>
-            require(["@/components/danger/view/dealDanger"], resolve)
+        // 隐患处理
+        zdrisknotice: resolve =>
+            require(["@/components/danger/view/dealDanger"], resolve),
+        // 隐患详情查询
+        processrisk: resolve =>
+            require(["@/components/danger/view/ProcessRisk"], resolve),
+        // 重大隐患评估记录
+        zdriskassess: resolve =>
+            require(["@/components/danger/view/ZDRiskAssess"], resolve),
+        // 重大隐患督办记录
+        zdriskfeet: resolve =>
+            require(["@/components/danger/view/ZDRiskFeet"], resolve),
+        // 隐患整改指令记录
+        zdriskreform: resolve =>
+            require(["@/components/danger/view/ZDRiskReform"], resolve),
+        // 隐患申请复查记录
+        zdriskreview: resolve =>
+            require(["@/components/danger/view/ZDRiskReview"], resolve),
+        // 隐患验收结果记录
+        zdriskaccept: resolve =>
+            require(["@/components/danger/view/ZDRiskAccept"], resolve),
+        // 重大隐患闭环记录
+        zdriskclose: resolve =>
+            require(["@/components/danger/view/ZDRiskClose"], resolve)
     },
     beforeRouteLeave(to, from, next) {
         if (to.name != "list") {

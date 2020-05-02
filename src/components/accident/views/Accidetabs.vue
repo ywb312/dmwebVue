@@ -54,12 +54,12 @@ export default {
                 this.$common.code2Text(
                     element,
                     "category",
-                    this.sglbSlots[0].values
+                    this.sglbSlots
                 );
                 this.$common.code2Text(
                     element,
                     "acciclassid",
-                    this.sgdjSlots[0].values
+                    this.sgdjSlots
                 );
             });
             this.rendering = arr;

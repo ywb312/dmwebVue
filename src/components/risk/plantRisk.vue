@@ -1,66 +1,65 @@
 <template>
     <div class="plantRisk">
-        <mt-loadmore
-            :top-method="loadTop"
-            :bottom-method="loadBottom"
-            :bottom-all-loaded="allLoaded"
-            :auto-fill="allLoaded"
-            bottomPullText="正在加载更多..."
-            ref="loadmore"
-        >
-            <div class="wrapper" v-for="(item,index) in rendering" :key="index">
-                <div class="title">
-                    <h4>{{index+1+'.'+item.name}}</h4>
-                    <!-- <p style="min-width:40px">
+        <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
+            <div slot="views">
+                <div
+                    class="wrapper"
+                    v-for="(item,index) in rendering"
+                    :key="index"
+                    @click="btnClick(item)"
+                >
+                    <div class="title">
+                        <h4>{{index+1+'.'+item.name}}</h4>
+                        <!-- <p style="min-width:40px">
                         <van-tag round type="primary">{{item.checktype}}</van-tag>
-                    </p>-->
-                </div>
-                <div class="main">
-                    <div>
-                        <span>风险点类型:</span>
-                        <span>{{item.fxtext}}</span>
+                        </p>-->
                     </div>
-                    <div>
-                        <span>创建人:</span>
-                        <span>{{item.createID}}</span>
+                    <div class="main">
+                        <div>
+                            <span>风险点类型:</span>
+                            <span>{{item.fxtext}}</span>
+                        </div>
+                        <div>
+                            <span>创建人:</span>
+                            <span>{{item.createID}}</span>
+                        </div>
                     </div>
                 </div>
-                <div class="bottom" @click="btnClick(item)">操作</div>
             </div>
-        </mt-loadmore>
-        <div v-show="noData" class="noMoreText">暂无数据</div>
-        <van-divider v-show="noMore">没有更多数据了</van-divider>
+        </ViewBox>
         <!-- 新增按钮 -->
         <div>
             <van-button class="btn" type="info" size="large" @click="addRisk">新增风险点</van-button>
         </div>
-        <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->
-        <mt-popup v-model="popshow" popup-transition="popup-fade" closeOnClickModal="true">
-            <div class="popupItem" @click.stop="riskModifySave">修改</div>
-            <div class="popupItem" @click.stop="riskDelete">删除</div>
-            <div class="popupItem" @click.stop="goRouter">查看危险源</div>
-        </mt-popup>
+        <van-action-sheet
+            v-model="popshow"
+            :actions="actions"
+            @select="onSelect"
+            cancel-text="取消"
+            close-on-click-action
+        />
+        <!-- 隐藏的组件 -->
         <div>
-            <add-risk :addshow="addshow" @popupClose="addshow=false" @addSuc="cleraData"></add-risk>
+            <add-risk :addshow="addshow" @popupClose="addshow=false" @addSuc="clearData"></add-risk>
             <modifyRisk
                 :modShow="modShow"
                 :selectData="selectData"
                 @popupClose="modShow=false"
-                @suc="cleraData"
+                @suc="clearData"
             ></modifyRisk>
             <delete-risk
                 :delShow="delShow"
                 :fid="selectData.fid"
                 @popupClose="delShow=false"
-                @suc="cleraData"
+                @suc="clearData"
             ></delete-risk>
         </div>
     </div>
 </template>
 <script>
 // 这是基本渲染功能的组件 公用
-import { Popup, Loadmore } from "mint-ui";
+import ViewBox from "@/components/pub/ViewBox.vue";
 import addRisk from "@/components/risk/risk/addRisk";
 import modifyRisk from "@/components/risk/risk/modifyRisk";
 import deleteRisk from "@/components/risk/risk/deleteRisk";
@@ -68,17 +67,19 @@ export default {
     name: "plantRisk",
     data() {
         return {
-            page: 1,
             // 渲染的数据
             rendering: [],
-            // 停止上拉加
-            allLoaded: false,
-            // 没有数据
-            noData: false,
-            // 没有更多数据了
-            noMore: false,
+            postData: {
+                url: "biz/risk/info/list.action",
+                obj: {}
+            },
             // 选中的对象
             selectData: {},
+            actions: [
+                { name: "修改" },
+                { name: "删除" },
+                { name: "查看危险源" }
+            ],
             // 控制操作模态框的显示
             popshow: false,
             // 增删改查组件的显示
@@ -89,50 +90,14 @@ export default {
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
-    created() {
-        this.getData();
-    },
+    created() {},
     methods: {
-        // 获取当前页面数据函数
-        getData(more = true) {
-            this.$api.risk
-                .getRisk({
-                    rows: 10,
-                    page: this.page,
-                    session: window.localStorage["session_Id"]
-                })
-                .then(res => {
-                    if (!res.rows) {
-                        return;
-                    }
-                    // 判断rows是否返回数据
-                    if (res.rows.length != 0) {
-                        res.rows.forEach(element => {
-                            this.$common.code2Text(
-                                element,
-                                "fxtype",
-                                this.fxtypeSlots[0].values
-                            );
-                        });
-                        // 判断是新增还是替换  默认为新增
-                        if (more) {
-                            this.rendering.push(...res.rows);
-                        } else {
-                            this.rendering = res.rows;
-                        }
-                        // 返回数据小于10条 停止上拉刷新
-                        if (res.rows.length < 10) {
-                            this.allLoaded = true;
-                            this.noMore = true;
-                        } else {
-                            this.allLoaded = false;
-                            this.noMore = false;
-                        }
-                    } else {
-                        this.noData = true;
-                        this.allLoaded = true;
-                    }
-                });
+        // 获取当前页面数据
+        getRendering(arr) {
+            arr.forEach(element => {
+                this.$common.code2Text(element, "fxtype", this.fxtypeSlots);
+            });
+            this.rendering = arr;
         },
         // 操作按钮点击事件
         btnClick(obj) {
@@ -143,43 +108,24 @@ export default {
         addRisk() {
             this.addshow = true;
         },
-        // 修改风险点
-        riskModifySave() {
-            this.popshow = false;
-            this.modShow = true;
+        clearData() {
+            this.$refs.view.cleraData();
         },
-        // 删除风险点
-        riskDelete() {
-            this.popshow = false;
-            this.delShow = true;
-        },
-        // 危险源页
-        goRouter() {
-            this.$router.push({
-                path: "/risk/companyRisk",
-                query: {
-                    fid: this.selectData.fid
-                }
-            });
-        },
-        // 上拉加载方法
-        loadBottom() {
-            this.page++;
-            this.$refs.loadmore.onBottomLoaded();
-            this.getData();
-        },
-        // 下拉刷新方法
-        loadTop() {
-            this.cleraData();
-            this.$refs.loadmore.onTopLoaded();
-        },
-        // 清空所需渲染数据并重新渲染
-        cleraData() {
-            this.page = 1;
-            this.noMore = false;
-            this.noData = false;
-            this.rendering = [];
-            this.getData(false);
+        onSelect(item) {
+            if (item.name == "修改") {
+                this.popshow = false;
+                this.modShow = true;
+            } else if (item.name == "删除") {
+                this.popshow = false;
+                this.delShow = true;
+            } else if (item.name == "查看危险源") {
+                this.$router.push({
+                    path: "/risk/companyRisk",
+                    query: {
+                        fid: this.selectData.fid
+                    }
+                });
+            }
         }
     },
     computed: {
@@ -188,8 +134,7 @@ export default {
         }
     },
     components: {
-        "mt-loadmore": Loadmore,
-        "mt-popup": Popup,
+        ViewBox,
         addRisk,
         modifyRisk,
         deleteRisk

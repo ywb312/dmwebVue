@@ -60,16 +60,8 @@ export default {
         // 处理请求的数据
         setRes(arr) {
             arr.forEach(element => {
-                this.$common.code2Text(
-                    element,
-                    "knfs",
-                    this.knfsSlots[0].values
-                );
-                this.$common.code2Text(
-                    element,
-                    "gtype",
-                    this.gTypeSlots[0].values
-                );
+                this.$common.code2Text(element, "knfs", this.knfsSlots);
+                this.$common.code2Text(element, "gtype", this.gTypeSlots);
             });
             return arr;
         },

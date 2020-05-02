@@ -209,11 +209,7 @@ export default {
             });
             // 如果name,fxtype和上一项的name,fxtype不一致就推入新数组,否则添加子元素
             sortArr.forEach((item, index, arr) => {
-                self.$common.code2Text(
-                    item,
-                    "fxtype",
-                    self.fxtypeSlots[0].values
-                );
+                self.$common.code2Text(item, "fxtype", self.fxtypeSlots);
                 self.$common.code2Text(item, "state", self.stateArr);
                 if (index == 0) {
                     item.child = [];

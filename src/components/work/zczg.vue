@@ -1,8 +1,8 @@
 <template>
-    <div class="zczg">
+    <div>
         <!-- 标题  -->
         <van-nav-bar
-            title="发现隐患"
+            title="自查自改"
             left-text="返回"
             fixed
             placeholder
@@ -25,7 +25,6 @@
 import datePick from "@/components/pub/datePick";
 import uploadimg from "@/components/pub/uploadimg";
 export default {
-    name: "zczg",
     data() {
         return {
             tbr: "",

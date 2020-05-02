@@ -1,6 +1,6 @@
 <template>
     <div class="record">
-        <Popup :popshow="recordVisible" @close="recordVisible=false">
+        <Popup :popshow="recordVisible" @close="recordClose">
             <div slot="title" class="popupTitle">审批意见</div>
             <div slot="views" class="popup">
                 <div class="chunk" v-for="item in resData" :key="item.id">
@@ -34,7 +34,6 @@ export default {
         return {
             recordVisible: false,
             resData: [],
-            // 加载中
             // 无数据
             noData: false,
             // 数据有误
@@ -59,6 +58,10 @@ export default {
                     }
                     self.resData = res.rows;
                 });
+        },
+        recordClose() {
+            this.recordVisible = false;
+            this.$emit("popupClose");
         }
     },
     watch: {
@@ -68,11 +71,6 @@ export default {
             if (val) {
                 this.getData(this.selectData);
                 this.recordVisible = val; //将父组件的值赋给popupVisible 子组件的值
-            }
-        },
-        recordVisible(val) {
-            if (val == false) {
-                this.$emit("popupClose");
             }
         }
     },

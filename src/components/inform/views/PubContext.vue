@@ -10,9 +10,9 @@
                 >
                     <div class="title">
                         <h4>{{index+1+"."+item.title}}</h4>
-                        <p style="min-width:40px">
+                        <!-- <p style="min-width:40px">
                             <van-tag round type="primary">{{item.moduleid}}</van-tag>
-                        </p>
+                        </p> -->
                     </div>
                     <div class="main">
                         <div>

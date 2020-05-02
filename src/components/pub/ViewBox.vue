@@ -11,11 +11,12 @@
             finished-text="没有更多了"
             :immediate-check="false"
             @load="onLoad"
+            offset="50"
         >
             <slot name="views"></slot>
+            <van-empty v-show="noData" description="暂无数据" />
+            <van-empty image="error" v-show="noRes" description="数据有误" />
         </van-list>
-        <van-empty v-show="noData" description="暂无数据" />
-        <van-empty image="error" v-show="noRes" description="数据有误" />
     </van-pull-refresh>
 </template>
 <script>

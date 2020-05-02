@@ -205,7 +205,7 @@ export default {
                 self.$common.code2Text(
                     item,
                     "fxtype",
-                    self.fxtypeSlots[0].values
+                    self.fxtypeSlots
                 );
                 self.$common.code2Text(item, "state", self.stateArr);
                 if (index == 0) {

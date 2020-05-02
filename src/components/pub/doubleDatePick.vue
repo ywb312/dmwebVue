@@ -74,6 +74,10 @@ export default {
             this.$emit("returnDate2", this.value2);
             this.showPicker2 = false;
         },
+        reset() {
+            this.value1 = "";
+            this.value2 = "";
+        },
         // 对时间选择器设置
         formatter(type, val) {
             if (type === "year") {
