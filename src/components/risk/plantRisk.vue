@@ -31,7 +31,7 @@
         </div>
         <!-- 操作按钮点击 -->
         <van-action-sheet
-            v-model="popshow"
+            v-model="sheetShow"
             :actions="actions"
             @select="onSelect"
             cancel-text="取消"
@@ -39,13 +39,13 @@
         />
         <!-- 隐藏的组件 -->
         <div>
-            <add-risk :addshow="addshow" @popupClose="addshow=false" @addSuc="clearData"></add-risk>
-            <modifyRisk
-                :modShow="modShow"
+            <set-risk
+                :setShow="setShow"
+                :type="type"
                 :selectData="selectData"
-                @popupClose="modShow=false"
+                @popupClose="setShow=false"
                 @suc="clearData"
-            ></modifyRisk>
+            ></set-risk>
             <delete-risk
                 :delShow="delShow"
                 :fid="selectData.fid"
@@ -58,8 +58,7 @@
 <script>
 // 这是基本渲染功能的组件 公用
 import ViewBox from "@/components/pub/ViewBox.vue";
-import addRisk from "@/components/risk/risk/addRisk";
-import modifyRisk from "@/components/risk/risk/modifyRisk";
+import setRisk from "@/components/risk/risk/setRisk";
 import deleteRisk from "@/components/risk/risk/deleteRisk";
 export default {
     name: "plantRisk",
@@ -79,10 +78,10 @@ export default {
                 { name: "查看危险源" }
             ],
             // 控制操作模态框的显示
-            popshow: false,
+            sheetShow: false,
             // 增删改查组件的显示
-            addshow: false,
-            modShow: false,
+            setShow: false,
+            type: "add",
             delShow: false
         };
     },
@@ -99,21 +98,21 @@ export default {
         // 操作按钮点击事件
         btnClick(obj) {
             this.selectData = obj;
-            this.popshow = true;
+            this.sheetShow = true;
         },
         // 新增风险点
         addRisk() {
-            this.addshow = true;
+            this.type = "add";
+            this.setShow = true;
         },
         clearData() {
             this.$refs.view.cleraData();
         },
         onSelect(item) {
             if (item.name == "修改") {
-                this.popshow = false;
-                this.modShow = true;
+                this.type = "mod";
+                this.setShow = true;
             } else if (item.name == "删除") {
-                this.popshow = false;
                 this.delShow = true;
             } else if (item.name == "查看危险源") {
                 this.$router.push({
@@ -132,8 +131,7 @@ export default {
     },
     components: {
         ViewBox,
-        addRisk,
-        modifyRisk,
+        setRisk,
         deleteRisk
     }
 };

@@ -7,6 +7,7 @@
             name="datetimePicker"
             :value="selectVal.name"
             :placeholder="placeholder"
+            :rules="[{ required: true, message: '请选择' }]"
             @click="treeShow"
         />
         <van-popup class="fill" v-model="popupVisible" position="right" get-container="#app">
@@ -64,7 +65,7 @@ export default {
     },
     watch: {
         selectVal: {
-            handler(newValue, oldValue) {
+            handler(newValue) {
                 if (newValue.id) {
                     this.$emit("selectMsg", newValue);
                 }

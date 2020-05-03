@@ -1406,10 +1406,6 @@ export default new Vuex.Store({
 		],
 		// 影响范围 下拉框配置
 		yxfwSlots: [{
-				text: "请选择",
-				id: ""
-			},
-			{
 				text: "本人",
 				id: "YXFWEI001"
 			},
@@ -1428,10 +1424,6 @@ export default new Vuex.Store({
 		],
 		// 潜在后果 下拉框配置
 		qzhgSlots: [{
-				text: "请选择",
-				id: ""
-			},
-			{
 				text: "经济损失",
 				id: "QZHG001"
 			},

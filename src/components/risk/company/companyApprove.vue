@@ -1,12 +1,14 @@
 <template>
-    <div class="companyApprove">
-        <div class="maskWrap" v-show="appShow" @click="appVisible=false">
+    <div>
+        <div class="maskWrap" v-show="appShow" @click="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">危险源评价</div>
-                <picker title="可能性" :slots="slotsL" @returnMsg="getL"></picker>
-                <picker title="严重性" :slots="slotsE" @returnMsg="getE"></picker>
-                <picker title="频繁度" :slots="slotsC" @returnMsg="getC"></picker>
-                <van-button type="info" size="large" @click="postData">确定</van-button>
+                <van-form @submit="postData">
+                    <picker title="可能性" ref="pickL" :slots="slotsL" @returnMsg="getL"></picker>
+                    <picker title="严重性" ref="pickE" :slots="slotsE" @returnMsg="getE"></picker>
+                    <picker title="频繁度" ref="pickC" :slots="slotsC" @returnMsg="getC"></picker>
+                    <van-button type="info" size="large" native-type="submit">确定</van-button>
+                </van-form>
             </div>
         </div>
     </div>
@@ -40,20 +42,11 @@ export default {
             return obj;
         },
         postData(obj) {
-            for (const key in this.getData) {
-                if (this.getData[key] == "") {
-                    this.$toast({
-                        message: "请继续选择完毕后提交",
-                        position: "bottom",
-                    });
-                    return;
-                }
-            }
             this.$api.risk.approveAdd(this.returnData()).then(res => {
-                this.appVisible = false;
+                this.close();
                 this.$toast({
                     message: "评价成功",
-                    position: "bottom",
+                    position: "bottom"
                 });
             });
         },
@@ -65,6 +58,13 @@ export default {
         },
         getC(v) {
             this.getData.c = v.id;
+        },
+        close() {
+            this.$refs.pickL.reset();
+            this.$refs.pickE.reset();
+            this.$refs.pickC.reset();
+            this.appVisible = false;
+            this.$emit("popupClose");
         }
     },
     watch: {
@@ -72,11 +72,6 @@ export default {
         appShow(val) {
             //popshow为父组件的值，val参数为值
             this.appVisible = val; //将父组件的值赋给popupVisible 子组件的值
-        },
-        appVisible(val) {
-            if (val == false) {
-                this.$emit("popupClose");
-            }
         }
     },
     computed: {
@@ -96,8 +91,3 @@ export default {
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>
-<style scoped>
-.maskMiddle {
-    /* margin-top: 38%; */
-}
-</style>

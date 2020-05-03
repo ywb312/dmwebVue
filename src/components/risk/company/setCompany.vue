@@ -1,8 +1,8 @@
 <template>
-    <div class="addCompany">
-        <div class="maskWrap" v-show="addshow" @click="addVisible=false">
+    <div>
+        <div class="maskWrap" v-show="setShow" @click="close">
             <div @click.stop class="maskMiddle">
-                <div class="maskTitle">新增危险源</div>
+                <div class="maskTitle">{{this.type == "add"?"新增危险源":"修改危险源"}}</div>
                 <van-form @submit="postData">
                     <van-field
                         label="危险源名称"
@@ -34,10 +34,9 @@
 <script>
 import picker from "@/components/pub/picker.vue";
 export default {
-    name: "addCompany",
     data() {
         return {
-            addVisible: false,
+            setVisible: false,
             getData: {
                 wname: "",
                 project: "",
@@ -48,25 +47,40 @@ export default {
             }
         };
     },
-    props: ["addshow", "fid"],
+    props: ["setShow", "fid", "selectData", "type"],
     methods: {
         // 根据当前页面的配置 对请求入参进行添加筛选
         returnData(option) {
             let obj = {
-                "bean.fid": this.fid,
                 session: window.localStorage["session_Id"]
             };
+            if (this.type == "add") {
+                obj["bean.fid"] = this.fid;
+            } else if (this.type == "mod") {
+                obj["bean.fid"] = this.selectData.fid;
+                obj["bean.wid"] = this.selectData.wid;
+            }
             for (const key in this.getData) {
                 obj["bean." + key] = this.getData[key];
             }
             return obj;
         },
         postData(obj) {
-            this.$api.risk.companyRiskAdd(this.returnData()).then(res => {
-                this.addVisible = false;
-                this.$emit("addSuc");
-            });
+            if (this.type == "add") {
+                this.$api.risk.companyRiskAdd(this.returnData()).then(res => {
+                    this.close();
+                    this.$emit("suc");
+                });
+            } else if (this.type == "mod") {
+                this.$api.risk
+                    .companyRiskModify(this.returnData())
+                    .then(res => {
+                        this.close();
+                        this.$emit("suc");
+                    });
+            }
         },
+        // 选择器赋值
         getYxfw(v) {
             this.getData.yxfw = v.id;
         },
@@ -76,6 +90,7 @@ export default {
         getQzhg(v) {
             this.getData.qzhg = v.id;
         },
+        // 关闭
         close() {
             this.getData.wname = "";
             this.getData.project = "";
@@ -83,15 +98,34 @@ export default {
             this.$refs.yxfwPick.reset();
             this.$refs.knfsPick.reset();
             this.$refs.qzhgPick.reset();
-            this.addVisible = false;
+            this.setVisible = false;
             this.$emit("popupClose");
         }
     },
     watch: {
         // 监听两个值 确定显示的状态
-        addshow(val) {
+        setShow(val) {
             //popshow为父组件的值，val参数为值
-            this.addVisible = val; //将父组件的值赋给popupVisible 子组件的值
+            if (val) {
+                this.setVisible = val; //将父组件的值赋给popupVisible 子组件的值
+                if (this.type == "mod") {
+                    this.getData.wname = this.selectData.wname;
+                    this.getData.project = this.selectData.project;
+                    this.getData.content = this.selectData.content;
+                    this.$refs.yxfwPick.setVal({
+                        text: this.selectData.yxfwText,
+                        id: this.selectData.yxfw
+                    });
+                    this.$refs.knfsPick.setVal({
+                        text: this.selectData.knfsText,
+                        id: this.selectData.knfs
+                    });
+                    this.$refs.qzhgPick.setVal({
+                        text: this.selectData.qzhgText,
+                        id: this.selectData.qzhg
+                    });
+                }
+            }
         }
     },
     computed: {

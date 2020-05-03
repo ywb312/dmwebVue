@@ -1,0 +1,97 @@
+<template>
+    <div>
+        <div class="maskWrap" v-show="setShow" @click="close">
+            <div @click.stop class="maskMiddle">
+                <div class="maskTitle">{{this.type == "add"?"新增风险点":"修改风险点"}}</div>
+                <van-form @submit="postData">
+                    <picker title="风险类型" ref="pick" :slots="fxtypeSlots" @returnMsg="getType"></picker>
+                    <van-field
+                        label="风险名称"
+                        v-model="getData.name"
+                        placeholder="风险名称"
+                        :rules="[{ required: true, message: '填写风险名称' }]"
+                    />
+                    <van-button type="info" size="large" native-type="submit">确定</van-button>
+                </van-form>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+import picker from "@/components/pub/picker.vue";
+export default {
+    data() {
+        return {
+            setVisible: false,
+            resData: [],
+            getData: {
+                name: "",
+                fxtype: ""
+            }
+        };
+    },
+    props: ["setShow", "type", "selectData"],
+    methods: {
+        postData(obj) {
+            if (this.type == "add") {
+                this.$api.risk
+                    .riskAdd({
+                        "bean.fxtype": this.getData.fxtype,
+                        "bean.name": this.getData.name,
+                        session: window.localStorage["session_Id"]
+                    })
+                    .then(res => {
+                        this.close();
+                        this.$emit("suc");
+                    });
+            } else if (this.type == "mod") {
+                this.$api.risk
+                    .riskModify({
+                        "bean.fxtype": this.getData.fxtype,
+                        "bean.name": this.getData.name,
+                        "bean.fid": this.selectData.fid,
+                        session: window.localStorage["session_Id"]
+                    })
+                    .then(res => {
+                        this.close();
+                        this.$emit("suc");
+                    });
+            }
+        },
+        getType(v) {
+            this.getData.fxtype = v.id;
+        },
+        close() {
+            this.getData.name = "";
+            this.$refs.pick.reset();
+            this.setVisible = false;
+            this.$emit("popupClose");
+        }
+    },
+    watch: {
+        // 监听两个值 确定显示的状态
+        setShow(val) {
+            //popshow为父组件的值，val参数为值
+            if (val) {
+                this.setVisible = val; //将父组件的值赋给popupVisible 子组件的值
+                if (this.type == "mod") {
+                    this.getData.name = this.selectData.name;
+                    this.$refs.pick.setVal({
+                        text: this.selectData.fxtypeText,
+                        id: this.selectData.fxtype
+                    });
+                }
+            }
+        }
+    },
+    computed: {
+        fxtypeSlots() {
+            return this.$store.state.fxtypeSlots;
+        }
+    },
+    components: {
+        picker
+    }
+};
+</script>
+<style scoped src="@/assets/css/public.css"/>

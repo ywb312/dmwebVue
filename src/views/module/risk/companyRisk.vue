@@ -43,12 +43,12 @@
         </ViewBox>
         <!-- 新增按钮 -->
         <div>
-            <van-button class="btn" type="info" size="large" @click="addshow=true">新增危险源</van-button>
+            <van-button class="btn" type="info" size="large" @click="addClick">新增危险源</van-button>
         </div>
         <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->
         <van-action-sheet
-            v-model="popshow"
+            v-model="sheetShow"
             :actions="actions"
             @select="onSelect"
             cancel-text="取消"
@@ -56,18 +56,14 @@
         />
         <!-- 组件框 -->
         <div>
-            <add-company
-                :addshow="addshow"
+            <set-company
+                :setShow="setShow"
+                :type="type"
                 :fid="$route.query.fid"
-                @popupClose="addshow=false"
-                @addSuc="clearData"
-            ></add-company>
-            <modify-company
-                :modShow="modShow"
                 :selectData="selectData"
-                @popupClose="modShow=false"
+                @popupClose="setShow=false"
                 @suc="clearData"
-            ></modify-company>
+            ></set-company>
             <delete-company
                 :delShow="delShow"
                 :wid="selectData.wid"
@@ -86,8 +82,7 @@
 // 这是基本渲染功能的组件 公用
 import ViewBox from "@/components/pub/ViewBox.vue";
 // 增删改框
-import addCompany from "@/components/risk/company/addCompany";
-import modifyCompany from "@/components/risk/company/modifyCompany";
+import setCompany from "@/components/risk/company/setCompany";
 import deleteCompany from "@/components/risk/company/deleteCompany";
 // 评价框
 import companyApprove from "@/components/risk/company/companyApprove";
@@ -106,7 +101,7 @@ export default {
             // 选中的对象
             selectData: {},
             // 控制操作模态框的显示
-            popshow: false,
+            sheetShow: false,
             actions: [
                 { name: "修改" },
                 { name: "删除" },
@@ -114,8 +109,8 @@ export default {
                 { name: "查看管控措施" }
             ],
             // 增删改查组件的显示
-            addshow: false,
-            modShow: false,
+            setShow: false,
+            type: "add",
             delShow: false,
             approveShow: false
         };
@@ -130,10 +125,14 @@ export default {
             });
             this.rendering = arr;
         },
+        addClick() {
+            this.type = "add";
+            this.setShow = true;
+        },
         // 操作按钮点击事件
         btnClick(obj) {
             this.selectData = obj;
-            this.popshow = true;
+            this.sheetShow = true;
         },
         // 跳转至管控措施
         goRouter() {
@@ -149,13 +148,11 @@ export default {
         },
         onSelect(item) {
             if (item.name == "修改") {
-                this.popshow = false;
-                this.modShow = true;
+                this.type = "mod";
+                this.setShow = true;
             } else if (item.name == "删除") {
-                this.popshow = false;
                 this.delShow = true;
             } else if (item.name == "评价") {
-                this.popshow = false;
                 this.approveShow = true;
             } else if (item.name == "查看管控措施") {
                 this.goRouter();
@@ -178,8 +175,7 @@ export default {
     },
     components: {
         ViewBox,
-        addCompany,
-        modifyCompany,
+        setCompany,
         deleteCompany,
         companyApprove
     }

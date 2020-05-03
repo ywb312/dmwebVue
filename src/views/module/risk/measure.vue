@@ -31,7 +31,7 @@
         </ViewBox>
         <!-- 新增按钮 -->
         <div>
-            <van-button class="btn" type="info" size="large" @click="addshow=true">新增管控措施</van-button>
+            <van-button class="btn" type="info" size="large" @click="addClick">新增管控措施</van-button>
         </div>
         <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->
@@ -44,18 +44,14 @@
         />
         <!-- 组件框 -->
         <div>
-            <add-measure
-                :addshow="addshow"
+            <set-measure
+                :setShow="setShow"
+                :type="type"
                 :wid="$route.query.wid"
-                @popupClose="addshow=false"
-                @addSuc="clearData"
-            ></add-measure>
-            <modify-measure
-                :modShow="modShow"
                 :selectData="selectData"
-                @popupClose="modShow=false"
+                @popupClose="setShow=false"
                 @suc="clearData"
-            ></modify-measure>
+            ></set-measure>
             <delete-measure
                 :delShow="delShow"
                 :gid="selectData.gid"
@@ -69,8 +65,7 @@
 // 这是基本渲染功能的组件 公用
 import ViewBox from "@/components/pub/ViewBox.vue";
 // 增删改框
-import addMeasure from "@/components/risk/measure/addMeasure";
-import modifyMeasure from "@/components/risk/measure/modifyMeasure";
+import setMeasure from "@/components/risk/measure/setMeasure";
 import deleteMeasure from "@/components/risk/measure/deleteMeasure";
 export default {
     name: "measure",
@@ -94,8 +89,8 @@ export default {
                 { name: "查看排查计划" }
             ],
             // 增删改查组件的显示
-            addshow: false,
-            modShow: false,
+            setShow: false,
+            type: "add",
             delShow: false
         };
     },
@@ -112,13 +107,16 @@ export default {
             this.selectData = obj;
             this.popshow = true;
         },
+        addClick() {
+            this.type = "add";
+            this.setShow = true;
+        },
         // 菜单选择
         onSelect(item) {
             if (item.name == "修改") {
-                this.popshow = false;
-                this.modShow = true;
+                this.type = "mod";
+                this.setShow = true;
             } else if (item.name == "删除") {
-                this.popshow = false;
                 this.delShow = true;
             } else if (item.name == "查看排查计划") {
                 this.goRouter();
@@ -145,8 +143,7 @@ export default {
     },
     components: {
         ViewBox,
-        addMeasure,
-        modifyMeasure,
+        setMeasure,
         deleteMeasure
     }
 };

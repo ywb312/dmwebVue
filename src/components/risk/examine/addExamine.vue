@@ -1,11 +1,13 @@
 <template>
     <div class="addExamine">
-        <div class="maskWrap" v-show="addshow" @click="addVisible=false">
+        <div class="maskWrap" v-show="addshow" @click="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">新增排查计划</div>
-                <tree title="单位" @selectMsg="getDept"></tree>
-                <picker title="频率" :slots="rateSlots" @returnMsg="getRate"></picker>
-                <van-button type="info" size="large" @click="postData">确定</van-button>
+                <van-form @submit="postData">
+                    <tree title="单位" ref="tree" @selectMsg="getDept"></tree>
+                    <picker title="频率" ref="pick" :slots="rateSlots" @returnMsg="getRate"></picker>
+                    <van-button type="info" size="large" native-type="submit">确定</van-button>
+                </van-form>
             </div>
         </div>
     </div>
@@ -64,17 +66,8 @@ export default {
             return obj;
         },
         postData(obj) {
-            for (const key in this.getData) {
-                if (this.getData[key] == "") {
-                    this.$toast({
-                        message: "请把信息补充完整",
-                        position: "bottom"
-                    });
-                    return;
-                }
-            }
             this.$api.risk.examineAdd(this.returnData()).then(res => {
-                this.addVisible = false;
+                this.close();
                 this.$emit("addSuc");
             });
         },
@@ -85,6 +78,12 @@ export default {
         // 获取单位
         getDept(v) {
             this.getData.deptid = v.id;
+        },
+        close() {
+            this.$refs.tree.reset();
+            this.$refs.pick.reset();
+            this.addVisible = false;
+            this.$emit("popupClose");
         }
     },
     watch: {
@@ -92,11 +91,6 @@ export default {
         addshow(val) {
             //popshow为父组件的值，val参数为值
             this.addVisible = val; //将父组件的值赋给popupVisible 子组件的值
-        },
-        addVisible(val) {
-            if (val == false) {
-                this.$emit("popupClose");
-            }
         }
     },
     computed: {
