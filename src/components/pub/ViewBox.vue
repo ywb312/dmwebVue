@@ -10,8 +10,9 @@
             :finished="finished"
             finished-text="没有更多了"
             :immediate-check="false"
+            :error.sync="error"
+            error-text="请求失败，点击重新加载"
             @load="onLoad"
-            offset="50"
         >
             <slot name="views"></slot>
             <van-empty v-show="noData" description="暂无数据" />
@@ -24,6 +25,7 @@ export default {
     name: "ViewBox",
     data() {
         return {
+            // 页码
             page: 1,
             // 渲染的数据
             rendering: [],
@@ -36,7 +38,11 @@ export default {
             // 暂无数据
             noData: false,
             // 数据有误
-            noRes: false
+            noRes: false,
+            // 请求出错
+            error: false,
+            // 避免一直执行onLoad
+            canLoad: true
         };
     },
     // pageData父组件传来的配置项
@@ -50,6 +56,7 @@ export default {
         this.getData();
     },
     methods: {
+        // 设置请求数据
         setObj() {
             let obj = {
                 rows: 10,
@@ -63,11 +70,12 @@ export default {
             }
             return obj;
         },
-        // 获取当前页面数据函数
+        // 请求、渲染函数
         getData(more = true) {
             this.$api.pub
                 .showPage(this.postData.url, this.setObj())
                 .then(res => {
+                    this.canLoad = true;
                     this.refreshing = false;
                     this.loading = false;
                     // 数据有误
@@ -75,12 +83,21 @@ export default {
                         this.noRes = true;
                         return;
                     }
-                    // 有数据和没数据都要返回
+                    // 数据为空
+                    if (res.records == 0) {
+                        this.canLoad = false;
+                        this.noData = true;
+                        this.$emit("getRendering", this.rendering);
+                        return;
+                    }
+                    // 有数据
                     if (res.rows && res.rows.length != 0) {
                         // 判断是新增还是替换  默认为新增
                         if (more) {
+                            // 向后新增
                             this.rendering.push(...res.rows);
                         } else {
+                            // 替换旧数据
                             this.rendering = res.rows;
                         }
                         this.$emit("getRendering", this.rendering);
@@ -88,18 +105,18 @@ export default {
                         if (res.rows.length < 10) {
                             this.finished = true;
                         }
-                    } else {
-                        // 数据为空
-                        if (res.records == 0) {
-                            this.noData = true;
-                            this.$emit("getRendering", this.rendering);
-                        }
-                        return;
                     }
+                })
+                .catch(() => {
+                    this.error = true;
                 });
         },
         // 上拉加载方法
         onLoad() {
+            if (!this.canLoad) {
+                this.loading = false;
+                return;
+            }
             this.page++;
             this.getData();
         },
@@ -108,11 +125,12 @@ export default {
             this.page = 1;
             this.finished = false;
             this.noData = false;
+            this.noRes = false;
+            this.canLoad = false;
             this.rendering = [];
             this.getData(false);
         }
-    },
-    components: {}
+    }
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>

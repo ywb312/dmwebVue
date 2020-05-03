@@ -20,12 +20,10 @@
                 >
                     <div class="main">
                         <div>
-                            <span>管控措施名称:</span>
-                            <span>{{item.gname}}</span>
+                            <span>管控措施名称: {{item.gname}}</span>
                         </div>
                         <div>
-                            <span>管控措施类型:</span>
-                            <span>{{item.gtypeText}}</span>
+                            <span>管控措施类型: {{item.gtypeText}}</span>
                         </div>
                     </div>
                 </div>

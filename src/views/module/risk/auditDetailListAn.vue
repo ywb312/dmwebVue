@@ -19,20 +19,20 @@
                     <div class="title">
                         <h4>{{index+1+'.'+item.name}}</h4>
                         <p style="min-width:40px">
-                            <van-tag round type="primary">{{item.fxtypeText}}</van-tag>
+                            <van-tag size="large" round type="primary">{{item.fxtypeText}}</van-tag>
                         </p>
                     </div>
                     <div class="main">
                         <div>
                             <span>1.{{item.wname}}</span>
                             <span>
-                                <van-tag round type="primary">{{item.stateText}}</van-tag>
+                                <van-tag size="large" round type="primary">{{item.stateText}}</van-tag>
                             </span>
                         </div>
                         <div v-for="(n,m) in item.child" :key="m">
                             <span>{{m+2+"."+n.wname}}</span>
                             <span>
-                                <van-tag round type="primary">{{item.stateText}}</van-tag>
+                                <van-tag size="large" round type="primary">{{item.stateText}}</van-tag>
                             </span>
                         </div>
                     </div>

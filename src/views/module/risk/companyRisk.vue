@@ -23,24 +23,19 @@
                     </div>
                     <div class="main">
                         <div>
-                            <span>项目:</span>
-                            <span>{{item.project}}</span>
+                            <span>项目: {{item.project}}</span>
                         </div>
                         <div>
-                            <span>内容:</span>
-                            <span>{{item.content}}</span>
+                            <span>内容: {{item.content}}</span>
                         </div>
                         <div>
-                            <span>影响范围:</span>
-                            <span>{{item.yxfwText}}</span>
+                            <span>影响范围: {{item.yxfwText}}</span>
                         </div>
                         <div>
-                            <span>可能导致的危害:</span>
-                            <span>{{item.knfsText}}</span>
+                            <span>可能导致的危害: {{item.knfsText}}</span>
                         </div>
                         <div>
-                            <span>潜在风险:</span>
-                            <span>{{item.qzhgText}}</span>
+                            <span>潜在风险: {{item.qzhgText}}</span>
                         </div>
                     </div>
                 </div>

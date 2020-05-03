@@ -1,10 +1,10 @@
 <template>
     <div class="modifyMeasure">
-        <div class="maskWrap" v-show="modShow" @click="modVisible=false">
+        <div class="maskWrap" v-show="modShow" @click="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">修改管控措施</div>
                 <van-field label="管控措施名称" placeholder="请输入风险名称" v-model="getData.gname" />
-                <picker title="管控措施类型" :slots="gTypeSlots" @returnMsg="getType"></picker>
+                <picker ref="pick" title="管控措施类型" :slots="gTypeSlots" @returnMsg="getType"></picker>
                 <van-button type="info" size="large" @click="postData">确定</van-button>
             </div>
         </div>
@@ -47,12 +47,16 @@ export default {
                 }
             }
             this.$api.risk.measureModify(this.returnData()).then(res => {
-                this.modVisible = false;
+                this.close();
                 this.$emit("suc");
             });
         },
         getType(v) {
             this.getData.gtype = v.id;
+        },
+        close() {
+            this.modVisible = false;
+            this.$emit("popupClose");
         }
     },
     watch: {
@@ -62,11 +66,6 @@ export default {
             if (val) {
                 this.modVisible = val; //将父组件的值赋给popupVisible 子组件的值
                 this.getData.gname = this.selectData.gname;
-            }
-        },
-        modVisible(val) {
-            if (val == false) {
-                this.$emit("popupClose");
             }
         }
     },

@@ -3,13 +3,30 @@
         <div class="maskWrap" v-show="addshow" @click="addVisible=false">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">新增危险源</div>
-                <van-field label="危险源名称" placeholder="请输入危险源名称" v-model="getData.wname"/>
-                <van-field label="项目" placeholder="请输入项目" v-model="getData.project"/>
-                <van-field label="内容" placeholder="请输入内容" v-model="getData.content"/>
-                <picker title="影响范围" :slots="yxfwSlots" @returnMsg="getYxfw"></picker>
-                <picker title="可能导致的危害" :slots="knfsSlots" @returnMsg="getKnfs"></picker>
-                <picker title="潜在后果" :slots="qzhgSlots" @returnMsg="getQzhg"></picker>
-                <van-button type="info" size="large" @click="postData">确定</van-button>
+                <van-form @submit="postData">
+                    <van-field
+                        label="危险源名称"
+                        v-model="getData.wname"
+                        placeholder="危险源名称"
+                        :rules="[{ required: true, message: '填写危险源名称' }]"
+                    />
+                    <van-field
+                        label="项目"
+                        v-model="getData.project"
+                        placeholder="项目"
+                        :rules="[{ required: true, message: '填写项目' }]"
+                    />
+                    <van-field
+                        label="内容"
+                        v-model="getData.content"
+                        placeholder="内容"
+                        :rules="[{ required: true, message: '填写内容' }]"
+                    />
+                    <picker title="影响范围" ref="yxfwPick" :slots="yxfwSlots" @returnMsg="getYxfw"></picker>
+                    <picker title="可能导致的危害" ref="knfsPick" :slots="knfsSlots" @returnMsg="getKnfs"></picker>
+                    <picker title="潜在后果" ref="qzhgPick" :slots="qzhgSlots" @returnMsg="getQzhg"></picker>
+                    <van-button type="info" size="large" native-type="submit">确定</van-button>
+                </van-form>
             </div>
         </div>
     </div>
@@ -45,15 +62,6 @@ export default {
             return obj;
         },
         postData(obj) {
-            for (const key in this.getData) {
-                if (this.getData[key] == "") {
-                    this.$toast({
-                        message: "请把信息补充完整",
-                        duration: 2000
-                    });
-                    return;
-                }
-            }
             this.$api.risk.companyRiskAdd(this.returnData()).then(res => {
                 this.addVisible = false;
                 this.$emit("addSuc");
@@ -67,6 +75,16 @@ export default {
         },
         getQzhg(v) {
             this.getData.qzhg = v.id;
+        },
+        close() {
+            this.getData.wname = "";
+            this.getData.project = "";
+            this.getData.content = "";
+            this.$refs.yxfwPick.reset();
+            this.$refs.knfsPick.reset();
+            this.$refs.qzhgPick.reset();
+            this.addVisible = false;
+            this.$emit("popupClose");
         }
     },
     watch: {
@@ -74,11 +92,6 @@ export default {
         addshow(val) {
             //popshow为父组件的值，val参数为值
             this.addVisible = val; //将父组件的值赋给popupVisible 子组件的值
-        },
-        addVisible(val) {
-            if (val == false) {
-                this.$emit("popupClose");
-            }
         }
     },
     computed: {

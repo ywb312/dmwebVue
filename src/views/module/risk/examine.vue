@@ -20,12 +20,10 @@
                 >
                     <div class="main">
                         <div>
-                            <span>频率:</span>
-                            <span>{{item.rate}}</span>
+                            <span>频率: {{item.rate}}</span>
                         </div>
                         <div>
-                            <span>单位:</span>
-                            <span>{{item.deptname}}</span>
+                            <span>单位: {{item.deptname}}</span>
                         </div>
                     </div>
                 </div>

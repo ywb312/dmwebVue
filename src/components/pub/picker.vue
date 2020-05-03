@@ -13,6 +13,7 @@
             <van-picker
                 show-toolbar
                 :columns="slots"
+                ref="pick"
                 @cancel="popupVisible = false"
                 @confirm="onConfirm"
             />
@@ -39,13 +40,21 @@ export default {
         }
     },
     methods: {
+        // 确认
         onConfirm(value) {
             this.value = value;
             this.popupVisible = false;
             this.$emit("returnMsg", value);
         },
+        // 清空重置
         reset() {
             this.value = "";
+            this.$emit("returnMsg", this.value);
+        },
+        // 数据回显设置
+        setVal(obj) {
+            this.value = obj;
+            this.$emit("returnMsg", this.value);
         }
     },
     components: {}

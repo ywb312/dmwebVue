@@ -11,17 +11,15 @@
                     <div class="title">
                         <h4>{{index+1+'.'+item.deptname}}</h4>
                         <p style="min-width:40px">
-                            <van-tag round type="primary">{{item.stateText}}</van-tag>
+                            <van-tag size="large" round type="primary">{{item.stateText}}</van-tag>
                         </p>
                     </div>
                     <div class="main">
                         <div>
-                            <span>提交时间:</span>
-                            <span>{{item.createdate}}</span>
+                            <span>提交时间: {{item.createdate}}</span>
                         </div>
                         <div>
-                            <span>审核时间:</span>
-                            <span>{{item.auditdate}}</span>
+                            <span>审核时间: {{item.auditdate}}</span>
                         </div>
                     </div>
                 </div>

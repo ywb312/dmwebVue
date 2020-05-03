@@ -11,17 +11,15 @@
                     <div class="title">
                         <h4>{{index+1+'.'+item.name}}</h4>
                         <!-- <p style="min-width:40px">
-                        <van-tag round type="primary">{{item.checktype}}</van-tag>
+                        <van-tag size="large" round type="primary">{{item.checktype}}</van-tag>
                         </p>-->
                     </div>
                     <div class="main">
                         <div>
-                            <span>风险点类型:</span>
-                            <span>{{item.fxtext}}</span>
+                            <span>风险点类型: {{item.fxtypeText}}</span>
                         </div>
                         <div>
-                            <span>创建人:</span>
-                            <span>{{item.createID}}</span>
+                            <span>创建人: {{item.createID}}</span>
                         </div>
                     </div>
                 </div>
@@ -90,7 +88,6 @@ export default {
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
-    created() {},
     methods: {
         // 获取当前页面数据
         getRendering(arr) {
