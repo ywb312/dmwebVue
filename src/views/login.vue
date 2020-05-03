@@ -38,21 +38,21 @@ export default {
         };
     },
     // 设置免登陆 如果本地有数据自动跳转
-    created() {
-        let storage = window.localStorage;
-        if (
-            storage.session_Id &&
-            storage.deptname &&
-            storage.username &&
-            storage.loginname &&
-            storage.rolename &&
-            storage.roleLevel
-        ) {
-            this.$router.push({
-                name: "home"
-            });
-        }
-    },
+    // created() {
+    //     let storage = window.localStorage;
+    //     if (
+    //         storage.session_Id &&
+    //         storage.deptname &&
+    //         storage.username &&
+    //         storage.loginname &&
+    //         storage.rolename &&
+    //         storage.roleLevel
+    //     ) {
+    //         this.$router.push({
+    //             name: "home"
+    //         });
+    //     }
+    // },
     methods: {
         onSubmit(values) {
             let _this = this;

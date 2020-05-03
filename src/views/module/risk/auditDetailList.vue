@@ -9,84 +9,75 @@
             @click-left="$router.back(-1)"
         />
         <div>
-            <mt-loadmore
-                :top-method="loadTop"
-                :bottom-method="loadBottom"
-                :bottom-all-loaded="allLoaded"
-                :auto-fill="allLoaded"
-                bottomPullText="正在加载更多..."
-                ref="loadmore"
-            >
-                <div class="wrapper" v-for="(item,index) in rendering" :key="index">
-                    <div class="title">
-                        <h4>{{index+1+'.'+item.name}}</h4>
-                        <p style="min-width:40px">
-                            <van-tag round type="primary">{{item.fxtypeText}}</van-tag>
-                        </p>
-                    </div>
-                    <div class="main">
-                        <div>
-                            <span>1.{{item.wname}}</span>
-                            <span>
-                                <van-tag round type="primary">{{item.stateText}}</van-tag>
-                            </span>
+            <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
+                <div slot="views">
+                    <div
+                        class="wrapper"
+                        v-for="(item,index) in rendering"
+                        :key="index"
+                        @click="btnClick(item)"
+                    >
+                        <div class="title">
+                            <h4>{{index+1+'.'+item.name}}</h4>
+                            <p style="min-width:40px">
+                                <van-tag round type="primary">{{item.fxtypeText}}</van-tag>
+                            </p>
                         </div>
-                        <div v-for="(n,m) in item.child" :key="m">
-                            <span>{{m+2+"."+n.wname}}</span>
-                            <span>
-                                <van-tag round type="primary">{{item.stateText}}</van-tag>
-                            </span>
+                        <div class="main">
+                            <div>
+                                <span>1.{{item.wname}}</span>
+                                <span>
+                                    <van-tag round type="primary">{{item.stateText}}</van-tag>
+                                </span>
+                            </div>
+                            <div v-for="(n,m) in item.child" :key="m">
+                                <span>{{m+2+"."+n.wname}}</span>
+                                <span>
+                                    <van-tag round type="primary">{{item.stateText}}</van-tag>
+                                </span>
+                            </div>
                         </div>
                     </div>
-                    <div class="bottom" @click="btnClick(item)">操作</div>
                 </div>
-                <div v-show="noData" class="noMoreText">暂无数据</div>
-                <van-divider v-show="noMore">没有更多数据了</van-divider>
-            </mt-loadmore>
+            </ViewBox>
         </div>
         <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->
-        <mt-popup v-model="popshow" popup-transition="popup-fade" closeOnClickModal="true">
-            <div v-if="selectData.state == 'SHZT004' || selectData.state == 'SHZT001'">
-                <div class="popupItem" @click.stop="auditPass(true)">审核通过</div>
-                <div class="popupItem" @click.stop="auditPass(false)">审核不通过</div>
-            </div>
-            <!-- <div v-if="selectData.state == 'SHZT002'&&selectData.wid">
-                <div class="popupItem" @click.stop="appraise">评价</div>
-                <div class="popupItem" @click.stop="goMeasure">管控措施</div>
-            </div>-->
-            <div class="popupItem" @click.stop="goDetail">查看详情</div>
-        </mt-popup>
-        <!-- 组件框 -->
-        <!-- <div>
-            <company-approve
-                :appShow="approveShow"
-                :selectData="selectData"
-                @popupClose="approveShow=false"
-            ></company-approve>
-        </div>-->
+        <van-action-sheet v-model="popshow" cancel-text="取消" close-on-click-action>
+            <div
+                class="content"
+                v-show="selectData.state == 'SHZT004' || selectData.state == 'SHZT001'"
+                @click="auditPass(true)"
+            >审核通过</div>
+            <div
+                class="content"
+                v-show="selectData.state == 'SHZT004' || selectData.state == 'SHZT001'"
+                @click="auditPass(false)"
+            >审核不通过</div>
+            <div class="content" @click="goDetail">查看详情</div>
+        </van-action-sheet>
     </div>
 </template>
 <script>
 // 这是基本渲染功能的组件 公用
-import { Popup, Loadmore } from "mint-ui";
+import ViewBox from "@/components/pub/ViewBox.vue";
 // 评价框
 import companyApprove from "@/components/risk/company/companyApprove";
 export default {
     name: "auditDetailList",
     data() {
         return {
-            page: 1,
             // 渲染的数据
             rendering: [],
-            // 停止上拉加
-            allLoaded: false,
-            // 没有数据
-            noData: false,
-            // 没有更多数据了
-            noMore: false,
+            postData: {
+                url: "biz/risk/companyRisk/cjshlist.action",
+                obj: {
+                    "bean.param": this.$route.query.auditid
+                }
+            },
+            // 操作面板显示
             popshow: false,
-            approveShow: false,
+            // 审批状态数组
             stateArr: [
                 {
                     text: "未审核",
@@ -105,21 +96,31 @@ export default {
                     id: "SHZT004"
                 }
             ],
+            // 选中项
             selectData: {}
         };
     },
-    created() {
-        this.getData();
-    },
     methods: {
-        // 每项按钮点击事件
+        // 处理请求的数据
+        getRendering(arr) {
+            this.rendering = this.setRes(arr);
+        },
+        // 每项点击
         btnClick(obj) {
             this.$store.commit("getSelectData", obj);
             this.popshow = true;
             this.selectData = obj;
         },
-        // 审核通过/不通过
+        // 查看详情按钮点击
+        goDetail() {
+            this.popshow = false;
+            this.$router.push({
+                path: "/risk/auditDetail"
+            });
+        },
+        // 审核通过/不通过点击
         auditPass(bol) {
+            this.popshow = false;
             let obj = {
                 "bean.cid": this.selectData.cid,
                 "bean.param": this.$route.query.auditid
@@ -134,66 +135,10 @@ export default {
                 });
             }
         },
-        // 评价框显示
-        // appraise() {
-        //     this.popshow = false;
-        //     this.approveShow = true;
-        // },
-        // // 跳转到管控措施页
-        // goMeasure() {
-        //     this.popshow = false;
-        //     this.$router.push({
-        //         path: "/risk/measure",
-        //         query: {
-        //             wid: this.$route.query.auditid
-        //         }
-        //     });
-        // },
-        // 查看详情按钮
-        goDetail() {
-            this.popshow = false;
-            this.$router.push({
-                path: "/risk/auditDetail"
-            });
-        },
-        // 获取当前页面数据函数
-        getData(more = true) {
-            this.$api.risk
-                .getAuditDetail({
-                    "bean.param": this.$route.query.auditid,
-                    session: window.localStorage["session_Id"]
-                })
-                .then(res => {
-                    if (!res.rows) {
-                        return;
-                    }
-                    // 判断rows是否返回数据
-                    if (res.rows.length != 0) {
-                        let data = this.setRes(res.rows);
-                        // 判断是新增还是替换  默认为新增
-                        if (more) {
-                            this.rendering.push(...data);
-                        } else {
-                            this.rendering = data;
-                        }
-                        // 返回数据小于10条 停止上拉刷新
-                        if (res.rows.length < 10) {
-                            this.allLoaded = true;
-                            this.noMore = true;
-                        } else {
-                            this.allLoaded = false;
-                            this.noMore = false;
-                        }
-                    } else {
-                        this.noData = true;
-                        this.allLoaded = true;
-                    }
-                });
-        },
         // 提示框操作成功
         postSuccess() {
             this.popshow = false;
-            this.cleraData();
+            this.clearData();
             this.$toast({
                 message: "操作成功",
                 position: "bottom"
@@ -226,24 +171,9 @@ export default {
             });
             return returnArr;
         },
-        // 上拉加载方法
-        loadBottom() {
-            this.page++;
-            this.$refs.loadmore.onBottomLoaded();
-            this.getData();
-        },
-        // 下拉刷新方法
-        loadTop() {
-            this.cleraData();
-            this.$refs.loadmore.onTopLoaded();
-        },
-        // 清空所需渲染数据并重新渲染
-        cleraData() {
-            this.page = 1;
-            this.noMore = false;
-            this.noData = false;
-            this.rendering = [];
-            this.getData(false);
+        // 清空数据 重新加载
+        clearData() {
+            this.$refs.view.cleraData();
         }
     },
     computed: {
@@ -252,8 +182,7 @@ export default {
         }
     },
     components: {
-        "mt-loadmore": Loadmore,
-        "mt-popup": Popup,
+        ViewBox,
         companyApprove
     },
     beforeRouteLeave(to, from, next) {
@@ -270,3 +199,9 @@ export default {
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>
+<style scoped>
+.content {
+    padding: 16px 0;
+    text-align: center;
+}
+</style>

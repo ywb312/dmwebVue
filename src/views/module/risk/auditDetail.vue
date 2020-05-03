@@ -26,11 +26,12 @@
                     <div v-if="item.grade">
                         <span>
                             风险等级:
-                            <mt-badge
-                                :type="item.grade == 1?'error':item.grade==2?'warning':'primary'"
+                            <van-tag
+                                size="large"
+                                round
+                                :type="item.grade == 1?'danger':item.grade==2?'warning':'primary'"
                                 :color="item.grade == 3?'yellow':''"
-                                size="normal"
-                            >{{item.grade+"级"}}</mt-badge>
+                            >{{item.grade+"级"}}</van-tag>
                         </span>
                     </div>
                     <div>
@@ -76,26 +77,10 @@ export default {
             delete obj.child;
             arr.push(obj);
             arr.forEach(element => {
-                this.$common.code2Text(
-                    element,
-                    "knfs",
-                    this.knfsSlots
-                );
-                this.$common.code2Text(
-                    element,
-                    "yxfw",
-                    this.yxfwSlots
-                );
-                this.$common.code2Text(
-                    element,
-                    "qzhg",
-                    this.qzhgSlots
-                );
-                this.$common.code2Text(
-                    element,
-                    "gtype",
-                    this.gTypeSlots
-                );
+                this.$common.code2Text(element, "knfs", this.knfsSlots);
+                this.$common.code2Text(element, "yxfw", this.yxfwSlots);
+                this.$common.code2Text(element, "qzhg", this.qzhgSlots);
+                this.$common.code2Text(element, "gtype", this.gTypeSlots);
             });
             return arr;
         }

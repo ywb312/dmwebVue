@@ -18,7 +18,7 @@
                                 {{item.cpname}}
                             </p>
                             <p style="min-width:50px;text-align:right">
-                                <van-tag round type="primary">{{item.planstatus}}</van-tag>
+                                <van-tag size="large" round type="primary">{{item.planstatus}}</van-tag>
                             </p>
                         </div>
                         <div>

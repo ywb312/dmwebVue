@@ -1,38 +1,38 @@
 <template>
     <div>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
-            <div
-                class="wrapper"
-                v-for="(item,index) in rendering"
-                :key="index"
-                @click="btnClick(item)"
-            >
-                <div class="title">
-                    <h4>{{index+1+'.'+item.name}}</h4>
-                    <p style="min-width:40px">
-                        <van-tag round type="primary">{{item.fxtypeText}}</van-tag>
-                    </p>
-                </div>
-                <div class="main">
-                    <div>
-                        <span>1.{{item.wname}}</span>
-                        <span>
-                            <mt-badge
-                                :type="item.grade == 1?'error':item.grade==2?'warning':'primary'"
-                                :color="item.grade == 3?'yellow':''"
-                                size="normal"
-                            >{{item.grade+"级"}}</mt-badge>
-                        </span>
+            <div slot="views">
+                <div
+                    class="wrapper"
+                    v-for="(item,index) in rendering"
+                    :key="index"
+                    @click="btnClick(item)"
+                >
+                    <div class="title">
+                        <h4>{{index+1+'.'+item.name}}</h4>
+                        <p style="min-width:40px">
+                            <van-tag size="large" round type="primary">{{item.fxtypeText}}</van-tag>
+                        </p>
                     </div>
-                    <div v-for="(n,m) in item.child" :key="m">
-                        <span>{{m+2+"."+n.wname}}</span>
-                        <span>
-                            <mt-badge
-                                :type="n.grade == 1?'error':n.grade==2?'warning':'primary'"
-                                :color="item.grade == 3?'yellow':''"
-                                size="normal"
-                            >{{n.grade+"级"}}</mt-badge>
-                        </span>
+                    <div class="main">
+                        <div>
+                            <span>1.{{item.wname}}</span>
+                            <span>
+                                <van-tag size="large" round
+                                    :type="item.grade == 1?'danger':item.grade==2?'warning':'primary'"
+                                    :color="item.grade == 3?'yellow':''"
+                                >{{item.grade+"级"}}</van-tag>
+                            </span>
+                        </div>
+                        <div v-for="(n,m) in item.child" :key="m">
+                            <span>{{m+2+"."+n.wname}}</span>
+                            <span>
+                                <van-tag size="large" round
+                                    :type="n.grade == 1?'danger':n.grade==2?'warning':'primary'"
+                                    :color="item.grade == 3?'yellow':''"
+                                >{{n.grade+"级"}}</van-tag>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -44,7 +44,6 @@
             cancel-text="取消"
             close-on-click-action
         />
-        <record :compShow="compShow" @popupClose="compShow=false" />
     </div>
 </template>
 <script>
@@ -66,7 +65,7 @@ export default {
                 { name: "自查自改" },
                 { name: "上报上级" },
                 { name: "隐患指派" }
-            ],
+            ]
         };
     },
     methods: {
@@ -106,7 +105,7 @@ export default {
         }
     },
     components: {
-        ViewBox,
+        ViewBox
     }
 };
 </script>

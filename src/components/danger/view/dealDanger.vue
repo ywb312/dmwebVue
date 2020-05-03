@@ -26,7 +26,7 @@
                         <div class="title">
                             <h4>{{index+1+'.'+item.crname}}</h4>
                             <p style="min-width:40px">
-                                <van-tag round type="primary">{{item.stateText}}</van-tag>
+                                <van-tag round size="large" type="primary">{{item.stateText}}</van-tag>
                             </p>
                         </div>
                         <div class="main">

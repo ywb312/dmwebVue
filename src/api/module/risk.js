@@ -51,18 +51,9 @@ function examineDelete(data) {
     return axios.post("biz/risk/rate/delete.action?actiontype=delete", data);
 }
 
-// 安环部审核列表详情
-function getAuditDetailAn(data) {
-    return axios.post("/biz/risk/companyRisk/shpjlist.action", data);
-}
 // 安环部审核通过
 function auidtPassAn(data) {
     return axios.post("biz/risk/audit/doModifySave.action", data);
-}
-
-// 非安环部审核列表详情
-function getAuditDetail(data) {
-    return axios.post("biz/risk/companyRisk/cjshlist.action", data);
 }
 
 // 非安环部审核通过
@@ -74,21 +65,9 @@ function auditNoPass(data) {
     return axios.post("biz/risk/companyRiskdept/nopass.action", data);
 }
 
-// 风险比较图
-function getRiskChart(data) {
-    return axios.post("biz/risk/info/fxwxytjlist.action", data);
-}
-// 风险公告栏
-function getRiskBoard(data) {
-    return axios.post("biz/risk/companyRisk/ggl.action", data);
-}
 // 风险公告栏 修改信息
 function riskBoardModify(data) {
     return axios.post("biz/risk/companyRiskdept/doinfoSave.action?actiontype=modifysave", data);
-}
-// 岗位风险告知卡
-function getInformCard(data) {
-    return axios.post("biz/risk/companyRisk/gzk.action", data);
 }
 export default {
     riskAdd,
@@ -104,12 +83,7 @@ export default {
     examineAdd,
     examineDelete,
     auidtPassAn,
-    getAuditDetailAn,
-    getAuditDetail,
     auditPass,
     auditNoPass,
-    getRiskChart,
-    getRiskBoard,
     riskBoardModify,
-    getInformCard
 }

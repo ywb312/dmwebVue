@@ -1,7 +1,5 @@
 import Vue from 'vue'
-import MintUI from 'mint-ui'
 import './assets/css/reset.css'
-import 'mint-ui/lib/style.css'
 import './assets/css/style.css'
 // import './assets/css/public.css'
 import App from './App.vue'
@@ -48,8 +46,7 @@ import {
 	ActionSheet
 } from 'vant';
 // {Radio,Popup,Loadmore,DatetimePicker,MessageBox} mintUI使用的组件
-Vue.use(MintUI)
-	.use(Form) //vant部分
+Vue.use(Form) //vant部分
 	.use(Field)
 	.use(NavBar)
 	.use(Icon)

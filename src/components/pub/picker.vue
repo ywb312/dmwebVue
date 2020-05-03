@@ -6,6 +6,7 @@
             :label="title"
             :value="value.text"
             placeholder="请选择"
+            :rules="[{ required: true, message: '请选择' }]"
             @click="popupVisible = true"
         />
         <van-popup v-model="popupVisible" position="bottom">

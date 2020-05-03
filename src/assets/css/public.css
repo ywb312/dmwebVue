@@ -84,22 +84,6 @@
     background-color: #2585cf;
 }
 
-.cellValue{
-    color: #323233;
-}
-/* mintUI弹出框 */
-.popupItem {
-    width: 270px;
-    padding: 10px;
-    font-size: 16px;
-    text-align: center;
-    border-bottom: 1px solid rgb(230, 230, 230);
-}
-
-.popupItem:last-of-type {
-    border-bottom: none;
-}
-
 .btn {
     background-color: #2585cf;
     position: fixed;

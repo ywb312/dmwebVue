@@ -12,7 +12,7 @@
                     <div class="title">
                         <h4>{{index+1+"."+item.staffname}}</h4>
                         <p style="min-width:40px">
-                            <van-tag round type="primary">{{item.shiptype}}</van-tag>
+                            <van-tag size="large" round type="primary">{{item.shiptype}}</van-tag>
                         </p>
                     </div>
                     <div class="main">
