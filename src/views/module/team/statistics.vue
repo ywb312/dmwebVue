@@ -13,11 +13,7 @@
         <div>
             <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
                 <div slot="views">
-                    <div
-                        class="wrapper"
-                        v-for="(item,index) in rendering"
-                        :key="index"
-                    >
+                    <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                         <div class="main">
                             <div>
                                 <p>相关方项目部总人数: {{item.staCount}}</p>

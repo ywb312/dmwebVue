@@ -11,42 +11,86 @@
                 >
                     <div class="main">
                         <div>
-                            <p>姓名: {{item.staffname}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">姓名:</span>
+                                <span class="main_val">{{item.staffname}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>性别: {{item.sexText}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">性别:</span>
+                                <span class="main_val">{{item.sexText}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>身份证号: {{item.idcard}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">身份证号:</span>
+                                <span class="main_val">{{item.idcard}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>工号:{{item.staffcode}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">工号:</span>
+                                <span class="main_val">{{item.staffcode}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>单位:{{item.deptname}}</p>
-                        </div>
-                        <div>
-                            <p>工种:{{item.station}}</p>
-                        </div>
-                        <div>
-                            <p>总工龄:{{item.workingAge}}</p>
-                        </div>
-                        <div>
-                            <p>联系方式:{{item.relaphone}}</p>
-                        </div>
-                        <div>
-                            <p>体检周期:{{item.examperiod}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">单位:</span>
+                                <span class="main_val">{{item.deptname}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
+        <!-- 操作面板 -->
+        <van-action-sheet
+            v-model="sheetShow"
+            :actions="actions"
+            @select="onSelect"
+            cancel-text="取消"
+            close-on-click-action
+        />
+        <!-- 弹窗组件 -->
+        <Popup :popshow="popshow" @close="popshow=false">
+            <div slot="title" class="popupTitle">详情</div>
+            <div slot="views" class="popup">
+                <div>
+                    <p>姓名: {{selectData.staffname}}</p>
+                </div>
+                <div>
+                    <p>性别: {{selectData.sexText}}</p>
+                </div>
+                <div>
+                    <p>身份证号: {{selectData.idcard}}</p>
+                </div>
+                <div>
+                    <p>工号: {{selectData.staffcode}}</p>
+                </div>
+                <div>
+                    <p>单位: {{selectData.deptname}}</p>
+                </div>
+                <div>
+                    <p>工种: {{selectData.station}}</p>
+                </div>
+                <div>
+                    <p>总工龄: {{selectData.workingAge}}</p>
+                </div>
+                <div>
+                    <p>联系方式: {{selectData.relaphone}}</p>
+                </div>
+                <div>
+                    <p>体检周期: {{selectData.examperiod}}</p>
+                </div>
+            </div>
+        </Popup>
     </div>
 </template>
 <script>
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
+import Popup from "@/components/pub/Popup.vue";
 export default {
     name: "HealthExamPeriod",
     data() {
@@ -56,7 +100,11 @@ export default {
             postData: {
                 url: "biz/sm/staff/periodlist.action",
                 obj: {}
-            }
+            },
+            sheetShow: false,
+            actions: [{ name: "个人体检档案" }, { name: "查看详情" }],
+            popshow: false,
+            selectData: {}
         };
     },
     // pageData父组件传来的配置项
@@ -75,17 +123,26 @@ export default {
             this.$refs.view.cleraData();
         },
         btnClick(obj) {
-            this.$router.push({
-                path: "/team/healthDetail",
-                query: {
-                    filters: obj.idcard
-                }
-            });
+            this.selectData = obj;
+            this.sheetShow = true;
+        },
+        onSelect(item) {
+            if (item.name == "个人体检档案") {
+                this.$router.push({
+                    path: "/team/healthDetail",
+                    query: {
+                        filters: this.selectData.idcard
+                    }
+                });
+            } else if (item.name == "查看详情") {
+                this.popshow = true;
+            }
         }
     },
     components: {
         SearchBox,
-        ViewBox
+        ViewBox,
+        Popup
     }
 };
 </script>

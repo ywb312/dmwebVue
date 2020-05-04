@@ -10,43 +10,95 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>要素号: {{item.elemcode}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">要素号:</span>
+                                <span class="main_val">{{item.elemcode}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>文件级别: {{item.filedegree}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">创建单位:</span>
+                                <span class="main_val">{{item.createdept}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>文件编号: {{item.filecode}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">创建人:</span>
+                                <span class="main_val">{{item.createman}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>模板名:{{item.templatename}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">创建单位:</span>
+                                <span class="main_val">{{item.createdept}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>创建单位:{{item.createdept}}</p>
-                        </div>
-                        <div>
-                            <p>创建人:{{item.createman}}</p>
-                        </div>
-                        <div>
-                            <p>创建时间:{{item.createtime}}</p>
-                        </div>
-                        <div>
-                            <p>最后修改时间:{{item.lastmoditime}}</p>
-                        </div>
-                        <div>
-                            <p>责任人:{{item.respname}}</p>
-                            <van-tag round type="primary">{{item.createstage}}</van-tag>
+                            <p class="main_text">
+                                <span class="main_title bold">责任人:</span>
+                                <span class="main_val">{{item.respname}}</span>
+                            </p>
+                            <p class="mian_tag">
+                                <van-tag round type="primary">{{item.createstage}}</van-tag>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
+        <van-action-sheet
+            v-model="sheetShow"
+            :actions="actions"
+            @select="onSelect"
+            cancel-text="取消"
+            close-on-click-action
+        />
+        <!-- 弹窗组件 -->
+        <Popup :popshow="popshow" @close="popshow=false">
+            <div slot="title" class="popupTitle">详情</div>
+            <div slot="views" class="popup">
+                <div>
+                    <p>文件名称: {{selectData.filename}}</p>
+                </div>
+                <div>
+                    <p>任务状态: {{selectData.releastateText}}</p>
+                </div>
+                <div>
+                    <p>要素号: {{selectData.elemcode}}</p>
+                </div>
+                <div>
+                    <p>文件级别: {{selectData.filedegree}}</p>
+                </div>
+                <div>
+                    <p>文件编号: {{selectData.filecode}}</p>
+                </div>
+                <div>
+                    <p>模板名:{{selectData.templatename}}</p>
+                </div>
+                <div>
+                    <p>创建单位:{{selectData.createdept}}</p>
+                </div>
+                <div>
+                    <p>创建人:{{selectData.createman}}</p>
+                </div>
+                <div>
+                    <p>创建时间:{{selectData.createtime}}</p>
+                </div>
+                <div>
+                    <p>最后修改时间:{{selectData.lastmoditime}}</p>
+                </div>
+                <div>
+                    <p>责任人:{{selectData.respname}}</p>
+                    <van-tag round type="primary">{{selectData.createstage}}</van-tag>
+                </div>
+            </div>
+        </Popup>
     </div>
 </template>
 <script>
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
+import Popup from "@/components/pub/Popup.vue";
 export default {
     name: "FileList",
     data() {
@@ -56,7 +108,11 @@ export default {
             postData: {
                 url: "",
                 obj: {}
-            }
+            },
+            sheetShow: false,
+            actions: [{ name: "查看详情" }],
+            popshow: false,
+            selectData: {}
         };
     },
     // pageData父组件传来的配置项
@@ -92,11 +148,21 @@ export default {
             this.postData.obj["bean.param"] = str;
             this.rendering = [];
             this.$refs.view.cleraData();
+        },
+        btnClick(obj) {
+            this.selectData = obj;
+            this.sheetShow = true;
+        },
+        onSelect(item) {
+            if (item.name == "查看详情") {
+                this.popshow = true;
+            }
         }
     },
     components: {
         SearchBox,
-        ViewBox
+        ViewBox,
+        Popup
     }
 };
 </script>

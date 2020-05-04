@@ -11,33 +11,71 @@
                 >
                     <div class="main">
                         <div>
-                            <p>姓名: {{item.colligatename}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">姓名:</span>
+                                <span class="main_val">{{item.colligatename}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>民族: {{item.nationText}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">民族:</span>
+                                <span class="main_val">{{item.nationText}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>出生日期: {{item.birthday}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">出生日期:</span>
+                                <span class="main_val">{{item.birthday}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>籍贯: {{item.nativeplace}}</p>
-                        </div>
-                        <div>
-                            <p>学历: {{item.educationText}}</p>
-                        </div>
-                        <div>
-                            <p>入职时间: {{item.entrydate}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">学历:</span>
+                                <span class="main_val">{{item.educationText}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
+        <!-- 操作面板 -->
+        <van-action-sheet
+            v-model="sheetShow"
+            :actions="actions"
+            @select="onSelect"
+            cancel-text="取消"
+            close-on-click-action
+        />
+        <!-- 弹窗组件 -->
+        <Popup :popshow="popshow" @close="popshow=false">
+            <div slot="title" class="popupTitle">详情</div>
+            <div slot="views" class="popup">
+                <div>
+                    <p>姓名: {{selectData.colligatename}}</p>
+                </div>
+                <div>
+                    <p>民族: {{selectData.nationText}}</p>
+                </div>
+                <div>
+                    <p>出生日期: {{selectData.birthday}}</p>
+                </div>
+                <div>
+                    <p>籍贯: {{selectData.nativeplace}}</p>
+                </div>
+                <div>
+                    <p>学历: {{selectData.educationText}}</p>
+                </div>
+                <div>
+                    <p>入职时间: {{selectData.entrydate}}</p>
+                </div>
+            </div>
+        </Popup>
     </div>
 </template>
 <script>
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
+import Popup from "@/components/pub/Popup.vue";
 export default {
     name: "Colligate",
     data() {
@@ -48,6 +86,10 @@ export default {
                 url: "biz/operate/staffarchive/colligate/list.action",
                 obj: {}
             },
+            sheetShow: false,
+            actions: [{ name: "查看更多" }, { name: "查看详情" }],
+            popshow: false,
+            selectData: {},
             mzArr: [
                 {
                     id: "MZ001",
@@ -136,15 +178,24 @@ export default {
             this.$refs.view.cleraData();
         },
         btnClick(obj) {
-            this.$store.commit("getSelectData", obj);
-            this.$router.push({
-                path: "/team/colligateDetail"
-            });
+            this.selectData = obj;
+            this.sheetShow = true;
+        },
+        onSelect(item) {
+            if (item.name == "查看详情") {
+                this.popshow = true;
+            } else if (item.name == "查看更多") {
+                this.$store.commit("getSelectData", this.selectData);
+                this.$router.push({
+                    path: "/team/colligateDetail"
+                });
+            }
         }
     },
     components: {
         SearchBox,
-        ViewBox
+        ViewBox,
+        Popup
     }
 };
 </script>

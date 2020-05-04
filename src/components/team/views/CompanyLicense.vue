@@ -3,45 +3,88 @@
         <SearchBox placeholder="请输入单位名称搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
-                <div class="wrapper" v-for="(item,index) in rendering" :key="index">
+                <div
+                    class="wrapper"
+                    v-for="(item,index) in rendering"
+                    :key="index"
+                    @click="btnClick(item)"
+                >
                     <div class="title">
                         <h4>{{index+1+"."+item.companyName}}</h4>
                     </div>
                     <div class="main">
                         <div>
-                            <p>主要负责人: {{item.legalPerson}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">主要负责人:</span>
+                                <span class="main_val">{{item.legalPerson}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>单位地址: {{item.companyAddress}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">单位地址:</span>
+                                <span class="main_val">{{item.companyAddress}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>经济类型: {{item.companyType}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">经济类型:</span>
+                                <span class="main_val">{{item.companyType}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>许可范围:{{item.permission}}</p>
-                        </div>
-                        <div>
-                            <p>有效始期:{{item.startDate}}</p>
-                        </div>
-                        <div>
-                            <p>有效至期:{{item.endDate}}</p>
-                        </div>
-                        <div v-for="(m,n) in item.attach" :key="m">
-                            <p>
-                                文件:
-                                <a :href="m">{{item.attachname[n]}}</a>
+                            <p class="main_text">
+                                <span class="main_title bold">许可范围:</span>
+                                <span class="main_val">{{item.permission}}</span>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
+        <!-- 操作面板 -->
+        <van-action-sheet
+            v-model="sheetShow"
+            :actions="actions"
+            @select="onSelect"
+            cancel-text="取消"
+            close-on-click-action
+        />
+        <!-- 弹窗组件 -->
+        <Popup :popshow="popshow" @close="popshow=false">
+            <div slot="title" class="popupTitle">详情</div>
+            <div slot="views" class="popup">
+                <div>
+                    <p>主要负责人: {{selectData.legalPerson}}</p>
+                </div>
+                <div>
+                    <p>单位地址: {{selectData.companyAddress}}</p>
+                </div>
+                <div>
+                    <p>经济类型: {{selectData.companyType}}</p>
+                </div>
+                <div>
+                    <p>许可范围:{{selectData.permission}}</p>
+                </div>
+                <div>
+                    <p>有效始期:{{selectData.startDate}}</p>
+                </div>
+                <div>
+                    <p>有效至期:{{selectData.endDate}}</p>
+                </div>
+                <div v-for="(m,n) in selectData.attach" :key="m">
+                    <p>
+                        文件:
+                        <a :href="m">{{selectData.attachname[n]}}</a>
+                    </p>
+                </div>
+            </div>
+        </Popup>
     </div>
 </template>
 <script>
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
+import Popup from "@/components/pub/Popup.vue";
 export default {
     name: "CompanyLicense",
     data() {
@@ -51,7 +94,11 @@ export default {
             postData: {
                 url: "biz/create/companyLicense/list.action",
                 obj: {}
-            }
+            },
+            sheetShow: false,
+            actions: [{ name: "查看详情" }],
+            popshow: false,
+            selectData: {}
         };
     },
     // pageData父组件传来的配置项
@@ -74,11 +121,21 @@ export default {
             this.postData.obj["bean.param"] = str;
             this.rendering = [];
             this.$refs.view.cleraData();
+        },
+        btnClick(obj) {
+            this.selectData = obj;
+            this.sheetShow = true;
+        },
+        onSelect(item) {
+            if (item.name == "查看详情") {
+                this.popshow = true;
+            }
         }
     },
     components: {
         SearchBox,
-        ViewBox
+        ViewBox,
+        Popup
     }
 };
 </script>

@@ -11,21 +11,32 @@
                 >
                     <div class="main">
                         <div>
-                            <p>企业名称: {{item.companyName}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">企业名称:</span>
+                                <span class="main_val">{{item.companyName}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>主要负责人: {{item.principal}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">主要负责人:</span>
+                                <span class="main_val">{{item.principal}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>尾矿库名称: {{item.name}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">尾矿库名称:</span>
+                                <span class="main_val">{{item.name}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>联系电话: {{item.phone}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">联系电话:</span>
+                                <span class="main_val">{{item.phone}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>

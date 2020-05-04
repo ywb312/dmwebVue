@@ -6,27 +6,40 @@
                 <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                     <div class="main">
                         <div>
-                            <p>主任: {{item.director}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">主任:</span>
+                                <span class="main_val">{{item.director}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>副主任: {{item.fudirector}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">副主任:</span>
+                                <span class="main_val">{{item.fudirector}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>成员:{{item.member}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">成员:</span>
+                                <span class="main_val">{{item.member}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>创建日期:{{item.createDate}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">创建日期:</span>
+                                <span class="main_val">{{item.createDate}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>
-                                附件名称:
-                                <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
+                            <p class="main_text">
+                                <span class="main_title bold">附件名称:</span>
+                                <span class="main_val">
+                                    <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
+                                </span>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>

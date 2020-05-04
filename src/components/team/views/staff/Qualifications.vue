@@ -3,45 +3,88 @@
         <SearchBox placeholder="请输入单位、姓名搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
-                <div class="wrapper" v-for="(item,index) in rendering" :key="index">
+                <div
+                    class="wrapper"
+                    v-for="(item,index) in rendering"
+                    :key="index"
+                    @click="btnClick(item)"
+                >
                     <div class="main">
                         <div>
-                            <p>单位: {{item.dept}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">单位:</span>
+                                <span class="main_val">{{item.dept}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>姓名: {{item.peopleName}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">姓名:</span>
+                                <span class="main_val">{{item.peopleName}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>性别: {{item.sexText}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">性别:</span>
+                                <span class="main_val">{{item.sexText}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>资格证类型:{{item.qualtype}}</p>
-                        </div>
-                        <div>
-                            <p>资格证号:{{item.qualcard}}</p>
-                        </div>
-                        <div>
-                            <p>职务:{{item.position}}</p>
-                        </div>
-                        <div>
-                            <p>联系电话:{{item.phone}}</p>
-                        </div>
-                        <div>
-                            <p>发证日期:{{item.startDate}}</p>
-                        </div>
-                        <div>
-                            <p>有效期至:{{item.endDate}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">资格证类型:</span>
+                                <span class="main_val">{{item.qualtype}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
+        <!-- 操作面板 -->
+        <van-action-sheet
+            v-model="sheetShow"
+            :actions="actions"
+            @select="onSelect"
+            cancel-text="取消"
+            close-on-click-action
+        />
+        <!-- 弹窗组件 -->
+        <Popup :popshow="popshow" @close="popshow=false">
+            <div slot="title" class="popupTitle">详情</div>
+            <div slot="views" class="popup">
+                <div>
+                    <p>单位: {{selectData.dept}}</p>
+                </div>
+                <div>
+                    <p>姓名: {{selectData.peopleName}}</p>
+                </div>
+                <div>
+                    <p>性别: {{selectData.sexText}}</p>
+                </div>
+                <div>
+                    <p>资格证类型: {{selectData.qualtype}}</p>
+                </div>
+                <div>
+                    <p>资格证号: {{selectData.qualcard}}</p>
+                </div>
+                <div>
+                    <p>职务: {{selectData.position}}</p>
+                </div>
+                <div>
+                    <p>联系电话: {{selectData.phone}}</p>
+                </div>
+                <div>
+                    <p>发证日期: {{selectData.startDate}}</p>
+                </div>
+                <div>
+                    <p>有效期至: {{selectData.endDate}}</p>
+                </div>
+            </div>
+        </Popup>
     </div>
 </template>
 <script>
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
+import Popup from "@/components/pub/Popup.vue";
 export default {
     name: "Qualifications",
     data() {
@@ -51,7 +94,11 @@ export default {
             postData: {
                 url: "biz/operate/staffarchive/qualifications/list.action",
                 obj: {}
-            }
+            },
+            sheetShow: false,
+            actions: [{ name: "查看详情" }],
+            popshow: false,
+            selectData: {}
         };
     },
     // pageData父组件传来的配置项
@@ -68,11 +115,21 @@ export default {
             this.postData.obj["bean.param"] = str;
             this.rendering = [];
             this.$refs.view.cleraData();
+        },
+        btnClick(obj) {
+            this.selectData = obj;
+            this.sheetShow = true;
+        },
+        onSelect(item) {
+            if (item.name == "查看详情") {
+                this.popshow = true;
+            }
         }
     },
     components: {
         SearchBox,
-        ViewBox
+        ViewBox,
+        Popup
     }
 };
 </script>
