@@ -27,25 +27,34 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>评估部门: {{item.deptName}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">评估部门:</span>
+                                <span class="main_val">{{item.deptName}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>评估描述: {{item.pgdesc}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">评估描述:</span>
+                                <span class="main_val">{{item.pgdesc}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>管控措施: {{item.gkcs}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">管控措施:</span>
+                                <span class="main_val">{{item.gkcs}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>评估时间: {{item.pgdate}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">评估时间:</span>
+                                <span class="main_val">{{item.pgdate}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>创建时间: {{item.createdate}}</p>
-                        </div>
-                        <div>
-                            <p>填表人员: {{item.tbr}}</p>
-                        </div>
-                        <div>
-                            <p>备注: {{item.memo}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">创建时间:</span>
+                                <span class="main_val">{{item.createdate}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -58,12 +67,51 @@
             :popshow="popshow"
             @popupClose="popshow=false"
         ></search-popup>
+        <!-- 操作面板 -->
+        <van-action-sheet
+            v-model="sheetShow"
+            :actions="actions"
+            @select="onSelect"
+            cancel-text="取消"
+            close-on-click-action
+        />
+        <!-- 弹窗组件 -->
+        <Popup :popshow="detailShow" @close="detailShow=false">
+            <div slot="title" class="popupTitle">详情</div>
+            <div slot="views" class="popup">
+                <div>
+                    <p>隐患名称: {{selectData.crname}}</p>
+                </div>
+                <div>
+                    <p>评估部门: {{selectData.deptName}}</p>
+                </div>
+                <div>
+                    <p>评估描述: {{selectData.pgdesc}}</p>
+                </div>
+                <div>
+                    <p>管控措施: {{selectData.gkcs}}</p>
+                </div>
+                <div>
+                    <p>评估时间: {{selectData.pgdate}}</p>
+                </div>
+                <div>
+                    <p>创建时间: {{selectData.createdate}}</p>
+                </div>
+                <div>
+                    <p>填表人员: {{selectData.tbr}}</p>
+                </div>
+                <div>
+                    <p>备注: {{selectData.memo}}</p>
+                </div>
+            </div>
+        </Popup>
     </div>
 </template>
 <script>
 import ViewBox from "@/components/pub/ViewBox.vue";
 // 查找组件
 import searchPopup from "@/components/danger/searchPopup";
+import Popup from "@/components/pub/Popup.vue";
 export default {
     data() {
         return {
@@ -73,7 +121,11 @@ export default {
                 obj: {}
             },
             // 查找组件的显示
-            popshow: false
+            popshow: false,
+            sheetShow: false,
+            actions: [{ name: "查看详情" }],
+            detailShow: false,
+            selectData: {}
         };
     },
     methods: {
@@ -86,11 +138,20 @@ export default {
             });
             this.$refs.view.cleraData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {
+            this.selectData = obj;
+            this.sheetShow = true;
+        },
+        onSelect(item) {
+            if (item.name == "查看详情") {
+                this.detailShow = true;
+            }
+        }
     },
     components: {
         ViewBox,
-        searchPopup
+        searchPopup,
+        Popup
     }
 };
 </script>

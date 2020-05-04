@@ -25,19 +25,28 @@
                     >
                         <div class="title">
                             <h4>{{index+1+'.'+item.crname}}</h4>
-                            <p style="min-width:40px">
+                            <p class="main_tag">
                                 <van-tag round size="large" type="primary">{{item.stateText}}</van-tag>
                             </p>
                         </div>
                         <div class="main">
                             <div>
-                                <span>隐患描述: {{item.crdesc}}</span>
+                                <p class="main_text">
+                                    <span class="main_title bold">隐患描述:</span>
+                                    <span class="main_val">{{item.crdesc}}</span>
+                                </p>
                             </div>
                             <div>
-                                <span>隐患场所: {{item.craddr}}</span>
+                                <p class="main_text">
+                                    <span class="main_title bold">隐患场所:</span>
+                                    <span class="main_val">{{item.craddr}}</span>
+                                </p>
                             </div>
                             <div>
-                                <span>审批时间: {{item.pcdate}}</span>
+                                <p class="main_text">
+                                    <span class="main_title bold">审批时间:</span>
+                                    <span class="main_val">{{item.pcdate}}</span>
+                                </p>
                             </div>
                         </div>
                     </div>

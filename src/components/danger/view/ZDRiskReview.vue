@@ -38,15 +38,6 @@
                         <div>
                             <p>整改情况说明: {{item.zgpsqk}}</p>
                         </div>
-                        <div>
-                            <p>验收截止日期: {{item.fcjzdate}}</p>
-                        </div>
-                        <div>
-                            <p>创建时间: {{item.createdate}}</p>
-                        </div>
-                        <div>
-                            <p>备注: {{item.memo}}</p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -58,12 +49,48 @@
             :popshow="popshow"
             @popupClose="popshow=false"
         ></search-popup>
+        <!-- 操作面板 -->
+        <van-action-sheet
+            v-model="sheetShow"
+            :actions="actions"
+            @select="onSelect"
+            cancel-text="取消"
+            close-on-click-action
+        />
+        <!-- 弹窗组件 -->
+        <Popup :popshow="detailShow" @close="detailShow=false">
+            <div slot="title" class="popupTitle">详情</div>
+            <div slot="views" class="popup">
+                <div>
+                    <p>申请验收单位: {{selectData.dwysryname}}</p>
+                </div>
+                <div>
+                    <p>申请验收说明: {{selectData.dyysqk}}</p>
+                </div>
+                <div>
+                    <p>整改申请部门: {{selectData.zgpsbmName}}</p>
+                </div>
+                <div>
+                    <p>整改情况说明: {{selectData.zgpsqk}}</p>
+                </div>
+                <div>
+                    <p>验收截止日期: {{selectData.fcjzdate}}</p>
+                </div>
+                <div>
+                    <p>创建时间: {{selectData.createdate}}</p>
+                </div>
+                <div>
+                    <p>备注: {{selectData.memo}}</p>
+                </div>
+            </div>
+        </Popup>
     </div>
 </template>
 <script>
 import ViewBox from "@/components/pub/ViewBox.vue";
 // 查找组件
 import searchPopup from "@/components/danger/searchPopup";
+import Popup from "@/components/pub/Popup.vue";
 export default {
     data() {
         return {
@@ -73,7 +100,11 @@ export default {
                 obj: {}
             },
             // 查找组件的显示
-            popshow: false
+            popshow: false,
+            sheetShow: false,
+            actions: [{ name: "查看详情" }],
+            detailShow: false,
+            selectData: {}
         };
     },
     methods: {
@@ -86,11 +117,20 @@ export default {
             });
             this.$refs.view.cleraData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {
+            this.selectData = obj;
+            this.sheetShow = true;
+        },
+        onSelect(item) {
+            if (item.name == "查看详情") {
+                this.detailShow = true;
+            }
+        }
     },
     components: {
         ViewBox,
-        searchPopup
+        searchPopup,
+        Popup
     }
 };
 </script>

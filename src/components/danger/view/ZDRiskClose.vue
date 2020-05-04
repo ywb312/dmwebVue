@@ -27,19 +27,34 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>销案日期: {{item.zgwcrq}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">销案日期:</span>
+                                <span class="main_val">{{item.zgwcrq}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>整改完成情况: {{item.hcqk}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">整改完成情况:</span>
+                                <span class="main_val">{{item.hcqk}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>创建时间: {{item.createdate}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">创建时间:</span>
+                                <span class="main_val">{{item.createdate}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>填表人员: {{item.username}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">填表人员:</span>
+                                <span class="main_val">{{item.username}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>备注: {{item.memo}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">备注:</span>
+                                <span class="main_val">{{item.memo}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>

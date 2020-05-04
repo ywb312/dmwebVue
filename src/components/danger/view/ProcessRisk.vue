@@ -34,16 +34,28 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>存在问题: {{item.crdesc}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">存在问题:</span>
+                                <span class="main_val">{{item.crdesc}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>隐患地点: {{item.craddr}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">隐患地点:</span>
+                                <span class="main_val">{{item.craddr}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>检查时间: {{item.pcdate}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">检查时间:</span>
+                                <span class="main_val">{{item.pcdate}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>检查人: {{item.createid}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">检查人:</span>
+                                <span class="main_val">{{item.createid}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>

@@ -27,22 +27,40 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>督办单位: {{item.deptName}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">督办单位:</span>
+                                <span class="main_val">{{item.deptName}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>督办事项: {{item.column_12}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">督办事项:</span>
+                                <span class="main_val">{{item.column_12}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>督办截止日期: {{item.dbjzdate}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">督办截止日期:</span>
+                                <span class="main_val">{{item.dbjzdate}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>创建时间: {{item.createdate}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">创建时间:</span>
+                                <span class="main_val">{{item.createdate}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>填表人员: {{item.tbr}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">填表人员:</span>
+                                <span class="main_val">{{item.tbr}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>备注: {{item.memo}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">备注:</span>
+                                <span class="main_val">{{item.memo}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
