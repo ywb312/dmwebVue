@@ -42,7 +42,7 @@
                 >
                     <div class="title">
                         <h4>{{index+1+"."+item.cpname}}</h4>
-                        <p style=" min-width:85px;">
+                        <p class="main_tag">
                             <van-tag size="large" round type="primary">{{item.checktype}}</van-tag>
                             <van-tag size="large" round type="primary">{{item.planstatus}}</van-tag>
                         </p>

@@ -68,7 +68,7 @@ toTree(data) {
 检查记录详情planDetail 落实条件
 计划管理 我的计划
 danger(隐患管理)FileApprove
-    操作弹出框显示条件 审批状态
+    自查自改等显示条件
 inform(通知公告)
     详情
     操作弹出框显示条件
@@ -100,7 +100,6 @@ inject 安全投入
     没有加已有年份搜索
 remind 提醒预警
     检查逾期预警 一键取消未开发
-    tree和dialog可能存在问题
 
 
 ## 上线注意事项
