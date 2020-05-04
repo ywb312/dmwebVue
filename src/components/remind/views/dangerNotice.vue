@@ -10,21 +10,32 @@
                 >
                     <div class="main">
                         <div>
-                            <p>隐患名称: {{item.crname}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">隐患名称:</span>
+                                <span class="main_val">{{item.crname}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>隐患描述: {{item.crdesc}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">隐患描述:</span>
+                                <span class="main_val">{{item.crdesc}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>隐患类型: {{item.prtypeText}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">隐患类型:</span>
+                                <span class="main_val">{{item.prtypeText}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>提醒类别: {{item.txlb}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">提醒类别:</span>
+                                <span class="main_val">{{item.txlb}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
         <!-- 操作面板 -->
         <van-action-sheet
@@ -117,9 +128,3 @@ export default {
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>
-<style scoped>
-.main span,
-.popup span {
-    font-weight: bold;
-}
-</style>

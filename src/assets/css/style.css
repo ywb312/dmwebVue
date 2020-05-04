@@ -1,30 +1,3 @@
-/* 标题样式 */
-.mint-header {
-    background-color: #2585cf;
-    height: 50px;
-    font-size: 20px;
-}
-
-.mint-header.is-fixed {
-    z-index: 100;
-}
-
-.mint-header-button {
-    flex: none;
-}
-
-/* 单选框同行显示 */
-.mint-radiolist {
-    display: flex;
-    align-items: center;
-    color: black;
-}
-
-.mint-radiolist-title {
-    font-size: 14px;
-    color: #000;
-}
-
 /*
  * vant修改默认样式
  */

@@ -9,21 +9,32 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>员工名称: {{item.username}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">员工名称:</span>
+                                <span class="main_val">{{item.username}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>建议名称: {{item.colname}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">建议名称:</span>
+                                <span class="main_val">{{item.colname}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>建议内容: {{item.content}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">建议内容:</span>
+                                <span class="main_val">{{item.content}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>创建日期: {{item.createdate}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">创建日期:</span>
+                                <span class="main_val">{{item.createdate}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>

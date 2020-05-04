@@ -13,33 +13,33 @@
                 <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                     <div class="main">
                         <div>
-                            <p>
-                                <span>计划名称:</span>
-                                {{item.cpname}}
+                            <p class="main_text">
+                                <span class="main_title bold">计划名称:</span>
+                                <span class="main_val">{{item.cpname}}</span>
                             </p>
-                            <p style="min-width:50px;text-align:right">
+                            <p class="main_tag">
                                 <van-tag size="large" round type="primary">{{item.planstatus}}</van-tag>
                             </p>
                         </div>
                         <div>
-                            <p>
-                                <span>创建日期:</span>
-                                {{item.createdate}}
+                            <p class="main_text">
+                                <span class="main_title bold">创建日期:</span>
+                                <span class="main_val">{{item.createdate}}</span>
                             </p>
                         </div>
                         <div>
-                            <p>
-                                <span>截止日期:</span>
-                                {{item.checkdeadline}}
+                            <p class="main_text">
+                                <span class="main_title bold">截止日期:</span>
+                                <span class="main_val">{{item.checkdeadline}}</span>
                             </p>
                         </div>
                         <div>
-                            <p>
-                                <span>检查单位:</span>
-                                {{item.deptname}}
+                            <p class="main_text">
+                                <span class="main_title bold">检查单位:</span>
+                                <span class="main_val">{{item.deptname}}</span>
                             </p>
-                            <p style="min-width:50px;text-align:right">
-                                <van-tag round type="primary">{{item.planfrom}}</van-tag>
+                            <p class="main_tag">
+                                <van-tag round plain size="large" type="primary">{{item.planfrom}}</van-tag>
                             </p>
                         </div>
                     </div>
@@ -135,8 +135,3 @@ export default {
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>
-<style scoped>
-.main span {
-    font-weight: bold;
-}
-</style>

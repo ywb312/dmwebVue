@@ -8,27 +8,44 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>相关方名称: {{item.companyName}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">相关方名称:</span>
+                                <span class="main_val">{{item.companyName}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>业主单位: {{item.ownerUnit}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">业主单位:</span>
+                                <span class="main_val">{{item.ownerUnit}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>业务主管部门: {{item.competentDept}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">业务主管部门:</span>
+                                <span class="main_val">{{item.competentDept}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>属地监管单位: {{item.supervisionUnit}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">属地监管单位:</span>
+                                <span class="main_val">{{item.supervisionUnit}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>年月: {{item.yearMonth}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">年月:</span>
+                                <span class="main_val">{{item.yearMonth}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>人数: {{item.staCount}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">人数:</span>
+                                <span class="main_val">{{item.staCount}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>

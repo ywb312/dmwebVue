@@ -10,33 +10,32 @@
                 >
                     <div class="main">
                         <div>
-                            <p>
-                                <span>预警内容:</span>
-                                {{item.warmcontent}}
+                            <p class="main_text">
+                                <span class="main_title bold">预警内容:</span>
+                                <span class="main_val">{{item.warmcontent}}</span>
                             </p>
                         </div>
                         <div>
-                            <p>
-                                <span>预警级别:</span>
-                                {{item.warmlevel}}
+                            <p class="main_text">
+                                <span class="main_title bold">预警级别:</span>
+                                <span class="main_val">{{item.warmlevel}}</span>
                             </p>
                         </div>
                         <div>
-                            <p>
-                                <span>发布时间:</span>
-                                {{item.addtime}}
+                            <p class="main_text">
+                                <span class="main_title bold">发布时间:</span>
+                                <span class="main_val">{{item.addtime}}</span>
                             </p>
                         </div>
                         <div>
-                            <p>
-                                <span>预警状态:</span>
-                                {{item.warmstatus}}
+                            <p class="main_text">
+                                <span class="main_title bold">预警状态:</span>
+                                <span class="main_val">{{item.warmstatus}}</span>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
         <!-- 操作面板 -->
         <van-action-sheet
@@ -52,31 +51,31 @@
             <div slot="views" class="popup">
                 <div>
                     <p>
-                        <span>风险点:</span>
+                        <span class="bold">风险点:</span>
                         {{selectData.fxdText}}
                     </p>
                 </div>
                 <div>
                     <p>
-                        <span>危险源:</span>
+                        <span class="bold">危险源:</span>
                         {{selectData.wxyText}}
                     </p>
                 </div>
                 <div>
                     <p>
-                        <span>管控措施:</span>
+                        <span class="bold">管控措施:</span>
                         {{selectData.gkcsText}}
                     </p>
                 </div>
                 <div>
                     <p>
-                        <span>预警级别:</span>
+                        <span class="bold">预警级别:</span>
                         {{selectData.warmlevel}}
                     </p>
                 </div>
                 <div>
                     <p>
-                        <span>发布时间:</span>
+                        <span class="bold">发布时间:</span>
                         {{selectData.addtime}}
                     </p>
                 </div>
@@ -134,9 +133,3 @@ export default {
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>
-<style scoped>
-.main span,
-.popup span {
-    font-weight: bold;
-}
-</style>

@@ -9,24 +9,38 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>发布单位: {{item.pubdept+" | "+item.year+"年度"}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">发布单位:</span>
+                                <span class="main_val">{{item.pubdept+" | "+item.year+"年度"}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>发布时间: {{item.createtime}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">发布时间:</span>
+                                <span class="main_val">{{item.createtime}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>附件名称: {{item.attachname}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">附件名称:</span>
+                                <span class="main_val">{{item.attachname}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>附件制作人: {{item.makeman}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">附件制作人:</span>
+                                <span class="main_val">{{item.makeman}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>附件制作时间: {{item.maketime}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">附件制作时间:</span>
+                                <span class="main_val">{{item.maketime}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>

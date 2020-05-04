@@ -9,21 +9,32 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>创建人员: {{item.creater}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">创建人员:</span>
+                                <span class="main_val">{{item.creater}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>内容: {{item.objcontent}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">内容:</span>
+                                <span class="main_val">{{item.objcontent}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>创建日期: {{item.createDate}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">创建日期:</span>
+                                <span class="main_val">{{item.createDate}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>意见: {{item.opinion}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">意见:</span>
+                                <span class="main_val">{{item.opinion}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>

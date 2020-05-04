@@ -9,42 +9,70 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>机构/单位/车间: {{item.dept}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">机构/单位/车间:</span>
+                                <span class="main_val">{{item.dept}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>会议开始时间: {{item.meetingbegintime}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">会议开始时间:</span>
+                                <span class="main_val">{{item.meetingbegintime}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>会议结束时间: {{item.meetingendtime}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">会议结束时间:</span>
+                                <span class="main_val">{{item.meetingendtime}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>主持人: {{item.hostman}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">主持人:</span>
+                                <span class="main_val">{{item.hostman}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>主要参与人员: {{item.joinstaff}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">主要参与人员:</span>
+                                <span class="main_val">{{item.joinstaff}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>请假或缺席人员: {{item.meetingtheme}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">请假或缺席人员:</span>
+                                <span class="main_val">{{item.meetingtheme}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>会议主要内容: {{item.meetingcontent}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">会议主要内容:</span>
+                                <span class="main_val">{{item.meetingcontent}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>记录人: {{item.createpeople}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">记录人:</span>
+                                <span class="main_val">{{item.createpeople}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>是否存档: {{item.issubmit}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">是否存档:</span>
+                                <span class="main_val">{{item.issubmit}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>
-                                附件名称:
-                                <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
+                            <p class="main_text">
+                                <span class="main_title bold">附件名称:</span>
+                                <span class="main_val">
+                                    <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
+                                </span>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>

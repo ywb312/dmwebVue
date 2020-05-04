@@ -6,27 +6,40 @@
                 <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                     <div class="main">
                         <div>
-                            <p>会议问题: {{item.problem}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">会议问题:</span>
+                                <span class="main_val">{{item.problem}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>解决措施: {{item.resolve}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">解决措施:</span>
+                                <span class="main_val">{{item.resolve}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>创建时间: {{item.createDate}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">创建时间:</span>
+                                <span class="main_val">{{item.createDate}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>问题解决进度: {{item.progress}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">问题解决进度:</span>
+                                <span class="main_val">{{item.progress}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>
-                                附件名称:
-                                <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
+                            <p class="main_text">
+                                <span class="main_title bold">附件名称:</span>
+                                <span class="main_val">
+                                    <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
+                                </span>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>

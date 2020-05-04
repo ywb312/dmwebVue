@@ -9,24 +9,34 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>年度: {{item.year}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">年度:</span>
+                                <span class="main_val">{{item.year}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>安全计划完成情况评估名称: {{item.evaluatename}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">安全计划完成情况评估名称:</span>
+                                <span class="main_val">{{item.evaluatename}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>安全计划完成情况评估内容: {{item.evaluatecontent}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">安全计划完成情况评估内容:</span>
+                                <span class="main_val">{{item.evaluatecontent}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>
-                                附件名称:
-                                <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
+                            <p class="main_text">
+                                <span class="main_title bold">附件名称:</span>
+                                <span class="main_val">
+                                    <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
+                                </span>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>

@@ -9,39 +9,68 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>主要责任人: {{item.legalPerson}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">主要责任人:</span>
+                                <span class="main_val">{{item.legalPerson}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>单位地址: {{item.companyAddress}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">单位地址:</span>
+                                <span class="main_val">{{item.companyAddress}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>经济类型: {{item.companyType}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">经济类型:</span>
+                                <span class="main_val">{{item.companyType}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>许可范围: {{item.permission}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">许可范围:</span>
+                                <span class="main_val">{{item.permission}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>业主单位: {{item.ownerUnit}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">业主单位:</span>
+                                <span class="main_val">{{item.ownerUnit}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>属地监管单位: {{item.supervisionUnit}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">属地监管单位:</span>
+                                <span class="main_val">{{item.supervisionUnit}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>业务主管部门: {{item.competentDept}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">业务主管部门:</span>
+                                <span class="main_val">{{item.competentDept}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>编号: {{item.socialCode}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">编号:</span>
+                                <span class="main_val">{{item.socialCode}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>有效始期: {{item.startDate}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">有效始期:</span>
+                                <span class="main_val">{{item.startDate}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>有效止期: {{item.endDate}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">有效止期:</span>
+                                <span class="main_val">{{item.endDate}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>

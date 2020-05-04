@@ -9,21 +9,32 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>{{item.year+"年度"}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">{{item.year+"年度"}}</span>
+                            </p>
+                            <p></p>
                         </div>
                         <div>
-                            <p>创建时间: {{item.createtime}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">创建时间:</span>
+                                <span class="main_val">{{item.createtime}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>考核日期: {{item.reviewtime}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">考核日期:</span>
+                                <span class="main_val">{{item.reviewtime}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>考核人员: {{item.reviewer}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">考核人员:</span>
+                                <span class="main_val">{{item.reviewer}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>

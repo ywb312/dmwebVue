@@ -6,24 +6,38 @@
                 <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                     <div class="main">
                         <div>
-                            <p>发布单位: {{item.pubdept}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">发布单位:</span>
+                                <span class="main_val">{{item.pubdept}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>制定时间: {{item.createtime}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">制定时间:</span>
+                                <span class="main_val">{{item.createtime}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>审批时间: {{item.audittime}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">审批时间:</span>
+                                <span class="main_val">{{item.audittime}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>发布时间: {{item.pubtime}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">发布时间:</span>
+                                <span class="main_val">{{item.pubtime}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>内容: {{item.suggestion}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">内容:</span>
+                                <span class="main_val">{{item.suggestion}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>

@@ -28,11 +28,8 @@ export default {
     }
 };
 </script>
+<style scoped src="@/assets/css/public.css"/>
 <style scoped>
-.banner img {
-    display: block;
-    width: 100%;
-}
 .icon {
     width: 18px;
     height: 18px;

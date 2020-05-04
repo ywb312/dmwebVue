@@ -132,11 +132,8 @@ export default {
     }
 };
 </script>
+<style scoped src="@/assets/css/public.css"/>
 <style scoped>
-.banner img {
-    display: block;
-    width: 100%;
-}
 .grids {
     height: 360px;
     overflow: auto;

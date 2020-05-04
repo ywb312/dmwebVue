@@ -16,5 +16,6 @@ export default {
     methods: {}
 };
 </script>
+<style scoped src="@/assets/css/public.css"/>
 <style scoped>
 </style>

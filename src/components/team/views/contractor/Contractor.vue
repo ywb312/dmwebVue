@@ -9,33 +9,52 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>相关方类型: {{item.contractortypeText}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">相关方类型:</span>
+                                <span class="main_val">{{item.contractortypeText}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>联系人: {{item.contactpeople}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">联系人:</span>
+                                <span class="main_val">{{item.contactpeople}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>联系地址: {{item.address}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">联系地址:</span>
+                                <span class="main_val">{{item.address}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>联系方式:{{item.tel}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">联系方式:</span>
+                                <span class="main_val">{{item.tel}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>关联业务:{{item.busasssociation}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">关联业务:</span>
+                                <span class="main_val">{{item.busasssociation}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>对口部门:{{item.counterparts}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">对口部门:</span>
+                                <span class="main_val">{{item.counterparts}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>
-                                附件名称:
-                                <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
+                            <p class="main_text">
+                                <span class="main_title bold">附件名称:</span>
+                                <span class="main_val">
+                                    <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
+                                </span>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>

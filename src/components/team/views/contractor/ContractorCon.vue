@@ -9,24 +9,38 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>创建时间: {{item.createtime}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">创建时间:</span>
+                                <span class="main_val">{{item.createtime}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>创建人:{{item.createpeople}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">创建人:</span>
+                                <span class="main_val">{{item.createpeople}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>修改时间:{{item.edittime}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">修改时间:</span>
+                                <span class="main_val">{{item.edittime}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>修改人:{{item.editpeople}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">修改人:</span>
+                                <span class="main_val">{{item.editpeople}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>总分:{{item.totalscore}}</p>
+                            <p class="main_text">
+                                <span class="main_title bold">总分:</span>
+                                <span class="main_val">{{item.totalscore}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
