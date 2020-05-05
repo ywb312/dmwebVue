@@ -139,32 +139,53 @@ export default {
             };
             if (type == "zczg") {
                 obj["bean.zgtype"] = "ZGLX002";
+                this.$dialog
+                    .confirm({
+                        title: "自查自改",
+                        message: "确定执行此操作?"
+                    })
+                    .then(this.dealAjax(obj));
             } else if (type == "sbsj") {
                 obj["bean.zgtype"] = "ZGLX001";
+                this.$dialog
+                    .confirm({
+                        title: "上报上级",
+                        message: "确定执行此操作?"
+                    })
+                    .then(this.dealAjax(obj));
             }
+        },
+        // 上传
+        dealAjax(obj) {
             this.$api.danger.doexp(obj).then(res => {
                 if (res.message) {
                     this.$toast(res.message);
+                    this.$refs.view.cleraData();
                 }
             });
         },
+        // 点击每一项
         btnClick(obj) {
             this.show = true;
             this.$store.commit("getSelectData", obj);
             this.selectData = obj;
         },
+        // 选中面板操作
         onSelect(item) {
             if (item.name == "查看详情") {
+                this.show = false;
                 this.$router.push({
                     path: "/danger/detail"
                 });
             } else if (item.name == "审批记录") {
+                this.show = false;
                 this.compShow = true;
             } else if (item.name == "自查自改") {
                 this.postDeal("zczg");
             } else if (item.name == "上报上级") {
                 this.postDeal("sbsj");
             } else if (item.name == "隐患指派") {
+                this.show = false;
                 this.$router.push({
                     path: "/danger/assign"
                 });

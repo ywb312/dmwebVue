@@ -64,17 +64,15 @@ export default {
                 })
                 .then(function(res) {
                     if (res.result) {
-                        if (window.localStorage) {
-                            var storage = window.localStorage;
-                            storage.session_Id = res.session_Id;
-                            storage.deptname = res.result.deptname;
-                            storage.username = res.result.username;
-                            storage.loginname = res.result.loginname;
-                            storage.rolename = res.result.rolename;
-                            storage.roleLevel = _this.getDeptId(
-                                res.result.deptname
-                            );
-                        }
+                        var storage = window.localStorage;
+                        storage.session_Id = res.session_Id;
+                        storage.deptname = res.result.deptname;
+                        storage.username = res.result.username;
+                        storage.loginname = res.result.loginname;
+                        storage.rolename = res.result.rolename;
+                        storage.roleLevel = _this.getDeptId(
+                            res.result.deptname
+                        );
                         _this.$router.push({
                             name: "home"
                         });

@@ -67,13 +67,6 @@
     letter-spacing: 10px;
 }
 
-.noMoreText {
-    width: 100%;
-    padding: 15px 0;
-    text-align: center;
-    color: gray;
-}
-
 /* 标志图片 */
 .navImg {
     width: 50px;
