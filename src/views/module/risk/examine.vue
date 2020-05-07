@@ -50,12 +50,6 @@
                 @popupClose="addshow=false"
                 @addSuc="clearData"
             ></add-examine>
-            <delete-examine
-                :delShow="delShow"
-                :cprid="selectData.cprid"
-                @popupClose="delShow=false"
-                @suc="clearData"
-            ></delete-examine>
         </div>
     </div>
 </template>
@@ -64,7 +58,6 @@
 import ViewBox from "@/components/pub/ViewBox.vue";
 // 增删改框
 import addExamine from "@/components/risk/examine/addExamine";
-import deleteExamine from "@/components/risk/examine/deleteExamine";
 export default {
     name: "examine",
     data() {
@@ -83,8 +76,7 @@ export default {
             // 控制操作模态框的显示
             popshow: false,
             // 增删改查组件的显示
-            addshow: false,
-            delShow: false
+            addshow: false
         };
     },
     methods: {
@@ -101,8 +93,27 @@ export default {
         onSelect(item) {
             if (item.name == "删除") {
                 this.popshow = false;
-                this.delShow = true;
+                this.delData();
             }
+        },
+        // 删除操作
+        delData() {
+            this.$dialog
+                .confirm({
+                    title: "删除",
+                    message: "确定执行此操作?"
+                })
+                .then(resolve => {
+                    this.$api.risk
+                        .examineDelete({
+                            "bean.cprid": this.selectData.cprid,
+                            ssession: window.localStorage["session_Id"]
+                        })
+                        .then(res => {
+                            this.clearData();
+                        });
+                })
+                .catch(reject => {});
         },
         // 清空数据 重新加载
         clearData() {
@@ -111,8 +122,7 @@ export default {
     },
     components: {
         ViewBox,
-        addExamine,
-        deleteExamine
+        addExamine
     }
 };
 </script>

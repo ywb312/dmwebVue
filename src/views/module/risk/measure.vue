@@ -52,12 +52,6 @@
                 @popupClose="setShow=false"
                 @suc="clearData"
             ></set-measure>
-            <delete-measure
-                :delShow="delShow"
-                :gid="selectData.gid"
-                @popupClose="delShow=false"
-                @suc="clearData"
-            ></delete-measure>
         </div>
     </div>
 </template>
@@ -66,7 +60,6 @@
 import ViewBox from "@/components/pub/ViewBox.vue";
 // 增删改框
 import setMeasure from "@/components/risk/measure/setMeasure";
-import deleteMeasure from "@/components/risk/measure/deleteMeasure";
 export default {
     name: "measure",
     data() {
@@ -90,8 +83,7 @@ export default {
             ],
             // 增删改查组件的显示
             setShow: false,
-            type: "add",
-            delShow: false
+            type: "add"
         };
     },
     methods: {
@@ -117,10 +109,29 @@ export default {
                 this.type = "mod";
                 this.setShow = true;
             } else if (item.name == "删除") {
-                this.delShow = true;
+                this.delData();
             } else if (item.name == "查看排查计划") {
                 this.goRouter();
             }
+        },
+        // 删除操作
+        delData() {
+            this.$dialog
+                .confirm({
+                    title: "删除",
+                    message: "确定执行此操作?"
+                })
+                .then(resolve => {
+                    this.$api.risk
+                        .measureDelete({
+                            "bean.gid": this.selectData.gid,
+                            ssession: window.localStorage["session_Id"]
+                        })
+                        .then(res => {
+                            this.clearData();
+                        });
+                })
+                .catch(reject => {});
         },
         // 危险源页
         goRouter() {
@@ -143,8 +154,7 @@ export default {
     },
     components: {
         ViewBox,
-        setMeasure,
-        deleteMeasure
+        setMeasure
     }
 };
 </script>

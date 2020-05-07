@@ -46,12 +46,6 @@
                 @popupClose="setShow=false"
                 @suc="clearData"
             ></set-risk>
-            <delete-risk
-                :delShow="delShow"
-                :fid="selectData.fid"
-                @popupClose="delShow=false"
-                @suc="clearData"
-            ></delete-risk>
         </div>
     </div>
 </template>
@@ -59,7 +53,6 @@
 // 这是基本渲染功能的组件 公用
 import ViewBox from "@/components/pub/ViewBox.vue";
 import setRisk from "@/components/risk/risk/setRisk";
-import deleteRisk from "@/components/risk/risk/deleteRisk";
 export default {
     name: "plantRisk",
     data() {
@@ -81,8 +74,7 @@ export default {
             sheetShow: false,
             // 增删改查组件的显示
             setShow: false,
-            type: "add",
-            delShow: false
+            type: "add"
         };
     },
     // pageData父组件传来的配置项
@@ -105,15 +97,17 @@ export default {
             this.type = "add";
             this.setShow = true;
         },
+        // 清空数据重新加载
         clearData() {
             this.$refs.view.cleraData();
         },
+        // 选择操作
         onSelect(item) {
             if (item.name == "修改") {
                 this.type = "mod";
                 this.setShow = true;
             } else if (item.name == "删除") {
-                this.delShow = true;
+                this.delData();
             } else if (item.name == "查看危险源") {
                 this.$router.push({
                     path: "/risk/companyRisk",
@@ -122,6 +116,25 @@ export default {
                     }
                 });
             }
+        },
+        // 删除操作
+        delData() {
+            this.$dialog
+                .confirm({
+                    title: "删除",
+                    message: "确定执行此操作?"
+                })
+                .then(resolve => {
+                    this.$api.risk
+                        .riskDelete({
+                            "bean.fid": this.selectData.fid,
+                            ssession: window.localStorage["session_Id"]
+                        })
+                        .then(res => {
+                            this.clearData();
+                        });
+                })
+                .catch(reject => {});
         }
     },
     computed: {
@@ -131,8 +144,7 @@ export default {
     },
     components: {
         ViewBox,
-        setRisk,
-        deleteRisk
+        setRisk
     }
 };
 </script>

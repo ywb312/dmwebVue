@@ -64,12 +64,6 @@
                 @popupClose="setShow=false"
                 @suc="clearData"
             ></set-company>
-            <delete-company
-                :delShow="delShow"
-                :wid="selectData.wid"
-                @popupClose="delShow=false"
-                @suc="clearData"
-            ></delete-company>
             <company-approve
                 :appShow="approveShow"
                 :selectData="selectData"
@@ -83,7 +77,6 @@
 import ViewBox from "@/components/pub/ViewBox.vue";
 // 增删改框
 import setCompany from "@/components/risk/company/setCompany";
-import deleteCompany from "@/components/risk/company/deleteCompany";
 // 评价框
 import companyApprove from "@/components/risk/company/companyApprove";
 export default {
@@ -111,7 +104,6 @@ export default {
             // 增删改查组件的显示
             setShow: false,
             type: "add",
-            delShow: false,
             approveShow: false
         };
     },
@@ -151,12 +143,31 @@ export default {
                 this.type = "mod";
                 this.setShow = true;
             } else if (item.name == "删除") {
-                this.delShow = true;
+                this.delData();
             } else if (item.name == "评价") {
                 this.approveShow = true;
             } else if (item.name == "查看管控措施") {
                 this.goRouter();
             }
+        },
+        // 删除操作
+        delData() {
+            this.$dialog
+                .confirm({
+                    title: "删除",
+                    message: "确定执行此操作?"
+                })
+                .then(resolve => {
+                    this.$api.risk
+                        .companyRiskDelete({
+                            "bean.wid": this.selectData.wid,
+                            ssession: window.localStorage["session_Id"]
+                        })
+                        .then(res => {
+                            this.clearData();
+                        });
+                })
+                .catch(reject => {});
         },
         clearData() {
             this.$refs.view.cleraData();
@@ -176,7 +187,6 @@ export default {
     components: {
         ViewBox,
         setCompany,
-        deleteCompany,
         companyApprove
     }
 };
