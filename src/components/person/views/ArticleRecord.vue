@@ -9,12 +9,6 @@
                     :key="index"
                     @click="btnClick(item)"
                 >
-                    <!-- <div class="title">
-                        <h4>{{index+1+"."+item.title}}</h4>
-                        <p style="min-width:40px">
-                            <van-tag round type="primary">{{item.moduleid}}</van-tag>
-                        </p>
-                    </div>-->
                     <div class="main">
                         <div>
                             <p>发放人: {{item.grantPeople}}</p>
@@ -37,13 +31,75 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
+        <!-- 操作面板 -->
+        <van-action-sheet
+            v-model="sheetShow"
+            :actions="actions"
+            @select="onSelect"
+            cancel-text="取消"
+            close-on-click-action
+        />
+        <!-- 弹窗组件 -->
+        <Popup :popshow="detailShow" @close="detailShow=false">
+            <div slot="title" class="popupTitle">详情</div>
+            <div slot="views" class="popup">
+                <div>
+                    <p>工作服: {{selectData.coveral}}</p>
+                </div>
+                <div>
+                    <p>军用胶鞋: {{selectData.shoes}}</p>
+                </div>
+                <div>
+                    <p>安全帽: {{selectData.safetyhat}}</p>
+                </div>
+                <div>
+                    <p>夏季工作服: {{selectData.summerCoverall}}</p>
+                </div>
+                <div>
+                    <p>秋季工作服: {{selectData.autumnCoverall}}</p>
+                </div>
+                <div>
+                    <p>口罩: {{selectData.mask}}</p>
+                </div>
+                <div>
+                    <p>毛巾: {{selectData.towel}}</p>
+                </div>
+                <div>
+                    <p>洗衣粉: {{selectData.washing}}</p>
+                </div>
+                <div>
+                    <p>普通照明手电: {{selectData.flashligh}}</p>
+                </div>
+                <div>
+                    <p>短筒雨靴: {{selectData.boots}}</p>
+                </div>
+                <div>
+                    <p>领用人: {{selectData.receivePeople}}</p>
+                </div>
+                <div>
+                    <p>发放人: {{selectData.grantPeople}}</p>
+                </div>
+                <div>
+                    <p>部门: {{selectData.deptid}}</p>
+                </div>
+                <div>
+                    <p>工种: {{selectData.workType}}</p>
+                </div>
+                <div>
+                    <p>标准规定期限: {{selectData.stipulatedate}}</p>
+                </div>
+                <div>
+                    <p>初次领用日期: {{selectData.receivedate}}</p>
+                </div>
+            </div>
+        </Popup>
     </div>
 </template>
 <script>
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
+import Popup from "@/components/pub/Popup.vue";
 export default {
     name: "ArticleRecord",
     data() {
@@ -53,7 +109,11 @@ export default {
             postData: {
                 url: "biz/operate/protect/protectArticleRecord/list.action",
                 obj: {}
-            }
+            },
+            sheetShow: false,
+            actions: [{ name: "查看详情" }],
+            detailShow: false,
+            selectData: {}
         };
     },
     // pageData父组件传来的配置项
@@ -69,18 +129,19 @@ export default {
             this.$refs.view.cleraData();
         },
         btnClick(obj) {
-            this.$store.commit("getSelectData", obj);
-            this.$router.push({
-                path: "/person/articlDetail",
-                query: {
-                    type: "1"
-                }
-            });
+            this.selectData = obj;
+            this.sheetShow = true;
+        },
+        onSelect(item) {
+            if (item.name == "查看详情") {
+                this.detailShow = true;
+            }
         }
     },
     components: {
         SearchBox,
-        ViewBox
+        ViewBox,
+        Popup
     }
 };
 </script>

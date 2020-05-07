@@ -27,7 +27,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>

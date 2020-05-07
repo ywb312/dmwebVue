@@ -25,13 +25,57 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
+        <!-- 操作面板 -->
+        <van-action-sheet
+            v-model="sheetShow"
+            :actions="actions"
+            @select="onSelect"
+            cancel-text="取消"
+            close-on-click-action
+        />
+        <!-- 弹窗组件 -->
+        <Popup :popshow="detailShow" @close="detailShow=false">
+            <div slot="title" class="popupTitle">详情</div>
+            <div slot="views" class="popup">
+                <div>
+                    <p>姓名: {{selectData.specialName}}</p>
+                </div>
+                <div>
+                    <p>性别: {{selectData.specialSex == "XB001" ?'男':'女'}}</p>
+                </div>
+                <div>
+                    <p>学历: {{selectData.education}}</p>
+                </div>
+                <div>
+                    <p>身份证号: {{selectData.idcard}}</p>
+                </div>
+                <div>
+                    <p>准操项目: {{selectData.project}}</p>
+                </div>
+                <div>
+                    <p>证件编号: {{selectData.specialIdCard}}</p>
+                </div>
+                <div>
+                    <p>发证日期: {{selectData.startDate}}</p>
+                </div>
+                <div>
+                    <p>复审日期: {{selectData.endDate}}</p>
+                </div>
+                <div>
+                    <p>备注: {{selectData.memo}}</p>
+                </div>
+                <div>
+                    <p>所属单位: {{selectData.deptName}}</p>
+                </div>
+            </div>
+        </Popup>
     </div>
 </template>
 <script>
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
+import Popup from "@/components/pub/Popup.vue";
 export default {
     name: "SpecialPeople",
     data() {
@@ -41,7 +85,11 @@ export default {
             postData: {
                 url: "biz/people/specialPeople/list.action",
                 obj: {}
-            }
+            },
+            sheetShow: false,
+            actions: [{ name: "查看详情" }],
+            detailShow: false,
+            selectData: {}
         };
     },
     // pageData父组件传来的配置项
@@ -60,18 +108,19 @@ export default {
             this.$refs.view.cleraData();
         },
         btnClick(obj) {
-            this.$store.commit("getSelectData", obj);
-            this.$router.push({
-                path: "/person/specialTypeDetail",
-                query: {
-                    type: "1"
-                }
-            });
+            this.selectData = obj;
+            this.sheetShow = true;
+        },
+        onSelect(item) {
+            if (item.name == "查看详情") {
+                this.detailShow = true;
+            }
         }
     },
     components: {
         SearchBox,
-        ViewBox
+        ViewBox,
+        Popup
     }
 };
 </script>

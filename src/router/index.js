@@ -194,34 +194,10 @@ const routes = [{
 			keepAlive: false
 		}
 	},
-	{ //三项人员	特种人员详情
-		path: '/person/specialTypeDetail',
-		name: 'specialTypeDetail',
-		component: () => import('@/views/module/person/specialTypeDetail.vue'),
-		meta: {
-			keepAlive: false
-		}
-	},
-	{ //三项人员	许可作业申请、审批详情
-		path: '/person/permissionDetail',
-		name: 'permissionDetail',
-		component: () => import('@/views/module/person/permissionDetail.vue'),
-		meta: {
-			keepAlive: false
-		}
-	},
 	{ //三项人员	工作票详情
 		path: '/person/workTicketDetail',
 		name: 'workTicketDetail',
 		component: () => import('@/views/module/person/workTicketDetail.vue'),
-		meta: {
-			keepAlive: false
-		}
-	},
-	{ //三项人员	劳动防护用品详情
-		path: '/person/articlDetail',
-		name: 'articlDetail',
-		component: () => import('@/views/module/person/articlDetail.vue'),
 		meta: {
 			keepAlive: false
 		}
@@ -390,14 +366,6 @@ const routes = [{
 		path: '/team/healthDetail',
 		name: 'healthDetail',
 		component: () => import('@/views/module/team/healthDetail.vue'),
-		meta: {
-			keepAlive: false
-		}
-	},
-	{ //组织保障管理	尾矿库建设详情
-		path: '/team/tailingDetail',
-		name: 'tailingDetail',
-		component: () => import('@/views/module/team/tailingDetail.vue'),
 		meta: {
 			keepAlive: false
 		}
