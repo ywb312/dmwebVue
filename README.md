@@ -84,8 +84,7 @@ technology(生产工艺)
 accident 事故管理
     详情跳转
 emergency 应急管理    
-    应急资源登记   报废状态怎么判断
-    应急演练记录    详情页评价状态未知
+    应急演练记录    详情评价状态未知
 team    组织保障管理
     FileApprove 审批无数据
     MeetingInfo 会议纪要发布 接口问题

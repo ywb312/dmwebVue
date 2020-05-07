@@ -28,13 +28,60 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
+        <!-- 操作面板 -->
+        <van-action-sheet
+            v-model="sheetShow"
+            :actions="actions"
+            @select="onSelect"
+            cancel-text="取消"
+            close-on-click-action
+        />
+        <!-- 弹窗组件 -->
+        <Popup :popshow="detailShow" @close="detailShow=false">
+            <div slot="title" class="popupTitle">详情</div>
+            <div slot="views" class="popup">
+                <div>
+                    <p>演练名称: {{selectData.plantitle}}</p>
+                </div>
+                <div>
+                    <p>演练类型: {{selectData.plantypeText}}</p>
+                </div>
+                <div>
+                    <p>预案名称: {{selectData.sortname}}</p>
+                </div>
+                <div>
+                    <p>演练时间: {{selectData.plantime}}</p>
+                </div>
+                <div>
+                    <p>演练地点: {{selectData.planplace}}</p>
+                </div>
+                <div>
+                    <p>演练级别: {{selectData.drillrule == "YLJB001"?"公司级":"车间级"}}</p>
+                </div>
+                <div>
+                    <p>组织部门: {{selectData.orgdept}}</p>
+                </div>
+                <div>
+                    <p>演练状态: {{selectData.drillstage}}</p>
+                </div>
+                <div>
+                    <p>制定人: {{selectData.makeman}}</p>
+                </div>
+                <div>
+                    <p>制定时间: {{selectData.maketime}}</p>
+                </div>
+                <div>
+                    <p>制定单位: {{selectData.remark}}</p>
+                </div>
+            </div>
+        </Popup>
     </div>
 </template>
 <script>
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
+import Popup from "@/components/pub/Popup.vue";
 export default {
     name: "EmergAgency",
     data() {
@@ -47,6 +94,11 @@ export default {
                     "bean.param": ""
                 }
             },
+            // 查找组件的显示
+            sheetShow: false,
+            actions: [{ name: "查看详情" }],
+            detailShow: false,
+            selectData: {},
             planTypeArr: [
                 { id: "YLLX001", text: "模拟演练" },
                 { id: "YLLX002", text: "桌面演练" },
@@ -73,18 +125,19 @@ export default {
             this.$refs.view.cleraData();
         },
         btnClick(obj) {
-            this.$store.commit("getSelectData", obj);
-            this.$router.push({
-                path: "/emergency/emergDrillDetail",
-                query: {
-                    type: "1"
-                }
-            });
+            this.selectData = obj;
+            this.sheetShow = true;
+        },
+        onSelect(item) {
+            if (item.name == "查看详情") {
+                this.detailShow = true;
+            }
         }
     },
     components: {
         SearchBox,
-        ViewBox
+        ViewBox,
+        Popup
     }
 };
 </script>

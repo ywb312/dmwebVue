@@ -338,14 +338,6 @@ const routes = [{
 			keepAlive: false
 		}
 	},
-	{ //应急管理 应急演练方案详情
-		path: '/emergency/emergDrillDetail',
-		name: 'emergDrillDetail',
-		component: () => import('@/views/module/emergency/emergDrillDetail.vue'),
-		meta: {
-			keepAlive: false
-		}
-	},
 	{ //事故管理
 		path: '/accident',
 		name: 'accident',

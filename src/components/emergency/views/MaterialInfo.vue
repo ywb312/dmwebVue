@@ -23,18 +23,62 @@
                             <p>责任人: {{item.respman}}</p>
                         </div>
                         <div>
-                            <p>状态: {{item.planplace}}</p>
+                            <p>状态: {{item.isok=="0"?"已报废":"未报废"}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
+        <!-- 操作面板 -->
+        <van-action-sheet
+            v-model="sheetShow"
+            :actions="actions"
+            @select="onSelect"
+            cancel-text="取消"
+            close-on-click-action
+        />
+        <!-- 弹窗组件 -->
+        <Popup :popshow="detailShow" @close="detailShow=false">
+            <div slot="title" class="popupTitle">详情</div>
+            <div slot="views" class="popup">
+                <div>
+                    <p>资源名称: {{selectData.materialmodule}}</p>
+                </div>
+                <div>
+                    <p>资源类型: {{selectData.materialtypeText}}</p>
+                </div>
+                <div>
+                    <p>规格参数: {{selectData.materialpara}}</p>
+                </div>
+                <div>
+                    <p>数量/单位: {{selectData.materialnums+"/"+selectData.materialunitText}}</p>
+                </div>
+                <div>
+                    <p>存放地点: {{selectData.storeplace}}</p>
+                </div>
+                <div>
+                    <p>责任单位: {{selectData.respdept}}</p>
+                </div>
+                <div>
+                    <p>责任人: {{selectData.respman}}</p>
+                </div>
+                <div>
+                    <p>出厂日期: {{selectData.materialborn}}</p>
+                </div>
+                <div>
+                    <p>下次检查日期: {{selectData.materialcheck}}</p>
+                </div>
+                <div>
+                    <p>报废状态: {{selectData.isok=="0"?"已报废":"未报废"}}</p>
+                </div>
+            </div>
+        </Popup>
     </div>
 </template>
 <script>
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
+import Popup from "@/components/pub/Popup.vue";
 export default {
     name: "MaterialInfo",
     data() {
@@ -47,6 +91,11 @@ export default {
                     "bean.param": ""
                 }
             },
+            // 查找组件的显示
+            sheetShow: false,
+            actions: [{ name: "查看详情" }],
+            detailShow: false,
+            selectData: {},
             materialtypeArr: [
                 { id: "WZZBLX001", text: "防护用品" },
                 { id: "WZZBLX002", text: "生命救助" },
@@ -99,18 +148,19 @@ export default {
             this.$refs.view.cleraData();
         },
         btnClick(obj) {
-            this.$store.commit("getSelectData", obj);
-            this.$router.push({
-                path: "/emergency/emergDrillDetail",
-                query: {
-                    type: "4"
-                }
-            });
+            this.selectData = obj;
+            this.sheetShow = true;
+        },
+        onSelect(item) {
+            if (item.name == "查看详情") {
+                this.detailShow = true;
+            }
         }
     },
     components: {
         SearchBox,
-        ViewBox
+        ViewBox,
+        Popup
     }
 };
 </script>

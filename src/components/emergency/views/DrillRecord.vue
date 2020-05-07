@@ -28,13 +28,51 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
+        <!-- 操作面板 -->
+        <van-action-sheet
+            v-model="sheetShow"
+            :actions="actions"
+            @select="onSelect"
+            cancel-text="取消"
+            close-on-click-action
+        />
+        <!-- 弹窗组件 -->
+        <Popup :popshow="detailShow" @close="detailShow=false">
+            <div slot="title" class="popupTitle">详情</div>
+            <div slot="views" class="popup">
+                <div>
+                    <p>演练名称: {{selectData.plantitle}}</p>
+                </div>
+                <div>
+                    <p>演练类型: {{selectData.plantype}}</p>
+                </div>
+                <div>
+                    <p>预案名称: {{selectData.sortname}}</p>
+                </div>
+                <div>
+                    <p>演练时间: {{selectData.plantime}}</p>
+                </div>
+                <div>
+                    <p>演练地点: {{selectData.planplace}}</p>
+                </div>
+                <div>
+                    <p>演练级别: {{selectData.drillrule}}</p>
+                </div>
+                <div>
+                    <p>记录时间: {{selectData.recordtime}}</p>
+                </div>
+                <div>
+                    <p>提交状态: {{selectData.submitstatus}}</p>
+                </div>
+            </div>
+        </Popup>
     </div>
 </template>
 <script>
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
+import Popup from "@/components/pub/Popup.vue";
 export default {
     name: "DrillRecord",
     data() {
@@ -46,7 +84,12 @@ export default {
                     "bean.element": this.pageData.element,
                     "bean.param": ""
                 }
-            }
+            },
+            // 查找组件的显示
+            sheetShow: false,
+            actions: [{ name: "查看详情" }],
+            detailShow: false,
+            selectData: {}
         };
     },
     created() {},
@@ -63,18 +106,19 @@ export default {
             this.$refs.view.cleraData();
         },
         btnClick(obj) {
-            this.$store.commit("getSelectData", obj);
-            this.$router.push({
-                path: "/emergency/emergDrillDetail",
-                query: {
-                    type: "2"
-                }
-            });
+            this.selectData = obj;
+            this.sheetShow = true;
+        },
+        onSelect(item) {
+            if (item.name == "查看详情") {
+                this.detailShow = true;
+            }
         }
     },
     components: {
         SearchBox,
-        ViewBox
+        ViewBox,
+        Popup
     }
 };
 </script>
