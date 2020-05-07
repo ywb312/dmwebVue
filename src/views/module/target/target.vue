@@ -163,17 +163,17 @@ export default {
             require(["@/components/target/opinionobj"], resolve),
         // 安全生产目标
         annualobj: resolve =>
-            require(["@/components/target/annualobj"], resolve), //发布单位
-        thinobj: resolve => require(["@/components/target/thinobj"], resolve), //右上角显示什么
+            require(["@/components/target/annualobj"], resolve),
+        thinobj: resolve => require(["@/components/target/thinobj"], resolve),
         assessmentobj: resolve =>
             require(["@/components/target/assessmentobj"], resolve),
-        // 环保目标方针 是否需要发布状态
+        // 环保目标方针
         envmeasure: resolve =>
-            require(["@/components/target/envmeasure"], resolve), //附件信息字段及年度
+            require(["@/components/target/envmeasure"], resolve),
         envYearWorkPlan: resolve =>
-            require(["@/components/target/envYearWorkPlan"], resolve), //附件信息字段及年度
+            require(["@/components/target/envYearWorkPlan"], resolve),
         envPolicyAims: resolve =>
-            require(["@/components/target/envPolicyAims"], resolve) //附件信息字段及年度
+            require(["@/components/target/envPolicyAims"], resolve)
     }
 };
 </script>

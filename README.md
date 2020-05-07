@@ -83,7 +83,6 @@ plan(我的计划)
 technology(生产工艺)
 accident 事故管理
     详情跳转
-target  方针目标 target.vue文件
 emergency 应急管理    
     应急资源登记   报废状态怎么判断
     应急演练记录    详情页评价状态未知

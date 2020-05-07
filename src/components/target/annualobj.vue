@@ -10,8 +10,14 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
+                                <span class="main_title bold">年度:</span>
+                                <span class="main_val">{{item.year+"年度"}}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="main_text">
                                 <span class="main_title bold">发布单位:</span>
-                                <span class="main_val">{{item.pubdept+" | "+item.year+"年度"}}</span>
+                                <span class="main_val">{{item.pubdept}}</span>
                             </p>
                         </div>
                         <div>

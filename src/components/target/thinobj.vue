@@ -10,10 +10,17 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">{{item.year+"年度"}}</span>
+                                <span class="main_title">部门/车间:</span>
+                                <span class="main_val">{{item.dept}}</span>
                             </p>
                             <p class="main_tag">
-                                <van-tag round type="primary">{{item.dept}}</van-tag>
+                                <van-tag round size="large" type="primary">{{item.year}}</van-tag>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="main_text">
+                                <span class="main_title">责任人:</span>
+                                <span class="main_val">{{item.chargeman}}</span>
                             </p>
                         </div>
                         <div>
