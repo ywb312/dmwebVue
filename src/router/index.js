@@ -226,14 +226,6 @@ const routes = [{
 			keepAlive: false
 		}
 	},
-	{ //三项人员	交接班记录详情
-		path: '/person/replaceDetail',
-		name: 'replaceDetail',
-		component: () => import('@/views/module/person/replaceDetail.vue'),
-		meta: {
-			keepAlive: false
-		}
-	},
 	{ //三项人员	安全标志申请单详情
 		path: '/person/safetySignApplyDetail',
 		name: 'safetySignApplyDetail',

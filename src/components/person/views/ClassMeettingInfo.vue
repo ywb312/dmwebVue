@@ -31,13 +31,63 @@ w<template>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
+        <!-- 操作面板 -->
+        <van-action-sheet
+            v-model="sheetShow"
+            :actions="actions"
+            @select="onSelect"
+            cancel-text="取消"
+            close-on-click-action
+        />
+        <!-- 弹窗组件 -->
+        <Popup :popshow="detailShow" @close="detailShow=false">
+            <div slot="title" class="popupTitle">详情</div>
+            <div slot="views" class="popup">
+                <div>
+                    <p>班组名称: {{selectData.classteamname}}</p>
+                </div>
+                <div>
+                    <p>班次: {{selectData.classesText}}</p>
+                </div>
+                <div>
+                    <p>班组长: {{selectData.classteamer}}</p>
+                </div>
+                <div>
+                    <p>主持人: {{selectData.hostman}}</p>
+                </div>
+                <div>
+                    <p>参会领导: {{selectData.leaders}}</p>
+                </div>
+                <div>
+                    <p>应到人数: {{selectData.shouldcomenumber}}</p>
+                </div>
+                <div>
+                    <p>实到人数: {{selectData.actuallycomenumber}}</p>
+                </div>
+                <div>
+                    <p>记录人: {{selectData.creater}}</p>
+                </div>
+                <div>
+                    <p>记录时间: {{selectData.createtime}}</p>
+                </div>
+                <div>
+                    <p>提交状态: {{selectData.issubmit=="0"?"未提交":"已提交"}}</p>
+                </div>
+                <div>
+                    <p>
+                        会议照片:
+                        <img class="navImg" :src="selectData.image" alt="加载失败" />
+                    </p>
+                </div>
+            </div>
+        </Popup>
     </div>
 </template>
 <script>
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
+import Popup from "@/components/pub/Popup.vue";
 export default {
     name: "ClassMeettingInfo",
     data() {
@@ -48,6 +98,10 @@ export default {
                 url: "biz/operate/taskclassmeettinginfo/listbycreateid.action",
                 obj: {}
             },
+            sheetShow: false,
+            actions: [{ name: "查看详情" }],
+            detailShow: false,
+            selectData: {},
             bcArr: [
                 {
                     text: "早班",
@@ -84,15 +138,19 @@ export default {
             this.$refs.view.cleraData();
         },
         btnClick(obj) {
-            this.$store.commit("getSelectData", obj);
-            this.$router.push({
-                path: "/person/replaceDetail"
-            });
+            this.selectData = obj;
+            this.sheetShow = true;
+        },
+        onSelect(item) {
+            if (item.name == "查看详情") {
+                this.detailShow = true;
+            }
         }
     },
     components: {
         SearchBox,
-        ViewBox
+        ViewBox,
+        Popup
     }
 };
 </script>
