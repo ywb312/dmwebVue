@@ -115,6 +115,11 @@ export default {
                     id: "fire",
                     url: require("@/assets/img/ic_accident_manager.png"),
                     title: "消防管理"
+                },
+                {
+                    id: "performance",
+                    url: require("@/assets/img/ic_accident_manager.png"),
+                    title: "绩效考核"
                 }
             ]
         };

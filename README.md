@@ -99,6 +99,12 @@ inject 安全投入
 remind 提醒预警
     检查逾期预警 一键取消未开发
 
+performance
+    安全体系自评 子表未区分
+
+数据字典获取 未开发，目前绑死的值
+    后续可集成到ViewBox中
+    
 
 ## 上线注意事项
     1.App.vue create注释打开 解决vuex刷新问题

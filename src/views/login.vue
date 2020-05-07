@@ -7,6 +7,7 @@
         <div class="main">
             <van-form @submit="onSubmit">
                 <van-field
+                    class="round_top"
                     label="用户名"
                     v-model="username"
                     name="username"
@@ -14,6 +15,7 @@
                     :rules="[{ required: true, message: '请输入用户名' }]"
                 />
                 <van-field
+                    class="round_bottom"
                     label="密码"
                     v-model="password"
                     type="password"
@@ -113,6 +115,14 @@ export default {
 .login {
     height: 100%;
     background: rgb(16, 187, 255);
+}
+.round_top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.round_bottom{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 .title {
     padding-top: 140px;

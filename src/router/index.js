@@ -474,6 +474,22 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //绩效评价
+		path: '/performance',
+		name: 'performance',
+		component: () => import('@/views/module/performance/performance.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //绩效评价	自评计划
+		path: '/performance/doscorerules',
+		name: 'doscorerules',
+		component: () => import('@/views/module/performance/doscorerules.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
 
 	// 工作台部分路由
 	{ //待办事项
