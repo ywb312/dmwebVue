@@ -102,7 +102,7 @@ export default {
             },
             show: false,
             popshow: false,
-            actions: [{ name: "查看详情" }],
+            actions: [{ name: "查看详情" }, { name: "评分规则表" }],
             selectData: {}
         };
     },
@@ -123,6 +123,15 @@ export default {
         onSelect(item) {
             if (item.name == "查看详情") {
                 this.popshow = true;
+            } else if (item.name == "评分规则表") {
+                this.$router.push({
+                    path: "/performance/doscorerules",
+                    query: {
+                        filters:
+                            "and itemid = '" + this.selectData.itemid + "'",
+                        type: "items"
+                    }
+                });
             }
         }
     },

@@ -146,7 +146,8 @@ export default {
                     filters:
                         "and t_eval_doscorerules.planid = '" +
                         this.selectData.planid +
-                        "'"
+                        "'",
+                    type: "evalplan"
                 }
             });
         },
