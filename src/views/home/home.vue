@@ -4,7 +4,12 @@
         <!-- 底部导航 -->
         <van-tabbar route active-color="#2585cf">
             <van-tabbar-item replace to="/home/homePage" icon="wap-home">主页</van-tabbar-item>
-            <van-tabbar-item replace to="/home/computerPage" icon="chat" :badge="badge">工作台</van-tabbar-item>
+            <van-tabbar-item
+                replace
+                to="/home/computerPage"
+                icon="chat"
+                :badge="backlog.records>0?backlog.records:''"
+            >工作台</van-tabbar-item>
             <van-tabbar-item replace to="/home/mePage" icon="manager">我的</van-tabbar-item>
         </van-tabbar>
     </div>
@@ -12,9 +17,7 @@
 <script>
 export default {
     data() {
-        return {
-            badge: ""
-        };
+        return {};
     },
     created() {
         let self = this;
@@ -26,9 +29,13 @@ export default {
             })
             .then(res => {
                 self.$store.commit("setBacklog", res);
-                this.badge = res.records;
             });
     },
-    methods: {}
+    methods: {},
+    computed: {
+        backlog() {
+            return this.$store.state.backlog;
+        }
+    }
 };
 </script>

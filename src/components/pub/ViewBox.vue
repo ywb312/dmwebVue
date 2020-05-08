@@ -83,6 +83,7 @@ export default {
                         this.noRes = true;
                         return;
                     }
+                    this.$emit("getBacklog", res);
                     // 数据为空
                     if (res.records == 0) {
                         this.canLoad = false;

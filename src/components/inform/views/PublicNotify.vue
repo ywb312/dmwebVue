@@ -48,7 +48,7 @@
                         <div>
                             <p class="main_text">
                                 <span class="main_title">消息内容:</span>
-                                <span class="main_val text-overflow">{{item.content}}</span>
+                                <span class="main_val van-ellipsis">{{item.content}}</span>
                             </p>
                         </div>
                     </div>

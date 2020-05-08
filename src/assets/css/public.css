@@ -42,12 +42,6 @@
     flex: 1;
 }
 
-.text-overflow {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 .main_tag {
     min-width: 60px;
     text-align: right;

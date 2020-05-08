@@ -10,8 +10,10 @@ function showPage(url, data) {
     return axios.post(url, data);
 }
 
-function getConfig(url) {
-    return axios.get(url);
+function getConfig(url, data) {
+    return axios.get(url, {
+        params: data
+    });
 }
 
 // 获取组织机构
