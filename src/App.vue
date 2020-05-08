@@ -62,7 +62,7 @@ export default {
     },
     watch: {
         isLoading: function(nval) {
-            // this.loadingShow(nval);
+            this.loadingShow(nval);
         }
     }
 };

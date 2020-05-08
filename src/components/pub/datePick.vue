@@ -7,6 +7,7 @@
             :value="value"
             :label="title"
             placeholder="点击选择时间"
+            :rules="[{ required: true, message: '请选择时间' }]"
             @click="showPicker = true"
         />
         <van-popup v-model="showPicker" position="bottom" get-container="#app">

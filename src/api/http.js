@@ -35,9 +35,9 @@ axios.defaults.validateStatus = status => {
 
 // 请求的地方设置成true
 axios.interceptors.request.use(config => {
-    store.commit('setIsLoading', {
-        isLoading: true
-    })
+    // store.commit('setIsLoading', {
+    //     isLoading: true
+    // })
     return config
 }, error => {
     return Promise.reject(error);
@@ -46,9 +46,9 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => {
     if (response.data.code == 500) { //根据后台状态码设置的
     }
-    store.commit('setIsLoading', {
-        isLoading: false
-    })
+    // store.commit('setIsLoading', {
+    //     isLoading: false
+    // })
     return response.data;
 }, error => {
     let {

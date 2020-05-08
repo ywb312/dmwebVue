@@ -68,12 +68,24 @@
             :popshow="popshow"
             @popupClose="popshow=false"
         ></search-popup>
+        <!-- 隐藏的组件 -->
+        <van-action-sheet
+            v-model="sheetShow"
+            :actions="actions"
+            @select="onSelect"
+            cancel-text="取消"
+            close-on-click-action
+        />
+        <div>
+            <record :compShow="compShow" @popupClose="compShow=false" />
+        </div>
     </div>
 </template>
 <script>
 // 查看方式组件
 import correlation from "@/components/danger/correlation";
 import ViewBox from "@/components/pub/ViewBox.vue";
+import record from "@/components/danger/record";
 // 查找组件
 import searchPopup from "@/components/danger/searchPopup";
 export default {
@@ -86,6 +98,12 @@ export default {
                     "bean.queryAll": ""
                 }
             },
+            sheetShow: false,
+            actions: [{ name: "隐患详情" }, { name: "审批记录" }],
+            // 选中的对象
+            selectData: {},
+            // 审批记录操作框
+            compShow: false,
             // 查找组件的显示
             popshow: false
         };
@@ -105,12 +123,29 @@ export default {
             });
             this.$refs.view.cleraData();
         },
-        btnClick(obj) {}
+        // 点击每一项
+        btnClick(obj) {
+            this.sheetShow = true;
+            this.$store.commit("getSelectData", obj);
+            this.selectData = obj;
+        },
+        // 选中面板操作
+        onSelect(item) {
+            this.sheetShow = false;
+            if (item.name == "隐患详情") {
+                this.$router.push({
+                    path: "/danger/detail"
+                });
+            } else if (item.name == "审批记录") {
+                this.compShow = true;
+            }
+        }
     },
     components: {
         ViewBox,
         correlation,
-        searchPopup
+        searchPopup,
+        record
     }
 };
 </script>

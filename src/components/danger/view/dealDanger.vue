@@ -84,7 +84,7 @@ export default {
             },
             show: false,
             actions: [
-                { name: "查看详情" },
+                { name: "隐患详情" },
                 { name: "审批记录" },
                 { name: "自查自改" },
                 { name: "上报上级" },
@@ -115,8 +115,19 @@ export default {
                     id: "SPZT005",
                     text: "未提交"
                 }
-            ]
+            ],
+            isOrg: false
         };
+    },
+    created() {
+        this.$api.pub
+            .getConfig("manager/sys/dept/getselfdept.action")
+            .then(res => {
+                let data = eval("(" + res + ")");
+                if (data.cells[0].isOrg == "1") {
+                    this.isOrg = true;
+                }
+            });
     },
     methods: {
         // 获取当前页面数据函数
@@ -126,9 +137,12 @@ export default {
             });
             this.rendering = arr;
         },
-        // 自查自改和上报
+        // 检验可否自查自改、上报、审批
         postDeal(type) {
-            if (this.selectData.state == "SPZT001") {
+            if (
+                this.selectData.stateText == "审批中" ||
+                this.selectData.stateText == "审批通过"
+            ) {
                 this.$toast(
                     "该记录处于审批中，数据不能修改！请在工作台-待办事项中完成！"
                 );
@@ -144,7 +158,10 @@ export default {
                         title: "自查自改",
                         message: "确定执行此操作?"
                     })
-                    .then(this.dealAjax(obj));
+                    .then(resolve => {
+                        this.dealAjax(obj);
+                    })
+                    .catch(reject => {});
             } else if (type == "sbsj") {
                 obj["bean.zgtype"] = "ZGLX001";
                 this.$dialog
@@ -152,7 +169,14 @@ export default {
                         title: "上报上级",
                         message: "确定执行此操作?"
                     })
-                    .then(this.dealAjax(obj));
+                    .then(resolve => {
+                        this.dealAjax(obj);
+                    })
+                    .catch(reject => {});
+            } else if (type == "tbzp" && this.isOrg) {
+                this.$router.push({
+                    path: "/danger/assign"
+                });
             }
         },
         // 上传
@@ -172,23 +196,19 @@ export default {
         },
         // 选中面板操作
         onSelect(item) {
-            if (item.name == "查看详情") {
-                this.show = false;
+            this.show = false;
+            if (item.name == "隐患详情") {
                 this.$router.push({
                     path: "/danger/detail"
                 });
             } else if (item.name == "审批记录") {
-                this.show = false;
                 this.compShow = true;
             } else if (item.name == "自查自改") {
                 this.postDeal("zczg");
             } else if (item.name == "上报上级") {
                 this.postDeal("sbsj");
             } else if (item.name == "隐患指派") {
-                this.show = false;
-                this.$router.push({
-                    path: "/danger/assign"
-                });
+                this.postDeal("tbzp");
             }
         }
     },

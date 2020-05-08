@@ -1,5 +1,5 @@
 <template>
-    <div class="assign page">
+    <div class="page">
         <!-- 标题  -->
         <van-nav-bar
             title="填报指派"
@@ -9,14 +9,24 @@
             left-arrow
             @click-left="$router.back(-1)"
         />
-        <tree title="整改责任单位" @selectMsg="getCompany"></tree>
-        <van-field label="整改治理要求" placeholder="请输入整改治理要求" v-model="zgzlyq" />
-        <date-pick title="整改截止时间" time="after" placeholder="请选择整改截止时间" @returnDate="getZgjzsj"></date-pick>
-        <van-field label="填表人员" placeholder="请输入填表人员名称" v-model="tbr" />
-        <van-field label="备注" placeholder="请输入备注说明" v-model="memo" />
-        <div>
-            <van-button class="btn" type="info" size="large" @click="update">提交</van-button>
-        </div>
+        <van-form @submit="update">
+            <tree title="整改责任单位" @selectMsg="getCompany"></tree>
+            <van-field
+                label="整改治理要求"
+                v-model="zgzlyq"
+                placeholder="整改治理要求"
+                :rules="[{ required: true, message: '请填写整改治理要求' }]"
+            />
+            <date-pick title="整改截止时间" time="after" @returnDate="getZgjzsj"></date-pick>
+            <van-field
+                label="填表人员"
+                v-model="tbr"
+                placeholder="填表人员名称"
+                :rules="[{ required: true, message: '请填写填表人员名称' }]"
+            />
+            <van-field label="备注" placeholder="请输入备注说明" v-model="memo" />
+            <van-button class="btn" type="info" size="large" native-type="submit">提交</van-button>
+        </van-form>
     </div>
 </template>
 <script>
@@ -43,19 +53,6 @@ export default {
             this.zgdate = v;
         },
         update() {
-            if (this.zgzrdw == "") {
-                this.$toast("请选择整改责任单位");
-                return;
-            } else if (this.zgzlyq == "") {
-                this.$toast("请输入整改治理要求");
-                return;
-            } else if (this.tbr == "") {
-                this.$toast("请输入填表人员名称");
-                return;
-            } else if (this.zgdate == "") {
-                this.$toast("请选择整改截止时间");
-                return;
-            }
             let _self = this;
             let obj = {
                 "sbzpEntity.yhid": this.selectData.yhid,
@@ -70,9 +67,8 @@ export default {
             };
             // 上传接口
             this.$api.danger.doexp(obj).then(function() {
-                let instance = this.$toast("操作成功");
+                _self.$toast({ message: "操作成功", duration: 1000 });
                 setTimeout(() => {
-                    instance.clear();
                     _self.$router.back(-1);
                 }, 1000);
             });

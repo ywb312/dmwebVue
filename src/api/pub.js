@@ -10,6 +10,10 @@ function showPage(url, data) {
     return axios.post(url, data);
 }
 
+function getConfig(url) {
+    return axios.get(url);
+}
+
 // 获取组织机构
 function getTree() {
     return axios.post("/manager/sys/dept/tree4.action");
@@ -28,6 +32,7 @@ function comboboxList(data, config) {
 export default {
     login,
     showPage,
+    getConfig,
     getTree,
     doupfile,
     comboboxList

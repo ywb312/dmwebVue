@@ -3,6 +3,7 @@
         <Popup :popshow="recordVisible" @close="recordClose">
             <div slot="title" class="popupTitle">审批意见</div>
             <div slot="views" class="popup">
+                <van-loading style="text-align: center;" v-show="isLoading" color="#2585cf" />
                 <div class="chunk" v-for="item in resData" :key="item.id">
                     <div>
                         <h4>{{item.name}}</h4>
@@ -37,17 +38,20 @@ export default {
             // 无数据
             noData: false,
             // 数据有误
-            noRes: false
+            noRes: false,
+            isLoading: true
         };
     },
     props: ["compShow"],
     methods: {
         getData(obj) {
+            this.isLoading = true;
             let self = this;
             self.resData = [];
             this.$api.danger
                 .getHicomments({ bussinesskey: obj.yhid })
                 .then(res => {
+                    this.isLoading = false;
                     if (typeof res != "object") {
                         this.noRes = true;
                         return;
@@ -65,7 +69,7 @@ export default {
         }
     },
     watch: {
-        // 监听两个值 确定显示的状态
+        // 监听值 确定显示的状态
         compShow(val) {
             //popshow为父组件的值，val参数为值
             if (val) {
