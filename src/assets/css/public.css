@@ -112,6 +112,9 @@
     background-color: #2585cf;
 }
 
+.btnMargin{
+    margin-bottom: 50px;
+}
 .btn {
     background-color: #2585cf;
     position: fixed;

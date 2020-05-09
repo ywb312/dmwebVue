@@ -3,7 +3,7 @@
         <div class="maskWrap" v-show="setShow" @click="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">{{this.type == "add"?"新增危险源":"修改危险源"}}</div>
-                <van-form @submit="postData">
+                <van-form @submit="postData" :show-error-message="false">
                     <van-field
                         label="危险源名称"
                         v-model="getData.wname"

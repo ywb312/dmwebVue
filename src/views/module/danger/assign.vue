@@ -9,7 +9,7 @@
             left-arrow
             @click-left="$router.back(-1)"
         />
-        <van-form @submit="update">
+        <van-form @submit="update" :show-error-message="false">
             <tree title="整改责任单位" @selectMsg="getCompany"></tree>
             <van-field
                 label="整改治理要求"

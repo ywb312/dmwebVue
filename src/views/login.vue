@@ -5,7 +5,7 @@
             <p>体系运行管理信息系统</p>
         </div>
         <div class="main">
-            <van-form @submit="onSubmit">
+            <van-form @submit="onSubmit" :show-error-message="false">
                 <van-field
                     class="round_top"
                     label="用户名"

@@ -2,7 +2,7 @@
     <div>
         <!-- 标题  -->
         <van-nav-bar
-            title="自查自改"
+            title="整改"
             left-text="返回"
             fixed
             placeholder
@@ -19,13 +19,6 @@
                 </template>
             </van-field>
             <van-field
-                label="填表人"
-                v-model="tbr"
-                name="填表人"
-                placeholder="填表人"
-                :rules="[{ required: true, message: '请填写填表人' }]"
-            />
-            <van-field
                 label="审批意见"
                 v-model="opinion"
                 name="审批意见"
@@ -33,19 +26,25 @@
                 :rules="[{ required: true, message: '请填写审批意见' }]"
             />
             <van-field
-                label="整改情况"
-                v-model="zgpsqk"
-                name="整改情况"
-                placeholder="整改情况"
-                :rules="[{ required: true, message: '请填写整改情况' }]"
+                label="申请验收说明"
+                v-model="dyysqk"
+                name="申请验收说明"
+                placeholder="申请验收说明"
+                :rules="[{ required: true, message: '请填写申请验收说明' }]"
             />
-            <date-pick title="整改时间" time="after" placeholder="请选择完成时间" @returnDate="getZgsqsj"></date-pick>
             <van-field
-                label="验收说明"
-                v-model="ysqk"
-                name="验收说明"
-                placeholder="验收说明"
-                :rules="[{ required: true, message: '请填写验收说明' }]"
+                label="整改情况说明"
+                v-model="zgpsqk"
+                name="整改情况说明"
+                placeholder="整改情况说明"
+                :rules="[{ required: true, message: '请填写整改情况说明' }]"
+            />
+            <van-field
+                label="填表人"
+                v-model="tbr"
+                name="填表人"
+                placeholder="填表人"
+                :rules="[{ required: true, message: '请填写填表人' }]"
             />
             <van-field label="备注" placeholder="请输入备注" v-model="memo" />
             <uploadimg @toImgArr="getImgArr"></uploadimg>
@@ -59,14 +58,13 @@ import uploadimg from "@/components/pub/uploadimg";
 export default {
     data() {
         return {
-            tbr: "",
+            isPass: "pass",
             opinion: "",
+            dyysqk: "",
             zgpsqk: "",
-            zgsqsj: "",
-            ysqk: "",
+            tbr: "",
             memo: "",
-            upImgArr: [],
-            isPass: "pass"
+            upImgArr: []
         };
     },
     props: ["postData"],
@@ -85,14 +83,14 @@ export default {
             });
             _self.postData["variable.keys"] = "nodepass,comments";
             _self.postData["variable.types"] = "B,S";
-            _self.postData["variable.values"] = "true," + this.opinion;
+            _self.postData["variable.values"] = "true," + this.opinion + ",2";
             _self.postData["comments"] = this.opinion;
-            _self.postData["zczgEntity.zgpsqk"] = this.zgpsqk;
-            _self.postData["zczgEntity.zgsqsj"] = this.zgsqsj;
-            _self.postData["zczgEntity.ysqk"] = this.ysqk;
-            _self.postData["zczgEntity.tbr"] = this.tbr;
-            _self.postData["zczgEntity.memo"] = this.memo;
-            _self.postData["zczgEntity.img"] = JSON.stringify(this.upImgArr);
+            _self.postData["yhzgEntity.prtype"] = "一般隐患";
+            _self.postData["yhzgEntity.dyysqk"] = this.dyysqk;
+            _self.postData["yhzgEntity.zgpsqk"] = this.zgpsqk;
+            _self.postData["yhzgEntity.tbr"] = this.tbr;
+            _self.postData["yhzgEntity.memo"] = this.memo;
+            _self.postData["yhzgEntity.img"] = JSON.stringify(this.upImgArr);
             // 上传接口
             this.$api.danger.ybRiskTask(_self.postData).then(res => {
                 _self.$store.commit("setIsLoading", {

@@ -9,7 +9,7 @@
             left-arrow
             @click-left="$router.back(-1)"
         />
-        <van-form @submit="onSubmit">
+        <van-form @submit="onSubmit" :show-error-message="false">
             <van-field
                 label="填表人"
                 placeholder="填表人"

@@ -5,6 +5,9 @@
 </template>
 <script>
 import zczg from "@/components/work/change/zczg";
+import zpzg from "@/components/work/change/zpzg";
+import zpys from "@/components/work/change/zpys";
+import sb from "@/components/work/change/sb";
 import db from "@/components/work/change/db";
 export default {
     name: "change",
@@ -18,6 +21,15 @@ export default {
         switch (this.$route.query.type) {
             case "zczg":
                 this.currentTabComponent = "zczg";
+                break;
+            case "zpzg":
+                this.currentTabComponent = "zpzg";
+                break;
+            case "zpys":
+                this.currentTabComponent = "zpys";
+                break;
+            case "sb":
+                this.currentTabComponent = "sb";
                 break;
             case "db":
                 this.currentTabComponent = "db";
@@ -51,6 +63,9 @@ export default {
     },
     components: {
         zczg,
+        zpzg,
+        zpys,
+        sb,
         db
     }
 };

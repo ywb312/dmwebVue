@@ -3,7 +3,7 @@
         <div class="maskWrap" v-show="modShow" @click="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">修改公告栏信息</div>
-                <van-form @submit="postData">
+                <van-form @submit="postData" :show-error-message="false">
                     <van-field
                         label="环节或部位"
                         placeholder="环节或部位"

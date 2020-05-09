@@ -9,12 +9,12 @@
             left-arrow
             @click-left="$router.back(-1)"
         />
-        <van-form @submit="update">
+        <van-form class="btnMargin" @submit="update" :show-error-message="false">
             <van-field name="approve" label="审批:">
                 <template #input>
                     <van-radio-group v-model="isPass" direction="horizontal" disabled>
                         <van-radio name="true">同意</van-radio>
-                        <van-radio name="false">不同意</van-radio>
+                        <van-radio name="false">驳回</van-radio>
                     </van-radio-group>
                 </template>
             </van-field>
@@ -72,6 +72,9 @@ export default {
         },
         update() {
             let _self = this;
+            _self.$store.commit("setIsLoading", {
+                isLoading: true
+            });
             _self.postData["variable.keys"] =
                 "nodepass,comments,selectDeptId,sbfs";
             _self.postData["variable.values"] =
@@ -85,16 +88,16 @@ export default {
             _self.postData["zddbEntity.tbr"] = this.tbr;
             _self.postData["zddbEntity.memo"] = this.memo;
             // 上传接口
-            this.$api.danger.completenodyTask(_self.postData).then(res => {
+            this.$api.danger.zdRiskTask(_self.postData).then(res => {
+                _self.$store.commit("setIsLoading", {
+                    isLoading: false
+                });
                 res = eval("(" + res + ")");
                 if (res.success) {
-                    _self.$toast({
-                        message: res.id,
-                        duration: 1000
-                    });
+                    _self.$toast(res.id);
                     setTimeout(() => {
                         _self.$router.back(-1);
-                    }, 1000);
+                    }, 2000);
                 } else {
                     this.$toast({
                         message: res.errormessage

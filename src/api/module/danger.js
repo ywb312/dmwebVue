@@ -24,16 +24,13 @@ function doexp(data) { //6.自查自改/上报/指派
     return axios.post("biz/sc/ybyhActiviti/doexp.action", data);
 }
 
-function completenodyTask(data) {
-    //5.待办事项-自查自改
-    //6.待办事项-整改
-    //7.待办事项-指派
-    //8.待办事项-上报
-    //9.待办事项-评估
-    //9.待办事项-督办
-    //9.待办事项-闭环
-    //9.待办事项-验收
+// 一般隐患接口
+function ybRiskTask(data) {
     return axios.post("biz/sc/ybyhActiviti/completenodyTask.action", data);
+}
+// 重大隐患接口
+function zdRiskTask(data) {
+    return axios.post("biz/sc/zdriskActiviti/completenodyTask.action", data);
 }
 
 export default {
@@ -42,6 +39,7 @@ export default {
     doAddSave,
     detail,
     getHicomments,
-    completenodyTask,
+    ybRiskTask,
+    zdRiskTask,
     doexp,
 }

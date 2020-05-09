@@ -3,7 +3,7 @@
         <div class="maskWrap" v-show="setShow" @click="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">{{this.type == "add"?"新增风险点":"修改风险点"}}</div>
-                <van-form @submit="postData">
+                <van-form @submit="postData" :show-error-message="false">
                     <picker title="风险类型" ref="pick" :slots="fxtypeSlots" @returnMsg="getType"></picker>
                     <van-field
                         label="风险名称"

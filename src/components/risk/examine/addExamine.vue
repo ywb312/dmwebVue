@@ -3,7 +3,7 @@
         <div class="maskWrap" v-show="addshow" @click="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">新增排查计划</div>
-                <van-form @submit="postData">
+                <van-form @submit="postData" :show-error-message="false">
                     <tree title="单位" ref="tree" @selectMsg="getDept"></tree>
                     <picker title="频率" ref="pick" :slots="rateSlots" @returnMsg="getRate"></picker>
                     <van-button type="info" size="large" native-type="submit">确定</van-button>

@@ -30,7 +30,7 @@
                         <div>
                             <span
                                 v-if="item.startUserName"
-                            >{{item.startUserName+"发现的"+item.crname+"进行"+item.taskDefinitionKeyText+"处理"}}</span>
+                            >{{item.startUserName+"发现的"+item.prtype+item.crname+"进行"+item.taskDefinitionKeyText+"处理"}}</span>
                             <span v-else>任务描述</span>
                             <span style="min-width:80px;text-align: right;">{{item.owner}}</span>
                         </div>
@@ -77,15 +77,17 @@ export default {
             // 审批记录操作框
             compShow: false,
             taskKeyArr: [
+                // 一般隐患操作
                 { id: "zczg", text: "自查自改" },
+                { id: "zpzg", text: "整改" },
+                { id: "zpys", text: "验收" },
+                { id: "sb", text: "自查自改或上报或指派" },
+                // 重大隐患操作
+                { id: "jkaqhbb", text: "评估" },
                 { id: "db", text: "督办指派" },
                 { id: "zg", text: "整改" },
-                { id: "zpzg", text: "整改" },
                 { id: "ys", text: "验收" },
-                { id: "bh", text: "闭环" },
-                { id: "zpys", text: "指派验收" },
-                { id: "sb", text: "指派验收" },
-                { id: "jkaqhbb", text: "评估处理" }
+                { id: "bh", text: "闭环" }
             ]
         };
     },
@@ -98,6 +100,22 @@ export default {
                     "taskDefinitionKey",
                     this.taskKeyArr
                 );
+                if (
+                    item.taskDefinitionKey == "zczg" ||
+                    item.taskDefinitionKey == "zpzg" ||
+                    item.taskDefinitionKey == "zpys" ||
+                    item.taskDefinitionKey == "sb"
+                ) {
+                    item.prtype = "一般隐患";
+                } else if (
+                    item.taskDefinitionKey == "jkaqhbb" ||
+                    item.taskDefinitionKey == "db" ||
+                    item.taskDefinitionKey == "zg" ||
+                    item.taskDefinitionKey == "ys" ||
+                    item.taskDefinitionKey == "bh"
+                ) {
+                    item.prtype = "重大隐患";
+                }
             });
             this.rendering = arr;
         },
@@ -131,6 +149,13 @@ export default {
         // 办理
         action() {
             this.sheetShow = false;
+            if (
+                this.selectData.assignee == "" &&
+                this.selectData.isactiviti == "1"
+            ) {
+                this.$toast("请先签收");
+                return;
+            }
             this.$router.push({
                 path: "/backlog/change",
                 query: {

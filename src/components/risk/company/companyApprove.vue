@@ -3,7 +3,7 @@
         <div class="maskWrap" v-show="appShow" @click="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">危险源评价</div>
-                <van-form @submit="postData">
+                <van-form @submit="postData" :show-error-message="false">
                     <picker title="可能性" ref="pickL" :slots="slotsL" @returnMsg="getL"></picker>
                     <picker title="严重性" ref="pickE" :slots="slotsE" @returnMsg="getE"></picker>
                     <picker title="频繁度" ref="pickC" :slots="slotsC" @returnMsg="getC"></picker>

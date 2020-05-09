@@ -3,7 +3,7 @@
         <div class="maskWrap" v-show="setShow" @click="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">{{this.type == "add"?"新增管控措施":"修改管控措施"}}</div>
-                <van-form @submit="postData">
+                <van-form @submit="postData" :show-error-message="false">
                     <van-field
                         label="管控措施名称"
                         v-model="getData.gname"
