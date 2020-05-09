@@ -94,22 +94,24 @@ export default {
             _self.postData["zczgEntity.memo"] = this.memo;
             _self.postData["zczgEntity.img"] = JSON.stringify(this.upImgArr);
             // 上传接口
-            this.$api.danger.ybRiskTask(_self.postData).then(res => {
-                _self.$store.commit("setIsLoading", {
-                    isLoading: false
-                });
-                res = eval("(" + res + ")");
-                if (res.success) {
-                    _self.$toast(res.id);
-                    setTimeout(() => {
-                        _self.$router.back(-1);
-                    }, 2000);
-                } else {
-                    this.$toast({
-                        message: res.errormessage
+            _self.$api.pub
+                .showPage(_self.postData["nodeaction"], _self.postData)
+                .then(res => {
+                    _self.$store.commit("setIsLoading", {
+                        isLoading: false
                     });
-                }
-            });
+                    res = eval("(" + res + ")");
+                    if (res.success) {
+                        _self.$toast(res.id);
+                        setTimeout(() => {
+                            _self.$router.back(-1);
+                        }, 2000);
+                    } else {
+                        this.$toast({
+                            message: res.errormessage
+                        });
+                    }
+                });
         }
     },
     components: {

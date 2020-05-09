@@ -12,7 +12,11 @@
         <van-form class="btnMargin" @submit="update" :show-error-message="false">
             <van-field name="approve" label="审批:">
                 <template #input>
-                    <van-radio-group v-model="isPass" direction="horizontal">
+                    <van-radio-group
+                        v-model="isPass"
+                        direction="horizontal"
+                        :disabled="postData['taskDefinitionKey']=='zpys'?false:true"
+                    >
                         <van-radio name="pass">同意</van-radio>
                         <van-radio name="noPass">驳回</van-radio>
                     </van-radio-group>
@@ -25,7 +29,7 @@
                 placeholder="审批意见"
                 :rules="[{ required: true, message: '请填写审批意见' }]"
             />
-            <date-pick title="验收时间" time="before" @returnDate="getXcyssj"></date-pick>
+            <date-pick title="验收时间" @returnDate="getXcyssj"></date-pick>
             <van-field
                 label="验收情况"
                 v-model="ysqk"
@@ -40,7 +44,7 @@
                 placeholder="验收专家及人员"
                 :rules="[{ required: true, message: '请填写验收专家及人员' }]"
             />
-            <div v-show="isPass=='noPass'">
+            <div v-if="isPass=='noPass'">
                 <van-field
                     label="驳回原因"
                     v-model="cause"
@@ -56,7 +60,7 @@
                     placeholder="整改治理要求"
                     :rules="[{ required: true, message: '请填写整改治理要求' }]"
                 />
-                <date-pick title="整改截止时间" time="before" @returnDate="getZgdate"></date-pick>
+                <date-pick title="整改截止时间" time="after" @returnDate="getZgdate"></date-pick>
             </div>
             <van-field
                 label="填表人"
@@ -66,7 +70,7 @@
                 :rules="[{ required: true, message: '请填写填表人' }]"
             />
             <van-field label="备注" placeholder="请输入备注" v-model="memo" />
-            <uploadimg @toImgArr="getImgArr"></uploadimg>
+            <uploadimg v-if="postData['taskDefinitionKey']=='zpys'" @toImgArr="getImgArr"></uploadimg>
             <van-button class="btn" type="info" size="large" native-type="submit">提交</van-button>
         </van-form>
     </div>
@@ -155,22 +159,24 @@ export default {
                 );
             }
             // 上传接口
-            this.$api.danger.ybRiskTask(_self.postData).then(res => {
-                _self.$store.commit("setIsLoading", {
-                    isLoading: false
-                });
-                res = eval("(" + res + ")");
-                if (res.success) {
-                    _self.$toast(res.id);
-                    setTimeout(() => {
-                        _self.$router.back(-1);
-                    }, 2000);
-                } else {
-                    this.$toast({
-                        message: res.errormessage
+            _self.$api.pub
+                .showPage(_self.postData["nodeaction"], _self.postData)
+                .then(res => {
+                    _self.$store.commit("setIsLoading", {
+                        isLoading: false
                     });
-                }
-            });
+                    res = eval("(" + res + ")");
+                    if (res.success) {
+                        _self.$toast(res.id);
+                        setTimeout(() => {
+                            _self.$router.back(-1);
+                        }, 2000);
+                    } else {
+                        this.$toast({
+                            message: res.errormessage
+                        });
+                    }
+                });
         }
     },
     components: {

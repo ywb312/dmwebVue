@@ -4,11 +4,6 @@
     </div>
 </template>
 <script>
-import zczg from "@/components/work/change/zczg";
-import zpzg from "@/components/work/change/zpzg";
-import zpys from "@/components/work/change/zpys";
-import sb from "@/components/work/change/sb";
-import db from "@/components/work/change/db";
 export default {
     name: "change",
     data() {
@@ -31,8 +26,20 @@ export default {
             case "sb":
                 this.currentTabComponent = "sb";
                 break;
+            case "jkaqhbb":
+                this.currentTabComponent = "jkaqhbb";
+                break;
             case "db":
                 this.currentTabComponent = "db";
+                break;
+            case "zg":
+                this.currentTabComponent = "zpzg";
+                break;
+            case "ys":
+                this.currentTabComponent = "zpys";
+                break;
+            case "bh":
+                this.currentTabComponent = "bh";
                 break;
             default:
                 break;
@@ -62,11 +69,14 @@ export default {
         }
     },
     components: {
-        zczg,
-        zpzg,
-        zpys,
-        sb,
-        db
+        zczg: resolve => require(["@/components/work/change/zczg"], resolve),
+        zpzg: resolve => require(["@/components/work/change/zpzg"], resolve),
+        zpys: resolve => require(["@/components/work/change/zpys"], resolve),
+        sb: resolve => require(["@/components/work/change/sb"], resolve),
+        jkaqhbb: resolve =>
+            require(["@/components/work/change/jkaqhbb"], resolve),
+        db: resolve => require(["@/components/work/change/db"], resolve),
+        bh: resolve => require(["@/components/work/change/bh"], resolve)
     }
 };
 </script>

@@ -1,4 +1,5 @@
 import axios from '../http'
+
 function doAddSaveSingle(data) { //安全检查提交隐患
     return axios.post("biz/sc/checkplandetail/doAddSaveSingle.action", data);
 }
@@ -24,22 +25,11 @@ function doexp(data) { //6.自查自改/上报/指派
     return axios.post("biz/sc/ybyhActiviti/doexp.action", data);
 }
 
-// 一般隐患接口
-function ybRiskTask(data) {
-    return axios.post("biz/sc/ybyhActiviti/completenodyTask.action", data);
-}
-// 重大隐患接口
-function zdRiskTask(data) {
-    return axios.post("biz/sc/zdriskActiviti/completenodyTask.action", data);
-}
-
 export default {
     doAddSaveSingle,
     getExePlan,
     doAddSave,
     detail,
     getHicomments,
-    ybRiskTask,
-    zdRiskTask,
     doexp,
 }
