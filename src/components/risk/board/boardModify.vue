@@ -53,8 +53,7 @@ export default {
         // 根据当前页面的配置 对请求入参进行添加筛选
         returnData(option) {
             let obj = {
-                "bean.cid": this.cid,
-                session: window.localStorage["session_Id"]
+                "bean.cid": this.cid
             };
             for (const key in this.getData) {
                 obj["bean." + key] = this.getData[key];

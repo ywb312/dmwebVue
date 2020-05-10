@@ -37,15 +37,17 @@ axios.defaults.validateStatus = status => {
 
 // 请求的地方设置成true
 axios.interceptors.request.use(config => {
-    console.log(config.data)
+    if (window.localStorage["session_Id"]) {
+        config.data.session = window.localStorage["session_Id"];
+    }
     return config
 }, error => {
     return Promise.reject(error);
 })
 //  axios响应拦截器
 axios.interceptors.response.use(res => {
-    if (res.status == 500) { //根据后台状态码设置的
-    }
+    // if (res.status == 200) { //根据后台状态码设置的
+    // }
     return res.data;
 }, error => {
     let {

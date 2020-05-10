@@ -106,8 +106,7 @@ export default {
                 .then(resolve => {
                     this.$api.risk
                         .examineDelete({
-                            "bean.cprid": this.selectData.cprid,
-                            ssession: window.localStorage["session_Id"]
+                            "bean.cprid": this.selectData.cprid
                         })
                         .then(res => {
                             this.clearData();

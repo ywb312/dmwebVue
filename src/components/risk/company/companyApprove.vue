@@ -33,8 +33,7 @@ export default {
         returnData(option) {
             let obj = {
                 "bean.wid": this.selectData.wid,
-                "bean.wname": this.selectData.wname,
-                session: window.localStorage["session_Id"]
+                "bean.wname": this.selectData.wname
             };
             for (const key in this.getData) {
                 obj["bean." + key] = this.getData[key];

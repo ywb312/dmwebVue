@@ -37,8 +37,7 @@ export default {
                 this.$api.risk
                     .riskAdd({
                         "bean.fxtype": this.getData.fxtype,
-                        "bean.name": this.getData.name,
-                        session: window.localStorage["session_Id"]
+                        "bean.name": this.getData.name
                     })
                     .then(res => {
                         this.close();
@@ -49,8 +48,7 @@ export default {
                     .riskModify({
                         "bean.fxtype": this.getData.fxtype,
                         "bean.name": this.getData.name,
-                        "bean.fid": this.selectData.fid,
-                        session: window.localStorage["session_Id"]
+                        "bean.fid": this.selectData.fid
                     })
                     .then(res => {
                         this.close();

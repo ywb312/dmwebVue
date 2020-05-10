@@ -19,7 +19,9 @@
                         <div>
                             <span>
                                 风险等级:
-                                <van-tag size="large" round
+                                <van-tag
+                                    size="large"
+                                    round
                                     :type="item.grade == 1?'danger':item.grade==2?'warning':'primary'"
                                     :color="item.grade == 3?'yellow':''"
                                 >{{item.grade+"级"}}</van-tag>
@@ -107,16 +109,12 @@ export default {
         },
         // 提交辨识
         upAffirm() {
-            this.$api.pub
-                .showPage(this.upUrl, {
-                    session: window.localStorage["session_Id"]
-                })
-                .then(res => {
-                    this.$toast({
-                        message: "提交成功",
-                        position: "bottom"
-                    });
+            this.$api.pub.showPage(this.upUrl, {}).then(res => {
+                this.$toast({
+                    message: "提交成功",
+                    position: "bottom"
                 });
+            });
         }
     },
     computed: {

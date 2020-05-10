@@ -58,7 +58,6 @@ export default {
         returnData(option) {
             let obj = {
                 "bean.gid": this.gid,
-                session: window.localStorage["session_Id"]
             };
             for (const key in this.getData) {
                 obj["bean." + key] = this.getData[key];

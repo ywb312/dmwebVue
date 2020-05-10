@@ -126,7 +126,6 @@ export default {
                     rows: 10,
                     page: this.page,
                     filters: this.selectData.planid,
-                    session: window.localStorage["session_Id"]
                 })
                 .then(res => {
                     console.log(res);

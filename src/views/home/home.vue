@@ -24,8 +24,7 @@ export default {
         this.$api.work
             .taskList({
                 page: 1,
-                rows: 10,
-                session: window.localStorage["session_Id"]
+                rows: 10
             })
             .then(res => {
                 self.$store.commit("setBacklog", res);

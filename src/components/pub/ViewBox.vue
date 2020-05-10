@@ -60,8 +60,7 @@ export default {
         setObj() {
             let obj = {
                 rows: 10,
-                page: this.page,
-                session: window.localStorage["session_Id"]
+                page: this.page
             };
             for (const key in this.postData.obj) {
                 if (this.postData.obj[key] != "") {

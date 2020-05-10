@@ -114,7 +114,6 @@ export default {
                 "bean.crLevel": this.crLevel,
                 "bean.classify": this.classify,
                 "bean.img": JSON.stringify(this.upImgArr),
-                session: window.localStorage["session_Id"]
             };
             // 上传接口
             this.$api.danger.doAddSaveSingle(obj).then(function() {

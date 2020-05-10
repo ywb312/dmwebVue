@@ -66,7 +66,6 @@ export default {
             // let _self = this;
             // let obj = {
             //     "sbzpEntity.yhid": this.selectData.yhid,
-            //     session: window.localStorage["session_Id"]
             // };
             // // 上传接口
             // this.$api.danger.doexp(obj).then(function() {

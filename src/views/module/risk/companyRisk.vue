@@ -160,8 +160,7 @@ export default {
                 .then(resolve => {
                     this.$api.risk
                         .companyRiskDelete({
-                            "bean.wid": this.selectData.wid,
-                            ssession: window.localStorage["session_Id"]
+                            "bean.wid": this.selectData.wid
                         })
                         .then(res => {
                             this.clearData();

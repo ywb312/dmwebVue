@@ -38,8 +38,7 @@ export default {
                     .measureAdd({
                         "bean.wid": this.wid,
                         "bean.gname": this.getData.gname,
-                        "bean.gtype": this.getData.gtype,
-                        session: window.localStorage["session_Id"]
+                        "bean.gtype": this.getData.gtype
                     })
                     .then(res => {
                         this.close();
@@ -51,8 +50,7 @@ export default {
                         "bean.wid": this.selectData.wid,
                         "bean.gid": this.selectData.gid,
                         "bean.gname": this.getData.gname,
-                        "bean.gtype": this.getData.gtype,
-                        session: window.localStorage["session_Id"]
+                        "bean.gtype": this.getData.gtype
                     })
                     .then(res => {
                         this.close();

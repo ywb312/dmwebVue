@@ -63,7 +63,6 @@ export default {
                 "sbzpEntity.zgdate": this.zgdate,
                 "sbzpEntity.tbr": this.tbr,
                 "sbzpEntity.memo": this.memo,
-                session: window.localStorage["session_Id"]
             };
             // 上传接口
             this.$api.danger.doexp(obj).then(function() {

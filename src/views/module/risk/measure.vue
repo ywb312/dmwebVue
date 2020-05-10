@@ -124,8 +124,7 @@ export default {
                 .then(resolve => {
                     this.$api.risk
                         .measureDelete({
-                            "bean.gid": this.selectData.gid,
-                            ssession: window.localStorage["session_Id"]
+                            "bean.gid": this.selectData.gid
                         })
                         .then(res => {
                             this.clearData();

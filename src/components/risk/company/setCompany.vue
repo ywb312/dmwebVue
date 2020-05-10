@@ -51,9 +51,7 @@ export default {
     methods: {
         // 根据当前页面的配置 对请求入参进行添加筛选
         returnData(option) {
-            let obj = {
-                session: window.localStorage["session_Id"]
-            };
+            let obj = {};
             if (this.type == "add") {
                 obj["bean.fid"] = this.fid;
             } else if (this.type == "mod") {
