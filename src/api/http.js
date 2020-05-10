@@ -37,7 +37,7 @@ axios.defaults.validateStatus = status => {
 
 // 请求的地方设置成true
 axios.interceptors.request.use(config => {
-    if (window.localStorage["session_Id"]) {
+    if (config.data && window.localStorage["session_Id"]) {
         config.data.session = window.localStorage["session_Id"];
     }
     return config
