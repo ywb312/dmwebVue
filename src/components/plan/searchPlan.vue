@@ -43,7 +43,6 @@
                     <div class="title">
                         <h4>{{index+1+"."+item.cpname}}</h4>
                         <p class="main_tag">
-                            <van-tag size="large" round type="primary">{{item.checktype}}</van-tag>
                             <van-tag size="large" round type="primary">{{item.planstatus}}</van-tag>
                         </p>
                     </div>
@@ -52,11 +51,25 @@
                             <span>检查人: {{item.tbr}} | 作业地点: {{item.zydd}}</span>
                         </div>
                         <div v-if="item.checkend">
-                            <span>计划执行时间: {{item.checkend}}</span>
+                            <p class="main_text">
+                                <span class="main_title">计划执行时间:</span>
+                                <span class="main_val">{{item.checkend}}</span>
+                            </p>
                         </div>
                         <div>
-                            <span>检查截止时间: {{item.checkdeadline}}</span>
-                            <span>{{item.planfrom}}</span>
+                            <p class="main_text">
+                                <span class="main_title">计划来源:</span>
+                                <span class="main_val">{{item.planfrom}}</span>
+                            </p>
+                             <p class="main_tag">
+                                <van-tag size="large" round type="primary">{{item.checktype}}</van-tag>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="main_text">
+                                <span class="main_title">检查截止时间:</span>
+                                <span class="main_val">{{item.checkdeadline}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>

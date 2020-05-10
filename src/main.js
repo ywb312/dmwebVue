@@ -44,6 +44,7 @@ import {
 	Radio,
 	Picker,
 	Loading,
+	Uploader,
 	ActionSheet
 } from 'vant';
 // {Radio,Popup,Loadmore,DatetimePicker,MessageBox} mintUI使用的组件
@@ -81,6 +82,7 @@ Vue.use(Form) //vant部分
 	.use(Radio)
 	.use(Picker)
 	.use(Loading)
+	.use(Uploader)
 	.use(Divider);
 Vue.use(axios)
 Vue.prototype.$api = api;

@@ -1,6 +1,8 @@
 import axios from 'axios'
 import qs from 'qs'
-import store from '../store/index'
+import {
+    Toast
+} from 'vant';
 
 // 公共url前缀
 axios.defaults.baseURL = '/dmweb/';
@@ -35,31 +37,31 @@ axios.defaults.validateStatus = status => {
 
 // 请求的地方设置成true
 axios.interceptors.request.use(config => {
-    // store.commit('setIsLoading', {
-    //     isLoading: true
-    // })
+    console.log(config.data)
     return config
 }, error => {
     return Promise.reject(error);
 })
 //  axios响应拦截器
-axios.interceptors.response.use(response => {
-    if (response.data.code == 500) { //根据后台状态码设置的
+axios.interceptors.response.use(res => {
+    if (res.status == 500) { //根据后台状态码设置的
     }
-    // store.commit('setIsLoading', {
-    //     isLoading: false
-    // })
-    return response.data;
+    return res.data;
 }, error => {
     let {
-        response
+        res
     } = error;
-    if (response) {
+    if (res) {
         // 服务器有返回
-        switch (response.status) {
+        switch (res.status) {
             case 401: //权限
+                Toast.fail('权限不够!');
                 break;
             case 403: //接收到，但服务器拒绝执行(token过期)
+                Toast.fail('信息已过期，请重新登录!');
+                break;
+            case 500: //接收到，但服务器拒绝执行(token过期)
+                Toast.fail('服务器错误!');
                 break;
             case 404: //找不到页面
                 break;
@@ -68,6 +70,7 @@ axios.interceptors.response.use(response => {
         // 服务器无返回
         if (!window.navigator.onLine) {
             // 断网处理
+            Toast.fail('网络连接失败，请检查网络!');
             return
         }
         return Promise.reject(error);

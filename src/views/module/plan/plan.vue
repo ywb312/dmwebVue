@@ -1,5 +1,5 @@
 <template>
-    <div class="plan page">
+    <div class="page">
         <!-- 标题  -->
         <van-nav-bar
             :title="pageData.text"
@@ -63,8 +63,3 @@ export default {
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>
-<style scoped>
-.plan {
-    height: 100%;
-}
-</style>

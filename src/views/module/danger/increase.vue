@@ -100,7 +100,6 @@ export default {
         },
         // 获取图片数组
         getImgArr(v) {
-            console.log(v);
             this.upImgArr = v;
         },
         onSubmit(val) {
