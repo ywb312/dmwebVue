@@ -67,16 +67,11 @@ toTree(data) {
 ## 遗留问题
 检查记录详情planDetail 落实条件
 计划管理 我的计划
-danger(隐患管理)FileApprove
-    自查自改等显示条件
+
 inform(通知公告)
     详情
     操作弹出框显示条件
-uploadimg 上传图片组件接口动态传值
-work(工作台)
-    操作弹出框显示条件及页面
-    safeCheak页面预留
-最后设置权限后重新修改vuex listPage 控制功能的展示
+
 plan(我的计划)
     我的检查计划及专项检查计划
     planDetail 下面列表需测试

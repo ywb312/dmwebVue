@@ -58,6 +58,11 @@ export default {
     methods: {
         onSubmit(values) {
             let _this = this;
+            let toast = this.$toast({
+                message: "正在登录...",
+                forbidClick: true,
+                loadingType: "spinner"
+            });
             _this.$api.pub
                 .login({
                     username: values.username,
@@ -65,6 +70,7 @@ export default {
                     "user-agent": "mobile"
                 })
                 .then(function(res) {
+                    toast.clear();
                     if (res.result) {
                         var storage = window.localStorage;
                         storage.session_Id = res.session_Id;

@@ -10,19 +10,23 @@
                 >
                     <div class="title">
                         <h4>{{index+1+"."+item.cpname}}</h4>
-                        <p style="min-width:40px">
-                            <van-tag round type="primary">{{item.checktype}}</van-tag>
+                        <p class="main_tag">
+                            <van-tag round size="large" type="primary">{{item.checktype}}</van-tag>
                         </p>
                     </div>
                     <div class="main">
                         <div>
-                            <span>检查截止时间: {{item.checkdeadline}}</span>
-                            <van-tag round type="primary">{{item.planstatus}}</van-tag>
+                            <p class="main_text">
+                                <span class="main_title">检查截止时间:</span>
+                                <span class="main_val">{{item.checkdeadline}}</span>
+                            </p>
+                            <p class="main_tag">
+                                <van-tag round size="large" type="primary">{{item.planstatus}}</van-tag>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -41,14 +45,15 @@ export default {
             }
         };
     },
-    // pageData父组件传来的配置项
-    props: ["pageData"],
     methods: {
         getRendering(v) {
             this.rendering = v;
         },
         btnClick(obj) {
-            // this.$store.commit("getSelectData", obj);
+            this.$store.commit("getSelectData", obj);
+            this.$router.push({
+                path: "/plan/myPlanDetail"
+            });
         }
     },
     components: {

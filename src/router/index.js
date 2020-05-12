@@ -106,10 +106,10 @@ const routes = [{
 			keepAlive: false
 		}
 	},
-	{ //计划管理 安全检查
-		path: '/safeCheack',
-		name: 'safeCheack',
-		component: () => import('@/views/module/plan/safeCheack.vue'),
+	{ //计划管理 我的计划
+		path: '/plan/myPlanDetail',
+		name: 'myPlanDetail',
+		component: () => import('@/views/module/plan/myPlanDetail.vue'),
 		meta: {
 			keepAlive: false
 		}
