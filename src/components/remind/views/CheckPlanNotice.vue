@@ -14,7 +14,7 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">计划名称:</span>
+                                <span class="main_title">计划名称:</span>
                                 <span class="main_val">{{item.cpname}}</span>
                             </p>
                             <p class="main_tag">
@@ -23,19 +23,19 @@
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">创建日期:</span>
+                                <span class="main_title">创建日期:</span>
                                 <span class="main_val">{{item.createdate}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">截止日期:</span>
+                                <span class="main_title">截止日期:</span>
                                 <span class="main_val">{{item.checkdeadline}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">检查单位:</span>
+                                <span class="main_title">检查单位:</span>
                                 <span class="main_val">{{item.deptname}}</span>
                             </p>
                             <p class="main_tag">

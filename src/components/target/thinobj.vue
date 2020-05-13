@@ -25,25 +25,25 @@
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">目标指标:</span>
+                                <span class="main_title">目标指标:</span>
                                 <span class="main_val">{{item.aim}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">目标措施:</span>
+                                <span class="main_title">目标措施:</span>
                                 <span class="main_val">{{item.measures}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">进度安排:</span>
+                                <span class="main_title">进度安排:</span>
                                 <span class="main_val">{{item.schedule}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">投资预算:</span>
+                                <span class="main_title">投资预算:</span>
                                 <span class="main_val">{{item.estimate+"万元"}}</span>
                             </p>
                         </div>

@@ -12,25 +12,25 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">姓名:</span>
+                                <span class="main_title">姓名:</span>
                                 <span class="main_val">{{item.peopleName}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">性别:</span>
+                                <span class="main_title">性别:</span>
                                 <span class="main_val">{{item.sexText}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">出生日期:</span>
+                                <span class="main_title">出生日期:</span>
                                 <span class="main_val">{{item.birthday}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">职务:</span>
+                                <span class="main_title">职务:</span>
                                 <span class="main_val">{{item.position}}</span>
                             </p>
                         </div>

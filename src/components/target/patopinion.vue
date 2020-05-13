@@ -10,19 +10,19 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">创建人员:</span>
+                                <span class="main_title">创建人员:</span>
                                 <span class="main_val">{{item.creater}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">创建日期:</span>
+                                <span class="main_title">创建日期:</span>
                                 <span class="main_val">{{item.createDate}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">意见:</span>
+                                <span class="main_title">意见:</span>
                                 <span class="main_val">{{item.opinion}}</span>
                             </p>
                         </div>

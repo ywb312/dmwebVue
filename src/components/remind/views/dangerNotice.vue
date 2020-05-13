@@ -11,25 +11,25 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">隐患名称:</span>
+                                <span class="main_title">隐患名称:</span>
                                 <span class="main_val">{{item.crname}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">隐患描述:</span>
+                                <span class="main_title">隐患描述:</span>
                                 <span class="main_val">{{item.crdesc}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">隐患类型:</span>
+                                <span class="main_title">隐患类型:</span>
                                 <span class="main_val">{{item.prtypeText}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">提醒类别:</span>
+                                <span class="main_title">提醒类别:</span>
                                 <span class="main_val">{{item.txlb}}</span>
                             </p>
                         </div>

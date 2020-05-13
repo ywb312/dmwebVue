@@ -32,19 +32,19 @@
                         <div class="main">
                             <div>
                                 <p class="main_text">
-                                    <span class="main_title bold">隐患描述:</span>
+                                    <span class="main_title">隐患描述:</span>
                                     <span class="main_val">{{item.crdesc}}</span>
                                 </p>
                             </div>
                             <div>
                                 <p class="main_text">
-                                    <span class="main_title bold">隐患场所:</span>
+                                    <span class="main_title">隐患场所:</span>
                                     <span class="main_val">{{item.craddr}}</span>
                                 </p>
                             </div>
                             <div>
                                 <p class="main_text">
-                                    <span class="main_title bold">审批时间:</span>
+                                    <span class="main_title">审批时间:</span>
                                     <span class="main_val">{{item.pcdate}}</span>
                                 </p>
                             </div>

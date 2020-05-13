@@ -15,25 +15,25 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">相关方类型:</span>
+                                <span class="main_title">相关方类型:</span>
                                 <span class="main_val">{{item.contractortypeText}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">联系人:</span>
+                                <span class="main_title">联系人:</span>
                                 <span class="main_val">{{item.contactpeople}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">联系地址:</span>
+                                <span class="main_title">联系地址:</span>
                                 <span class="main_val">{{item.address}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">联系方式:</span>
+                                <span class="main_title">联系方式:</span>
                                 <span class="main_val">{{item.tel}}</span>
                             </p>
                         </div>

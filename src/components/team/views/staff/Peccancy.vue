@@ -12,25 +12,25 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">违章人员:</span>
+                                <span class="main_title">违章人员:</span>
                                 <span class="main_val">{{item.username}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">所属单位:</span>
+                                <span class="main_title">所属单位:</span>
                                 <span class="main_val">{{item.deptname}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">违章时间:</span>
+                                <span class="main_title">违章时间:</span>
                                 <span class="main_val">{{item.peccancytime}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">违章地点:</span>
+                                <span class="main_title">违章地点:</span>
                                 <span class="main_val">{{item.peccancyaddress}}</span>
                             </p>
                         </div>

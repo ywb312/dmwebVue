@@ -98,8 +98,8 @@ performance
     安全体系自评 子表未区分
 
 数据字典获取 未开发，目前绑死的值
-    后续可集成到ViewBox中
-    
+    开发速度,继发 code2Text改为返回Promise
+    使用速度,并发 Promise.arr()
 
 ## 上线注意事项
     1.App.vue create注释打开 解决vuex刷新问题

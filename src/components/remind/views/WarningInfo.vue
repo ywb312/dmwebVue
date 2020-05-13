@@ -11,25 +11,25 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">预警内容:</span>
+                                <span class="main_title">预警内容:</span>
                                 <span class="main_val">{{item.warmcontent}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">预警级别:</span>
+                                <span class="main_title">预警级别:</span>
                                 <span class="main_val">{{item.warmlevel}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">发布时间:</span>
+                                <span class="main_title">发布时间:</span>
                                 <span class="main_val">{{item.addtime}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">预警状态:</span>
+                                <span class="main_title">预警状态:</span>
                                 <span class="main_val">{{item.warmstatus}}</span>
                             </p>
                         </div>

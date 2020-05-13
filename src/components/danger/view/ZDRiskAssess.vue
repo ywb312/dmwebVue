@@ -28,31 +28,31 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">评估部门:</span>
+                                <span class="main_title">评估部门:</span>
                                 <span class="main_val">{{item.deptName}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">评估描述:</span>
+                                <span class="main_title">评估描述:</span>
                                 <span class="main_val">{{item.pgdesc}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">管控措施:</span>
+                                <span class="main_title">管控措施:</span>
                                 <span class="main_val">{{item.gkcs}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">评估时间:</span>
+                                <span class="main_title">评估时间:</span>
                                 <span class="main_val">{{item.pgdate}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">创建时间:</span>
+                                <span class="main_title">创建时间:</span>
                                 <span class="main_val">{{item.createdate}}</span>
                             </p>
                         </div>

@@ -10,31 +10,31 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">创建时间:</span>
+                                <span class="main_title">创建时间:</span>
                                 <span class="main_val">{{item.createtime}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">创建人:</span>
+                                <span class="main_title">创建人:</span>
                                 <span class="main_val">{{item.createpeople}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">修改时间:</span>
+                                <span class="main_title">修改时间:</span>
                                 <span class="main_val">{{item.edittime}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">修改人:</span>
+                                <span class="main_title">修改人:</span>
                                 <span class="main_val">{{item.editpeople}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">总分:</span>
+                                <span class="main_title">总分:</span>
                                 <span class="main_val">{{item.totalscore}}</span>
                             </p>
                         </div>

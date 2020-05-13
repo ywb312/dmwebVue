@@ -11,13 +11,13 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">相关方名称:</span>
+                                <span class="main_title">相关方名称:</span>
                                 <span class="main_val">{{item.companyName}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">年月:</span>
+                                <span class="main_title">年月:</span>
                                 <span class="main_val">{{item.yearMonth}}</span>
                             </p>
                         </div>

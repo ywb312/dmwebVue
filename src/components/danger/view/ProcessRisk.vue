@@ -35,25 +35,25 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">存在问题:</span>
+                                <span class="main_title">存在问题:</span>
                                 <span class="main_val">{{item.crdesc}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">隐患地点:</span>
+                                <span class="main_title">隐患地点:</span>
                                 <span class="main_val">{{item.craddr}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">检查时间:</span>
+                                <span class="main_title">检查时间:</span>
                                 <span class="main_val">{{item.pcdate}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">检查人:</span>
+                                <span class="main_title">检查人:</span>
                                 <span class="main_val">{{item.createid}}</span>
                             </p>
                         </div>

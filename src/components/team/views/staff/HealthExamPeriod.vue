@@ -12,31 +12,31 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">姓名:</span>
+                                <span class="main_title">姓名:</span>
                                 <span class="main_val">{{item.staffname}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">性别:</span>
+                                <span class="main_title">性别:</span>
                                 <span class="main_val">{{item.sexText}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">身份证号:</span>
+                                <span class="main_title">身份证号:</span>
                                 <span class="main_val">{{item.idcard}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">工号:</span>
+                                <span class="main_title">工号:</span>
                                 <span class="main_val">{{item.staffcode}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">单位:</span>
+                                <span class="main_title">单位:</span>
                                 <span class="main_val">{{item.deptname}}</span>
                             </p>
                         </div>

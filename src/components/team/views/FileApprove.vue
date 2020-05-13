@@ -15,31 +15,31 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">要素号:</span>
+                                <span class="main_title">要素号:</span>
                                 <span class="main_val">{{item.elemcode}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">创建单位:</span>
+                                <span class="main_title">创建单位:</span>
                                 <span class="main_val">{{item.createdept}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">创建人:</span>
+                                <span class="main_title">创建人:</span>
                                 <span class="main_val">{{item.createman}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">创建单位:</span>
+                                <span class="main_title">创建单位:</span>
                                 <span class="main_val">{{item.createdept}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">责任人:</span>
+                                <span class="main_title">责任人:</span>
                                 <span class="main_val">{{item.respname}}</span>
                             </p>
                             <p class="mian_tag">

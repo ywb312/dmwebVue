@@ -12,31 +12,31 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">片号:</span>
+                                <span class="main_title">片号:</span>
                                 <span class="main_val">{{item.number}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">姓名:</span>
+                                <span class="main_title">姓名:</span>
                                 <span class="main_val">{{item.name}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">性别:</span>
+                                <span class="main_title">性别:</span>
                                 <span class="main_val">{{item.sexText}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">单位:</span>
+                                <span class="main_title">单位:</span>
                                 <span class="main_val">{{item.danwei}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">工种:</span>
+                                <span class="main_title">工种:</span>
                                 <span class="main_val">{{item.profession}}</span>
                             </p>
                         </div>

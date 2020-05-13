@@ -7,19 +7,19 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">年度:</span>
+                                <span class="main_title">年度:</span>
                                 <span class="main_val">{{item.year}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">评审计划名称:</span>
+                                <span class="main_title">评审计划名称:</span>
                                 <span class="main_val">{{item.pubname}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">附件名称:</span>
+                                <span class="main_title">附件名称:</span>
                                 <span class="main_val">
                                     <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
                                 </span>
@@ -27,19 +27,19 @@
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">发布单位:</span>
+                                <span class="main_title">发布单位:</span>
                                 <span class="main_val">{{item.pubdept}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">发布时间:</span>
+                                <span class="main_title">发布时间:</span>
                                 <span class="main_val">{{item.pubtime}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">发布状态:</span>
+                                <span class="main_title">发布状态:</span>
                                 <span class="main_val">{{item.pubstatusText}}</span>
                             </p>
                         </div>

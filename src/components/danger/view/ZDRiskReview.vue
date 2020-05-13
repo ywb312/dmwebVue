@@ -28,25 +28,25 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">申请验收单位:</span>
+                                <span class="main_title">申请验收单位:</span>
                                 <span class="main_val">{{item.dwysryname}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">申请验收说明:</span>
+                                <span class="main_title">申请验收说明:</span>
                                 <span class="main_val">{{item.dyysqk}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">整改申请部门:</span>
+                                <span class="main_title">整改申请部门:</span>
                                 <span class="main_val">{{item.zgpsbmName}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">整改情况说明:</span>
+                                <span class="main_title">整改情况说明:</span>
                                 <span class="main_val">{{item.zgpsqk}}</span>
                             </p>
                         </div>

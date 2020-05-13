@@ -10,19 +10,19 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">建议名称:</span>
+                                <span class="main_title">建议名称:</span>
                                 <span class="main_val">{{item.colname}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">奖励内容:</span>
+                                <span class="main_title">奖励内容:</span>
                                 <span class="main_val">{{item.content}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">创建日期:</span>
+                                <span class="main_title">创建日期:</span>
                                 <span class="main_val">{{item.createdate}}</span>
                             </p>
                         </div>

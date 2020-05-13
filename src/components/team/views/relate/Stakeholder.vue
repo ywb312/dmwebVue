@@ -15,25 +15,25 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">主要责任人:</span>
+                                <span class="main_title">主要责任人:</span>
                                 <span class="main_val">{{item.legalPerson}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">单位地址:</span>
+                                <span class="main_title">单位地址:</span>
                                 <span class="main_val">{{item.companyAddress}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">许可范围:</span>
+                                <span class="main_title">许可范围:</span>
                                 <span class="main_val">{{item.permission}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">业主单位:</span>
+                                <span class="main_title">业主单位:</span>
                                 <span class="main_val">{{item.ownerUnit}}</span>
                             </p>
                         </div>

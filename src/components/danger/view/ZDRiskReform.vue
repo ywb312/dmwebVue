@@ -28,37 +28,37 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">整改责任单位:</span>
+                                <span class="main_title">整改责任单位:</span>
                                 <span class="main_val">{{item.zgzrdwName}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">整改治理要求:</span>
+                                <span class="main_title">整改治理要求:</span>
                                 <span class="main_val">{{item.zgzlyq}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">整改截止日期:</span>
+                                <span class="main_title">整改截止日期:</span>
                                 <span class="main_val">{{item.zgdate}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">创建时间:</span>
+                                <span class="main_title">创建时间:</span>
                                 <span class="main_val">{{item.createdate}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">填表人员:</span>
+                                <span class="main_title">填表人员:</span>
                                 <span class="main_val">{{item.tbr}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">备注:</span>
+                                <span class="main_title">备注:</span>
                                 <span class="main_val">{{item.memo}}</span>
                             </p>
                         </div>

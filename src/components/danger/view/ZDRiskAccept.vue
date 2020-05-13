@@ -28,25 +28,25 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">验收负责单位:</span>
+                                <span class="main_title">验收负责单位:</span>
                                 <span class="main_val">{{item.ysfzdwName}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">验收专家人员:</span>
+                                <span class="main_title">验收专家人员:</span>
                                 <span class="main_val">{{item.yszjry}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">现场验收时间:</span>
+                                <span class="main_title">现场验收时间:</span>
                                 <span class="main_val">{{item.xcyssj}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">验收情况:</span>
+                                <span class="main_title">验收情况:</span>
                                 <span class="main_val">{{item.ysqk}}</span>
                             </p>
                         </div>

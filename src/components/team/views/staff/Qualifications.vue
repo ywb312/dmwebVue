@@ -12,25 +12,25 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">单位:</span>
+                                <span class="main_title">单位:</span>
                                 <span class="main_val">{{item.dept}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">姓名:</span>
+                                <span class="main_title">姓名:</span>
                                 <span class="main_val">{{item.peopleName}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">性别:</span>
+                                <span class="main_title">性别:</span>
                                 <span class="main_val">{{item.sexText}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">资格证类型:</span>
+                                <span class="main_title">资格证类型:</span>
                                 <span class="main_val">{{item.qualtype}}</span>
                             </p>
                         </div>

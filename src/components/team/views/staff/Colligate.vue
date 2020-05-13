@@ -12,25 +12,25 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">姓名:</span>
+                                <span class="main_title">姓名:</span>
                                 <span class="main_val">{{item.colligatename}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">民族:</span>
+                                <span class="main_title">民族:</span>
                                 <span class="main_val">{{item.nationText}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">出生日期:</span>
+                                <span class="main_title">出生日期:</span>
                                 <span class="main_val">{{item.birthday}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">学历:</span>
+                                <span class="main_title">学历:</span>
                                 <span class="main_val">{{item.educationText}}</span>
                             </p>
                         </div>

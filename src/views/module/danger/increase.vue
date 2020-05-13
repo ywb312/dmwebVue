@@ -117,10 +117,10 @@ export default {
             };
             // 上传接口
             this.$api.danger.doAddSaveSingle(obj).then(function() {
-                _self.$toast({ message: "操作成功", duration: 1000 });
+                _self.$toast({ message: "操作成功", duration: 2000 });
                 setTimeout(() => {
                     _self.$router.back(-1);
-                }, 1000);
+                }, 2000);
             });
         }
     },

@@ -10,31 +10,31 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">机构/单位/车间:</span>
+                                <span class="main_title">机构/单位/车间:</span>
                                 <span class="main_val">{{item.dept}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">会议开始时间:</span>
+                                <span class="main_title">会议开始时间:</span>
                                 <span class="main_val">{{item.meetingbegintime}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">会议结束时间:</span>
+                                <span class="main_title">会议结束时间:</span>
                                 <span class="main_val">{{item.meetingendtime}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">主持人:</span>
+                                <span class="main_title">主持人:</span>
                                 <span class="main_val">{{item.hostman}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">主要参与人员:</span>
+                                <span class="main_title">主要参与人员:</span>
                                 <span class="main_val">{{item.joinstaff}}</span>
                             </p>
                         </div>

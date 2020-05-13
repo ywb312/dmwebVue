@@ -10,37 +10,37 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">年度:</span>
+                                <span class="main_title">年度:</span>
                                 <span class="main_val">{{item.year+"年度"}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">发布单位:</span>
+                                <span class="main_title">发布单位:</span>
                                 <span class="main_val">{{item.pubdept}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">发布时间:</span>
+                                <span class="main_title">发布时间:</span>
                                 <span class="main_val">{{item.createtime}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">附件名称:</span>
+                                <span class="main_title">附件名称:</span>
                                 <span class="main_val">{{item.attachname}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">附件制作人:</span>
+                                <span class="main_title">附件制作人:</span>
                                 <span class="main_val">{{item.makeman}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">附件制作时间:</span>
+                                <span class="main_title">附件制作时间:</span>
                                 <span class="main_val">{{item.maketime}}</span>
                             </p>
                         </div>

@@ -7,31 +7,31 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">发布单位:</span>
+                                <span class="main_title">发布单位:</span>
                                 <span class="main_val">{{item.pubdept}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">制定时间:</span>
+                                <span class="main_title">制定时间:</span>
                                 <span class="main_val">{{item.createtime}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">审批时间:</span>
+                                <span class="main_title">审批时间:</span>
                                 <span class="main_val">{{item.audittime}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">发布时间:</span>
+                                <span class="main_title">发布时间:</span>
                                 <span class="main_val">{{item.pubtime}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">内容:</span>
+                                <span class="main_title">内容:</span>
                                 <span class="main_val">{{item.suggestion}}</span>
                             </p>
                         </div>

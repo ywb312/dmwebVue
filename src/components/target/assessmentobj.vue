@@ -10,25 +10,25 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">{{item.year+"年度"}}</span>
+                                <span class="main_title">{{item.year+"年度"}}</span>
                             </p>
                             <p></p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">创建时间:</span>
+                                <span class="main_title">创建时间:</span>
                                 <span class="main_val">{{item.createtime}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">考核日期:</span>
+                                <span class="main_title">考核日期:</span>
                                 <span class="main_val">{{item.reviewtime}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title bold">考核人员:</span>
+                                <span class="main_title">考核人员:</span>
                                 <span class="main_val">{{item.reviewer}}</span>
                             </p>
                         </div>
