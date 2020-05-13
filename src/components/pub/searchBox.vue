@@ -1,6 +1,6 @@
 <template>
     <div class="SearchBox">
-        <van-sticky :offset-top="46">
+        <van-sticky :offset-top="$common.getOffset()">
             <div class="box">
                 <input type="text" v-bind="$attrs" v-model="value" />
                 <span @click="btnClick">查询</span>

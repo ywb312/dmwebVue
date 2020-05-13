@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 查询 -->
-        <van-sticky :offset-top="46">
+        <van-sticky :offset-top="$common.getOffset()">
             <van-button plain color="#2585cf" @click="searchShow=true" block>查询</van-button>
         </van-sticky>
         <!-- <van-row type="flex" justify="space-around">

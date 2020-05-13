@@ -60,5 +60,14 @@ export default {
         }
         deepSearch(tree, id);
         return retNode;
+    },
+    // 获取根元素font-size
+    getFontSize() {
+        let fontSzie = document.documentElement.style.fontSize;
+        return fontSzie.substring(0, fontSzie.length - 2)
+    },
+    // 返回offset高度
+    getOffset() {
+        return this.getFontSize() * (1.22667).toFixed(2);
     }
 }

@@ -9,7 +9,7 @@
             left-arrow
             @click-left="$router.back(-1)"
         />
-        <van-sticky :offset-top="46">
+        <van-sticky :offset-top="$common.getOffset()">
             <div class="topPage">
                 <div>
                     计划名称:

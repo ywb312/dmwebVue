@@ -16,7 +16,7 @@
         </van-nav-bar>
         <div>
             <!-- 查看方式 -->
-            <van-sticky :offset-top="46">
+            <van-sticky :offset-top="$common.getOffset()">
                 <correlation @radioChange="radioData"></correlation>
             </van-sticky>
             <!-- 主体 -->
