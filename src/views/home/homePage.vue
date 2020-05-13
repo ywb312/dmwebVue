@@ -1,10 +1,10 @@
 <template>
     <div class="homePage">
-        <van-nav-bar title="主页" fixed placeholder />
+        <van-nav-bar title="主页" fixed placeholder z-index="100" />
         <div class="banner">
             <img src="@/assets/img/homeshow.png" alt />
         </div>
-        <div class="grids">
+        <div class="grids" :style="gridStyle">
             <van-grid :border="true" :column-num="3">
                 <van-grid-item
                     class="grids_item"
@@ -121,10 +121,13 @@ export default {
                     url: require("@/assets/img/ic_accident_manager.png"),
                     title: "绩效考核"
                 }
-            ]
+            ],
+            gridStyle: {
+                overflow: "scroll",
+                height: window.innerHeight - 310 + "px"
+            }
         };
     },
-    mounted() {},
     methods: {
         linkTo(id) {
             this.$router.push({
@@ -139,11 +142,6 @@ export default {
 </script>
 <style scoped src="@/assets/css/public.css"/>
 <style scoped>
-.grids {
-    height: 360px;
-    overflow: auto;
-    margin-bottom: 50px;
-}
 .grids_img {
     width: 60px;
     height: 60px;

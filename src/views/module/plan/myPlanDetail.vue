@@ -14,14 +14,39 @@
             <van-field label="检查人员" placeholder="请输入备注说明" v-model="tbr"></van-field>
             <date-pick title="检查日期" time="after" @returnDate="getTime"></date-pick>
             <van-button type="info" size="large" native-type="submit">提交</van-button>
-        </van-form>
-        <div class="wrapper" v-for="(item,index) in rendering" :key="index" @click="btnClick(item)">
-            <div class="main">
-                
+            <div class="wrapper" v-for="(item,index) in rendering" :key="index">
+                <div class="main">
+                    <div>
+                        <p>
+                            <span class="main_title">危险源名称:</span>
+                            <span class="main_val">{{item.maindanger}}</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            <span class="main_title">管控措施:</span>
+                            <span class="main_val">{{item.inspacetcontent}}</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p></p>
+                    </div>
+                    <div>
+                        <p>
+                            <span class="main_title">落实条件:</span>
+                            <span class="main_val">
+                                <van-radio-group v-model="radio">
+                                    <van-radio name="1">落实</van-radio>
+                                    <van-radio name="2">未落实</van-radio>
+                                    <van-radio name="3">不涉及</van-radio>
+                                </van-radio-group>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <van-empty image="error" v-show="noRes" description="数据有误" />
             </div>
-            <van-empty v-if="noData" description="暂无数据" />
-            <van-empty image="error" v-show="noRes" description="数据有误" />
-        </div>
+        </van-form>
     </div>
 </template>
 <script>
@@ -35,10 +60,11 @@ export default {
             date: "",
             rendering: [],
             noRes: false,
-            noData:false
+            radio: ""
         };
     },
     created() {
+        // 获取排查表
         this.$api.plan
             .myPlan({
                 "bean.cpid": this.selectData.cpid,
@@ -53,17 +79,34 @@ export default {
                 }
                 if (res.rows && res.rows.length != 0) {
                     this.rendering = res.rows;
-                }else{
-                    this.noData = true;
                 }
             });
     },
     methods: {
+        // 获取时间
         getTime(v) {
             this.date = v;
         },
+        // 提交
         postData(val) {
-            console.log(val);
+            this.$api.pub
+                .showPage("biz/sc/checkplandetail/doAddSave.action", {
+                    obj: this.rendering,
+                    lsjhzydd: this.zydd,
+                    tbr: this.tbr,
+                    checkend: this.date
+                })
+                .then(res => {
+                    if (res.success) {
+                        this.$router.back(-1);
+                    }
+                });
+        },
+        // 一键设置落实/不涉及
+        allChange(type) {
+            for (j = 0, len = arr.length; j < len; j++) {
+                // arr[j] = type;
+            }
         }
     },
     computed: {
