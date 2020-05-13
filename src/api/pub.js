@@ -5,6 +5,11 @@ function login(data) {
     return axios.post("main/login.action", data);
 }
 
+// 退出登录
+function logout(data) {
+    return axios.post("main/logout.action", data);
+}
+
 // 动态url和动态data
 function showPage(url, data) {
     return axios.post(url, data);
@@ -33,6 +38,7 @@ function comboboxList(data, config) {
 
 export default {
     login,
+    logout,
     showPage,
     getConfig,
     getTree,
