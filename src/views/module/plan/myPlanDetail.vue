@@ -166,12 +166,3 @@ export default {
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>
-<style scoped>
-.setBtnGroup {
-    display: flex;
-    justify-content: space-around;
-    background: white;
-    text-align: center;
-    padding-bottom: 8px;
-}
-</style>

@@ -68,18 +68,20 @@ toTree(data) {
 检查记录详情planDetail 落实条件
 计划管理 我的计划
 
-inform(通知公告)
+inform  通知公告
     详情
     操作弹出框显示条件
+    增删改查
 
-plan(我的计划)
-    我的检查计划及专项检查计划
-    planDetail 下面列表需测试
-technology(生产工艺)
+plan    我的计划
+    专项检查计划
+
 accident 事故管理
-    详情跳转
-emergency 应急管理    
+    事故详情跳转
+
+emergency 应急管理
     应急演练记录    详情评价状态未知
+
 team    组织保障管理
     FileApprove 审批无数据
     MeetingInfo 会议纪要发布 接口问题
@@ -89,13 +91,15 @@ health后用弹窗来查看详情
     职业卫生检测
         放射源放射性监测 子表类别没有   是否合格判断
         all 是否超限
+
 inject 安全投入
-    没有加已有年份搜索
+    未根据已有年份 设置搜索范围
+
 remind 提醒预警
     检查逾期预警 一键取消未开发
-
+    
 performance
-    安全体系自评 子表未区分
+    安全体系自评 子表未区分(一级/二级/三级)
 
 数据字典获取 未开发，目前绑死的值
     开发速度,继发 code2Text改为返回Promise

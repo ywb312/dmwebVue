@@ -91,6 +91,15 @@
     color: #2585cf;
 }
 
+/* 行内双按钮 */
+.setBtnGroup {
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    text-align: center;
+    padding-bottom: 8px;
+}
+
 /* vantUi 弹出框 */
 .popup {
     width: 320px;
@@ -112,6 +121,7 @@
     background-color: #2585cf;
 }
 
+/* 待办事项 办理页面 距底部边距 */
 .btnMargin {
     margin-bottom: 50px;
 }

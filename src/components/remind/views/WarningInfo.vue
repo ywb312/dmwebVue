@@ -50,34 +50,19 @@
             <div slot="title" class="popupTitle">详情</div>
             <div slot="views" class="popup">
                 <div>
-                    <p>
-                        <span class="bold">风险点:</span>
-                        {{selectData.fxdText}}
-                    </p>
+                    <p>风险点: {{selectData.fxdText}}</p>
                 </div>
                 <div>
-                    <p>
-                        <span class="bold">危险源:</span>
-                        {{selectData.wxyText}}
-                    </p>
+                    <p>危险源: {{selectData.wxyText}}</p>
                 </div>
                 <div>
-                    <p>
-                        <span class="bold">管控措施:</span>
-                        {{selectData.gkcsText}}
-                    </p>
+                    <p>管控措施: {{selectData.gkcsText}}</p>
                 </div>
                 <div>
-                    <p>
-                        <span class="bold">预警级别:</span>
-                        {{selectData.warmlevel}}
-                    </p>
+                    <p>预警级别: {{selectData.warmlevel}}</p>
                 </div>
                 <div>
-                    <p>
-                        <span class="bold">发布时间:</span>
-                        {{selectData.addtime}}
-                    </p>
+                    <p>发布时间: {{selectData.addtime}}</p>
                 </div>
             </div>
         </Popup>

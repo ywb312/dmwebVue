@@ -112,11 +112,4 @@ export default {
 .maskMiddle {
     margin-top: 40%;
 }
-.setBtnGroup {
-    display: flex;
-    justify-content: space-around;
-    background: white;
-    text-align: center;
-    padding: 8px 0;
-}
 </style>
