@@ -199,7 +199,10 @@ export default {
             this.show = false;
             if (item.name == "隐患详情") {
                 this.$router.push({
-                    path: "/danger/detail"
+                    path: "/danger/detail",
+                    query: {
+                        yhid: this.selectData.yhid
+                    }
                 });
             } else if (item.name == "审批记录") {
                 this.compShow = true;

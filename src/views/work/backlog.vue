@@ -167,7 +167,10 @@ export default {
         goDetail() {
             this.sheetShow = false;
             this.$router.push({
-                path: "/danger/detail"
+                path: "/danger/detail",
+                query: {
+                    yhid: this.selectData.yhid
+                }
             });
         }
     },

@@ -1,5 +1,5 @@
 <template>
-    <div class="detail page">
+    <div class="page">
         <!-- 标题  -->
         <van-nav-bar
             title="隐患详情"
@@ -89,7 +89,6 @@
                 </div>
             </div>
         </div>
-        <div></div>
     </div>
 </template>
 <script>
@@ -114,7 +113,7 @@ export default {
     created() {
         let self = this;
         let obj = {
-            "bean.yhid": this.selectData.yhid,
+            "bean.yhid": this.$route.query.yhid,
             "bean.flag": "1"
         };
         self.$api.danger.detail(obj).then(res => {
@@ -122,12 +121,7 @@ export default {
             self.infos = res.infos;
         });
     },
-    methods: {},
-    computed: {
-        selectData() {
-            return this.$store.state.selectData;
-        }
-    }
+    methods: {}
 };
 </script>
 <style scoped>
