@@ -13,9 +13,7 @@
                 <van-col span="8">{{loginname}}</van-col>
             </van-row>
         </div>
-        <van-cell title="退出登录" @click="logOut">
-            <img slot="icon" src="@/assets/img/incid_rep.png" class="icon" />
-        </van-cell>
+        <van-cell title="退出登录" icon="clear" @click="logOut"></van-cell>
     </div>
 </template>
 <script>
@@ -85,11 +83,5 @@ export default {
     bottom: 0;
     border-top: solid 1px white;
     border-bottom: solid 1px white;
-}
-.icon {
-    width: 18px;
-    height: 18px;
-    margin-right: 10px;
-    padding-top: 2px;
 }
 </style>

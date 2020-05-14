@@ -8,7 +8,7 @@ import computerPage from '../views/home/computerPage.vue'
 import mePage from '../views/home/mePage.vue'
 import list from '../views/list.vue'
 // 十二个功能分为十二个路由 按需加载
-Vue.use(VueRouter)
+if (!window.VueRouter) Vue.use(VueRouter)
 
 const routes = [{
 		path: '/',

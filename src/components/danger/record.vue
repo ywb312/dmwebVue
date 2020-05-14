@@ -46,6 +46,8 @@ export default {
     methods: {
         getData(obj) {
             this.isLoading = true;
+            this.noData = false;
+            this.noRes = false;
             let self = this;
             self.resData = [];
             this.$api.danger

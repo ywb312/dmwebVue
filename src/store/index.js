@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// 本地数据放到vuex 还是存到json中
-import listPage from "@/store/listPage.json"
+// 本地数据放到vuex 还是存到js中 可改为json
+import listPage from "@/store/listPage.js"
 Vue.use(Vuex)
 export default new Vuex.Store({
 	state: {
