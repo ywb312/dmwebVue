@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import './assets/css/reset.css'
 import './assets/css/style.css'
-// import './assets/css/public.css'
 import App from './App.vue'
 import router from './router'
 import store from './store'

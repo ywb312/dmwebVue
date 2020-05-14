@@ -1,9 +1,10 @@
 // vue-cli3配置文件
 const isProduction = process.env.NODE_ENV !== 'development'
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 module.exports = {
     publicPath: './',
+    // 输出文件目录
+    outputDir: "dist",
     devServer: {
         port: 8081,
         open: true,
@@ -18,11 +19,12 @@ module.exports = {
             }
         },
     },
+    parallel: false,
     productionSourceMap: false,
     css: {
         extract: false,
-        modules: false,
-        sourceMap: IS_DEV,
+        requireModuleExtension: true,
+        sourceMap: false,
         loaderOptions: {
             postcss: {
                 plugins: [
@@ -33,7 +35,6 @@ module.exports = {
                 ]
             }
         },
-        // extract: false,
     },
     chainWebpack: config => {
         // 移除 prefetch 插件
@@ -50,28 +51,11 @@ module.exports = {
     },
     configureWebpack: config => {
         if (isProduction) {
-            // 代码压缩
-            config.plugins.push(
-                new UglifyJsPlugin({
-                    uglifyOptions: {
-                        //生产环境自动删除console
-                        compress: {
-                            // 去除所有debugger
-                            drop_debugger: true,
-                            // 去除所有console.*
-                            drop_console: true,
-                            // 去除未用到的变量后 存在遗留的console.log则删除
-                            pure_funcs: ['console.log']
-                        }
-                    },
-                    sourceMap: false,
-                    parallel: true
-                })
-            )
             // gzip压缩
             config.plugins.push(
                 new CompressionWebpackPlugin({
                     test: /\.js$|\.html$|\.css/,
+                    exclude: /node_modules/,
                     filename: '[path].gz[query]',
                     algorithm: 'gzip',
                     threshold: 10240, // 只有大小大于该值的资源会被处理 10240
