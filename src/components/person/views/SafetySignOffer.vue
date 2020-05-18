@@ -24,7 +24,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -41,58 +40,25 @@ export default {
                     "/biz/operate/tasksafemarkappmain/list.action?filters=" +
                     "and state='SPZT002'",
                 obj: {}
-            },
-            sgjdArr: [
-                {
-                    text: "第一季度",
-                    id: "SGJD001"
-                },
-                {
-                    text: "第二季度",
-                    id: "SGJD002"
-                },
-                {
-                    text: "第三季度",
-                    id: "SGJD003"
-                },
-                {
-                    text: "第四季度",
-                    id: "SGJD004"
-                }
-            ],
-            spztArr: [
-                {
-                    id: "SPZT001",
-                    text: "审批中"
-                },
-                {
-                    id: "SPZT002",
-                    text: "审批通过"
-                },
-                {
-                    id: "SPZT003",
-                    text: "审批不通过"
-                },
-                {
-                    id: "SPZT004",
-                    text: "未审批"
-                },
-                {
-                    id: "SPZT005",
-                    text: "未提交"
-                }
-            ]
+            }
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "quarters", this.sgjdArr);
-                this.$common.code2Text(element, "state", this.spztArr);
+            let _self = this;
+            Promise.all([
+                _self.$common.comboList({ sourcename: "SGJD" }),
+                _self.$common.comboList({ sourcename: "SPZT" })
+            ]).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "quarters", this.sgjdArr);
+                    _self.$common.code2Text(element, "state", this.spztArr);
+                    _self.$common.setSex(element);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         btnClick(obj) {
             this.$router.push({

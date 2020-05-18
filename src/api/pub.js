@@ -32,7 +32,7 @@ function doupfile(data, config) {
 }
 
 // 获取数据字典
-function comboboxList(data, config) {
+function comboboxList(data) {
     return axios.post("/pub/select/dict/comboboxList.action", data);
 }
 

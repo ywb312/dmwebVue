@@ -128,7 +128,7 @@ export default {
                     res = eval("(" + res + ")");
                     // 数据有误
                     if (typeof res != "object") {
-                        _self.$toast("服务器连接错误");
+                        _self.$toast("");
                         return;
                     }
                     if (res.success) {

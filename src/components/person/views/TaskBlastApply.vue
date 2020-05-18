@@ -28,7 +28,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -44,31 +43,20 @@ export default {
             postData: {
                 url: "biz/operate/taskblastappinfo/list.action",
                 obj: {}
-            },
-            bplxArr: [
-                {
-                    id: "BPLX001",
-                    text: "扩槽"
-                },
-                {
-                    id: "BPLX002",
-                    text: "拉底"
-                },
-                {
-                    id: "BPLX003",
-                    text: "正常排"
-                }
-            ]
+            }
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "blasttype", this.bplxArr);
+            let _self = this;
+            this.$common.comboList({ sourcename: "BPLX" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "blasttype", res);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {

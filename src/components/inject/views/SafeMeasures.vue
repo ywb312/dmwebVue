@@ -32,7 +32,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -48,66 +47,27 @@ export default {
             postData: {
                 url: "biz/operate/safe/safemeasures/list.action",
                 obj: {}
-            },
-            aqcsfylb: [
-                {
-                    id: "AQCSFYLB001",
-                    text: "安全工程"
-                },
-                {
-                    id: "AQCSFYLB002",
-                    text: "安全管理"
-                },
-                {
-                    id: "AQCSFYLB003",
-                    text: "安全设备"
-                },
-                {
-                    id: "AQCSFYLB004",
-                    text: "个体防护用品"
-                },
-                {
-                    id: "AQCSFYLB005",
-                    text: "安全标志及标识"
-                },
-                {
-                    id: "AQCSFYLB006",
-                    text: "安全奖励"
-                },
-                {
-                    id: "AQCSFYLB007",
-                    text: "安全教育培训"
-                },
-                {
-                    id: "AQCSFYLB008",
-                    text: "安全科技"
-                },
-                {
-                    id: "AQCSFYLB009",
-                    text: "应急设备设施"
-                },
-                {
-                    id: "AQCSFYLB010",
-                    text: "其他与安全生产直接相关的支出"
-                }
-            ]
+            }
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "protype", this.aqcsfylb);
-                let obj = this.$common.getDeptName(
-                    this.treeData,
-                    element.org_id
-                );
-                if (obj.name) {
-                    element.idName = obj.name;
-                }
+            let _self = this;
+            this.$common.comboList({ sourcename: "AQCSFYLB" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "protype", res);
+                    let obj = this.$common.getDeptName(
+                        this.treeData,
+                        element.org_id
+                    );
+                    if (obj.name) {
+                        element.idName = obj.name;
+                    }
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {

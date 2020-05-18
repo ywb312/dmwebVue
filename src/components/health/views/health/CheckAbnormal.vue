@@ -123,28 +123,6 @@ export default {
                     text: new Date().getFullYear() - 4 + "年",
                     value: new Date().getFullYear() - 4
                 }
-            ],
-            tjlxArr: [
-                {
-                    id: "TJLX002",
-                    text: "岗中体检"
-                },
-                {
-                    id: "TJLX004",
-                    text: "离岗体检"
-                },
-                {
-                    id: "TJLX005",
-                    text: "应急体检"
-                },
-                {
-                    id: "TJLX006",
-                    text: "入职体检"
-                },
-                {
-                    id: "TJLX007",
-                    text: "换岗体检"
-                }
             ]
         };
     },
@@ -152,11 +130,14 @@ export default {
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "examtype", this.tjlxArr);
-                this.$common.setSex(element);
+            let _self = this;
+            _self.$common.comboList({ sourcename: "TJLX" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "examtype", res);
+                    _self.$common.setSex(element);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 年份的回调
         searchBack(str) {

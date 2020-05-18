@@ -76,11 +76,19 @@ export default {
             arr.push(...obj.child);
             delete obj.child;
             arr.push(obj);
-            arr.forEach(element => {
-                this.$common.code2Text(element, "knfs", this.knfsSlots);
-                this.$common.code2Text(element, "yxfw", this.yxfwSlots);
-                this.$common.code2Text(element, "qzhg", this.qzhgSlots);
-                this.$common.code2Text(element, "gtype", this.gTypeSlots);
+            let _self = this;
+            Promise.all([
+                _self.$common.comboList({ sourcename: "KNFS" }),
+                _self.$common.comboList({ sourcename: "YXFWEI" }),
+                _self.$common.comboList({ sourcename: "QZHG" }),
+                _self.$common.comboList({ sourcename: "GKCSLX" })
+            ]).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "knfs", res[0]);
+                    _self.$common.code2Text(element, "yxfw", res[1]);
+                    _self.$common.code2Text(element, "qzhg", res[2]);
+                    _self.$common.code2Text(element, "gtype", res[3]);
+                });
             });
             return arr;
         }
@@ -88,18 +96,6 @@ export default {
     computed: {
         selectData() {
             return this.$store.state.selectData;
-        },
-        knfsSlots() {
-            return this.$store.state.knfsSlots;
-        },
-        yxfwSlots() {
-            return this.$store.state.yxfwSlots;
-        },
-        qzhgSlots() {
-            return this.$store.state.qzhgSlots;
-        },
-        gTypeSlots() {
-            return this.$store.state.gTypeSlots;
         }
     },
     components: {}

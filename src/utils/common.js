@@ -1,3 +1,4 @@
+import apiPub from "@/api/pub.js"
 export default {
     // obj需要转换的对象 key为要转换的属性名 arr转换数据的数组id,text
     code2Text(obj, key, arr) {
@@ -69,5 +70,29 @@ export default {
     // 返回offset高度
     getOffset() {
         return this.getFontSize() * (1.22667).toFixed(2);
+    },
+    // 将返回字符串变为数组
+    comboArr(str) {
+        let arr = str.trim().split(",")
+        let arr2 = []
+        arr.forEach(item => {
+            let obj = {
+                id: item.split(":")[0].replace(/^\'|\'$/g, ''),
+                text: item.split(":")[1].replace(/^\'|\'$/g, '')
+            }
+            arr2.push(obj)
+        });
+        return arr2
+    },
+    comboList(data) {
+        let _self = this;
+        return new Promise(function (resolve, reject) {
+            //做一些异步操作
+            apiPub.comboboxList(data).then(res => {
+                resolve(_self.comboArr(res))
+            }).catch(error => {
+                reject(error)
+            })
+        });
     }
 }

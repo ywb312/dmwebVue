@@ -25,7 +25,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -49,21 +48,19 @@ export default {
     created() {},
     // pageData父组件传来的配置项
     props: ["pageData"],
-   methods: {
+    methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(
-                    element,
-                    "category",
-                    this.sglbSlots
-                );
-                this.$common.code2Text(
-                    element,
-                    "acciclassid",
-                    this.sgdjSlots
-                );
+            let _self = this;
+            Promise.all([
+                _self.$common.comboList({ sourcename: "SGLB" }),
+                _self.$common.comboList({ sourcename: "SGDJ" })
+            ]).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "category", res[0]);
+                    _self.$common.code2Text(element, "acciclassid", res[1]);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {
@@ -78,14 +75,7 @@ export default {
             });
         }
     },
-    computed: {
-        sglbSlots() {
-            return this.$store.state.sglbSlots;
-        },
-        sgdjSlots() {
-            return this.$store.state.sgdjSlots;
-        }
-    },
+    computed: {},
     components: {
         SearchBox,
         ViewBox

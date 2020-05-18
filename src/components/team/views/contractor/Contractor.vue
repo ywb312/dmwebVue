@@ -70,63 +70,20 @@ export default {
             postData: {
                 url: "biz/operate/org/orgcontractor/list.action",
                 obj: {}
-            },
-            xgflxArr: [
-                {
-                    text: "安全生产监管部门",
-                    id: "XGFLX001"
-                },
-                {
-                    text: "上级主管单位",
-                    id: "XGFLX002"
-                },
-                {
-                    text: "安全生产技术服务与咨询",
-                    id: "XGFLX003"
-                },
-                {
-                    text: "其他服务与咨询",
-                    id: "XGFLX004"
-                },
-                {
-                    text: "监测、检验机构",
-                    id: "XGFLX005"
-                },
-                {
-                    text: "相关劳保用品供应商",
-                    id: "XGFLX006"
-                },
-                {
-                    text: "工程承包商",
-                    id: "XGFLX007"
-                },
-                {
-                    text: "周边社区",
-                    id: "XGFLX008"
-                },
-                {
-                    text: "外部应急机构",
-                    id: "XGFLX009"
-                },
-                {
-                    text: "其他",
-                    id: "XGFLX010"
-                }
-            ]
+            }
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(
-                    element,
-                    "contractortype",
-                    this.xgflxArr
-                );
+            let _self = this;
+            this.$common.comboList({ sourcename: "XGFLX" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "contractortype", res);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {

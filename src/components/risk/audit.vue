@@ -38,25 +38,7 @@ export default {
             postData: {
                 url: "biz/risk/audit/list.action",
                 obj: {}
-            },
-            stateArr: [
-                {
-                    text: "未审核",
-                    id: "SHZT001"
-                },
-                {
-                    text: "审核通过",
-                    id: "SHZT002"
-                },
-                {
-                    text: "审核未通过",
-                    id: "SHZT003"
-                },
-                {
-                    text: "待审核",
-                    id: "SHZT004"
-                }
-            ]
+            }
         };
     },
     // pageData父组件传来的配置项
@@ -70,10 +52,13 @@ export default {
     },
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "state", this.stateArr);
+            let _self = this;
+            this.$common.comboList({ sourcename: "SHZT" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "state", res);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 每项按钮点击事件
         btnClick(obj) {

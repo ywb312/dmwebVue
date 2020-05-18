@@ -46,11 +46,17 @@ export default {
     methods: {
         // 处理请求的数据
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "knfs", this.knfsSlots);
-                this.$common.code2Text(element, "gtype", this.gTypeSlots);
+            let _self = this;
+            Promise.all([
+                _self.$common.comboList({ sourcename: "KNFS" }),
+                _self.$common.comboList({ sourcename: "GKCSLX" })
+            ]).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "knfs", res[0]);
+                    _self.$common.code2Text(element, "gtype", res[1]);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         }
     },
     computed: {

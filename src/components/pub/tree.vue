@@ -45,7 +45,7 @@ export default {
                     let data = eval("(" + res + ")");
                     // 数据有误
                     if (typeof data != "object") {
-                        _self.$toast("服务器连接错误");
+                        this.$toast("服务器连接错误");
                         return;
                     }
                     let sortData = _self.$common.toTree(data.cells);

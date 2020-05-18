@@ -113,63 +113,25 @@ export default {
             show: false,
             popshow: false,
             actions: [{ name: "查看详情" }],
-            selectData: {},
-            tjjlArr: [
-                {
-                    id: "TJJL001",
-                    text: "未见异常"
-                },
-                {
-                    id: "TJJL002",
-                    text: "复查"
-                },
-                {
-                    id: "TJJL003",
-                    text: "疑似职业病"
-                },
-                {
-                    id: "TJJL004",
-                    text: "职业禁忌症"
-                },
-                {
-                    id: "TJJL005",
-                    text: "其他疾患"
-                }
-            ],
-            tjlxArr: [
-                {
-                    id: "TJLX002",
-                    text: "岗中体检"
-                },
-                {
-                    id: "TJLX004",
-                    text: "离岗体检"
-                },
-                {
-                    id: "TJLX005",
-                    text: "应急体检"
-                },
-                {
-                    id: "TJLX006",
-                    text: "入职体检"
-                },
-                {
-                    id: "TJLX007",
-                    text: "换岗体检"
-                }
-            ]
+            selectData: {}
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "eaxmresult", this.tjjlArr);
-                this.$common.code2Text(element, "examtype", this.tjlxArr);
-                this.$common.setSex(element);
+            let _self = this;
+            Promise.all([
+                _self.$common.comboList({ sourcename: "TJJL" }),
+                _self.$common.comboList({ sourcename: "TJLX" })
+            ]).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "eaxmresult", res[0]);
+                    _self.$common.code2Text(element, "examtype", res[1]);
+                    _self.$common.setSex(element);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {

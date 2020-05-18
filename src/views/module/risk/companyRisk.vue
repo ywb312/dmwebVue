@@ -110,12 +110,19 @@ export default {
     created() {},
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "yxfw", this.yxfwSlots);
-                this.$common.code2Text(element, "knfs", this.knfsSlots);
-                this.$common.code2Text(element, "qzhg", this.qzhgSlots);
+            let _self = this;
+            Promise.all([
+                _self.$common.comboList({ sourcename: "YXFWEI" }),
+                _self.$common.comboList({ sourcename: "KNFS" }),
+                _self.$common.comboList({ sourcename: "QZHG" })
+            ]).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "yxfw", res[0]);
+                    _self.$common.code2Text(element, "knfs", res[1]);
+                    _self.$common.code2Text(element, "qzhg", res[2]);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         addClick() {
             this.type = "add";
@@ -165,7 +172,7 @@ export default {
                         .then(res => {
                             // 数据有误
                             if (typeof res != "object") {
-                                _self.$toast("服务器连接错误");
+                                this.$toast("服务器连接错误");
                                 return;
                             }
                             this.clearData();

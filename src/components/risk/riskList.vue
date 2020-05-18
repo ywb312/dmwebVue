@@ -18,7 +18,9 @@
                         <div>
                             <span>1.{{item.wname}}</span>
                             <span>
-                                <van-tag size="large" round
+                                <van-tag
+                                    size="large"
+                                    round
                                     :type="item.grade == 1?'danger':item.grade==2?'warning':'primary'"
                                     :color="item.grade == 3?'yellow':''"
                                 >{{item.grade+"级"}}</van-tag>
@@ -27,7 +29,9 @@
                         <div v-for="(n,m) in item.child" :key="m">
                             <span>{{m+2+"."+n.wname}}</span>
                             <span>
-                                <van-tag size="large" round
+                                <van-tag
+                                    size="large"
+                                    round
                                     :type="n.grade == 1?'danger':n.grade==2?'warning':'primary'"
                                     :color="item.grade == 3?'yellow':''"
                                 >{{n.grade+"级"}}</van-tag>
@@ -66,21 +70,23 @@ export default {
             let sortArr = res.sort((a, b) => {
                 return a.name > b.name ? 1 : -1;
             });
-            // 如果name,fxtype和上一项的name,fxtype不一致就推入新数组,否则添加子元素
-            sortArr.forEach((item, index, arr) => {
-                self.$common.code2Text(item, "fxtype", self.fxtypeSlots);
-                if (index == 0) {
-                    item.child = [];
-                    returnArr.push(item);
-                } else if (
-                    item.name == arr[index - 1].name &&
-                    item.fxtype == arr[index - 1].fxtype
-                ) {
-                    returnArr[returnArr.length - 1].child.push(item);
-                } else {
-                    item.child = [];
-                    returnArr.push(item);
-                }
+            this.$common.comboList({ sourcename: "FXDLX" }).then(res => {
+                // 如果name,fxtype和上一项的name,fxtype不一致就推入新数组,否则添加子元素
+                sortArr.forEach((item, index, arr) => {
+                    self.$common.code2Text(item, "fxtype", res);
+                    if (index == 0) {
+                        item.child = [];
+                        returnArr.push(item);
+                    } else if (
+                        item.name == arr[index - 1].name &&
+                        item.fxtype == arr[index - 1].fxtype
+                    ) {
+                        returnArr[returnArr.length - 1].child.push(item);
+                    } else {
+                        item.child = [];
+                        returnArr.push(item);
+                    }
+                });
             });
             return returnArr;
         },

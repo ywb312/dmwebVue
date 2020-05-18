@@ -82,10 +82,13 @@ export default {
     methods: {
         // 获取当前页面数据
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "fxtype", this.fxtypeSlots);
+            let _self = this;
+            this.$common.comboList({ sourcename: "FXDLX" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "fxtype", res);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 操作按钮点击事件
         btnClick(obj) {
@@ -132,18 +135,13 @@ export default {
                         .then(res => {
                             // 数据有误
                             if (typeof res != "object") {
-                                _self.$toast("服务器连接错误");
+                                this.$toast("服务器连接错误");
                                 return;
                             }
                             this.clearData();
                         });
                 })
                 .catch(reject => {});
-        }
-    },
-    computed: {
-        fxtypeSlots() {
-            return this.$store.state.fxtypeSlots;
         }
     },
     components: {

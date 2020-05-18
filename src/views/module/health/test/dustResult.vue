@@ -100,60 +100,25 @@ export default {
             show: false,
             popshow: false,
             actions: [{ name: "查看详情" }],
-            selectData: {},
-            cczylxArr: [
-                {
-                    id: "CCZYLX001",
-                    text: "卸矿作业"
-                },
-                {
-                    id: "CCZYLX002",
-                    text: "卸废石作业"
-                },
-                {
-                    id: "CCZYLX003",
-                    text: "运输作业"
-                },
-                {
-                    id: "CCZYLX004",
-                    text: "破碎作业"
-                },
-                {
-                    id: "CCZYLX005",
-                    text: "巷道掘进作业"
-                },
-                {
-                    id: "CCZYLX006",
-                    text: "浅采作业"
-                },
-                {
-                    id: "CCZYLX007",
-                    text: "选矿作业"
-                },
-                {
-                    id: "CCZYLX008",
-                    text: "脱水作业"
-                },
-                {
-                    id: "CCZYLX009",
-                    text: "充填作业"
-                }
-            ]
+            selectData: {}
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "techtype", this.cczylxArr);
-                if (element.dusttype == "FCLB001") {
-                    element.dusttypeText = "矽尘";
-                } else if (element.dusttype == "FCLB002") {
-                    element.dusttypeText = "其他粉尘";
-                }
+            let _self = this;
+            this.$common.comboList({ sourcename: "CCZYLX" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "techtype", res);
+                    if (element.dusttype == "FCLB001") {
+                        element.dusttypeText = "矽尘";
+                    } else if (element.dusttype == "FCLB002") {
+                        element.dusttypeText = "其他粉尘";
+                    }
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         btnClick(obj) {
             this.show = true;

@@ -95,31 +95,7 @@ export default {
             sheetShow: false,
             actions: [{ name: "查看详情" }],
             detailShow: false,
-            selectData: {},
-            materialtypeArr: [
-                { id: "WZZBLX001", text: "防护用品" },
-                { id: "WZZBLX002", text: "生命救助" },
-                { id: "WZZBLX003", text: "生命支持" },
-                { id: "WZZBLX004", text: "临时住宿" },
-                { id: "WZZBLX005", text: "通讯广播" },
-                { id: "WZZBLX006", text: "污染清理" },
-                { id: "WZZBLX007", text: "动力燃料" },
-                { id: "WZZBLX008", text: "器材工具" },
-                { id: "WZZBLX009", text: "工程设备" },
-                { id: "WZZBLX010", text: "矿山救援" }
-            ],
-            materialArr: [
-                { id: "DW001", text: "万元" },
-                { id: "DW002", text: "元" },
-                { id: "DW003", text: "m" },
-                { id: "DW004", text: "m3" },
-                { id: "DW005", text: "根" },
-                { id: "DW006", text: "台" },
-                { id: "DW007", text: "kg" },
-                { id: "DW008", text: "t" },
-                { id: "DW009", text: "套" },
-                { id: "DW010", text: "个" }
-            ]
+            selectData: {}
         };
     },
     created() {},
@@ -127,19 +103,17 @@ export default {
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(
-                    element,
-                    "materialtype",
-                    this.materialtypeArr
-                );
-                this.$common.code2Text(
-                    element,
-                    "materialunit",
-                    this.materialArr
-                );
+            let _self = this;
+            Promise.all([
+                _self.$common.comboList({ sourcename: "WZZBLX" }),
+                _self.$common.comboList({ sourcename: "DW" })
+            ]).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "materialtype", res[0]);
+                    _self.$common.code2Text(element, "materialunit", res[1]);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {

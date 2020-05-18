@@ -89,87 +89,25 @@ export default {
             sheetShow: false,
             actions: [{ name: "查看更多" }, { name: "查看详情" }],
             popshow: false,
-            selectData: {},
-            mzArr: [
-                {
-                    id: "MZ001",
-                    text: "汉族"
-                },
-                {
-                    id: "MZ002",
-                    text: "壮族"
-                },
-                {
-                    id: "MZ003",
-                    text: "满族"
-                },
-                {
-                    id: "MZ004",
-                    text: "回族"
-                },
-                {
-                    id: "MZ005",
-                    text: "苗族"
-                },
-                {
-                    id: "MZ006",
-                    text: "维吾尔族"
-                }
-            ],
-            xlArr: [
-                {
-                    id: "XL001",
-                    text: "小学"
-                },
-                {
-                    id: "XL002",
-                    text: "初中"
-                },
-                {
-                    id: "XL003",
-                    text: "高中"
-                },
-                {
-                    id: "XL004",
-                    text: "大专"
-                },
-                {
-                    id: "XL005",
-                    text: "本科"
-                },
-                {
-                    id: "XL006",
-                    text: "硕士研究生"
-                },
-                {
-                    id: "XL007",
-                    text: "博士研究生"
-                },
-                {
-                    id: "XL008",
-                    text: "技校"
-                },
-                {
-                    id: "XL009",
-                    text: "中专"
-                },
-                {
-                    id: "XL010",
-                    text: "职高"
-                }
-            ]
+            selectData: {}
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.setSex(element);
-                this.$common.code2Text(element, "nation", this.mzArr);
-                this.$common.code2Text(element, "education", this.xlArr);
+            let _self = this;
+            Promise.all([
+                _self.$common.comboList({ sourcename: "MZ" }),
+                _self.$common.comboList({ sourcename: "XL" })
+            ]).then(res => {
+                arr.forEach(element => {
+                    _self.$common.setSex(element);
+                    _self.$common.code2Text(element, "nation", this.mzArr);
+                    _self.$common.code2Text(element, "education", this.xlArr);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {

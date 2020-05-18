@@ -50,19 +50,17 @@ export default {
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(
-                    element,
-                    "category",
-                    this.sglbSlots
-                );
-                this.$common.code2Text(
-                    element,
-                    "acciclassid",
-                    this.sgdjSlots
-                );
+            let _self = this;
+            Promise.all([
+                _self.$common.comboList({ sourcename: "SGLB" }),
+                _self.$common.comboList({ sourcename: "SGDJ" })
+            ]).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "category", res[0]);
+                    _self.$common.code2Text(element, "acciclassid", res[1]);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {
@@ -75,14 +73,6 @@ export default {
             this.$router.push({
                 path: "/accident/accidentDetail"
             });
-        }
-    },
-    computed: {
-        sglbSlots() {
-            return this.$store.state.sglbSlots;
-        },
-        sgdjSlots() {
-            return this.$store.state.sgdjSlots;
         }
     },
     components: {

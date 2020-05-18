@@ -101,35 +101,20 @@ export default {
             sheetShow: false,
             actions: [{ name: "查看详情" }],
             detailShow: false,
-            selectData: {},
-            bcArr: [
-                {
-                    text: "早班",
-                    id: "BC001"
-                },
-                {
-                    text: "中班",
-                    id: "BC002"
-                },
-                {
-                    text: "晚班",
-                    id: "BC003"
-                },
-                {
-                    text: "休班",
-                    id: "BC004"
-                }
-            ]
+            selectData: {}
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "classes", this.bcArr);
+            let _self = this;
+            this.$common.comboList({ sourcename: "BC" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "classes", res);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {

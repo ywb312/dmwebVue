@@ -35,7 +35,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -152,11 +151,17 @@ export default {
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "devattribute", this.tzsbsxArr);
-                this.$common.code2Text(element, "devtype", this.sblbArr);
+            let _self = this;
+            Promise.all([
+                _self.$common.comboList({ sourcename: "TZSBSX" }),
+                _self.$common.comboList({ sourcename: "SBLB" })
+            ]).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "devattribute", res[0]);
+                    _self.$common.code2Text(element, "devtype", res[1]);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {

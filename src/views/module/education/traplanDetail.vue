@@ -86,29 +86,7 @@ export default {
     name: "traplanDetail",
     data() {
         return {
-            rendering: [],
-            solts: [
-                {
-                    id: "PXFS001",
-                    text: "主题报告"
-                },
-                {
-                    id: "PXFS002",
-                    text: "集中授课"
-                },
-                {
-                    id: "PXFS003",
-                    text: "实际操作"
-                },
-                {
-                    id: "PXFS004",
-                    text: "视频影音学习"
-                },
-                {
-                    id: "PXFS005",
-                    text: "讨论互动学习"
-                }
-            ]
+            rendering: []
         };
     },
     created() {
@@ -117,7 +95,10 @@ export default {
     },
     methods: {
         setRendering(obj) {
-            this.$common.code2Text(obj, "tratype", this.solts);
+            let _self = this;
+            this.$common.comboList({ sourcename: "PXFS" }).then(res => {
+                _self.$common.code2Text(obj, "tratype", res);
+            });
             return obj;
         },
         getData() {
@@ -130,7 +111,7 @@ export default {
                 .then(res => {
                     // 数据有误
                     if (typeof res != "object") {
-                        _self.$toast("服务器连接错误");
+                        this.$toast("服务器连接错误");
                         return;
                     }
                     if (res.rows && res.rows.length > 0) {

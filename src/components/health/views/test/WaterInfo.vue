@@ -34,7 +34,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
         <!-- 操作面板 -->
         <van-action-sheet
@@ -62,35 +61,20 @@ export default {
             },
             show: false,
             actions: [{ name: "水质检测结果" }],
-            selectData: {},
-            sylxArr: [
-                {
-                    id: "SYLX001",
-                    text: "进水"
-                },
-                {
-                    id: "SYLX002",
-                    text: "出水"
-                },
-                {
-                    id: "SYLX003",
-                    text: "井下水"
-                },
-                {
-                    id: "SYLX004",
-                    text: "地表水"
-                }
-            ]
+            selectData: {}
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "example", this.sylxArr);
+            let _self = this;
+            this.$common.comboList({ sourcename: "SYLX" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "example", res);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {

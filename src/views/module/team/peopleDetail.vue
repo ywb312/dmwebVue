@@ -74,57 +74,18 @@ export default {
                 obj: {
                     filters: this.$route.query.filters
                 }
-            },
-            xlArr: [
-                {
-                    id: "XL001",
-                    text: "小学"
-                },
-                {
-                    id: "XL002",
-                    text: "初中"
-                },
-                {
-                    id: "XL003",
-                    text: "高中"
-                },
-                {
-                    id: "XL004",
-                    text: "大专"
-                },
-                {
-                    id: "XL005",
-                    text: "本科"
-                },
-                {
-                    id: "XL006",
-                    text: "硕士研究生"
-                },
-                {
-                    id: "XL007",
-                    text: "博士研究生"
-                },
-                {
-                    id: "XL008",
-                    text: "技校"
-                },
-                {
-                    id: "XL009",
-                    text: "中专"
-                },
-                {
-                    id: "XL010",
-                    text: "职高"
-                }
-            ]
+            }
         };
     },
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "edugrade", this.xlArr);
+            let _self = this;
+            this.$common.comboList({ sourcename: "XL" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "edugrade", res);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         }
     },
     components: {

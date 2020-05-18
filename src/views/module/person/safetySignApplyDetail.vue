@@ -106,90 +106,24 @@ export default {
                 obj: {
                     filters: this.$route.query.filters
                 }
-            },
-            // 标志类型
-            bzlxArr: [
-                {
-                    text: "禁止标志",
-                    id: "BZLX001"
-                },
-                {
-                    text: "警告标志",
-                    id: "BZLX002"
-                },
-                {
-                    text: "指令标志",
-                    id: "BZLX003"
-                },
-                {
-                    text: "路标、名牌、提示标志",
-                    id: "BZLX004"
-                }
-            ],
-            // 安全标志规格
-            aqbzggArr: [
-                {
-                    text: "40×50",
-                    id: "AQBZGG001"
-                },
-                {
-                    text: "30×40",
-                    id: "AQBZGG002"
-                },
-                {
-                    text: "40×60",
-                    id: "AQBZGG003"
-                },
-                {
-                    text: "60×80",
-                    id: "AQBZGG004"
-                },
-                {
-                    text: "100×100",
-                    id: "AQBZGG005"
-                },
-                {
-                    text: "100×120",
-                    id: "AQBZGG006"
-                }
-            ],
-            // 安全标志牌材质
-            aqbzpczArr: [
-                {
-                    text: "塑料",
-                    id: "AQBZPCZ001"
-                },
-                {
-                    text: "不锈钢",
-                    id: "AQBZPCZ002"
-                },
-                {
-                    text: "铝合金",
-                    id: "AQBZPCZ003"
-                },
-                {
-                    text: "亚克力",
-                    id: "AQBZPCZ004"
-                },
-                {
-                    text: "搪瓷",
-                    id: "AQBZPCZ005"
-                },
-                {
-                    text: "铝反光",
-                    id: "AQBZPCZ006"
-                }
-            ]
+            }
         };
     },
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "mark_type", this.bzlxArr);
-                this.$common.code2Text(element, "stand", this.aqbzggArr);
-                this.$common.code2Text(element, "quality", this.aqbzpczArr);
+            let _self = this;
+            Promise.all([
+                _self.$common.comboList({ sourcename: "BZLX" }),
+                _self.$common.comboList({ sourcename: "AQBZGG" }),
+                _self.$common.comboList({ sourcename: "AQBZPCZ" })
+            ]).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "mark_type", res[0]);
+                    _self.$common.code2Text(element, "stand", res[1]);
+                    _self.$common.code2Text(element, "quality", res[2]);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         }
     },
     components: {

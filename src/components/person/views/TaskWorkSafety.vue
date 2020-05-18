@@ -31,7 +31,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -47,91 +46,20 @@ export default {
             postData: {
                 url: "biz/operate/taskworksafetyconfirmitems/list.action",
                 obj: {}
-            },
-            qrxmArr: [
-                {
-                    id: "QRXMFL001",
-                    text: "空气质量"
-                },
-                {
-                    id: "QRXMFL002",
-                    text: "照明状况"
-                },
-                {
-                    id: "QRXMFL003",
-                    text: "洒水除尘"
-                },
-                {
-                    id: "QRXMFL004",
-                    text: "敲帮问顶"
-                },
-                {
-                    id: "QRXMFL005",
-                    text: "爆破安全"
-                },
-                {
-                    id: "QRXMFL006",
-                    text: "坠落防护"
-                },
-                {
-                    id: "QRXMFL007",
-                    text: "顶板防护"
-                },
-                {
-                    id: "QRXMFL008",
-                    text: "机电设施"
-                },
-                {
-                    id: "QRXMFL009",
-                    text: "矿仓防护"
-                },
-                {
-                    id: "QRXMFL010",
-                    text: "供矿设施"
-                },
-                {
-                    id: "QRXMFL011",
-                    text: "充填管道"
-                },
-                {
-                    id: "QRXMFL012",
-                    text: "充填隔墙"
-                },
-                {
-                    id: "QRXMFL013",
-                    text: "机械设备"
-                },
-                {
-                    id: "QRXMFL014",
-                    text: "溜井防护"
-                },
-                {
-                    id: "QRXMFL015",
-                    text: "物料堆放"
-                },
-                {
-                    id: "QRXMFL016",
-                    text: "物体打击"
-                },
-                {
-                    id: "QRXMFL017",
-                    text: "动力配电"
-                },
-                {
-                    id: "QRXMFL018",
-                    text: "警戒措施"
-                }
-            ]
+            }
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "itemstype", this.qrxmArr);
+            let _self = this;
+            this.$common.comboList({ sourcename: "QRXMFL" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "itemstype", res);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {

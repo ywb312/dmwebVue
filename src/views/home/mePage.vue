@@ -40,7 +40,7 @@ export default {
                     _this.$api.pub.logout().then(res => {
                         // 数据有误
                         if (typeof res != "object") {
-                            _self.$toast("服务器连接错误");
+                            _this.$toast("服务器连接错误");
                             return;
                         }
                         _this.$router.push({

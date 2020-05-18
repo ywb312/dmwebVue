@@ -111,19 +111,19 @@ export default {
         };
     },
     created() {
-        let self = this;
+        let _self = this;
         let obj = {
             "bean.yhid": this.$route.query.yhid,
             "bean.flag": "1"
         };
-        self.$api.danger.detail(obj).then(res => {
+        _self.$api.danger.detail(obj).then(res => {
             // 数据有误
             if (typeof res != "object") {
                 _self.$toast("服务器连接错误");
                 return;
             }
-            self.pro = res.pro;
-            self.infos = res.infos;
+            _self.pro = res.pro;
+            _self.infos = res.infos;
         });
     },
     methods: {}

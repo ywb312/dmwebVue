@@ -54,7 +54,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -72,120 +71,27 @@ export default {
                 obj: {
                     "bean.element": this.pageData.element
                 }
-            },
-            // 专业类别
-            flfgzylbArr: [
-                {
-                    id: "FLFGZYLB001",
-                    text: "综合"
-                },
-                {
-                    id: "FLFGZYLB002",
-                    text: "劳动保护"
-                },
-                {
-                    id: "FLFGZYLB003",
-                    text: "环境保护"
-                },
-                {
-                    id: "FLFGZYLB004",
-                    text: "消防安全"
-                },
-                {
-                    id: "FLFGZYLB005",
-                    text: "应急管理"
-                },
-                {
-                    id: "FLFGZYLB006",
-                    text: "防汛防旱"
-                },
-                {
-                    id: "FLFGZYLB007",
-                    text: "交通安全"
-                },
-                {
-                    id: "FLFGZYLB008",
-                    text: "安全"
-                },
-                {
-                    id: "FLFGZYLB009",
-                    text: "危险物品"
-                },
-                {
-                    id: "FLFGZYLB010",
-                    text: "设备设施"
-                },
-                {
-                    id: "FLFGZYLB011",
-                    text: "电气安全"
-                },
-                {
-                    id: "FLFGZYLB012",
-                    text: "职业卫生"
-                },
-                {
-                    id: "FLFGZYLB013",
-                    text: "其他"
-                }
-            ],
-            // 有效性
-            flfgyxxArr: [
-                {
-                    text: "尚未实施",
-                    id: "FLFGYXX001"
-                },
-                {
-                    text: "现行有效",
-                    id: "FLFGYXX002"
-                },
-                {
-                    text: "废止",
-                    id: "FLFGYXX003"
-                }
-            ],
-            // 法律法规级别
-            flfgjb: [
-                {
-                    text: "法律",
-                    id: "FLFGJB001"
-                },
-                {
-                    text: "行政法规",
-                    id: "FLFGJB002"
-                },
-                {
-                    text: "地方法规",
-                    id: "FLFGJB003"
-                },
-                {
-                    text: "部门规章",
-                    id: "FLFGJB004"
-                },
-                {
-                    text: "国家和行业标准",
-                    id: "FLFGJB005"
-                },
-                {
-                    text: "规范性文件及其他要求",
-                    id: "FLFGJB006"
-                },
-                {
-                    text: "国际公约",
-                    id: "FLFGJB007"
-                }
-            ]
+            }
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "protype", this.flfgzylbArr);
-                this.$common.code2Text(element, "validity", this.flfgyxxArr);
-                this.$common.code2Text(element, "level", this.flfgjb);
+            let _self = this;
+            Promise.all([
+                _self.$common.comboList({ sourcename: "FLFGZYLB" }),
+                _self.$common.comboList({ sourcename: "FLFGYXX" }),
+                _self.$common.comboList({ sourcename: "FLFGJB" })
+            ]).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "protype", res[0]);
+                    _self.$common.code2Text(element, "validity", res[1]);
+                    _self.$common.code2Text(element, "level", res[2]);
+                    _self.$common.setSex(element);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {

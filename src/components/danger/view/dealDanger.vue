@@ -94,28 +94,6 @@ export default {
             selectData: {},
             // 审批记录操作框
             compShow: false,
-            spArr: [
-                {
-                    id: "SPZT001",
-                    text: "审批中"
-                },
-                {
-                    id: "SPZT002",
-                    text: "审批通过"
-                },
-                {
-                    id: "SPZT003",
-                    text: "审批不通过"
-                },
-                {
-                    id: "SPZT004",
-                    text: "未审批"
-                },
-                {
-                    id: "SPZT005",
-                    text: "未提交"
-                }
-            ],
             isOrg: false
         };
     },
@@ -126,7 +104,7 @@ export default {
                 let data = eval("(" + res + ")");
                 // 数据有误
                 if (typeof res != "object") {
-                    _self.$toast("服务器连接错误")
+                    this.$toast("服务器连接错误");
                     return;
                 }
                 if (data.cells[0].isOrg == "1") {
@@ -137,10 +115,13 @@ export default {
     methods: {
         // 获取当前页面数据函数
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "state", this.spArr);
+            let _self = this;
+            _self.$common.comboList({ sourcename: "SPZT" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "state", res);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 检验可否自查自改、上报、审批
         postDeal(type) {
@@ -189,7 +170,7 @@ export default {
             this.$api.danger.doexp(obj).then(res => {
                 // 数据有误
                 if (typeof res != "object") {
-                    _self.$toast("服务器连接错误")
+                    this.$toast("服务器连接错误");
                     return;
                 }
                 if (res.message) {

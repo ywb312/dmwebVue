@@ -98,14 +98,7 @@ export default {
             sheetShow: false,
             actions: [{ name: "查看详情" }],
             detailShow: false,
-            selectData: {},
-            planTypeArr: [
-                { id: "YLLX001", text: "模拟演练" },
-                { id: "YLLX002", text: "桌面演练" },
-                { id: "YLLX003", text: "培训演练" },
-                { id: "YLLX004", text: "其他" },
-                { id: "YLLX005", text: "综合演练" }
-            ]
+            selectData: {}
         };
     },
     created() {},
@@ -113,10 +106,13 @@ export default {
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "plantype", this.planTypeArr);
+            let _self = this;
+            _self.$common.comboList({ sourcename: "YLLX" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "plantype", res);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {

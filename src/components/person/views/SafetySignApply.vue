@@ -41,35 +41,20 @@ export default {
             postData: {
                 url: "biz/operate/tasksafemarkappmain/list.action",
                 obj: {}
-            },
-            sgjdArr: [
-                {
-                    text: "第一季度",
-                    id: "SGJD001"
-                },
-                {
-                    text: "第二季度",
-                    id: "SGJD002"
-                },
-                {
-                    text: "第三季度",
-                    id: "SGJD003"
-                },
-                {
-                    text: "第四季度",
-                    id: "SGJD004"
-                }
-            ]
+            }
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "quarters", this.sgjdArr);
+            let _self = this;
+            this.$common.comboList({ sourcename: "SGJD" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "quarters", res);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         btnClick(obj) {
             this.$router.push({

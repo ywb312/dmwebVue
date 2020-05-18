@@ -34,7 +34,6 @@ w<template>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -50,39 +49,20 @@ export default {
             postData: {
                 url: "biz/operate/hyd/hydrant/list.action",
                 obj: {}
-            },
-            agenttypeArr: [
-                {
-                    id: "MHJLB001",
-                    text: "2Kg二氧化碳"
-                },
-                {
-                    id: "MHJLB002",
-                    text: "4Kg干粉"
-                },
-                {
-                    id: "MHJLB005",
-                    text: "2Kg干粉"
-                },
-                {
-                    id: "MHJLB006",
-                    text: "1Kg干粉"
-                },
-                {
-                    id: "MHJLB007",
-                    text: "35Kg干粉"
-                }
-            ]
+            }
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "agenttype", this.agenttypeArr);
+            let _self = this;
+            this.$common.comboList({ sourcename: "MHJLB" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "agenttype", res);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {

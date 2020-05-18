@@ -31,7 +31,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -47,35 +46,20 @@ export default {
             postData: {
                 url: "biz/operate/tasksafemarkinfo/list.action",
                 obj: {}
-            },
-            bzlxArr: [
-                {
-                    text: "禁止标志",
-                    id: "BZLX001"
-                },
-                {
-                    text: "警告标志",
-                    id: "BZLX002"
-                },
-                {
-                    text: "指令标志",
-                    id: "BZLX003"
-                },
-                {
-                    text: "路标、名牌、提示标志",
-                    id: "BZLX004"
-                }
-            ]
+            }
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "mark_type", this.bzlxArr);
+            let _self = this;
+            this.$common.comboList({ sourcename: "BZLX" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "mark_type", res);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {

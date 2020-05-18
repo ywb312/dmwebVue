@@ -297,22 +297,7 @@ export default {
             show: false,
             popshow: false,
             actions: [{ name: "查看详情" }],
-            selectData: {},
-            pffsArr: [
-                { id: "PFFS001", text: "基础数据" },
-                { id: "PFFS002", text: "查询统计" },
-                { id: "PFFS003", text: "系统设定" }
-            ],
-            yjkhxArr: [
-                { id: "YJKHX001001", text: "1.1方针" },
-                { id: "YJKHX001002", text: "1.2目标" }
-            ],
-            pcdaArr: [
-                { id: "PDCA001", text: "P" },
-                { id: "PDCA002", text: "D" },
-                { id: "PDCA003", text: "C" },
-                { id: "PDCA004", text: "A" }
-            ]
+            selectData: {}
         };
     },
     created() {
@@ -332,13 +317,21 @@ export default {
     },
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "firstitem", this.yjkhxArr);
-                this.$common.code2Text(element, "seconditem", this.yjkhxArr);
-                this.$common.code2Text(element, "pdca", this.pcdaArr);
-                this.$common.code2Text(element, "doscoretype", this.pffsArr);
+            let _self = this;
+            Promise.all([
+                _self.$common.comboList({ sourcename: "YJKHX" }),
+                _self.$common.comboList({ sourcename: "YJKHX" }),
+                _self.$common.comboList({ sourcename: "PDCA" }),
+                _self.$common.comboList({ sourcename: "PFFS" })
+            ]).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "firstitem", res[0]);
+                    _self.$common.code2Text(element, "seconditem", res[1]);
+                    _self.$common.code2Text(element, "pdca", res[2]);
+                    _self.$common.code2Text(element, "doscoretype", res[3]);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         btnClick(obj) {
             this.show = true;

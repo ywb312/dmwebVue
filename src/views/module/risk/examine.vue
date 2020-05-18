@@ -111,7 +111,7 @@ export default {
                         .then(res => {
                             // 数据有误
                             if (typeof res != "object") {
-                                _self.$toast("服务器连接错误");
+                                this.$toast("服务器连接错误");
                                 return;
                             }
                             this.clearData();

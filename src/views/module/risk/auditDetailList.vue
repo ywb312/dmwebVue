@@ -77,25 +77,6 @@ export default {
             },
             // 操作面板显示
             popshow: false,
-            // 审批状态数组
-            stateArr: [
-                {
-                    text: "未审核",
-                    id: "SHZT001"
-                },
-                {
-                    text: "审核通过",
-                    id: "SHZT002"
-                },
-                {
-                    text: "审核未通过",
-                    id: "SHZT003"
-                },
-                {
-                    text: "待审核",
-                    id: "SHZT004"
-                }
-            ],
             // 选中项
             selectData: {}
         };
@@ -128,19 +109,19 @@ export default {
             if (bol) {
                 this.$api.risk.auditPass(obj).then(res => {
                     // 数据有误
-                if (typeof res != "object") {
-                    _self.$toast("服务器连接错误")
-                    return;
-                }
+                    if (typeof res != "object") {
+                        this.$toast("服务器连接错误");
+                        return;
+                    }
                     this.postSuccess();
                 });
             } else {
                 this.$api.risk.auditNoPass(obj).then(res => {
                     // 数据有误
-                if (typeof res != "object") {
-                    _self.$toast("服务器连接错误")
-                    return;
-                }
+                    if (typeof res != "object") {
+                        this.$toast("服务器连接错误");
+                        return;
+                    }
                     this.postSuccess();
                 });
             }
@@ -163,32 +144,32 @@ export default {
                 return a.name > b.name ? 1 : -1;
             });
             // 如果name,fxtype和上一项的name,fxtype不一致就推入新数组,否则添加子元素
-            sortArr.forEach((item, index, arr) => {
-                self.$common.code2Text(item, "fxtype", self.fxtypeSlots);
-                self.$common.code2Text(item, "state", self.stateArr);
-                if (index == 0) {
-                    item.child = [];
-                    returnArr.push(item);
-                } else if (
-                    item.name == arr[index - 1].name &&
-                    item.fxtype == arr[index - 1].fxtype
-                ) {
-                    returnArr[returnArr.length - 1].child.push(item);
-                } else {
-                    item.child = [];
-                    returnArr.push(item);
-                }
+            Promise.all([
+                _self.$common.comboList({ sourcename: "FXDLX" }),
+                _self.$common.comboList({ sourcename: "SHZT" })
+            ]).then(res => {
+                sortArr.forEach((item, index, arr) => {
+                    self.$common.code2Text(item, "fxtype", res[0]);
+                    self.$common.code2Text(item, "state", res[1]);
+                    if (index == 0) {
+                        item.child = [];
+                        returnArr.push(item);
+                    } else if (
+                        item.name == arr[index - 1].name &&
+                        item.fxtype == arr[index - 1].fxtype
+                    ) {
+                        returnArr[returnArr.length - 1].child.push(item);
+                    } else {
+                        item.child = [];
+                        returnArr.push(item);
+                    }
+                });
             });
             return returnArr;
         },
         // 清空数据 重新加载
         clearData() {
             this.$refs.view.cleraData();
-        }
-    },
-    computed: {
-        fxtypeSlots() {
-            return this.$store.state.fxtypeSlots;
         }
     },
     components: {

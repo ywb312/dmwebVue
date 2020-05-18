@@ -29,7 +29,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -47,28 +46,23 @@ export default {
                 obj: {
                     "bean.param": ""
                 }
-            },
+            }
             // dqztArr: [
             //     { id: "DQZT001", text: "采矿中" },
             //     { id: "DQZT002", text: "充填中" },
             //     { id: "DQZT003", text: "充填完毕" }
             // ],
-            ckffArr: [
-                { id: "CKFF005", text: "浅孔留矿法" },
-                { id: "CKFF006", text: "中深孔落矿空场填充法" },
-                { id: "CKFF007", text: "上下水平分层充填" },
-                { id: "CKFF008", text: "阶段充填法" },
-                { id: "CKFF009", text: "盘区机械化" }
-            ]
         };
     },
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                // this.$common.code2Text(element, "crruentstatus", this.dqztArr);
-                this.$common.code2Text(element, "miningtype", this.ckffArr);
+            let _self = this;
+            this.$common.comboList({ sourcename: "CKFF" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "miningtype", res);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {

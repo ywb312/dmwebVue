@@ -64,25 +64,7 @@ export default {
                 url: "",
                 obj: {}
             },
-            upUrl: "",
-            stateArr: [
-                {
-                    text: "未审核",
-                    id: "SHZT001"
-                },
-                {
-                    text: "审核通过",
-                    id: "SHZT002"
-                },
-                {
-                    text: "审核未通过",
-                    id: "SHZT003"
-                },
-                {
-                    text: "待审核",
-                    id: "SHZT004"
-                }
-            ]
+            upUrl: ""
         };
     },
     created() {
@@ -99,20 +81,28 @@ export default {
     methods: {
         // 处理请求的数据
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "knfs", this.knfsSlots);
-                this.$common.code2Text(element, "yxfw", this.yxfwSlots);
-                this.$common.code2Text(element, "qzhg", this.qzhgSlots);
-                this.$common.code2Text(element, "fxtype", this.fxtypeSlots);
+            let _self = this;
+            Promise.all([
+                _self.$common.comboList({ sourcename: "KNFS" }),
+                _self.$common.comboList({ sourcename: "YXFWEI" }),
+                _self.$common.comboList({ sourcename: "QZHG" }),
+                _self.$common.comboList({ sourcename: "FXDLX" })
+            ]).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "knfs", res[0]);
+                    _self.$common.code2Text(element, "yxfw", res[1]);
+                    _self.$common.code2Text(element, "qzhg", res[2]);
+                    _self.$common.code2Text(element, "fxtype", res[3]);
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 提交辨识
         upAffirm() {
             this.$api.pub.showPage(this.upUrl, {}).then(res => {
                 // 数据有误
                 if (typeof res != "object") {
-                    _self.$toast("服务器连接错误")
+                    this.$toast("服务器连接错误");
                     return;
                 }
                 this.$toast({
@@ -122,20 +112,7 @@ export default {
             });
         }
     },
-    computed: {
-        knfsSlots() {
-            return this.$store.state.knfsSlots;
-        },
-        yxfwSlots() {
-            return this.$store.state.yxfwSlots;
-        },
-        qzhgSlots() {
-            return this.$store.state.qzhgSlots;
-        },
-        fxtypeSlots() {
-            return this.$store.state.fxtypeSlots;
-        }
-    },
+    computed: {},
     components: {
         ViewBox
     }

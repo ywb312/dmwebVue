@@ -32,7 +32,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -48,70 +47,27 @@ export default {
             postData: {
                 url: "biz/operate/safe/safeinsurance/list.action",
                 obj: {}
-            },
-            scdjArr: [
-                {
-                    id: "SCDJ001",
-                    text: "一级"
-                },
-                {
-                    id: "SCDJ002",
-                    text: "二级"
-                },
-                {
-                    id: "SCDJ003",
-                    text: "三级"
-                },
-                {
-                    id: "SCDJ004",
-                    text: "四级"
-                },
-                {
-                    id: "SCDJ005",
-                    text: "五级"
-                },
-                {
-                    id: "SCDJ006",
-                    text: "六级"
-                },
-                {
-                    id: "SCDJ007",
-                    text: "七级"
-                },
-                {
-                    id: "SCDJ008",
-                    text: "八级"
-                },
-                {
-                    id: "SCDJ009",
-                    text: "九级"
-                },
-                {
-                    id: "SCDJ010",
-                    text: "十级"
-                },
-                {
-                    id: "SCDJ011",
-                    text: "无"
-                }
-            ]
+            }
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
         getRendering(arr) {
-            arr.forEach(element => {
-                this.$common.code2Text(element, "level", this.scdjArr);
-                let obj = this.$common.getDeptName(
-                    this.treeData,
-                    element.insurance_org
-                );
-                if (obj.name) {
-                    element.deptName = obj.name;
-                }
+            let _self = this;
+            this.$common.comboList({ sourcename: "SCDJ" }).then(res => {
+                arr.forEach(element => {
+                    _self.$common.code2Text(element, "level", this.res);
+                    let obj = this.$common.getDeptName(
+                        this.treeData,
+                        element.insurance_org
+                    );
+                    if (obj.name) {
+                        element.deptName = obj.name;
+                    }
+                });
+                _self.rendering = arr;
             });
-            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {
