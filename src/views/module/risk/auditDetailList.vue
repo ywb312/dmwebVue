@@ -127,10 +127,20 @@ export default {
             };
             if (bol) {
                 this.$api.risk.auditPass(obj).then(res => {
+                    // 数据有误
+                if (typeof res != "object") {
+                    _self.$toast("服务器连接错误")
+                    return;
+                }
                     this.postSuccess();
                 });
             } else {
                 this.$api.risk.auditNoPass(obj).then(res => {
+                    // 数据有误
+                if (typeof res != "object") {
+                    _self.$toast("服务器连接错误")
+                    return;
+                }
                     this.postSuccess();
                 });
             }

@@ -125,10 +125,14 @@ export default {
                 .getTraTable({
                     rows: 10,
                     page: this.page,
-                    filters: this.selectData.planid,
+                    filters: this.selectData.planid
                 })
                 .then(res => {
-                    console.log(res);
+                    // 数据有误
+                    if (typeof res != "object") {
+                        _self.$toast("服务器连接错误");
+                        return;
+                    }
                     if (res.rows && res.rows.length > 0) {
                         this.rendering = res.rows;
                     }

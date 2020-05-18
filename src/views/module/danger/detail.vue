@@ -117,6 +117,11 @@ export default {
             "bean.flag": "1"
         };
         self.$api.danger.detail(obj).then(res => {
+            // 数据有误
+            if (typeof res != "object") {
+                _self.$toast("服务器连接错误");
+                return;
+            }
             self.pro = res.pro;
             self.infos = res.infos;
         });

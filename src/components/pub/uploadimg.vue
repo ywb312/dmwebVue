@@ -21,37 +21,37 @@ export default {
     },
     methods: {
         afterRead(file) {
-            let self = this;
-            file.status = "uploading";
-            file.message = "上传中...";
-            let formData = new FormData();
-            formData.append("file", file.file);
-            formData.append("fileName", file.file.name);
-            formData.append(
-                "suffix",
-                file.file.name.split(".")[1].toLowerCase()
-            );
-            this.$api.pub
-                .doupfile(formData, {
-                    headers: { "Content-Type": "multipart/form-data" },
-                    transformRequest: function(data) {
-                        return data;
-                    }
-                })
-                .then(res => {
-                    file.status = "";
-                    file.message = "";
-                    file.fileurl = res.fileurl.replace(/[\\]/g, "/");
-                    self.toParent();
-                })
-                .catch(reject => {
-                    file.status = "failed";
-                    file.message = "上传失败";
-                });
+            this.toParent();
+            // console.log(this.fileList)
+
+            // let formData = new FormData();
+            // formData.append("file", file.file);
+            // formData.append("fileName", file.file.name);
+            // formData.append(
+            //     "suffix",
+            //     file.file.name.split(".")[1].toLowerCase()
+            // );
+            // this.$api.pub
+            //     .doupfile(formData, {
+            //         headers: { "Content-Type": "multipart/form-data" },
+            //         transformRequest: function(data) {
+            //             return data;
+            //         }
+            //     })
+            //     .then(res => {
+            //         file.status = "";
+            //         file.message = "";
+            //         file.fileurl = res.fileurl.replace(/[\\]/g, "/");
+            //         self.toParent();
+            //     })
+            //     .catch(reject => {
+            //         file.status = "failed";
+            //         file.message = "上传失败";
+            //     });
         },
         toParent() {
             let arr = this.fileList.map(item => {
-                return item.fileurl;
+                return item.content;
             });
             this.$emit("toImgArr", arr);
         }

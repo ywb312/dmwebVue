@@ -146,6 +146,11 @@ export default {
                 "bean.auditid": this.selectData.auditid
             };
             this.$api.risk.auidtPassAn(obj).then(res => {
+                // 数据有误
+                if (typeof res != "object") {
+                    _self.$toast("服务器连接错误")
+                    return;
+                }
                 this.popshow = false;
                 this.$toast({
                     message: "操作成功",

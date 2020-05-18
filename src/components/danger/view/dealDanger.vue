@@ -124,6 +124,11 @@ export default {
             .getConfig("manager/sys/dept/getselfdept.action")
             .then(res => {
                 let data = eval("(" + res + ")");
+                // 数据有误
+                if (typeof res != "object") {
+                    _self.$toast("服务器连接错误")
+                    return;
+                }
                 if (data.cells[0].isOrg == "1") {
                     this.isOrg = true;
                 }
@@ -182,6 +187,11 @@ export default {
         // 上传
         dealAjax(obj) {
             this.$api.danger.doexp(obj).then(res => {
+                // 数据有误
+                if (typeof res != "object") {
+                    _self.$toast("服务器连接错误")
+                    return;
+                }
                 if (res.message) {
                     this.$toast(res.message);
                     this.$refs.view.cleraData();

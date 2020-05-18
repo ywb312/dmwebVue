@@ -35,8 +35,8 @@ export default {
     data() {
         return {
             //input双向绑定
-            username: "",
-            password: ""
+            username: "admin",
+            password: "123"
         };
     },
     // 设置免登陆 如果本地有数据自动跳转

@@ -40,6 +40,11 @@ export default {
                         "bean.name": this.getData.name
                     })
                     .then(res => {
+                        // 数据有误
+                        if (typeof res != "object") {
+                            _self.$toast("服务器连接错误");
+                            return;
+                        }
                         this.close();
                         this.$emit("suc");
                     });
@@ -51,6 +56,11 @@ export default {
                         "bean.fid": this.selectData.fid
                     })
                     .then(res => {
+                        // 数据有误
+                        if (typeof res != "object") {
+                            _self.$toast("服务器连接错误");
+                            return;
+                        }
                         this.close();
                         this.$emit("suc");
                     });

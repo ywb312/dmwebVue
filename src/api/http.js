@@ -46,8 +46,6 @@ axios.interceptors.request.use(config => {
 })
 //  axios响应拦截器
 axios.interceptors.response.use(res => {
-    // if (res.status == 200) { //根据后台状态码设置的
-    // }
     return res.data;
 }, error => {
     let {

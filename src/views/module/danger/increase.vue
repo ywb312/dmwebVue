@@ -72,10 +72,10 @@ export default {
             classify: "",
             // 下拉框的配置
             crLevelSlots: [
-                { text: "一级", id: "ZDYHJB001" },
-                { text: "二级", id: "ZDYHJB002" },
-                { text: "三级", id: "ZDYHJB003" },
-                { text: "四级", id: "ZDYHJB004" }
+                { text: "一级", id: "1" },
+                { text: "二级", id: "2" },
+                { text: "三级", id: "3" },
+                { text: "四级", id: "4" }
             ],
             classifySlots: [
                 { text: "管理缺陷", id: "YHLB001" },
@@ -112,11 +112,16 @@ export default {
                 "bean.czwt": this.czwt,
                 "bean.knfs": this.knfs,
                 "bean.crLevel": this.crLevel,
-                "bean.classify": this.classify,
-                "bean.img": JSON.stringify(this.upImgArr),
+                "bean.childtype": this.classify,
+                "bean.img": JSON.stringify(this.upImgArr)
             };
             // 上传接口
-            this.$api.danger.doAddSaveSingle(obj).then(function() {
+            this.$api.danger.doAddSaveSingle(obj).then(function(res) {
+                // 数据有误
+                if (typeof res != "object") {
+                    _self.$toast("服务器连接错误")
+                    return;
+                }
                 _self.$toast({ message: "操作成功", duration: 2000 });
                 setTimeout(() => {
                     _self.$router.back(-1);

@@ -163,6 +163,11 @@ export default {
                             "bean.wid": this.selectData.wid
                         })
                         .then(res => {
+                            // 数据有误
+                            if (typeof res != "object") {
+                                _self.$toast("服务器连接错误");
+                                return;
+                            }
                             this.clearData();
                         });
                 })

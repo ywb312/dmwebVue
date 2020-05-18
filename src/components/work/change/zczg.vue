@@ -101,6 +101,11 @@ export default {
                         isLoading: false
                     });
                     res = eval("(" + res + ")");
+                    // 数据有误
+                    if (typeof res != "object") {
+                        _self.$toast("服务器连接错误");
+                        return;
+                    }
                     if (res.success) {
                         _self.$toast(res.id);
                         setTimeout(() => {

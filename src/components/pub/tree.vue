@@ -43,6 +43,11 @@ export default {
             } else {
                 this.$api.pub.getTree().then(function(res) {
                     let data = eval("(" + res + ")");
+                    // 数据有误
+                    if (typeof data != "object") {
+                        _self.$toast("服务器连接错误");
+                        return;
+                    }
                     let sortData = _self.$common.toTree(data.cells);
                     this.lists = sortData;
                 });

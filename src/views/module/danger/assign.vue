@@ -62,10 +62,15 @@ export default {
                 "sbzpEntity.zgzlyq": this.zgzlyq,
                 "sbzpEntity.zgdate": this.zgdate,
                 "sbzpEntity.tbr": this.tbr,
-                "sbzpEntity.memo": this.memo,
+                "sbzpEntity.memo": this.memo
             };
             // 上传接口
-            this.$api.danger.doexp(obj).then(function() {
+            this.$api.danger.doexp(obj).then(function(res) {
+                // 数据有误
+                if (typeof res != "object") {
+                    _self.$toast("服务器连接错误");
+                    return;
+                }
                 _self.$toast({ message: "操作成功", duration: 2000 });
                 setTimeout(() => {
                     _self.$router.back(-1);
