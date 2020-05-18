@@ -59,14 +59,6 @@ export default {
             });
         }
     },
-    computed: {
-        knfsSlots() {
-            return this.$store.state.knfsSlots;
-        },
-        gTypeSlots() {
-            return this.$store.state.gTypeSlots;
-        }
-    },
     components: {
         ViewBox
     }

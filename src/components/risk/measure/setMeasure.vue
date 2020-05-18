@@ -26,10 +26,16 @@ export default {
             getData: {
                 gname: "",
                 gtype: ""
-            }
+            },
+            gTypeSlots: []
         };
     },
     props: ["setShow", "wid", "type", "selectData"],
+    created() {
+        this.$common.comboList({ sourcename: "GKCSLX" }).then(res => {
+            this.gTypeSlots = res;
+        });
+    },
     methods: {
         // 操作请求
         postData(obj) {
@@ -94,11 +100,6 @@ export default {
                     });
                 }
             }
-        }
-    },
-    computed: {
-        gTypeSlots() {
-            return this.$store.state.gTypeSlots;
         }
     },
     components: {

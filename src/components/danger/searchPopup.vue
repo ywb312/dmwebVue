@@ -33,48 +33,7 @@ export default {
             searchShow: false,
             popupVisible: "",
             postData: {},
-            statusSlots: [
-                {
-                    text: "请选择",
-                    id: "0"
-                },
-                {
-                    text: "待评估",
-                    id: "1"
-                },
-                {
-                    text: "待指派",
-                    id: "2"
-                },
-                {
-                    text: "待整改",
-                    id: "3"
-                },
-                {
-                    text: "待验收",
-                    id: "4"
-                },
-                {
-                    text: "待督办",
-                    id: "5"
-                },
-                {
-                    text: "已闭环",
-                    id: "6"
-                },
-                {
-                    text: "待闭环",
-                    id: "7"
-                },
-                {
-                    text: "强制闭环",
-                    id: "8"
-                },
-                {
-                    text: "待处理",
-                    id: "9"
-                }
-            ],
+            statusSlots: [],
             dbDateConifg: [
                 { title: "起始日期", placeholder: "请选择开始日期" },
                 { title: "截至日期", placeholder: "请选择截至日期" }
@@ -82,6 +41,11 @@ export default {
         };
     },
     props: ["popshow", "statusShow", "companyShow"],
+    created() {
+        this.$common.comboList({ sourcename: "YHZT" }).then(res => {
+            this.statusSlots = res;
+        });
+    },
     methods: {
         // 返回隐患状态
         getStatus(v) {

@@ -184,17 +184,6 @@ export default {
             this.$refs.view.cleraData();
         }
     },
-    computed: {
-        knfsSlots() {
-            return this.$store.state.knfsSlots;
-        },
-        yxfwSlots() {
-            return this.$store.state.yxfwSlots;
-        },
-        qzhgSlots() {
-            return this.$store.state.qzhgSlots;
-        }
-    },
     components: {
         ViewBox,
         setCompany,

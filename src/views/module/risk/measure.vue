@@ -154,11 +154,6 @@ export default {
             this.$refs.view.cleraData();
         }
     },
-    computed: {
-        gTypeSlots() {
-            return this.$store.state.gTypeSlots;
-        }
-    },
     components: {
         ViewBox,
         setMeasure

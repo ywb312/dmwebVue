@@ -27,10 +27,16 @@ export default {
             getData: {
                 name: "",
                 fxtype: ""
-            }
+            },
+            fxtypeSlots: []
         };
     },
     props: ["setShow", "type", "selectData"],
+    created() {
+        this.$common.comboList({ sourcename: "FXDLX" }).then(res => {
+            this.fxtypeSlots = res;
+        });
+    },
     methods: {
         postData(obj) {
             if (this.type == "add") {
@@ -90,11 +96,6 @@ export default {
                     });
                 }
             }
-        }
-    },
-    computed: {
-        fxtypeSlots() {
-            return this.$store.state.fxtypeSlots;
         }
     },
     components: {

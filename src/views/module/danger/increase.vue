@@ -70,6 +70,7 @@ export default {
             knfs: "",
             crLevel: "",
             classify: "",
+            knfsSlots: [],
             // 下拉框的配置
             crLevelSlots: [
                 { text: "一级", id: "1" },
@@ -77,15 +78,17 @@ export default {
                 { text: "三级", id: "3" },
                 { text: "四级", id: "4" }
             ],
-            classifySlots: [
-                { text: "管理缺陷", id: "YHLB001" },
-                { text: "设备设施不安全", id: "YHLB002" },
-                { text: "员工行为不安全", id: "YHLB003" },
-                { text: "作业环境不安全", id: "YHLB004" },
-                { text: "防护用品/器不安全", id: "YHLB005" }
-            ],
+            classifySlots: [],
             upImgArr: []
         };
+    },
+    created() {
+        this.$common.comboList({ sourcename: "KNFS" }).then(res => {
+            this.knfsSlots = res;
+        });
+        this.$common.comboList({ sourcename: "YHLB" }).then(res => {
+            this.classifySlots = res;
+        });
     },
     methods: {
         // 获取不同下拉框的值
@@ -119,7 +122,7 @@ export default {
             this.$api.danger.doAddSaveSingle(obj).then(function(res) {
                 // 数据有误
                 if (typeof res != "object") {
-                    _self.$toast("服务器连接错误")
+                    _self.$toast("服务器连接错误");
                     return;
                 }
                 _self.$toast({ message: "操作成功", duration: 2000 });
@@ -127,11 +130,6 @@ export default {
                     _self.$router.back(-1);
                 }, 2000);
             });
-        }
-    },
-    computed: {
-        knfsSlots() {
-            return this.$store.state.knfsSlots;
         }
     },
     components: {

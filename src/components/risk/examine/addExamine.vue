@@ -57,7 +57,7 @@ export default {
         // 根据当前页面的配置 对请求入参进行添加筛选
         returnData(option) {
             let obj = {
-                "bean.gid": this.gid,
+                "bean.gid": this.gid
             };
             for (const key in this.getData) {
                 obj["bean." + key] = this.getData[key];
@@ -68,7 +68,7 @@ export default {
             this.$api.risk.examineAdd(this.returnData()).then(res => {
                 // 数据有误
                 if (typeof res != "object") {
-                    this.$toast("服务器连接错误")
+                    this.$toast("服务器连接错误");
                     return;
                 }
                 this.close();
@@ -95,11 +95,6 @@ export default {
         addshow(val) {
             //popshow为父组件的值，val参数为值
             this.addVisible = val; //将父组件的值赋给popupVisible 子组件的值
-        }
-    },
-    computed: {
-        gTypeSlots() {
-            return this.$store.state.gTypeSlots;
         }
     },
     components: {

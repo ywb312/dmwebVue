@@ -97,11 +97,6 @@ export default {
             });
         }
     },
-    computed: {
-        fxtypeSlots() {
-            return this.$store.state.fxtypeSlots;
-        }
-    },
     components: {
         ViewBox
     }

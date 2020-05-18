@@ -24,10 +24,24 @@ export default {
                 l: "",
                 e: "",
                 c: ""
-            }
+            },
+            slotsL: [],
+            slotsE: [],
+            slotsC: []
         };
     },
     props: ["appShow", "selectData"],
+    created() {
+        this.$common.comboList({ sourcename: "LECDL" }).then(res => {
+            this.slotsL = res;
+        });
+        this.$common.comboList({ sourcename: "BLPL" }).then(res => {
+            this.slotsE = res;
+        });
+        this.$common.comboList({ sourcename: "LECDC" }).then(res => {
+            this.slotsC = res;
+        });
+    },
     methods: {
         // 根据当前页面的配置 对请求入参进行添加筛选
         returnData(option) {
@@ -44,7 +58,7 @@ export default {
             this.$api.risk.approveAdd(this.returnData()).then(res => {
                 // 数据有误
                 if (typeof res != "object") {
-                    this.$toast("服务器连接错误")
+                    this.$toast("服务器连接错误");
                     return;
                 }
                 this.close();
@@ -76,17 +90,6 @@ export default {
         appShow(val) {
             //popshow为父组件的值，val参数为值
             this.appVisible = val; //将父组件的值赋给popupVisible 子组件的值
-        }
-    },
-    computed: {
-        slotsL() {
-            return this.$store.state.lecSlotsL;
-        },
-        slotsE() {
-            return this.$store.state.lecSlotsE;
-        },
-        slotsC() {
-            return this.$store.state.lecSlotsC;
         }
     },
     components: {

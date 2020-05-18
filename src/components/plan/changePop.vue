@@ -52,16 +52,19 @@ export default {
             knfs: "",
             prtype: "YHLX001",
             childtype: "",
-            classifySlots: [
-                { text: "管理缺陷", id: "YHLB001" },
-                { text: "设备设施不安全", id: "YHLB002" },
-                { text: "员工行为不安全", id: "YHLB003" },
-                { text: "作业环境不安全", id: "YHLB004" },
-                { text: "防护用品/器不安全", id: "YHLB005" }
-            ]
+            knfsSlots: [],
+            classifySlots: []
         };
     },
     props: ["changeShow", "selectData"],
+    created() {
+        this.$common.comboList({ sourcename: "KNFS" }).then(res => {
+            this.knfsSlots = res;
+        });
+        this.$common.comboList({ sourcename: "YHLB" }).then(res => {
+            this.classifySlots = res;
+        });
+    },
     methods: {
         // 获取不同下拉框的值
         getKnfs(v) {
@@ -95,11 +98,6 @@ export default {
             if (newValue) {
                 this.inspacetcontent = this.selectData.inspacetcontent;
             }
-        }
-    },
-    computed: {
-        knfsSlots() {
-            return this.$store.state.knfsSlots;
         }
     },
     components: {

@@ -44,10 +44,24 @@ export default {
                 yxfw: "",
                 knfs: "",
                 qzhg: ""
-            }
+            },
+            knfsSlots: [],
+            yxfwSlots: [],
+            qzhgSlots: []
         };
     },
     props: ["setShow", "fid", "selectData", "type"],
+    created() {
+        this.$common.comboList({ sourcename: "KNFS" }).then(res => {
+            this.knfsSlots = res;
+        });
+        this.$common.comboList({ sourcename: "YXFWEI" }).then(res => {
+            this.yxfwSlots = res;
+        });
+        this.$common.comboList({ sourcename: "QZHG" }).then(res => {
+            this.qzhgSlots = res;
+        });
+    },
     methods: {
         // 根据当前页面的配置 对请求入参进行添加筛选
         returnData(option) {
@@ -134,17 +148,6 @@ export default {
                     });
                 }
             }
-        }
-    },
-    computed: {
-        knfsSlots() {
-            return this.$store.state.knfsSlots;
-        },
-        yxfwSlots() {
-            return this.$store.state.yxfwSlots;
-        },
-        qzhgSlots() {
-            return this.$store.state.qzhgSlots;
         }
     },
     components: {
