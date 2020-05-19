@@ -54,6 +54,7 @@ export default {
         },
         update() {
             let _self = this;
+            _self.$store.commit("setIsLoading", true);
             let obj = {
                 "sbzpEntity.yhid": this.selectData.yhid,
                 "sbzpEntity.assignFlag": 0,
@@ -66,6 +67,7 @@ export default {
             };
             // 上传接口
             this.$api.danger.doexp(obj).then(function(res) {
+                _self.$store.commit("setIsLoading", false);
                 // 数据有误
                 if (typeof res != "object") {
                     _self.$toast("服务器连接错误");

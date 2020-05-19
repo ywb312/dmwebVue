@@ -39,6 +39,7 @@ export default {
     },
     methods: {
         postData(obj) {
+            this.$store.commit("setIsLoading", true);
             if (this.type == "add") {
                 this.$api.risk
                     .riskAdd({
@@ -46,6 +47,7 @@ export default {
                         "bean.name": this.getData.name
                     })
                     .then(res => {
+                        this.$store.commit("setIsLoading", false);
                         // 数据有误
                         if (typeof res != "object") {
                             this.$toast("服务器连接错误");
@@ -62,6 +64,7 @@ export default {
                         "bean.fid": this.selectData.fid
                     })
                     .then(res => {
+                        this.$store.commit("setIsLoading", false);
                         // 数据有误
                         if (typeof res != "object") {
                             this.$toast("服务器连接错误");

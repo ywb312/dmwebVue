@@ -78,8 +78,10 @@ export default {
             return obj;
         },
         postData(obj) {
+            this.$store.commit("setIsLoading", true);
             if (this.type == "add") {
                 this.$api.risk.companyRiskAdd(this.returnData()).then(res => {
+                    this.$store.commit("setIsLoading", false);
                     // 数据有误
                     if (typeof res != "object") {
                         this.$toast("服务器连接错误");
@@ -92,6 +94,7 @@ export default {
                 this.$api.risk
                     .companyRiskModify(this.returnData())
                     .then(res => {
+                        this.$store.commit("setIsLoading", false);
                         // 数据有误
                         if (typeof res != "object") {
                             this.$toast("服务器连接错误");

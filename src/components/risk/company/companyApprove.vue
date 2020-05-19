@@ -55,7 +55,9 @@ export default {
             return obj;
         },
         postData(obj) {
+            this.$store.commit("setIsLoading", true);
             this.$api.risk.approveAdd(this.returnData()).then(res => {
+                this.$store.commit("setIsLoading", false);
                 // 数据有误
                 if (typeof res != "object") {
                     this.$toast("服务器连接错误");

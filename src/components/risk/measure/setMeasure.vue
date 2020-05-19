@@ -39,6 +39,7 @@ export default {
     methods: {
         // 操作请求
         postData(obj) {
+            this.$store.commit("setIsLoading", true);
             if (this.type == "add") {
                 this.$api.risk
                     .measureAdd({
@@ -47,6 +48,7 @@ export default {
                         "bean.gtype": this.getData.gtype
                     })
                     .then(res => {
+                        this.$store.commit("setIsLoading", false);
                         // 数据有误
                         if (typeof res != "object") {
                             this.$toast("服务器连接错误");
@@ -64,6 +66,7 @@ export default {
                         "bean.gtype": this.getData.gtype
                     })
                     .then(res => {
+                        this.$store.commit("setIsLoading", false);
                         // 数据有误
                         if (typeof res != "object") {
                             this.$toast("服务器连接错误");

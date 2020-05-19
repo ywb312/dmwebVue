@@ -116,6 +116,7 @@ export default {
                     return;
                 }
             }
+            this.$store.commit("setIsLoading", true);
             // 提交
             this.$api.pub
                 .showPage("biz/sc/checkplandetail/doAddSave.action", {
@@ -125,6 +126,7 @@ export default {
                     checkend: this.date
                 })
                 .then(res => {
+                    this.$store.commit("setIsLoading", false);
                     res = eval("(" + res + ")");
                     // 数据有误
                     if (typeof res != "object") {
