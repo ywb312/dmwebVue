@@ -108,18 +108,20 @@ export default {
             };
             if (bol) {
                 this.$api.risk.auditPass(obj).then(res => {
+                    let data = eval("(" + res + ")");
                     // 数据有误
-                    if (typeof res != "object") {
-                        this.$toast("服务器连接错误");
+                    if (!data.success) {
+                        this.$toast("提交不成功");
                         return;
                     }
                     this.postSuccess();
                 });
             } else {
                 this.$api.risk.auditNoPass(obj).then(res => {
+                    let data = eval("(" + res + ")");
                     // 数据有误
-                    if (typeof res != "object") {
-                        this.$toast("服务器连接错误");
+                    if (!data.success) {
+                        this.$toast("提交不成功");
                         return;
                     }
                     this.postSuccess();

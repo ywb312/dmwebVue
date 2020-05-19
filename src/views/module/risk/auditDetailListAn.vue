@@ -128,9 +128,10 @@ export default {
                 "bean.auditid": this.selectData.auditid
             };
             this.$api.risk.auidtPassAn(obj).then(res => {
+                let data = eval("(" + res + ")");
                 // 数据有误
-                if (typeof res != "object") {
-                    this.$toast("服务器连接错误");
+                if (!data.success) {
+                    this.$toast("提交不成功");
                     return;
                 }
                 this.popshow = false;

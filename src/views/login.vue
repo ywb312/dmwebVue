@@ -79,7 +79,7 @@ export default {
                         storage.loginname = res.result.loginname;
                         storage.rolename = res.result.rolename;
                         storage.roleLevel = _this.getDeptId(
-                            res.result.deptname
+                            res.result.rolename
                         );
                         _this.$router.push({
                             name: "home"

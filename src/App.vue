@@ -53,7 +53,7 @@ export default {
                 Toast.loading({
                     message: "加载中...",
                     forbidClick: true,
-                    duration: 0
+                    duration: 10000
                 });
             } else {
                 Toast.clear();

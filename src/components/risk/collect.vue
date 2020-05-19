@@ -101,8 +101,10 @@ export default {
         upAffirm() {
             this.$api.pub.showPage(this.upUrl, {}).then(res => {
                 // 数据有误
-                if (typeof res != "object") {
-                    this.$toast("服务器连接错误");
+                let data = eval("(" + res + ")");
+                // 数据有误
+                if (!data.success) {
+                    this.$toast(data.errormessage);
                     return;
                 }
                 this.$toast({

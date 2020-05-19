@@ -49,9 +49,10 @@ export default {
                     })
                     .then(res => {
                         this.$store.commit("setIsLoading", false);
+                        let data = eval("(" + res + ")");
                         // 数据有误
-                        if (typeof res != "object") {
-                            this.$toast("服务器连接错误");
+                        if (!data.success) {
+                            this.$toast("提交不成功");
                             return;
                         }
                         this.close();
@@ -67,9 +68,10 @@ export default {
                     })
                     .then(res => {
                         this.$store.commit("setIsLoading", false);
+                        let data = eval("(" + res + ")");
                         // 数据有误
-                        if (typeof res != "object") {
-                            this.$toast("服务器连接错误");
+                        if (!data.success) {
+                            this.$toast("提交不成功");
                             return;
                         }
                         this.close();

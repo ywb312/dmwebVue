@@ -26,8 +26,12 @@
             </div>
         </ViewBox>
         <!-- 新增按钮 -->
-        <div>
-            <van-button class="btn" type="info" size="large" @click="addRisk">新增风险点</van-button>
+        <div v-if="affirm" class="setBtnGroup">
+            <van-button type="info" @click="addRisk">新增风险点</van-button>
+            <van-button type="info" @click="upAffirm">提交辨识</van-button>
+        </div>
+        <div v-else>
+            <van-button class="btn" type="info" block @click="addRisk">新增风险点</van-button>
         </div>
         <!-- 操作按钮点击 -->
         <van-action-sheet
@@ -74,8 +78,15 @@ export default {
             sheetShow: false,
             // 增删改查组件的显示
             setShow: false,
-            type: "add"
+            type: "add",
+            // 控制显示隐藏
+            affirm: false
         };
+    },
+    created() {
+        if (window.localStorage.roleLevel == 1) {
+            this.affirm = true;
+        }
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
@@ -133,15 +144,34 @@ export default {
                             "bean.fid": this.selectData.fid
                         })
                         .then(res => {
+                            let data = eval("(" + res + ")");
                             // 数据有误
-                            if (typeof res != "object") {
-                                this.$toast("服务器连接错误");
+                            if (!data.success) {
+                                this.$toast("提交不成功");
                                 return;
                             }
                             this.clearData();
                         });
                 })
                 .catch(reject => {});
+        },
+        // 提交辨识
+        upAffirm() {
+            this.$api.pub
+                .showPage("biz/risk/audit/doAddSave.action", {})
+                .then(res => {
+                    // 数据有误
+                    let data = eval("(" + res + ")");
+                    // 数据有误
+                    if (!data.success) {
+                        this.$toast(data.errormessage);
+                        return;
+                    }
+                    this.$toast({
+                        message: "提交成功",
+                        position: "bottom"
+                    });
+                });
         }
     },
     components: {
@@ -151,3 +181,10 @@ export default {
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>
+<style scoped>
+.setBtnGroup {
+    width: 100%;
+    position: fixed;
+    bottom: 8px;
+}
+</style>

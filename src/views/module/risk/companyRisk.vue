@@ -152,7 +152,9 @@ export default {
             } else if (item.name == "删除") {
                 this.delData();
             } else if (item.name == "评价") {
-                this.approveShow = true;
+                if (window.localStorage.roleLevel > 2) {
+                    this.approveShow = true;
+                }
             } else if (item.name == "查看管控措施") {
                 this.goRouter();
             }
@@ -170,9 +172,10 @@ export default {
                             "bean.wid": this.selectData.wid
                         })
                         .then(res => {
+                            let data = eval("(" + res + ")");
                             // 数据有误
-                            if (typeof res != "object") {
-                                this.$toast("服务器连接错误");
+                            if (!data.success) {
+                                this.$toast("提交不成功");
                                 return;
                             }
                             this.clearData();
