@@ -22,7 +22,7 @@
             <van-datetime-picker
                 v-model="pickerValue1"
                 ref="picker1"
-                type="datetime"
+                type="date"
                 :formatter="formatter"
                 :min-date="minDate1"
                 :max-date="maxDate1"
@@ -34,7 +34,7 @@
             <van-datetime-picker
                 v-model="pickerValue2"
                 ref="picker2"
-                type="datetime"
+                type="date"
                 :formatter="formatter"
                 :min-date="minDate2"
                 :max-date="maxDate2"
@@ -96,7 +96,7 @@ export default {
         // 设置选中时间的格式
         formatDate(date) {
             return `${date.getFullYear()}-${date.getMonth() +
-                1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
+                1}-${date.getDate()}`;
         }
     }
 };

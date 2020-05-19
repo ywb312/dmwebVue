@@ -2,7 +2,7 @@
     <div>
         <!-- 标题  -->
         <van-nav-bar
-            title="验收"
+            title="评估"
             left-text="返回"
             fixed
             placeholder
@@ -40,7 +40,7 @@
                     placeholder="管控措施"
                     :rules="[{ required: true, message: '请填写管控措施' }]"
                 />
-                <date-pick title="评估时间" @returnDate="getPgdate"></date-pick>
+                <date-pick title="评估时间" type="datetime" time="before" @returnDate="getPgdate"></date-pick>
                 <van-field
                     label="填表人"
                     v-model="tbr"

@@ -17,7 +17,7 @@
                 placeholder="整改治理要求"
                 :rules="[{ required: true, message: '请填写整改治理要求' }]"
             />
-            <date-pick title="整改截止时间" time="after" @returnDate="getZgjzsj"></date-pick>
+            <date-pick title="整改截止时间" type="datetime" time="after" @returnDate="getZgjzsj"></date-pick>
             <van-field
                 label="填表人员"
                 v-model="tbr"
