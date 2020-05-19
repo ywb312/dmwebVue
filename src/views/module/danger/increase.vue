@@ -27,7 +27,7 @@
             <pick title="可能发生事故" :slots="knfsSlots" @returnMsg="getKnfs"></pick>
             <pick title="隐患等级" :slots="crLevelSlots" @returnMsg="getCrLevel"></pick>
             <pick
-                v-show="prtype=='YHLX001'"
+                v-if="prtype=='YHLX001'"
                 title="隐患分类"
                 :slots="classifySlots"
                 @returnMsg="getClassify"
@@ -107,6 +107,7 @@ export default {
         },
         onSubmit(val) {
             let _self = this;
+            _self.$store.commit("setIsLoading", true);
             let obj = {
                 "bean.tbr": this.tbr,
                 "bean.prtype": this.prtype,
@@ -120,12 +121,13 @@ export default {
             };
             // 上传接口
             this.$api.danger.doAddSaveSingle(obj).then(function(res) {
+                _self.$store.commit("setIsLoading", false);
                 // 数据有误
                 if (typeof res != "object") {
                     _self.$toast("服务器连接错误");
                     return;
                 }
-                _self.$toast({ message: "操作成功", duration: 2000 });
+                _self.$toast({ message: "操作成功" });
                 setTimeout(() => {
                     _self.$router.back(-1);
                 }, 2000);

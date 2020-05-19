@@ -26,7 +26,7 @@ export default new Vuex.Store({
 			state.listNum = num;
 		},
 		setIsLoading(state, bol) {
-			state.isLoading = bol.isLoading;
+			state.isLoading = bol;
 		},
 		setTree(state, data) {
 			state.treeData = data;

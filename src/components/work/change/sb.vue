@@ -103,9 +103,7 @@ export default {
         },
         update() {
             let _self = this;
-            _self.$store.commit("setIsLoading", {
-                isLoading: true
-            });
+            _self.$store.commit("setIsLoading", true);
             if (this.type == "zp") {
                 // 指派
                 _self.postData["variable.keys"] =
@@ -145,9 +143,7 @@ export default {
             _self.$api.pub
                 .showPage(_self.postData["nodeaction"], _self.postData)
                 .then(res => {
-                    _self.$store.commit("setIsLoading", {
-                        isLoading: false
-                    });
+                    _self.$store.commit("setIsLoading", false);
                     res = eval("(" + res + ")");
                     // 数据有误
                     if (typeof res != "object") {

@@ -58,9 +58,7 @@ export default {
         },
         update() {
             let _self = this;
-            _self.$store.commit("setIsLoading", {
-                isLoading: true
-            });
+            _self.$store.commit("setIsLoading", true);
             _self.postData["variable.keys"] = "nodepass,comments";
             _self.postData["variable.values"] = "true," + this.opinion;
             _self.postData["variable.types"] = "B,S";
@@ -72,9 +70,7 @@ export default {
             _self.$api.pub
                 .showPage(_self.postData["nodeaction"], _self.postData)
                 .then(res => {
-                    _self.$store.commit("setIsLoading", {
-                        isLoading: false
-                    });
+                    _self.$store.commit("setIsLoading", false);
                     res = eval("(" + res + ")");
                     // 数据有误
                     if (typeof res != "object") {

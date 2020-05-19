@@ -526,16 +526,12 @@ const router = new VueRouter({
 
 // 全局路由钩子函数 控制加载中的显示
 router.beforeEach(function (to, from, next) {
-	store.commit('setIsLoading', {
-		isLoading: true
-	})
+	store.commit('setIsLoading', true)
 	next();
 })
 
 router.afterEach(function () {
-	store.commit('setIsLoading', {
-		isLoading: false
-	})
+	store.commit('setIsLoading', false)
 })
 
 export default router
