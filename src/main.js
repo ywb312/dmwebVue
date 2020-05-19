@@ -1,13 +1,23 @@
 import Vue from 'vue'
+// 初始化css样式
 import './assets/css/reset.css'
+// 本地的默认样式
 import './assets/css/style.css'
 import App from './App.vue'
 import router from './router'
+// vuex
 import store from './store'
+// ajax插件
 import axios from 'axios'
+// 封装的请求
 import api from './api/api'
+// 公共js
 import common from './utils/common'
+// 移动端设置html fontsize插件
 import 'amfe-flexible'
+// 引入vconsole 便于移动端调试
+import Vconsole from 'vconsole';
+new Vconsole();
 import {
 	Form,
 	Field,
