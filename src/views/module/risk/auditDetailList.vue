@@ -137,7 +137,7 @@ export default {
         },
         // 设置返还参数
         setRes(res) {
-            let self = this;
+            let _self = this;
             let returnArr = [];
             // 先对数组进行排序
             let sortArr = res.sort((a, b) => {
@@ -149,8 +149,8 @@ export default {
                 _self.$common.comboList({ sourcename: "SHZT" })
             ]).then(res => {
                 sortArr.forEach((item, index, arr) => {
-                    self.$common.code2Text(item, "fxtype", res[0]);
-                    self.$common.code2Text(item, "state", res[1]);
+                    _self.$common.code2Text(item, "fxtype", res[0]);
+                    _self.$common.code2Text(item, "state", res[1]);
                     if (index == 0) {
                         item.child = [];
                         returnArr.push(item);
