@@ -19,6 +19,9 @@
 	设备设施 -- 'facility'
 	组织保障 -- 'team'
 	职业卫生 -- 'health'
+	安全环保投入 -- 'inject'
+	消防管理 -- 'fire'
+	绩效考核 -- 'performance'
     如需修改功能的名称,功能在store/index.js和module其功能名文件夹 功能文件下同时修改
 
 ## 开发的通用设置

@@ -88,37 +88,37 @@ export default {
                 },
                 {
                     id: "laws",
-                    url: require("@/assets/img/ic_accident_manager.png"),
+                    url: require("@/assets/img/ic_laws.png"),
                     title: "法律法规"
                 },
                 {
                     id: "facility",
-                    url: require("@/assets/img/ic_accident_manager.png"),
+                    url: require("@/assets/img/ic_facility.png"),
                     title: "设备设施"
                 },
                 {
                     id: "team",
-                    url: require("@/assets/img/ic_accident_manager.png"),
+                    url: require("@/assets/img/ic_team.png"),
                     title: "组织保障"
                 },
                 {
                     id: "health",
-                    url: require("@/assets/img/ic_accident_manager.png"),
+                    url: require("@/assets/img/ic_health.png"),
                     title: "职业卫生"
                 },
                 {
                     id: "inject",
-                    url: require("@/assets/img/ic_accident_manager.png"),
+                    url: require("@/assets/img/ic_inject.png"),
                     title: "安全环保投入"
                 },
                 {
                     id: "fire",
-                    url: require("@/assets/img/ic_accident_manager.png"),
+                    url: require("@/assets/img/ic_fire.png"),
                     title: "消防管理"
                 },
                 {
                     id: "performance",
-                    url: require("@/assets/img/ic_accident_manager.png"),
+                    url: require("@/assets/img/ic_performance.png"),
                     title: "绩效考核"
                 }
             ],

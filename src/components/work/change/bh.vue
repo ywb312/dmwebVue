@@ -2,7 +2,7 @@
     <div>
         <!-- 标题  -->
         <van-nav-bar
-            title="督办"
+            title="闭环"
             left-text="返回"
             fixed
             placeholder
