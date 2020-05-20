@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import {
+	Toast
+} from "vant"
 import store from '../store/index'
 import login from '../views/login.vue'
 import home from '../views/home/home.vue'
@@ -526,8 +529,22 @@ const router = new VueRouter({
 
 // 全局路由钩子函数 控制加载中的显示
 router.beforeEach(function (to, from, next) {
-	store.commit('setIsLoading', true)
-	next();
+	if (to.path == "/") {
+		next();
+	} else {
+		// requireAuth:可以在路由元信息指定哪些页面需要登录权限
+		if (window.localStorage.session_Id) {
+			store.commit('setIsLoading', true)
+			next();
+		} else {
+			Toast({
+				message: "未登录,即将跳转至登录页面",
+			})
+			setTimeout(() => {
+				next("/");
+			}, 2000)
+		}
+	}
 })
 
 router.afterEach(function () {
