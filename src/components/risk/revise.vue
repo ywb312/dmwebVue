@@ -42,6 +42,18 @@
                         <div>
                             <span>潜在后果: {{item.qzhgText}}</span>
                         </div>
+                        <div>
+                            <span>可能性(L): {{item.l}}</span>
+                        </div>
+                        <div>
+                            <span>严重性(E): {{item.e}}</span>
+                        </div>
+                        <div>
+                            <span>频繁度(C): {{item.c}}</span>
+                        </div>
+                        <div>
+                            <span>管控措施: {{item.gname}}</span>
+                        </div>
                     </div>
                 </div>
             </div>

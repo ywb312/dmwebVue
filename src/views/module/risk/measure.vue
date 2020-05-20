@@ -130,9 +130,10 @@ export default {
                             "bean.gid": this.selectData.gid
                         })
                         .then(res => {
+                            let data = eval("(" + res + ")");
                             // 数据有误
-                            if (typeof res != "object") {
-                                this.$toast("服务器连接错误");
+                            if (!data.success) {
+                                this.$toast("删除不成功");
                                 return;
                             }
                             this.clearData();

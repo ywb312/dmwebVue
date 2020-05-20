@@ -175,7 +175,7 @@ export default {
                             let data = eval("(" + res + ")");
                             // 数据有误
                             if (!data.success) {
-                                this.$toast("提交不成功");
+                                this.$toast("删除不成功");
                                 return;
                             }
                             this.clearData();

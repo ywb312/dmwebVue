@@ -54,14 +54,61 @@
                 v-show="selectData.state == 'SHZT004' || selectData.state == 'SHZT001'"
                 @click="auditPass(false)"
             >审核不通过</div>
+            <div class="content" @click="modRisk">修改风险点</div>
+            <div class="content" @click="modCompany">修订危险源</div>
+            <div class="content" @click="modApprove">修订评价</div>
+            <div class="content" @click="setMeasure('add')">增加管理措施</div>
+            <div class="content" @click="setMeasure('mod')">修订管控措施</div>
+            <div class="content" @click="delMeasure">删除管控措施</div>
             <div class="content" @click="goDetail">查看详情</div>
         </van-action-sheet>
+        <!-- 弹窗组 -->
+        <div>
+            <!-- 修改风险点 -->
+            <set-risk
+                :setShow="riskShow"
+                type="mod"
+                :selectData="selectData"
+                @popupClose="riskShow=false"
+                @suc="clearData"
+            ></set-risk>
+            <!-- 修改危险源 -->
+            <set-company
+                :setShow="companyShow"
+                type="mod"
+                :fid="selectData.fid"
+                :selectData="selectData"
+                @popupClose="companyShow=false"
+                @suc="clearData"
+            ></set-company>
+            <!-- 修改评价 -->
+            <company-approve
+                :appShow="approveShow"
+                :selectData="selectData"
+                @popupClose="approveShow=false"
+            ></company-approve>
+            <!-- 新增、修改管控措施 -->
+            <set-measure
+                :setShow="measureShow"
+                :type="measureType"
+                :wid="selectData.wid"
+                :selectData="selectData"
+                @popupClose="measureShow=false"
+                @suc="clearData"
+            ></set-measure>
+        </div>
     </div>
 </template>
 <script>
 // 这是基本渲染功能的组件 公用
 import ViewBox from "@/components/pub/ViewBox.vue";
-// 评价框
+// 风险点
+import setRisk from "@/components/risk/risk/setRisk";
+// 危险源
+import setCompany from "@/components/risk/company/setCompany";
+// 管控措施
+import setMeasure from "@/components/risk/measure/setMeasure";
+// 评价
 import companyApprove from "@/components/risk/company/companyApprove";
 export default {
     name: "auditDetailList",
@@ -72,13 +119,23 @@ export default {
             postData: {
                 url: "",
                 obj: {
+                    "bean.deptid": this.$route.query.deptid,
                     "bean.param": this.$route.query.auditid
                 }
             },
             // 操作面板显示
             popshow: false,
             // 选中项
-            selectData: {}
+            selectData: {},
+            // 修改风险点
+            riskShow: false,
+            // 修改危险源
+            companyShow: false,
+            // 修改评价
+            approveShow: false,
+            // 增、改管控措施
+            measureShow: false,
+            measureType: "add"
         };
     },
     created() {
@@ -137,6 +194,53 @@ export default {
                 });
             }
         },
+        // 风险点
+        modRisk() {
+            this.popshow = false;
+            this.riskShow = true;
+        },
+        // 危险源
+        modCompany() {
+            this.popshow = false;
+            this.companyShow = true;
+        },
+        // 评价
+        modApprove() {
+            this.popshow = false;
+            this.approveShow = true;
+        },
+        // 评价
+        setMeasure(type) {
+            this.popshow = false;
+            this.measureShow = true;
+            this.measureType = type;
+        },
+        // 删除操作
+        delMeasure() {
+            this.popshow = false;
+            let _self = this;
+            this.$dialog
+                .confirm({
+                    title: "删除",
+                    message: "确定执行此操作?"
+                })
+                .then(resolve => {
+                    _self.$api.risk
+                        .measureDelete({
+                            "bean.gid": _self.selectData.gid
+                        })
+                        .then(res => {
+                            let data = eval("(" + res + ")");
+                            // 数据有误
+                            if (!data.success) {
+                                this.$toast("删除不成功");
+                                return;
+                            }
+                            _self.clearData();
+                        });
+                })
+                .catch(reject => {});
+        },
         // 提示框操作成功
         postSuccess() {
             this.popshow = false;
@@ -185,6 +289,9 @@ export default {
     },
     components: {
         ViewBox,
+        setRisk,
+        setCompany,
+        setMeasure,
         companyApprove
     },
     beforeRouteLeave(to, from, next) {

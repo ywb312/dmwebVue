@@ -16,26 +16,32 @@
                     </div>
                     <div class="main">
                         <div>
-                            <span>1.{{item.wname}}</span>
-                            <span>
+                            <p>
+                                <span class="main_title">1.</span>
+                                <span class="main_val">{{item.wname}}</span>
+                            </p>
+                            <p class="main_tag">
                                 <van-tag
                                     size="large"
                                     round
                                     :type="item.grade == 1?'danger':item.grade==2?'warning':'primary'"
                                     :color="item.grade == 3?'yellow':''"
                                 >{{item.grade+"级"}}</van-tag>
-                            </span>
+                            </p>
                         </div>
                         <div v-for="(n,m) in item.child" :key="m">
-                            <span>{{m+2+"."+n.wname}}</span>
-                            <span>
+                            <p>
+                                <span class="main_title">{{m+2+"."}}</span>
+                                <span class="main_val">{{n.wname}}</span>
+                            </p>
+                            <p class="main_tag">
                                 <van-tag
                                     size="large"
                                     round
                                     :type="n.grade == 1?'danger':n.grade==2?'warning':'primary'"
                                     :color="item.grade == 3?'yellow':''"
                                 >{{n.grade+"级"}}</van-tag>
-                            </span>
+                            </p>
                         </div>
                     </div>
                 </div>

@@ -76,7 +76,8 @@ export default {
                 this.$router.push({
                     path: "/risk/auditDetailList",
                     query: {
-                        auditid: obj.auditid
+                        auditid: obj.auditid,
+                        deptid: obj.deptid
                     }
                 });
             }
