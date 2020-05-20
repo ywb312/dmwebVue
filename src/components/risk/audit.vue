@@ -64,7 +64,7 @@ export default {
         btnClick(obj) {
             this.$store.commit("getSelectData", obj);
             //判断是安全环保部
-            if (true) {
+            if (window.localStorage.roleLevel == 4) {
                 this.$router.push({
                     path: "/risk/auditDetailListAn",
                     query: {

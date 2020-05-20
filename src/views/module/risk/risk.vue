@@ -72,6 +72,11 @@ export default {
                     text: "岗位告知卡",
                     id: "gzk",
                     components: "informCard"
+                },
+                {
+                    text: "安环部修订",
+                    id: "revise",
+                    components: "revise"
                 }
             ]
         };
@@ -97,7 +102,8 @@ export default {
         riskChart: resolve => require(["@/components/risk/riskChart"], resolve),
         riskBoard: resolve => require(["@/components/risk/riskBoard"], resolve),
         informCard: resolve =>
-            require(["@/components/risk/informCard"], resolve)
+            require(["@/components/risk/informCard"], resolve),
+        revise: resolve => require(["@/components/risk/revise"], resolve)
     }
 };
 </script>

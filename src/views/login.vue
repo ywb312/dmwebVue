@@ -106,6 +106,7 @@ export default {
             } else if (name.indexOf("厂级") != -1) {
                 roleLevel = "3";
             } else if (
+                name.indexOf("超级管理员") != -1 ||
                 name.indexOf("安全环保部") != -1 ||
                 name.indexOf("安环部") != -1 ||
                 name.indexOf("安全生产委员会") != -1

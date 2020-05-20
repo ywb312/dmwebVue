@@ -81,7 +81,7 @@ export default {
             // 渲染的数据
             rendering: [],
             postData: {
-                url: "/biz/risk/companyRisk/shpjlist.action",
+                url: "biz/risk/companyRisk/shpjlist.action",
                 obj: {
                     "bean.deptid": this.$route.query.deptid,
                     "bean.param": this.$route.query.auditid

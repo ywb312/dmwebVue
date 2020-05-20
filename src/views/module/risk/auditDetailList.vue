@@ -70,7 +70,7 @@ export default {
             // 渲染的数据
             rendering: [],
             postData: {
-                url: "biz/risk/companyRisk/cjshlist.action",
+                url: "",
                 obj: {
                     "bean.param": this.$route.query.auditid
                 }
@@ -80,6 +80,15 @@ export default {
             // 选中项
             selectData: {}
         };
+    },
+    created() {
+        if (window.localStorage.roleLevel == 2) {
+            // 车间
+            this.postData.url = "biz/risk/companyRisk/shlist.action";
+        } else if (window.localStorage.roleLevel == 3) {
+            // 厂级
+            this.postData.url = "biz/risk/companyRisk/cjshlist.action";
+        }
     },
     methods: {
         // 处理请求的数据

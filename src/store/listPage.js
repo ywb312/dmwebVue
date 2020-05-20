@@ -45,9 +45,9 @@ export default [{
     }, {
         "text": "计划查询",
         "id": "scdetail"
-    // }, {
-    //     "text": "专项检查计划",
-    //     "id": "special"
+    }, {
+        "text": "专项检查计划",
+        "id": "special"
     }]
 }, {
     "title": "提醒预警",
@@ -137,6 +137,12 @@ export default [{
         }, {
             "show": "3"
         }, {
+            "show": "4"
+        }]
+    }, {
+        "text": "安环部修订",
+        "id": "revise",
+        "condition": [{
             "show": "4"
         }]
     }]
