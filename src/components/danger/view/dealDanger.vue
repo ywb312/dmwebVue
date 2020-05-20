@@ -107,7 +107,7 @@ export default {
                     this.$toast("服务器连接错误");
                     return;
                 }
-                if (data.cells[0].isOrg == "1") {
+                if (data.cells[0].isOrg && data.cells[0].isOrg == "1") {
                     this.isOrg = true;
                 }
             });
