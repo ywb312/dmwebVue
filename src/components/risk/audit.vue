@@ -63,8 +63,9 @@ export default {
         // 每项按钮点击事件
         btnClick(obj) {
             this.$store.commit("getSelectData", obj);
+            var level = window.localStorage.roleLevel;
             //判断是安全环保部
-            if (window.localStorage.roleLevel == 4) {
+            if (level == 4) {
                 this.$router.push({
                     path: "/risk/auditDetailListAn",
                     query: {
@@ -72,9 +73,17 @@ export default {
                         deptid: obj.deptid
                     }
                 });
-            } else {
+            } else if (level == 3) {
                 this.$router.push({
-                    path: "/risk/auditDetailList",
+                    path: "/risk/auditDetailListChang",
+                    query: {
+                        auditid: obj.auditid,
+                        deptid: obj.deptid
+                    }
+                });
+            } else if (level == 2) {
+                this.$router.push({
+                    path: "/risk/auditDetailListChe",
                     query: {
                         auditid: obj.auditid,
                         deptid: obj.deptid

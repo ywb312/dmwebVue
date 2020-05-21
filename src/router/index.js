@@ -165,10 +165,18 @@ const routes = [{
 			keepAlive: false
 		}
 	},
-	{ //风险管理 审核详情列表
-		path: '/risk/auditDetailList',
-		name: 'auditDeatilListAn',
-		component: () => import('@/views/module/risk/auditDetailList.vue'),
+	{ //风险管理 厂级审核详情列表
+		path: '/risk/auditDetailListChang',
+		name: 'auditDeatilList',
+		component: () => import('@/views/module/risk/auditDetailListChang.vue'),
+		meta: {
+			keepAlive: true
+		}
+	},
+	{ //风险管理 车间审核详情列表
+		path: '/risk/auditDetailListChe',
+		name: 'auditDetailListChe',
+		component: () => import('@/views/module/risk/auditDetailListChe.vue'),
 		meta: {
 			keepAlive: true
 		}

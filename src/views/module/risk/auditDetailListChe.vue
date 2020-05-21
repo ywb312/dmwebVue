@@ -24,17 +24,33 @@
                             </p>
                         </div>
                         <div class="main">
-                            <div>
-                                <span>1.{{item.wname}}</span>
-                                <span>
-                                    <van-tag size="large" round type="primary">{{item.stateText}}</van-tag>
-                                </span>
+                            <div class="noFlex">
+                                <div>
+                                    <p>
+                                        <span class="main_title">{{"("+(index+1)+")"}}</span>
+                                        <span class="main_val">{{item.wname}}</span>
+                                    </p>
+                                    <p class="main_tag">
+                                        <van-tag size="large" round type="primary">{{item.stateText}}</van-tag>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p>项目:{{item.project}}|内容:{{item.content}}</p>
+                                </div>
                             </div>
-                            <div v-for="(n,m) in item.child" :key="m">
-                                <span>{{m+2+"."+n.wname}}</span>
-                                <span>
-                                    <van-tag size="large" round type="primary">{{item.stateText}}</van-tag>
-                                </span>
+                            <div class="noFlex" v-for="(n,m) in item.child" :key="m">
+                                <div>
+                                    <p>
+                                        <span class="main_title">{{"("+(m+1)+")"}}</span>
+                                        <span class="main_val">{{n.wname}}</span>
+                                    </p>
+                                    <p class="main_tag">
+                                        <van-tag size="large" round type="primary">{{n.stateText}}</van-tag>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p>项目:{{n.project}}|内容:{{n.content}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -111,13 +127,13 @@ import setMeasure from "@/components/risk/measure/setMeasure";
 // 评价
 import companyApprove from "@/components/risk/company/companyApprove";
 export default {
-    name: "auditDetailList",
+    name: "auditDetailListChe",
     data() {
         return {
             // 渲染的数据
             rendering: [],
             postData: {
-                url: "",
+                url: "biz/risk/companyRisk/shlist.action",
                 obj: {
                     "bean.deptid": this.$route.query.deptid,
                     "bean.param": this.$route.query.auditid
@@ -135,22 +151,17 @@ export default {
             approveShow: false,
             // 增、改管控措施
             measureShow: false,
-            measureType: "add"
+            measureType: "add",
+            roleLevel: window.localStorage.roleLevel
         };
-    },
-    created() {
-        if (window.localStorage.roleLevel == 2) {
-            // 车间
-            this.postData.url = "biz/risk/companyRisk/shlist.action";
-        } else if (window.localStorage.roleLevel == 3) {
-            // 厂级
-            this.postData.url = "biz/risk/companyRisk/cjshlist.action";
-        }
     },
     methods: {
         // 处理请求的数据
         getRendering(arr) {
-            this.rendering = this.setRes(arr);
+            let _self = this;
+            this.setRes(arr).then(res => {
+                _self.rendering = res;
+            });
         },
         // 每项点击
         btnClick(obj) {
@@ -251,36 +262,41 @@ export default {
             });
         },
         // 设置返还参数
-        setRes(res) {
+        setRes(arr) {
             let _self = this;
             let returnArr = [];
-            // 先对数组进行排序
-            let sortArr = res.sort((a, b) => {
-                return a.name > b.name ? 1 : -1;
-            });
+            function getItem(key, val, arr) {
+                return arr.findIndex(item => item[key] == val);
+            }
             // 如果name,fxtype和上一项的name,fxtype不一致就推入新数组,否则添加子元素
-            Promise.all([
+            return Promise.all([
                 _self.$common.comboList({ sourcename: "FXDLX" }),
-                _self.$common.comboList({ sourcename: "SHZT" })
+                _self.$common.comboList({ sourcename: "SHZT" }),
+                _self.$common.comboList({ sourcename: "GKCSLX" })
             ]).then(res => {
-                sortArr.forEach((item, index, arr) => {
+                arr.forEach((item, index, arr) => {
                     _self.$common.code2Text(item, "fxtype", res[0]);
                     _self.$common.code2Text(item, "state", res[1]);
-                    if (index == 0) {
+                    _self.$common.code2Text(item, "gtype", res[2]);
+                    let fidIndex = getItem("fid", item.fid, returnArr);
+                    if (fidIndex == -1) {
+                        // 风险点不一致 向后新增
                         item.child = [];
                         returnArr.push(item);
-                    } else if (
-                        item.name == arr[index - 1].name &&
-                        item.fxtype == arr[index - 1].fxtype
-                    ) {
-                        returnArr[returnArr.length - 1].child.push(item);
-                    } else {
-                        item.child = [];
-                        returnArr.push(item);
+                    } else if (fidIndex >= 0) {
+                        // 风险点一致 匹配危险源
+                        let widArr = returnArr[fidIndex].child;
+                        let widIndex = getItem("wid", item.wid, widArr);
+                        if (widIndex >= 0) {
+                            widArr[widIndex].child.push(item);
+                        } else if (widIndex == -1) {
+                            item.child = [];
+                            widArr.push(item);
+                        }
                     }
                 });
+                return returnArr;
             });
-            return returnArr;
         },
         // 清空数据 重新加载
         clearData() {
