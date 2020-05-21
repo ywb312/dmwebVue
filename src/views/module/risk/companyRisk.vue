@@ -135,7 +135,7 @@ export default {
         },
         // 跳转至管控措施
         goRouter() {
-            if (window.localStorage["roleLevel"] == "1") {
+            if (this.$common.getLevel() == "1") {
                 return;
             }
             this.$router.push({

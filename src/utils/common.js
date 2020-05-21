@@ -94,5 +94,8 @@ export default {
                 reject(error)
             })
         });
+    },
+    getLevel(){
+        return window.localStorage.roleLevel;
     }
 }

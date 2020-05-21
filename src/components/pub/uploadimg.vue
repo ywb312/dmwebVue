@@ -37,7 +37,7 @@ export default {
             this.dealImage(file.content, 400, base => {
                 file.status = "";
                 file.message = "";
-                file.content = base;
+                file.upUrl = base;
                 this.toParent();
             });
         },
@@ -85,7 +85,7 @@ export default {
         },
         toParent() {
             let arr = this.fileList.map(item => {
-                return item.content;
+                return item.upUrl;
             });
             this.$emit("toImgArr", arr);
         }

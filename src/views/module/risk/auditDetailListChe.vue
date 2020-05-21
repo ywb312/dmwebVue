@@ -152,7 +152,6 @@ export default {
             // 增、改管控措施
             measureShow: false,
             measureType: "add",
-            roleLevel: window.localStorage.roleLevel
         };
     },
     methods: {

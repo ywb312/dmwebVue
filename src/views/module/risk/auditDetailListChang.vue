@@ -183,8 +183,7 @@ export default {
             approveShow: false,
             // 增、改管控措施
             measureShow: false,
-            measureType: "add",
-            roleLevel: window.localStorage.roleLevel
+            measureType: "add"
         };
     },
     methods: {

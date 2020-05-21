@@ -64,30 +64,25 @@ export default {
         btnClick(obj) {
             this.$store.commit("getSelectData", obj);
             var level = window.localStorage.roleLevel;
+            var query = {
+                auditid: obj.auditid,
+                deptid: obj.deptid
+            };
             //判断是安全环保部
             if (level == 4) {
                 this.$router.push({
                     path: "/risk/auditDetailListAn",
-                    query: {
-                        auditid: obj.auditid,
-                        deptid: obj.deptid
-                    }
+                    query
                 });
             } else if (level == 3) {
                 this.$router.push({
                     path: "/risk/auditDetailListChang",
-                    query: {
-                        auditid: obj.auditid,
-                        deptid: obj.deptid
-                    }
+                    query
                 });
             } else if (level == 2) {
                 this.$router.push({
                     path: "/risk/auditDetailListChe",
-                    query: {
-                        auditid: obj.auditid,
-                        deptid: obj.deptid
-                    }
+                    query
                 });
             }
         }

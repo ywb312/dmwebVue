@@ -63,7 +63,7 @@ export default {
                 // 遍历对象数组
                 pageData.page.forEach(element => {
                     element.condition.forEach(item => {
-                        if (item.show == window.localStorage["roleLevel"]) {
+                        if (item.show == this.$common.getLevel()) {
                             let text = item.text || "";
                             element.text = text + element.text;
                             arr.push(element);
