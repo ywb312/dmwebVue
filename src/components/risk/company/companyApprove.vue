@@ -4,9 +4,9 @@
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">危险源评价</div>
                 <van-form @submit="postData" :show-error-message="false">
-                    <picker title="可能性" ref="pickL" :slots="slotsL" @returnMsg="getL"></picker>
-                    <picker title="严重性" ref="pickE" :slots="slotsE" @returnMsg="getE"></picker>
-                    <picker title="频繁度" ref="pickC" :slots="slotsC" @returnMsg="getC"></picker>
+                    <picker title="可能性" ref="pickL" :slots="lecSlotsL" @returnMsg="getL"></picker>
+                    <picker title="严重性" ref="pickE" :slots="lecSlotsE" @returnMsg="getE"></picker>
+                    <picker title="频繁度" ref="pickC" :slots="lecSlotsC" @returnMsg="getC"></picker>
                     <van-button type="info" size="large" native-type="submit">确定</van-button>
                 </van-form>
             </div>
@@ -31,17 +31,6 @@ export default {
         };
     },
     props: ["appShow", "selectData"],
-    created() {
-        this.$common.comboList({ sourcename: "LECDL" }).then(res => {
-            this.slotsL = res;
-        });
-        this.$common.comboList({ sourcename: "BLPL" }).then(res => {
-            this.slotsE = res;
-        });
-        this.$common.comboList({ sourcename: "LECDC" }).then(res => {
-            this.slotsC = res;
-        });
-    },
     methods: {
         // 根据当前页面的配置 对请求入参进行添加筛选
         returnData(option) {
@@ -97,6 +86,17 @@ export default {
     },
     components: {
         picker
+    },
+    computed: {
+        lecSlotsL() {
+            return this.$store.state.lecSlotsL;
+        },
+        lecSlotsE() {
+            return this.$store.state.lecSlotsE;
+        },
+        lecSlotsC() {
+            return this.$store.state.lecSlotsC;
+        }
     }
 };
 </script>

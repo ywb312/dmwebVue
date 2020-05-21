@@ -10,12 +10,7 @@
         />
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
-                <div
-                    class="wrapper"
-                    v-for="(item,index) in rendering"
-                    :key="index"
-                    @click="btnClick(item)"
-                >
+                <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                     <div class="title">
                         <h4>{{index+1+'.'+item.name}}</h4>
                         <p style="min-width:40px">
@@ -23,17 +18,72 @@
                         </p>
                     </div>
                     <div class="main">
-                        <div>
-                            <span>1.{{item.wname}}</span>
-                            <span>
-                                <van-tag size="large" round type="primary">{{item.stateText}}</van-tag>
-                            </span>
+                        <div class="noFlex" @click="btnClick(item)">
+                            <div>
+                                <p>
+                                    <span class="main_title">{{"("+(index+1)+")"}}</span>
+                                    <span class="main_val">{{item.wname}}</span>
+                                </p>
+                                <p class="main_tag">
+                                    <van-tag size="large" round type="primary">{{item.stateText}}</van-tag>
+                                </p>
+                            </div>
+                            <div>
+                                <p>可能性:{{item.l}}|严重性:{{item.e}}|频繁度:{{item.c}}</p>
+                                <p class="main_tag">
+                                    <van-tag
+                                        size="large"
+                                        round
+                                        :type="item.grade == 1?'danger':item.grade==2?'warning':'primary'"
+                                        :color="item.grade == 3?'yellow':''"
+                                    >{{item.grade+"级"}}</van-tag>
+                                </p>
+                            </div>
+                            <div>
+                                <p>
+                                    <span class="main_title">{{item.gtypeText+":"}}</span>
+                                    <span class="main_val">{{item.gname}}</span>
+                                </p>
+                            </div>
                         </div>
-                        <div v-for="(n,m) in item.child" :key="m">
-                            <span>{{m+2+"."+n.wname}}</span>
-                            <span>
-                                <van-tag size="large" round type="primary">{{item.stateText}}</van-tag>
-                            </span>
+                        <div
+                            class="noFlex"
+                            v-for="(n,m) in item.child"
+                            :key="m"
+                            @click="btnClick(n)"
+                        >
+                            <div>
+                                <p>
+                                    <span class="main_title">{{"("+(m+2)+")"}}</span>
+                                    <span class="main_val">{{n.wname}}</span>
+                                </p>
+                                <p class="main_tag">
+                                    <van-tag size="large" round type="primary">{{n.stateText}}</van-tag>
+                                </p>
+                            </div>
+                            <div>
+                                <p>可能性:{{n.l}}|严重性:{{n.e}}|频繁度:{{n.c}}</p>
+                                <p class="main_tag">
+                                    <van-tag
+                                        size="large"
+                                        round
+                                        :type="item.grade == 1?'danger':item.grade==2?'warning':'primary'"
+                                        :color="item.grade == 3?'yellow':''"
+                                    >{{item.grade+"级"}}</van-tag>
+                                </p>
+                            </div>
+                            <div>
+                                <p>
+                                    <span class="main_title">{{n.gtypeText+":"}}</span>
+                                    <span class="main_val">{{n.gname}}</span>
+                                </p>
+                            </div>
+                            <div v-for="(key,val) in n.child" :key="val">
+                                <p>
+                                    <span class="main_title">{{key.gtypeText+":"}}</span>
+                                    <span class="main_val">{{key.gname}}</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -95,12 +145,16 @@ export default {
     methods: {
         // 处理请求的数据
         getRendering(arr) {
-            this.rendering = this.setRes(arr);
+            let _self = this;
+            this.setRes(arr).then(res => {
+                _self.rendering = res;
+            });
         },
         // 每项按钮点击事件
         btnClick(obj) {
             this.$store.commit("getSelectData", obj);
             this.popshow = true;
+            console.log(obj);
             this.selectData = obj;
         },
         approveClick() {
@@ -142,36 +196,41 @@ export default {
             });
         },
         // 设置返还参数
-        setRes(res) {
+        setRes(arr) {
             let _self = this;
             let returnArr = [];
-            // 先对数组进行排序
-            let sortArr = res.sort((a, b) => {
-                return a.name > b.name ? 1 : -1;
-            });
+            function getItem(key, val, arr) {
+                return arr.findIndex(item => item[key] == val);
+            }
             // 如果name,fxtype和上一项的name,fxtype不一致就推入新数组,否则添加子元素
-            Promise.all([
+            return Promise.all([
                 _self.$common.comboList({ sourcename: "FXDLX" }),
-                _self.$common.comboList({ sourcename: "SHZT" })
+                _self.$common.comboList({ sourcename: "SHZT" }),
+                _self.$common.comboList({ sourcename: "GKCSLX" })
             ]).then(res => {
-                sortArr.forEach((item, index, arr) => {
+                arr.forEach((item, index, arr) => {
                     _self.$common.code2Text(item, "fxtype", res[0]);
                     _self.$common.code2Text(item, "state", res[1]);
-                    if (index == 0) {
+                    _self.$common.code2Text(item, "gtype", res[2]);
+                    let fidIndex = getItem("fid", item.fid, returnArr);
+                    if (fidIndex == -1) {
+                        // 风险点不一致 向后新增
                         item.child = [];
                         returnArr.push(item);
-                    } else if (
-                        item.name == arr[index - 1].name &&
-                        item.fxtype == arr[index - 1].fxtype
-                    ) {
-                        returnArr[returnArr.length - 1].child.push(item);
-                    } else {
-                        item.child = [];
-                        returnArr.push(item);
+                    } else if (fidIndex >= 0) {
+                        // 风险点一致 匹配危险源
+                        let widArr = returnArr[fidIndex].child;
+                        let widIndex = getItem("wid", item.wid, widArr);
+                        if (widIndex >= 0) {
+                            widArr[widIndex].child.push(item);
+                        } else if (widIndex == -1) {
+                            item.child = [];
+                            widArr.push(item);
+                        }
                     }
                 });
+                return returnArr;
             });
-            return returnArr;
         },
         // 清空数据 重新加载
         clearData() {

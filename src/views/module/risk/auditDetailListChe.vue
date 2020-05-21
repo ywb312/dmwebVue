@@ -24,21 +24,30 @@
                             </p>
                         </div>
                         <div class="main">
-                            <div class="noFlex">
+                            <div class="noFlex" @click="btnClick(item)">
                                 <div>
                                     <p>
                                         <span class="main_title">{{"("+(index+1)+")"}}</span>
                                         <span class="main_val">{{item.wname}}</span>
                                     </p>
                                     <p class="main_tag">
-                                        <van-tag size="large" round type="primary">{{item.stateText}}</van-tag>
+                                        <van-tag
+                                            size="large"
+                                            round
+                                            type="primary"
+                                        >{{item.stateText}}</van-tag>
                                     </p>
                                 </div>
                                 <div>
                                     <p>项目:{{item.project}}|内容:{{item.content}}</p>
                                 </div>
                             </div>
-                            <div class="noFlex" v-for="(n,m) in item.child" :key="m">
+                            <div
+                                class="noFlex"
+                                v-for="(n,m) in item.child"
+                                :key="m"
+                                @click="btnClick(n)"
+                            >
                                 <div>
                                     <p>
                                         <span class="main_title">{{"("+(m+1)+")"}}</span>
@@ -151,7 +160,7 @@ export default {
             approveShow: false,
             // 增、改管控措施
             measureShow: false,
-            measureType: "add",
+            measureType: "add"
         };
     },
     methods: {

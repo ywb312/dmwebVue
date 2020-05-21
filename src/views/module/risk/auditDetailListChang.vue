@@ -11,12 +11,7 @@
         <div>
             <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
                 <div slot="views">
-                    <div
-                        class="wrapper"
-                        v-for="(item,index) in rendering"
-                        :key="index"
-                        @click="btnClick(item)"
-                    >
+                    <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                         <div class="title">
                             <h4>{{index+1+'.'+item.name}}</h4>
                             <p style="min-width:40px">
@@ -24,7 +19,7 @@
                             </p>
                         </div>
                         <div class="main">
-                            <div class="noFlex">
+                            <div class="noFlex" @click="btnClick(item)">
                                 <div>
                                     <p>
                                         <span class="main_title">{{"("+(index+1)+")"}}</span>
@@ -56,7 +51,12 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="noFlex" v-for="(n,m) in item.child" :key="m">
+                            <div
+                                class="noFlex"
+                                v-for="(n,m) in item.child"
+                                :key="m"
+                                @click="btnClick(n)"
+                            >
                                 <div>
                                     <p>
                                         <span class="main_title">{{"("+(m+2)+")"}}</span>
@@ -75,6 +75,12 @@
                                             :type="item.grade == 1?'danger':item.grade==2?'warning':'primary'"
                                             :color="item.grade == 3?'yellow':''"
                                         >{{item.grade+"级"}}</van-tag>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p>
+                                        <span class="main_title">{{n.gtypeText+":"}}</span>
+                                        <span class="main_val">{{n.gname}}</span>
                                     </p>
                                 </div>
                                 <div v-for="(key,val) in n.child" :key="val">

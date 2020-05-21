@@ -68,7 +68,9 @@ export default {
         };
     },
     created() {
-        this.rendering = this.setData(this.selectData);
+        this.setData(this.selectData).then(res=>{
+            this.rendering = res;
+        });
     },
     methods: {
         setData(obj) {
@@ -77,7 +79,7 @@ export default {
             delete obj.child;
             arr.push(obj);
             let _self = this;
-            Promise.all([
+            return Promise.all([
                 _self.$common.comboList({ sourcename: "KNFS" }),
                 _self.$common.comboList({ sourcename: "YXFWEI" }),
                 _self.$common.comboList({ sourcename: "QZHG" }),
@@ -89,8 +91,8 @@ export default {
                     _self.$common.code2Text(element, "qzhg", res[2]);
                     _self.$common.code2Text(element, "gtype", res[3]);
                 });
+                return arr;
             });
-            return arr;
         }
     },
     computed: {
