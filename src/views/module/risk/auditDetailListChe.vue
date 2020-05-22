@@ -151,26 +151,41 @@ export default {
                 "bean.cid": this.selectData.cid,
                 "bean.param": this.$route.query.auditid
             };
+            let _self = this;
             if (bol) {
-                this.$api.risk.auditPass(obj).then(res => {
-                    let data = eval("(" + res + ")");
-                    // 数据有误
-                    if (!data.success) {
-                        this.$toast("提交不成功");
-                        return;
-                    }
-                    this.postSuccess();
-                });
+                this.$dialog
+                    .confirm({
+                        title: "审核通过",
+                        message: "确定执行此操作?"
+                    })
+                    .then(resolve => {
+                        _self.$api.risk.auditPass(obj).then(res => {
+                            let data = eval("(" + res + ")");
+                            // 数据有误
+                            if (!data.success) {
+                                _self.$toast("提交不成功");
+                                return;
+                            }
+                            _self.postSuccess();
+                        });
+                    });
             } else {
-                this.$api.risk.auditNoPass(obj).then(res => {
-                    let data = eval("(" + res + ")");
-                    // 数据有误
-                    if (!data.success) {
-                        this.$toast("提交不成功");
-                        return;
-                    }
-                    this.postSuccess();
-                });
+                this.$dialog
+                    .confirm({
+                        title: "审核不通过",
+                        message: "确定执行此操作?"
+                    })
+                    .then(resolve => {
+                        _self.$api.risk.auditNoPass(obj).then(res => {
+                            let data = eval("(" + res + ")");
+                            // 数据有误
+                            if (!data.success) {
+                                _self.$toast("提交不成功");
+                                return;
+                            }
+                            _self.postSuccess();
+                        });
+                    });
             }
         },
         // 风险点

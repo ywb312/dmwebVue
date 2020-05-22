@@ -78,8 +78,9 @@ export default {
             if (obj.child) {
                 arr.push(...obj.child);
                 delete obj.child;
+            } else {
+                arr.push(obj);
             }
-            arr.push(obj);
             let _self = this;
             return Promise.all([
                 _self.$common.comboList({ sourcename: "KNFS" }),

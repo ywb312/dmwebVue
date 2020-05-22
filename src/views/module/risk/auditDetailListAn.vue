@@ -62,21 +62,10 @@
         <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->
         <van-action-sheet v-model="popshow" cancel-text="取消" close-on-click-action>
-            <div
-                class="content"
-                v-show="selectData.state == 'SHZT004' || selectData.state == 'SHZT001'"
-                @click="auditPass"
-            >审核通过</div>
-            <div
-                class="content"
-                v-show="selectData.state == 'SHZT002'&&selectData.wid"
-                @click="approveClick"
-            >评价</div>
-            <div
-                class="content"
-                v-show="selectData.state == 'SHZT002'&&selectData.wid"
-                @click="goMeaSure"
-            >管控措施</div>
+            <div v-show="selectData.state == 'SHZT004' || selectData.state == 'SHZT001'">
+                <div class="content" @click="auditPass">审核通过</div>
+                <div class="content" @click="approveClick">修订评价</div>
+            </div>
             <div class="content" @click="goDetail">查看详情</div>
         </van-action-sheet>
         <!-- 组件框 -->
@@ -109,9 +98,7 @@ export default {
             },
             popshow: false,
             approveShow: false,
-            selectData: {},
-            // 点击类型
-            clickType: ""
+            selectData: {}
         };
     },
     methods: {
@@ -125,22 +112,12 @@ export default {
         // 每项点击
         btnClick(obj, type) {
             this.$store.commit("getSelectData", obj);
-            this.clickType = type;
             this.selectData = obj;
             this.popshow = true;
         },
         approveClick() {
             this.popshow = false;
             this.approveShow = true;
-        },
-        goMeaSure() {
-            this.popshow = false;
-            this.$router.push({
-                path: "/risk/measure",
-                query: {
-                    wid: this.$route.query.auditid
-                }
-            });
         },
         goDetail() {
             this.popshow = false;
@@ -153,19 +130,27 @@ export default {
             let obj = {
                 "bean.auditid": this.selectData.auditid
             };
-            this.$api.risk.auidtPassAn(obj).then(res => {
-                let data = eval("(" + res + ")");
-                // 数据有误
-                if (!data.success) {
-                    this.$toast("提交不成功");
-                    return;
-                }
-                this.popshow = false;
-                this.$toast({
-                    message: "操作成功",
-                    position: "bottom"
+            let _self = this;
+            this.$dialog
+                .confirm({
+                    title: "审核通过",
+                    message: "确定执行此操作?"
+                })
+                .then(resolve => {
+                    _self.$api.risk.auidtPassAn(obj).then(res => {
+                        let data = eval("(" + res + ")");
+                        // 数据有误
+                        if (!data.success) {
+                            _self.$toast("提交不成功");
+                            return;
+                        }
+                        _self.popshow = false;
+                        _self.$toast({
+                            message: "操作成功",
+                            position: "bottom"
+                        });
+                    });
                 });
-            });
         },
         // 设置返还参数
         setRes(arr) {
