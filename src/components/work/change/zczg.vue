@@ -39,7 +39,13 @@
                 placeholder="整改情况"
                 :rules="[{ required: true, message: '请填写整改情况' }]"
             />
-            <date-pick title="整改时间" type="datetime" time="before" placeholder="请选择完成时间" @returnDate="getZgsqsj"></date-pick>
+            <date-pick
+                title="整改时间"
+                type="datetime"
+                time="before"
+                placeholder="请选择完成时间"
+                @returnDate="getZgsqsj"
+            ></date-pick>
             <van-field
                 label="验收说明"
                 v-model="ysqk"

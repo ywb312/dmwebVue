@@ -35,7 +35,7 @@
                     placeholder="整改治理要求"
                     :rules="[{ required: true, message: '请填写整改治理要求' }]"
                 />
-                <date-pick title="整改截止时间" time="after" @returnDate="getZgdate"></date-pick>
+                <date-pick title="整改截止时间" type="datetime" time="after" @returnDate="getZgdate"></date-pick>
                 <van-field
                     label="填表人"
                     v-model="tbr"
@@ -44,7 +44,6 @@
                     :rules="[{ required: true, message: '请填写填表人' }]"
                 />
                 <van-field label="备注" placeholder="请输入备注" v-model="memo" />
-                <uploadimg @toImgArr="getImgArr"></uploadimg>
             </div>
             <van-button class="btn" type="info" size="large" native-type="submit">提交</van-button>
         </van-form>
@@ -54,7 +53,6 @@
 import picker from "@/components/pub/picker";
 import datePick from "@/components/pub/datePick";
 import tree from "@/components/pub/tree";
-import uploadimg from "@/components/pub/uploadimg";
 export default {
     data() {
         return {
@@ -66,7 +64,6 @@ export default {
             zgdate: "",
             tbr: "",
             memo: "",
-            upImgArr: [],
             typeArr: [
                 {
                     text: "上报",
@@ -97,10 +94,6 @@ export default {
         getCompany(v) {
             this.zgzrdw = v;
         },
-        // 获取图片数组
-        getImgArr(v) {
-            this.upImgArr = v;
-        },
         update() {
             let _self = this;
             _self.$store.commit("setIsLoading", true);
@@ -120,9 +113,6 @@ export default {
                 _self.postData["sbzpEntity.zgdate"] = this.zgdate;
                 _self.postData["sbzpEntity.tbr"] = this.tbr;
                 _self.postData["sbzpEntity.memo"] = this.memo;
-                _self.postData["sbzpEntity.img"] = JSON.stringify(
-                    this.upImgArr
-                );
             } else if (this.type == "zczg") {
                 // 自查自改
                 _self.postData["variable.keys"] =
@@ -166,8 +156,7 @@ export default {
     components: {
         picker,
         datePick,
-        tree,
-        uploadimg
+        tree
     }
 };
 </script>

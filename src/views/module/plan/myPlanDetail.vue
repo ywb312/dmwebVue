@@ -23,7 +23,7 @@
                     v-model="tbr"
                     :rules="[{ required: true, message: '1' }]"
                 ></van-field>
-                <date-pick title="检查日期" time="after" @returnDate="getTime"></date-pick>
+                <date-pick title="检查日期" type="datetime" time="before" @returnDate="getTime"></date-pick>
                 <div class="setBtnGroup">
                     <van-button plain type="info" native-type="button" @click="allChange('2')">落实</van-button>
                     <van-button plain type="info" native-type="button" @click="allChange('0')">不涉及</van-button>

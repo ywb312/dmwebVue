@@ -25,7 +25,12 @@
                 </template>
             </van-field>
             <pick title="可能发生事故" :slots="knfsSlots" @returnMsg="getKnfs"></pick>
-            <pick title="隐患等级" :slots="crLevelSlots" @returnMsg="getCrLevel"></pick>
+            <pick
+                v-if="prtype=='YHLX001'"
+                title="隐患等级"
+                :slots="crLevelSlots"
+                @returnMsg="getCrLevel"
+            ></pick>
             <pick
                 v-if="prtype=='YHLX001'"
                 title="隐患分类"

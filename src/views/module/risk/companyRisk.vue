@@ -136,6 +136,7 @@ export default {
         // 跳转至管控措施
         goRouter() {
             if (this.$common.getLevel() == "1") {
+                this.$toast("没有权限！");
                 return;
             }
             this.$router.push({
@@ -152,8 +153,10 @@ export default {
             } else if (item.name == "删除") {
                 this.delData();
             } else if (item.name == "评价") {
-                if (window.localStorage.roleLevel > 2) {
+                if (this.$common.getLevel() > 1) {
                     this.approveShow = true;
+                } else {
+                    this.$toast("没有权限！");
                 }
             } else if (item.name == "查看管控措施") {
                 this.goRouter();

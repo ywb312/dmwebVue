@@ -50,14 +50,12 @@
                 />
                 <van-field label="备注" placeholder="请输入备注" v-model="memo" />
             </div>
-            <!-- <uploadimg @toImgArr="getImgArr"></uploadimg> -->
             <van-button class="btn" type="info" size="large" native-type="submit">提交</van-button>
         </van-form>
     </div>
 </template>
 <script>
 import datePick from "@/components/pub/datePick";
-// import uploadimg from "@/components/pub/uploadimg";
 export default {
     data() {
         return {
@@ -68,7 +66,6 @@ export default {
             pgdate: "",
             tbr: "",
             memo: ""
-            // upImgArr: [],
         };
     },
     props: ["postData"],
@@ -77,10 +74,6 @@ export default {
         getPgdate(v) {
             this.pgdate = v;
         },
-        // 获取图片数组
-        // getImgArr(v) {
-        //     this.upImgArr = v;
-        // },
         update() {
             let _self = this;
             _self.$store.commit("setIsLoading", true);
@@ -96,9 +89,6 @@ export default {
                 _self.postData["zdpgEntity.pgdate"] = this.pgdate;
                 _self.postData["zdpgEntity.tbr"] = this.tbr;
                 _self.postData["zdpgEntity.memo"] = this.memo;
-                // _self.postData["zdpgEntity.img"] = JSON.stringify(
-                //     this.upImgArr
-                // );
             } else if (this.isPass == "noPass") {
                 _self.postData["variable.keys"] = "nodepass,comments";
                 _self.postData["variable.types"] = "B,S";
@@ -132,7 +122,6 @@ export default {
     },
     components: {
         datePick
-        // uploadimg
     }
 };
 </script>
