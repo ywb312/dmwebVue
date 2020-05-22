@@ -38,6 +38,7 @@ export default {
                 "bean.wid": this.selectData.wid,
                 "bean.wname": this.selectData.wname
             };
+            obj["bean.pjid"] = this.selectData.pjid || "";
             for (const key in this.getData) {
                 obj["bean." + key] = this.getData[key];
             }

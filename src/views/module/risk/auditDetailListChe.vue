@@ -11,12 +11,7 @@
         <div>
             <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
                 <div slot="views">
-                    <div
-                        class="wrapper"
-                        v-for="(item,index) in rendering"
-                        :key="index"
-                        @click="btnClick(item)"
-                    >
+                    <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                         <div class="title">
                             <h4>{{index+1+'.'+item.name}}</h4>
                             <p style="min-width:40px">
@@ -24,24 +19,6 @@
                             </p>
                         </div>
                         <div class="main">
-                            <div class="noFlex" @click="btnClick(item)">
-                                <div>
-                                    <p>
-                                        <span class="main_title">{{"("+(index+1)+")"}}</span>
-                                        <span class="main_val">{{item.wname}}</span>
-                                    </p>
-                                    <p class="main_tag">
-                                        <van-tag
-                                            size="large"
-                                            round
-                                            type="primary"
-                                        >{{item.stateText}}</van-tag>
-                                    </p>
-                                </div>
-                                <div>
-                                    <p>项目:{{item.project}}|内容:{{item.content}}</p>
-                                </div>
-                            </div>
                             <div
                                 class="noFlex"
                                 v-for="(n,m) in item.child"
@@ -69,22 +46,16 @@
         <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->
         <van-action-sheet v-model="popshow" cancel-text="取消" close-on-click-action>
-            <div
-                class="content"
-                v-show="selectData.state == 'SHZT004' || selectData.state == 'SHZT001'"
-                @click="auditPass(true)"
-            >审核通过</div>
-            <div
-                class="content"
-                v-show="selectData.state == 'SHZT004' || selectData.state == 'SHZT001'"
-                @click="auditPass(false)"
-            >审核不通过</div>
-            <div class="content" @click="modRisk">修改风险点</div>
-            <div class="content" @click="modCompany">修订危险源</div>
-            <div class="content" @click="modApprove">修订评价</div>
-            <div class="content" @click="setMeasure('add')">增加管理措施</div>
-            <div class="content" @click="setMeasure('mod')">修订管控措施</div>
-            <div class="content" @click="delMeasure">删除管控措施</div>
+            <div v-if="selectData.state == 'SHZT004' || selectData.state == 'SHZT001'">
+                <div class="content" @click="auditPass(true)">审核通过</div>
+                <div class="content" @click="auditPass(false)">审核不通过</div>
+                <div class="content" @click="modRisk">修改风险点</div>
+                <div class="content" @click="modCompany">修订危险源</div>
+            </div>
+            <div v-else>
+                <div class="content" @click="modApprove">评价</div>
+                <div class="content" @click="goMeasure">管理措施</div>
+            </div>
             <div class="content" @click="goDetail">查看详情</div>
         </van-action-sheet>
         <!-- 弹窗组 -->
@@ -112,15 +83,6 @@
                 :selectData="selectData"
                 @popupClose="approveShow=false"
             ></company-approve>
-            <!-- 新增、修改管控措施 -->
-            <set-measure
-                :setShow="measureShow"
-                :type="measureType"
-                :wid="selectData.wid"
-                :selectData="selectData"
-                @popupClose="measureShow=false"
-                @suc="clearData"
-            ></set-measure>
         </div>
     </div>
 </template>
@@ -131,8 +93,6 @@ import ViewBox from "@/components/pub/ViewBox.vue";
 import setRisk from "@/components/risk/risk/setRisk";
 // 危险源
 import setCompany from "@/components/risk/company/setCompany";
-// 管控措施
-import setMeasure from "@/components/risk/measure/setMeasure";
 // 评价
 import companyApprove from "@/components/risk/company/companyApprove";
 export default {
@@ -218,6 +178,17 @@ export default {
             this.popshow = false;
             this.riskShow = true;
         },
+        // 管控措施
+        goMeasure() {
+            this.popshow = false;
+            this.$router.push({
+                path: "/risk/measure",
+                query: {
+                    wid: this.selectData.wid,
+                    deptid: this.$route.query.deptid
+                }
+            });
+        },
         // 危险源
         modCompany() {
             this.popshow = false;
@@ -225,40 +196,17 @@ export default {
         },
         // 评价
         modApprove() {
-            this.popshow = false;
-            this.approveShow = true;
-        },
-        // 评价
-        setMeasure(type) {
-            this.popshow = false;
-            this.measureShow = true;
-            this.measureType = type;
-        },
-        // 删除操作
-        delMeasure() {
-            this.popshow = false;
-            let _self = this;
-            this.$dialog
-                .confirm({
-                    title: "删除",
-                    message: "确定执行此操作?"
+            this.$api.pub
+                .showPage("biz/risk/pj/doModify.action", {
+                    "bean.wid": this.selectData.wid
                 })
-                .then(resolve => {
-                    _self.$api.risk
-                        .measureDelete({
-                            "bean.gid": _self.selectData.gid
-                        })
-                        .then(res => {
-                            let data = eval("(" + res + ")");
-                            // 数据有误
-                            if (!data.success) {
-                                this.$toast("删除不成功");
-                                return;
-                            }
-                            _self.clearData();
-                        });
-                })
-                .catch(reject => {});
+                .then(res => {
+                    if (res[0] != null) {
+                        this.selectData.pjid = res[0].pjid;
+                    }
+                    this.popshow = false;
+                    this.approveShow = true;
+                });
         },
         // 提示框操作成功
         postSuccess() {
@@ -289,16 +237,27 @@ export default {
                     let fidIndex = getItem("fid", item.fid, returnArr);
                     if (fidIndex == -1) {
                         // 风险点不一致 向后新增
-                        item.child = [];
+                        let obj = JSON.parse(JSON.stringify(item));
+                        // 加入到其危险源
+                        item.child = [obj];
+                        // 加入到其管控措施
+                        item.child[0].child = [obj];
+                        // 推入数组
                         returnArr.push(item);
                     } else if (fidIndex >= 0) {
                         // 风险点一致 匹配危险源
                         let widArr = returnArr[fidIndex].child;
                         let widIndex = getItem("wid", item.wid, widArr);
                         if (widIndex >= 0) {
+                            // 危险源不一致 向后新增
+                            if (!widArr[widIndex].child) {
+                                widArr[widIndex].child = [];
+                            }
                             widArr[widIndex].child.push(item);
                         } else if (widIndex == -1) {
-                            item.child = [];
+                            // 危险源一致 匹配危险源
+                            let obj = JSON.parse(JSON.stringify(item));
+                            item.child = [obj];
                             widArr.push(item);
                         }
                     }
@@ -315,7 +274,6 @@ export default {
         ViewBox,
         setRisk,
         setCompany,
-        setMeasure,
         companyApprove
     },
     beforeRouteLeave(to, from, next) {

@@ -68,15 +68,17 @@ export default {
         };
     },
     created() {
-        this.setData(this.selectData).then(res=>{
+        this.setData(this.selectData).then(res => {
             this.rendering = res;
         });
     },
     methods: {
         setData(obj) {
             let arr = [];
-            arr.push(...obj.child);
-            delete obj.child;
+            if (obj.child) {
+                arr.push(...obj.child);
+                delete obj.child;
+            }
             arr.push(obj);
             let _self = this;
             return Promise.all([

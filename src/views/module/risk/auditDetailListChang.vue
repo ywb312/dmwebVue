@@ -19,47 +19,15 @@
                             </p>
                         </div>
                         <div class="main">
-                            <div class="noFlex" @click="btnClick(item)">
-                                <div>
-                                    <p>
-                                        <span class="main_title">{{"("+(index+1)+")"}}</span>
-                                        <span class="main_val">{{item.wname}}</span>
-                                    </p>
-                                    <p class="main_tag">
-                                        <van-tag
-                                            size="large"
-                                            round
-                                            type="primary"
-                                        >{{item.stateText}}</van-tag>
-                                    </p>
-                                </div>
-                                <div>
-                                    <p>可能性:{{item.l}}|严重性:{{item.e}}|频繁度:{{item.c}}</p>
-                                    <p class="main_tag">
-                                        <van-tag
-                                            size="large"
-                                            round
-                                            :type="item.grade == 1?'danger':item.grade==2?'warning':'primary'"
-                                            :color="item.grade == 3?'yellow':''"
-                                        >{{item.grade+"级"}}</van-tag>
-                                    </p>
-                                </div>
-                                <div>
-                                    <p>
-                                        <span class="main_title">{{item.gtypeText+":"}}</span>
-                                        <span class="main_val">{{item.gname}}</span>
-                                    </p>
-                                </div>
-                            </div>
                             <div
                                 class="noFlex"
                                 v-for="(n,m) in item.child"
                                 :key="m"
-                                @click="btnClick(n)"
+                                @click="btnClick(n,'wid')"
                             >
                                 <div>
                                     <p>
-                                        <span class="main_title">{{"("+(m+2)+")"}}</span>
+                                        <span class="main_title">{{"("+(m+1)+")"}}</span>
                                         <span class="main_val">{{n.wname}}</span>
                                     </p>
                                     <p class="main_tag">
@@ -77,13 +45,11 @@
                                         >{{item.grade+"级"}}</van-tag>
                                     </p>
                                 </div>
-                                <div>
-                                    <p>
-                                        <span class="main_title">{{n.gtypeText+":"}}</span>
-                                        <span class="main_val">{{n.gname}}</span>
-                                    </p>
-                                </div>
-                                <div v-for="(key,val) in n.child" :key="val">
+                                <div
+                                    v-for="(key,val) in n.child"
+                                    @click.stop="btnClick(key,'gid')"
+                                    :key="val"
+                                >
                                     <p>
                                         <span class="main_title">{{key.gtypeText+":"}}</span>
                                         <span class="main_val">{{key.gname}}</span>
@@ -98,22 +64,16 @@
         <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->
         <van-action-sheet v-model="popshow" cancel-text="取消" close-on-click-action>
-            <div
-                class="content"
-                v-show="selectData.state == 'SHZT004' || selectData.state == 'SHZT001'"
-                @click="auditPass(true)"
-            >审核通过</div>
-            <div
-                class="content"
-                v-show="selectData.state == 'SHZT004' || selectData.state == 'SHZT001'"
-                @click="auditPass(false)"
-            >审核不通过</div>
-            <div class="content" @click="modRisk">修改风险点</div>
-            <div class="content" @click="modCompany">修订危险源</div>
-            <div class="content" @click="modApprove">修订评价</div>
-            <div class="content" @click="setMeasure('add')">增加管理措施</div>
-            <div class="content" @click="setMeasure('mod')">修订管控措施</div>
-            <div class="content" @click="delMeasure">删除管控措施</div>
+            <div v-if="selectData.state == 'SHZT004' || selectData.state == 'SHZT001'">
+                <div class="content" @click="auditPass(true)">审核通过</div>
+                <div class="content" @click="auditPass(false)">审核不通过</div>
+                <div class="content" @click="modRisk">修改风险点</div>
+                <div class="content" v-if="clickType =='wid'" @click="modCompany">修订危险源</div>
+                <div class="content" v-if="clickType =='wid'" @click="modApprove">修订评价</div>
+                <div class="content" v-if="clickType =='gid'" @click="setMeasure('add')">增加管理措施</div>
+                <div class="content" v-if="clickType =='gid'" @click="setMeasure('mod')">修订管控措施</div>
+                <div class="content" v-if="clickType =='gid'" @click="delMeasure">删除管控措施</div>
+            </div>
             <div class="content" @click="goDetail">查看详情</div>
         </van-action-sheet>
         <!-- 弹窗组 -->
@@ -179,6 +139,8 @@ export default {
             },
             // 操作面板显示
             popshow: false,
+            // 点击类型
+            clickType: "",
             // 选中项
             selectData: {},
             // 修改风险点
@@ -201,10 +163,11 @@ export default {
             });
         },
         // 每项点击
-        btnClick(obj) {
+        btnClick(obj, type) {
             this.$store.commit("getSelectData", obj);
-            this.popshow = true;
+            this.clickType = type;
             this.selectData = obj;
+            this.popshow = true;
         },
         // 查看详情按钮点击
         goDetail() {
@@ -216,30 +179,49 @@ export default {
         // 审核通过/不通过点击
         auditPass(bol) {
             this.popshow = false;
+            let _self = this;
             let obj = {
                 "bean.cid": this.selectData.cid,
                 "bean.param": this.$route.query.auditid
             };
             if (bol) {
-                this.$api.risk.auditPass(obj).then(res => {
-                    let data = eval("(" + res + ")");
-                    // 数据有误
-                    if (!data.success) {
-                        this.$toast("提交不成功");
-                        return;
-                    }
-                    this.postSuccess();
-                });
+                this.$dialog
+                    .confirm({
+                        title: "审核通过",
+                        message: "确定执行此操作?"
+                    })
+                    .then(resolve => {
+                        _self.$api.risk
+                            .auditPass(obj)
+                            .then(res => {
+                                let data = eval("(" + res + ")");
+                                // 数据有误
+                                if (!data.success) {
+                                    _self.$toast("提交不成功");
+                                    return;
+                                }
+                                _self.postSuccess();
+                            })
+                            .catch(reject => {});
+                    });
             } else {
-                this.$api.risk.auditNoPass(obj).then(res => {
-                    let data = eval("(" + res + ")");
-                    // 数据有误
-                    if (!data.success) {
-                        this.$toast("提交不成功");
-                        return;
-                    }
-                    this.postSuccess();
-                });
+                this.$dialog
+                    .confirm({
+                        title: "审核不通过",
+                        message: "确定执行此操作?"
+                    })
+                    .then(resolve => {
+                        _self.$api.risk.auditNoPass(obj).then(res => {
+                            let data = eval("(" + res + ")");
+                            // 数据有误
+                            if (!data.success) {
+                                _self.$toast("提交不成功");
+                                return;
+                            }
+                            _self.postSuccess();
+                        });
+                    })
+                    .catch(reject => {});
             }
         },
         // 风险点
@@ -318,16 +300,28 @@ export default {
                     let fidIndex = getItem("fid", item.fid, returnArr);
                     if (fidIndex == -1) {
                         // 风险点不一致 向后新增
-                        item.child = [];
+                        // 深拷贝
+                        let obj = JSON.parse(JSON.stringify(item));
+                        // 加入到其危险源
+                        item.child = [obj];
+                        // 加入到其管控措施
+                        item.child[0].child = [obj];
+                        // 推入数组
                         returnArr.push(item);
                     } else if (fidIndex >= 0) {
                         // 风险点一致 匹配危险源
                         let widArr = returnArr[fidIndex].child;
                         let widIndex = getItem("wid", item.wid, widArr);
                         if (widIndex >= 0) {
+                            // 危险源不一致 向后新增
+                            if (!widArr[widIndex].child) {
+                                widArr[widIndex].child = [];
+                            }
                             widArr[widIndex].child.push(item);
                         } else if (widIndex == -1) {
-                            item.child = [];
+                            // 危险源一致 匹配危险源
+                            let obj = JSON.parse(JSON.stringify(item));
+                            item.child = [obj];
                             widArr.push(item);
                         }
                     }

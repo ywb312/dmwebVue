@@ -86,6 +86,11 @@ export default {
             type: "add"
         };
     },
+    created() {
+        if (this.$route.query.deptid) {
+            this.postData.obj["bean.deptid"] = this.$route.query.deptid;
+        }
+    },
     methods: {
         // 获取当前页面数据
         getRendering(arr) {

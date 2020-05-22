@@ -26,7 +26,7 @@ function companyRiskDelete(data) {
 }
 // 危险源   新增评价
 function approveAdd(data) {
-    return axios.post("biz/risk/companyRisk/doModifySave.action", data);
+    return axios.post("biz/risk/pj/doAddSave.action", data);
 }
 
 // 管控措施 新增

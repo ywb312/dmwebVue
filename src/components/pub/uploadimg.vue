@@ -85,7 +85,7 @@ export default {
         },
         toParent() {
             let arr = this.fileList.map(item => {
-                return item.upUrl;
+                return item.upUrl.substring(item.upUrl.indexOf(",") + 1);
             });
             this.$emit("toImgArr", arr);
         }

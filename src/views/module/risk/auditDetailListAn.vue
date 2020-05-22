@@ -18,43 +18,15 @@
                         </p>
                     </div>
                     <div class="main">
-                        <div class="noFlex" @click="btnClick(item)">
-                            <div>
-                                <p>
-                                    <span class="main_title">{{"("+(index+1)+")"}}</span>
-                                    <span class="main_val">{{item.wname}}</span>
-                                </p>
-                                <p class="main_tag">
-                                    <van-tag size="large" round type="primary">{{item.stateText}}</van-tag>
-                                </p>
-                            </div>
-                            <div>
-                                <p>可能性:{{item.l}}|严重性:{{item.e}}|频繁度:{{item.c}}</p>
-                                <p class="main_tag">
-                                    <van-tag
-                                        size="large"
-                                        round
-                                        :type="item.grade == 1?'danger':item.grade==2?'warning':'primary'"
-                                        :color="item.grade == 3?'yellow':''"
-                                    >{{item.grade+"级"}}</van-tag>
-                                </p>
-                            </div>
-                            <div>
-                                <p>
-                                    <span class="main_title">{{item.gtypeText+":"}}</span>
-                                    <span class="main_val">{{item.gname}}</span>
-                                </p>
-                            </div>
-                        </div>
                         <div
                             class="noFlex"
                             v-for="(n,m) in item.child"
                             :key="m"
-                            @click="btnClick(n)"
+                            @click="btnClick(n,'wid')"
                         >
                             <div>
                                 <p>
-                                    <span class="main_title">{{"("+(m+2)+")"}}</span>
+                                    <span class="main_title">{{"("+(m+1)+")"}}</span>
                                     <span class="main_val">{{n.wname}}</span>
                                 </p>
                                 <p class="main_tag">
@@ -72,13 +44,11 @@
                                     >{{item.grade+"级"}}</van-tag>
                                 </p>
                             </div>
-                            <div>
-                                <p>
-                                    <span class="main_title">{{n.gtypeText+":"}}</span>
-                                    <span class="main_val">{{n.gname}}</span>
-                                </p>
-                            </div>
-                            <div v-for="(key,val) in n.child" :key="val">
+                            <div
+                                v-for="(key,val) in n.child"
+                                @click.stop="btnClick(key,'gid')"
+                                :key="val"
+                            >
                                 <p>
                                     <span class="main_title">{{key.gtypeText+":"}}</span>
                                     <span class="main_val">{{key.gname}}</span>
@@ -139,7 +109,9 @@ export default {
             },
             popshow: false,
             approveShow: false,
-            selectData: {}
+            selectData: {},
+            // 点击类型
+            clickType: ""
         };
     },
     methods: {
@@ -150,12 +122,12 @@ export default {
                 _self.rendering = res;
             });
         },
-        // 每项按钮点击事件
-        btnClick(obj) {
+        // 每项点击
+        btnClick(obj, type) {
             this.$store.commit("getSelectData", obj);
-            this.popshow = true;
-            console.log(obj);
+            this.clickType = type;
             this.selectData = obj;
+            this.popshow = true;
         },
         approveClick() {
             this.popshow = false;
@@ -215,16 +187,28 @@ export default {
                     let fidIndex = getItem("fid", item.fid, returnArr);
                     if (fidIndex == -1) {
                         // 风险点不一致 向后新增
-                        item.child = [];
+                        // 深拷贝
+                        let obj = JSON.parse(JSON.stringify(item));
+                        // 加入到其危险源
+                        item.child = [obj];
+                        // 加入到其管控措施
+                        item.child[0].child = [obj];
+                        // 推入数组
                         returnArr.push(item);
                     } else if (fidIndex >= 0) {
                         // 风险点一致 匹配危险源
                         let widArr = returnArr[fidIndex].child;
                         let widIndex = getItem("wid", item.wid, widArr);
                         if (widIndex >= 0) {
+                            // 危险源不一致 向后新增
+                            if (!widArr[widIndex].child) {
+                                widArr[widIndex].child = [];
+                            }
                             widArr[widIndex].child.push(item);
                         } else if (widIndex == -1) {
-                            item.child = [];
+                            // 危险源一致 匹配危险源
+                            let obj = JSON.parse(JSON.stringify(item));
+                            item.child = [obj];
                             widArr.push(item);
                         }
                     }
