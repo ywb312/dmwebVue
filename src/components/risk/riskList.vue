@@ -66,7 +66,9 @@ export default {
     },
     methods: {
         getRendering(arr) {
-            this.rendering = this.setRes(arr);
+            this.setRes(arr).then(res => {
+                this.rendering = res;
+            });
         },
         // 设置返还参数
         setRes(res) {
@@ -76,7 +78,7 @@ export default {
             let sortArr = res.sort((a, b) => {
                 return a.name > b.name ? 1 : -1;
             });
-            this.$common.comboList({ sourcename: "FXDLX" }).then(res => {
+            return this.$common.comboList({ sourcename: "FXDLX" }).then(res => {
                 // 如果name,fxtype和上一项的name,fxtype不一致就推入新数组,否则添加子元素
                 sortArr.forEach((item, index, arr) => {
                     self.$common.code2Text(item, "fxtype", res);
@@ -93,8 +95,10 @@ export default {
                         returnArr.push(item);
                     }
                 });
+                return new Promise(reslove => {
+                    reslove(returnArr);
+                });
             });
-            return returnArr;
         },
         btnClick(obj) {
             this.$store.commit("getSelectData", obj);

@@ -140,6 +140,14 @@ export default [{
             "show": "4"
         }]
     }, {
+        "text": "二级危险源汇总",
+        "id": "twoOnrisk",
+        "condition": [{
+            "show": "3"
+        }, {
+            "show": "4"
+        }]
+    }, {
         "text": "安环部修订",
         "id": "revise",
         "condition": [{

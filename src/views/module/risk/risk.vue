@@ -74,6 +74,11 @@ export default {
                     components: "informCard"
                 },
                 {
+                    text: "二级危险源汇总",
+                    id: "twoOnrisk",
+                    components: "twoOnrisk"
+                },
+                {
                     text: "安环部修订",
                     id: "revise",
                     components: "revise"
@@ -103,6 +108,7 @@ export default {
         riskBoard: resolve => require(["@/components/risk/riskBoard"], resolve),
         informCard: resolve =>
             require(["@/components/risk/informCard"], resolve),
+        twoOnrisk: resolve => require(["@/components/risk/twoOnrisk"], resolve),
         revise: resolve => require(["@/components/risk/revise"], resolve)
     }
 };
