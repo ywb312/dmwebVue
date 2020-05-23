@@ -52,8 +52,14 @@ export default {
             this.$emit("returnMsg", this.value);
         },
         // 数据回显设置
-        setVal(obj) {
-            this.value = obj;
+        setVal(id) {
+            for (let i = 0; i < this.slots.length; i++) {
+                const item = this.slots[i];
+                if (item.id == id) {
+                    this.value = item;
+                    break;
+                }
+            }
             this.$emit("returnMsg", this.value);
         }
     },

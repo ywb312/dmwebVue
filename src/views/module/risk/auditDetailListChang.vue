@@ -100,6 +100,7 @@
                 :appShow="approveShow"
                 :selectData="selectData"
                 @popupClose="approveShow=false"
+                @suc="clearData"
             ></company-approve>
             <!-- 新增、修改管控措施 -->
             <set-measure

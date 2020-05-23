@@ -47,13 +47,14 @@
         </div>
         <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->
-        <van-action-sheet
-            v-model="sheetShow"
-            :actions="actions"
-            @select="onSelect"
-            cancel-text="取消"
-            close-on-click-action
-        />
+        <van-action-sheet v-model="sheetShow" cancel-text="取消" close-on-click-action>
+            <div class="content" @click="modCompanyRisk">修改</div>
+            <div class="content" @click="delData">删除</div>
+            <div v-if="$common.getLevel() > 1">
+                <div class="content" @click="showPj">评价</div>
+                <div class="content" @click="goMeasure">查看管控措施</div>
+            </div>
+        </van-action-sheet>
         <!-- 组件框 -->
         <div>
             <set-company
@@ -95,12 +96,6 @@ export default {
             selectData: {},
             // 控制操作模态框的显示
             sheetShow: false,
-            actions: [
-                { name: "修改" },
-                { name: "删除" },
-                { name: "评价" },
-                { name: "查看管控措施" }
-            ],
             // 增删改查组件的显示
             setShow: false,
             type: "add",
@@ -133,12 +128,13 @@ export default {
             this.selectData = obj;
             this.sheetShow = true;
         },
+        showPj() {
+            this.sheetShow = false;
+            this.approveShow = true;
+        },
         // 跳转至管控措施
-        goRouter() {
-            if (this.$common.getLevel() == "1") {
-                this.$toast("没有权限！");
-                return;
-            }
+        goMeasure() {
+            this.sheetShow = false;
             this.$router.push({
                 path: "/risk/measure",
                 query: {
@@ -146,24 +142,14 @@ export default {
                 }
             });
         },
-        onSelect(item) {
-            if (item.name == "修改") {
-                this.type = "mod";
-                this.setShow = true;
-            } else if (item.name == "删除") {
-                this.delData();
-            } else if (item.name == "评价") {
-                if (this.$common.getLevel() > 1) {
-                    this.approveShow = true;
-                } else {
-                    this.$toast("没有权限！");
-                }
-            } else if (item.name == "查看管控措施") {
-                this.goRouter();
-            }
+        modCompanyRisk() {
+            this.sheetShow = false;
+            this.type = "mod";
+            this.setShow = true;
         },
         // 删除操作
         delData() {
+            this.sheetShow = false;
             this.$dialog
                 .confirm({
                     title: "删除",
@@ -198,3 +184,9 @@ export default {
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>
+<style scoped>
+.content {
+    padding: 16px 0;
+    text-align: center;
+}
+</style>

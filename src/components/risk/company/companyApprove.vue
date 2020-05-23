@@ -84,6 +84,9 @@ export default {
         appShow(val) {
             //popshow为父组件的值，val参数为值
             this.appVisible = val; //将父组件的值赋给popupVisible 子组件的值
+            this.$refs.pickL.setVal(this.selectData.l);
+            this.$refs.pickE.setVal(this.selectData.e);
+            this.$refs.pickC.setVal(this.selectData.c);
         }
     },
     components: {

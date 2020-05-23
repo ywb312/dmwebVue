@@ -139,18 +139,9 @@ export default {
                     this.getData.wname = this.selectData.wname;
                     this.getData.project = this.selectData.project;
                     this.getData.content = this.selectData.content;
-                    this.$refs.yxfwPick.setVal({
-                        text: this.selectData.yxfwText,
-                        id: this.selectData.yxfw
-                    });
-                    this.$refs.knfsPick.setVal({
-                        text: this.selectData.knfsText,
-                        id: this.selectData.knfs
-                    });
-                    this.$refs.qzhgPick.setVal({
-                        text: this.selectData.qzhgText,
-                        id: this.selectData.qzhg
-                    });
+                    this.$refs.yxfwPick.setVal(this.selectData.yxfw);
+                    this.$refs.knfsPick.setVal(this.selectData.knfs);
+                    this.$refs.qzhgPick.setVal(this.selectData.qzhg);
                 }
             }
         }
