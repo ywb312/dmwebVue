@@ -62,8 +62,7 @@ toTree(data) {
     width: 0px;
 }
 
-## 修改mintUI样式文件 assets/css/style.css
-## 所有risk,danger一级页面为组件，其余新增、详情..页面都是路由 功能复杂的页面需要利用组件切换，其余共用一个组件
+## 所有risk,danger一级页面为组件，其余新增、详情..等需要跳转的二级页面都是路由,其余共用一个组件
 ## technology(生产工艺)后端不是同一个接口,不分element;前端不分开,共用一个页面
 
 
@@ -80,7 +79,7 @@ inform  通知公告
     专项检查计划 -->
 
 accident 事故管理
-    事故详情跳转
+    事故详情跳转（功能不够）
 
 emergency 应急管理
     应急演练记录    详情评价状态未知
@@ -104,10 +103,8 @@ remind 提醒预警
 performance
     安全体系自评 子表未区分(一级/二级/三级)
 
-数据字典获取 未开发，目前绑死的值
-    开发速度,继发 code2Text改为返回Promise
-    使用速度,并发 Promise.arr()
-
+# 待开发 
+    安全教育培训 设备设施
 ## 上线注意事项
     1.App.vue create注释打开 解决vuex刷新问题
     2.App.vue 加载中动画的显示
