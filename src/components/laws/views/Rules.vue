@@ -97,7 +97,7 @@ export default {
         searchBack(str) {
             this.postData.obj["bean.param"] = str;
             this.rendering = [];
-            this.$refs.view.cleraData();
+            this.$refs.view.clearData();
         },
         // 法律法规库
         ruleActive(name) {
@@ -107,7 +107,7 @@ export default {
                 this.postData.url = "biz/operate/rule/rules/list.action";
             }
             this.rendering = [];
-            this.$refs.view.cleraData();
+            this.$refs.view.clearData();
         }
     },
     components: {

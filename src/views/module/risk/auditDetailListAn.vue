@@ -74,6 +74,7 @@
                 :appShow="approveShow"
                 :selectData="selectData"
                 @popupClose="approveShow=false"
+                @suc="clearData"
             ></company-approve>
         </div>
     </div>
@@ -203,7 +204,7 @@ export default {
         },
         // 清空数据 重新加载
         clearData() {
-            this.$refs.view.cleraData();
+            this.$refs.view.clearData();
         }
     },
     components: {

@@ -60,7 +60,7 @@
                     placeholder="整改治理要求"
                     :rules="[{ required: true, message: '请填写整改治理要求' }]"
                 />
-                <date-pick title="整改截止时间" time="after" @returnDate="getZgdate"></date-pick>
+                <date-pick title="整改截止时间" type="datetime" time="after" @returnDate="getZgdate"></date-pick>
             </div>
             <van-field
                 label="填表人"
@@ -70,7 +70,7 @@
                 :rules="[{ required: true, message: '请填写填表人' }]"
             />
             <van-field label="备注" placeholder="请输入备注" v-model="memo" />
-            <uploadimg v-if="postData['taskDefinitionKey']=='zpys'" @toImgArr="getImgArr"></uploadimg>
+            <uploadimg @toImgArr="getImgArr"></uploadimg>
             <van-button class="btn" type="info" size="large" native-type="submit">提交</van-button>
         </van-form>
     </div>

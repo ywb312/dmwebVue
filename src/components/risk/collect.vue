@@ -11,14 +11,20 @@
                     </div>
                     <div class="main">
                         <div>
-                            <span>危险源名称: {{item.wname}}</span>
+                            <p>
+                                <span class="main_title">危险源名称:</span>
+                                <span class="main_val">{{item.wname}}</span>
+                            </p>
                         </div>
                         <div>
-                            <span>危险源责任单位: {{item.deptname}}</span>
+                            <p>
+                                <span>危险源责任单位:</span>
+                                <span>{{item.deptname}}</span>
+                            </p>
                         </div>
                         <div>
-                            <span>
-                                风险等级:
+                            <span class="main_title">风险等级:</span>
+                            <span class="main_val">
                                 <van-tag
                                     size="large"
                                     round
@@ -28,19 +34,40 @@
                             </span>
                         </div>
                         <div>
-                            <span>项目: {{item.project}}</span>
+                            <p>
+                                <span class="main_title">项目:</span>
+                                <span class="main_val">{{item.project}}</span>
+                            </p>
                         </div>
                         <div>
-                            <span>内容: {{item.content}}</span>
+                            <p>
+                                <span class="main_title">内容:</span>
+                                <span class="main_val">{{item.content}}</span>
+                            </p>
                         </div>
                         <div>
-                            <span>影响范围: {{item.yxfwText}}</span>
+                            <p>
+                                <span class="main_title">影响范围:</span>
+                                <span class="main_val">{{item.yxfwText}}</span>
+                            </p>
                         </div>
                         <div>
-                            <span>可能导致的事故: {{item.knfsText}}</span>
+                            <p>
+                                <span class="main_title">可能导致的事故:</span>
+                                <span class="main_val">{{item.knfsText}}</span>
+                            </p>
                         </div>
                         <div>
-                            <span>潜在后果: {{item.qzhgText}}</span>
+                            <p>
+                                <span class="main_title">潜在后果:</span>
+                                <span class="main_val">{{item.qzhgText}}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                <span class="main_title">{{item.gtypeText}}:</span>
+                                <span class="main_val">{{item.gname}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -86,13 +113,15 @@ export default {
                 _self.$common.comboList({ sourcename: "KNFS" }),
                 _self.$common.comboList({ sourcename: "YXFWEI" }),
                 _self.$common.comboList({ sourcename: "QZHG" }),
-                _self.$common.comboList({ sourcename: "FXDLX" })
+                _self.$common.comboList({ sourcename: "FXDLX" }),
+                _self.$common.comboList({ sourcename: "GKCSLX" })
             ]).then(res => {
                 arr.forEach(element => {
                     _self.$common.code2Text(element, "knfs", res[0]);
                     _self.$common.code2Text(element, "yxfw", res[1]);
                     _self.$common.code2Text(element, "qzhg", res[2]);
                     _self.$common.code2Text(element, "fxtype", res[3]);
+                    _self.$common.code2Text(element, "gtype", res[4]);
                 });
                 _self.rendering = arr;
             });

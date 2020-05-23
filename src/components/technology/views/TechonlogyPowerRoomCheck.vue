@@ -60,7 +60,7 @@ export default {
         searchBack(str) {
             this.postData.obj["bean.param"] = str;
             this.rendering = [];
-            this.$refs.view.cleraData();
+            this.$refs.view.clearData();
         },
         // 点击某一项 将数据commit到vuex 跳转页面
         btnClick(obj) {

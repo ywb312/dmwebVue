@@ -130,7 +130,7 @@ export default {
             Object.keys(v).forEach(key => {
                 this.postData.obj["bean." + key] = v[key];
             });
-            this.$refs.view.cleraData();
+            this.$refs.view.clearData();
         },
         btnClick(obj) {
             this.selectData = obj;

@@ -83,7 +83,7 @@ export default {
         searchBack(str) {
             this.postData.obj["bean.param"] = str;
             this.rendering = [];
-            this.$refs.view.cleraData();
+            this.$refs.view.clearData();
         }
     },
     components: {

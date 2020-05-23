@@ -187,7 +187,7 @@ export default {
                 .catch(reject => {});
         },
         clearData() {
-            this.$refs.view.cleraData();
+            this.$refs.view.clearData();
         }
     },
     components: {

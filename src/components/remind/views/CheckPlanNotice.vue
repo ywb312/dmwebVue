@@ -106,7 +106,7 @@ export default {
         // 查询操作
         searchBack() {
             this.rendering = [];
-            this.$refs.view.cleraData();
+            this.$refs.view.clearData();
         },
         // 取消操作
         removeVal() {

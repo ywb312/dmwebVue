@@ -3,7 +3,7 @@
         style="min-height:500px"
         v-model="refreshing"
         success-text="刷新成功"
-        @refresh="cleraData"
+        @refresh="clearData"
     >
         <van-list
             v-model="loading"
@@ -121,7 +121,7 @@ export default {
             this.getData();
         },
         // 清空所需渲染数据并重新渲染 下拉直接执行此方法
-        cleraData() {
+        clearData() {
             this.page = 1;
             this.finished = false;
             this.noData = false;

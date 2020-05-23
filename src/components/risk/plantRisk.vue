@@ -113,7 +113,7 @@ export default {
         },
         // 清空数据重新加载
         clearData() {
-            this.$refs.view.cleraData();
+            this.$refs.view.clearData();
         },
         // 选择操作
         onSelect(item) {

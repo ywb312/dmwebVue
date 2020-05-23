@@ -331,7 +331,7 @@ export default {
         },
         // 清空数据 重新加载
         clearData() {
-            this.$refs.view.cleraData();
+            this.$refs.view.clearData();
         }
     },
     components: {

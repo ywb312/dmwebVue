@@ -25,7 +25,13 @@
                 placeholder="审批意见"
                 :rules="[{ required: true, message: '请填写审批意见' }]"
             />
-            <date-pick title="销案日期" time="after" placeholder="请选择督办截止时间" @returnDate="getZgwcrq"></date-pick>
+            <date-pick
+                title="销案日期"
+                type="datetype"
+                time="after"
+                placeholder="请选择销案日期"
+                @returnDate="getZgwcrq"
+            ></date-pick>
             <van-field
                 label="完成情况"
                 v-model="hcqk"

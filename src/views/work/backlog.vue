@@ -140,7 +140,7 @@ export default {
                 .then(res => {
                     var data = eval("(" + res + ")");
                     if (data.success) {
-                        this.$refs.view.cleraData();
+                        this.$refs.view.clearData();
                     } else {
                         alertMsg("操作失败" + data.errormessage);
                     }

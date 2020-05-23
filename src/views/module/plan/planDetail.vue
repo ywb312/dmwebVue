@@ -32,7 +32,7 @@
                 </div>
             </div>
         </van-sticky>
-        <van-pull-refresh v-model="isLoading" @refresh="cleraData">
+        <van-pull-refresh v-model="isLoading" @refresh="clearData">
             <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                 <div class="main">
                     <div>
@@ -101,7 +101,7 @@ export default {
             this.rendering = render;
         },
         // 清空所需渲染数据并重新渲染
-        cleraData() {
+        clearData() {
             this.noRes = false;
             this.noData = false;
             this.rendering = [];

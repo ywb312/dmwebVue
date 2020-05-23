@@ -55,6 +55,7 @@ export default {
                     return;
                 }
                 this.close();
+                this.$emit("suc");
                 this.$toast({
                     message: "评价成功",
                     position: "bottom"

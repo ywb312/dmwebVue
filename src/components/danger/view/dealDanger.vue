@@ -175,7 +175,7 @@ export default {
                 }
                 if (res.message) {
                     this.$toast(res.message);
-                    this.$refs.view.cleraData();
+                    this.$refs.view.clearData();
                 }
             });
         },

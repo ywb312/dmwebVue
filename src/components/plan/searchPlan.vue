@@ -107,7 +107,7 @@ export default {
         // 头部查询功能
         inquire(str) {
             this.postData.obj["bean.checktype"] = str;
-            this.$refs.view.cleraData();
+            this.$refs.view.clearData();
         },
         // 获取组织机构
         getCompany(v) {
@@ -123,7 +123,7 @@ export default {
             this.postData.obj["bean.param"] = "";
             this.$refs.treeChild.reset();
             this.$refs.dateChild.reset();
-            this.$refs.view.cleraData();
+            this.$refs.view.clearData();
         },
         // 查询按钮点击事件
         searchClick() {
@@ -133,7 +133,7 @@ export default {
             ) {
                 return;
             } else {
-                this.$refs.view.cleraData();
+                this.$refs.view.clearData();
             }
         },
         // 点击某一项 将数据commit到vuex 跳转页面

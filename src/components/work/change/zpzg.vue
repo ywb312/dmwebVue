@@ -47,7 +47,7 @@
                 :rules="[{ required: true, message: '请填写填表人' }]"
             />
             <van-field label="备注" placeholder="请输入备注" v-model="memo" />
-            <uploadimg v-if="postData['taskDefinitionKey'] == 'zpzg'" @toImgArr="getImgArr"></uploadimg>
+            <uploadimg @toImgArr="getImgArr"></uploadimg>
             <van-button class="btn" type="info" size="large" native-type="submit">提交</van-button>
         </van-form>
     </div>

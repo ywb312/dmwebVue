@@ -115,13 +115,13 @@ export default {
         // 查看方式 得到子组件传入的值
         radioData(v) {
             this.postData.obj["bean.queryAll"] = v;
-            this.$refs.view.cleraData();
+            this.$refs.view.clearData();
         },
         paramsDate(v) {
             Object.keys(v).forEach(key => {
                 this.postData.obj["bean." + key] = v[key];
             });
-            this.$refs.view.cleraData();
+            this.$refs.view.clearData();
         },
         // 点击每一项
         btnClick(obj) {

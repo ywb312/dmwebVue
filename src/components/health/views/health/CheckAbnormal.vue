@@ -147,7 +147,7 @@ export default {
                 this.postData.obj["bean.param"] = "";
             }
             this.rendering = [];
-            this.$refs.view.cleraData();
+            this.$refs.view.clearData();
         },
         btnClick(obj) {
             this.show = true;
