@@ -27,7 +27,7 @@
             />
             <date-pick
                 title="销案日期"
-                type="datetype"
+                type="datetime"
                 time="after"
                 placeholder="请选择销案日期"
                 @returnDate="getZgwcrq"
