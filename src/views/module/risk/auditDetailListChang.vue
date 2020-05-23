@@ -63,7 +63,7 @@
         </div>
         <!-- 隐藏的组件 -->
         <!-- 操作按钮点击 -->
-        <van-action-sheet v-model="popshow" cancel-text="取消" close-on-click-action>
+        <van-action-sheet v-model="sheetShow" cancel-text="取消" close-on-click-action>
             <div v-if="selectData.state == 'SHZT004' || selectData.state == 'SHZT001'">
                 <div class="content" @click="auditPass(true)">审核通过</div>
                 <div class="content" @click="auditPass(false)">审核不通过</div>
@@ -139,7 +139,7 @@ export default {
                 }
             },
             // 操作面板显示
-            popshow: false,
+            sheetShow: false,
             // 点击类型
             clickType: "",
             // 选中项
@@ -168,18 +168,18 @@ export default {
             this.$store.commit("getSelectData", obj);
             this.clickType = type;
             this.selectData = obj;
-            this.popshow = true;
+            this.sheetShow = true;
         },
         // 查看详情按钮点击
         goDetail() {
-            this.popshow = false;
+            this.sheetShow = false;
             this.$router.push({
                 path: "/risk/auditDetail"
             });
         },
         // 审核通过/不通过点击
         auditPass(bol) {
-            this.popshow = false;
+            this.sheetShow = false;
             let _self = this;
             let obj = {
                 "bean.cid": this.selectData.cid,
@@ -227,28 +227,28 @@ export default {
         },
         // 风险点
         modRisk() {
-            this.popshow = false;
+            this.sheetShow = false;
             this.riskShow = true;
         },
         // 危险源
         modCompany() {
-            this.popshow = false;
+            this.sheetShow = false;
             this.companyShow = true;
         },
         // 评价
         modApprove() {
-            this.popshow = false;
+            this.sheetShow = false;
             this.approveShow = true;
         },
-        // 评价
+        // 管控措施
         setMeasure(type) {
-            this.popshow = false;
+            this.sheetShow = false;
             this.measureShow = true;
             this.measureType = type;
         },
         // 删除操作
         delMeasure() {
-            this.popshow = false;
+            this.sheetShow = false;
             let _self = this;
             this.$dialog
                 .confirm({
@@ -274,7 +274,7 @@ export default {
         },
         // 提示框操作成功
         postSuccess() {
-            this.popshow = false;
+            this.sheetShow = false;
             this.clearData();
             this.$toast({
                 message: "操作成功",
