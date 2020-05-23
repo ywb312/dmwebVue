@@ -29,7 +29,7 @@
                 placeholder="审批意见"
                 :rules="[{ required: true, message: '请填写审批意见' }]"
             />
-            <date-pick title="验收时间" type="datetime" time="before" @returnDate="getXcyssj"></date-pick>
+            <date-pick title="验收时间" type="datetime" time="before" nowTime @returnDate="getXcyssj"></date-pick>
             <van-field
                 label="验收情况"
                 v-model="ysqk"

@@ -43,6 +43,7 @@
                 title="整改时间"
                 type="datetime"
                 time="before"
+                nowTime
                 placeholder="请选择完成时间"
                 @returnDate="getZgsqsj"
             ></date-pick>

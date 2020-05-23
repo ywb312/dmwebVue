@@ -47,9 +47,16 @@ export default {
         type: {
             type: String,
             default: "date"
+        },
+        nowTime: {
+            type: Boolean,
+            default: false
         }
     },
     created() {
+        if (this.nowTime) {
+            this.value = this.formatDate(new Date());
+        }
         switch (this.time) {
             case "left":
             case "before":

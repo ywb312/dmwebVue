@@ -96,10 +96,7 @@ export default {
                 this.setVisible = val; //将父组件的值赋给popupVisible 子组件的值
                 if (this.type == "mod") {
                     this.getData.name = this.selectData.name;
-                    this.$refs.pick.setVal({
-                        text: this.selectData.fxtypeText,
-                        id: this.selectData.fxtype
-                    });
+                    this.$refs.pick.setVal(this.selectData.fxtype);
                 }
             }
         }

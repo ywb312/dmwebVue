@@ -40,7 +40,13 @@
                     placeholder="管控措施"
                     :rules="[{ required: true, message: '请填写管控措施' }]"
                 />
-                <date-pick title="评估时间" type="datetime" time="before" @returnDate="getPgdate"></date-pick>
+                <date-pick
+                    title="评估时间"
+                    type="datetime"
+                    time="before"
+                    nowTime
+                    @returnDate="getPgdate"
+                ></date-pick>
                 <van-field
                     label="填表人"
                     v-model="tbr"
