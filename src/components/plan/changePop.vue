@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="maskWrap" v-if="changeShow" @click="close">
+        <div class="maskWrap" v-show="changeShow" @click="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">排查隐患</div>
                 <van-form @submit="postData" :show-error-message="false">
@@ -32,6 +32,16 @@
                         :slots="classifySlots"
                         @returnMsg="getClassify"
                     ></picker>
+                    <picker
+                        v-if="prtype=='YHLX001'"
+                        ref="crLevel"
+                        title="隐患等级"
+                        :slots="crLevelSlots"
+                        @returnMsg="getCrLevel"
+                    ></picker>
+                    <div class="bgColor">
+                        <uploadimg ref="upImg" @toImgArr="getImgArr"></uploadimg>
+                    </div>
                     <div class="setBtnGroup">
                         <van-button type="info" native-type="button" @click="close">取消</van-button>
                         <van-button type="info" native-type="submit">确定</van-button>
@@ -44,16 +54,29 @@
 <script>
 // 修改原对象 公用一个堆地址 不用返回赋值
 import picker from "@/components/pub/picker.vue";
+import uploadimg from "@/components/pub/uploadimg";
 export default {
     data() {
         return {
+            // 确定
+            confim: false,
+            // 数据
             inspacetcontent: "",
             czwt: "",
             knfs: "",
+            crLevel: "",
             prtype: "YHLX001",
             childtype: "",
             knfsSlots: [],
-            classifySlots: []
+            classifySlots: [],
+            // 下拉框的配置
+            crLevelSlots: [
+                { text: "一级", id: "1" },
+                { text: "二级", id: "2" },
+                { text: "三级", id: "3" },
+                { text: "四级", id: "4" }
+            ],
+            upImgArr: []
         };
     },
     props: ["changeShow", "selectData"],
@@ -73,16 +96,27 @@ export default {
         getClassify(v) {
             this.childtype = v.text;
         },
+        getCrLevel(v) {
+            this.crLevel = v.id;
+        },
+        // 获取图片数组
+        getImgArr(v) {
+            this.upImgArr = v;
+        },
         // 返回数据
         postData() {
+            this.confim = true;
             this.selectData.inspacetcontent = this.inspacetcontent;
             this.selectData.czwt = this.czwt;
             this.selectData.knfs = this.knfs;
             this.selectData.prtype = this.prtype;
+            this.selectData.crLevel = this.crLevel;
             this.selectData.childtype = this.childtype;
+            this.selectData.img = this.upImgArr;
             this.close();
         },
         close() {
+            this.$emit("popupClose");
             this.inspacetcontent = "";
             this.czwt = "";
             this.prtype = "YHLX001";
@@ -90,24 +124,53 @@ export default {
             if (this.$refs.childtype) {
                 this.$refs.childtype.reset();
             }
-            this.$emit("popupClose");
+            if (this.$refs.crLevel) {
+                this.$refs.crLevel.reset();
+            }
+            this.$refs.upImg.clearImg();
+            if (this.confim) {
+                this.confim = false;
+                this.$emit("suc");
+            }
         }
     },
     watch: {
         changeShow(newValue) {
             if (newValue) {
                 this.inspacetcontent = this.selectData.inspacetcontent;
+                if (this.selectData.czwt) {
+                    this.czwt = this.selectData.czwt;
+                }
+                if (this.selectData.prtype) {
+                    this.prtype = this.selectData.prtype;
+                }
+                if (this.selectData.knfs) {
+                    this.$refs.knfs.setVal(this.selectData.knfs);
+                }
+                if (
+                    this.selectData.prtype == "YHLX001" &&
+                    this.selectData.crLevel
+                ) {
+                    this.$refs.crLevel.setVal(this.selectData.crLevel);
+                }
             }
         }
     },
     components: {
-        picker
+        picker,
+        uploadimg
     }
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>
 <style scoped>
 .maskMiddle {
-    margin-top: 40%;
+    margin-top: 30%;
+}
+.bgColor {
+    background: white;
+}
+.setBtnGroup {
+    padding-top: 8px;
 }
 </style>

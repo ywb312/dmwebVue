@@ -58,12 +58,14 @@
                     </div>
                 </div>
             </div>
+            <van-empty v-show="noData" description="暂无数据" />
+            <van-empty image="error" v-show="noRes" description="数据有误" />
         </van-form>
-        <van-empty image="error" v-show="noRes" description="数据有误" />
         <change-pop
             :changeShow="changeShow"
             :selectData="rendering[index]"
-            @popupClose="changeShow=false"
+            @popupClose="changeClose"
+            @suc="changeOK"
         ></change-pop>
     </div>
 </template>
@@ -80,6 +82,7 @@ export default {
             rendering: [],
             changeShow: false,
             noRes: false,
+            noData: false,
             index: 0
         };
     },
@@ -99,6 +102,8 @@ export default {
                 }
                 if (res.rows && res.rows.length != 0) {
                     this.rendering = this.setRes(res.rows);
+                } else {
+                    this.noData = true;
                 }
             });
     },
@@ -152,7 +157,14 @@ export default {
             this.index = index;
             this.changeShow = true;
         },
-        // 更改返回对象键名 便于提交
+        changeClose() {
+            this.changeShow = false;
+            this.$set(this.rendering[this.index], "isok", "");
+        },
+        changeOK() {
+            this.$set(this.rendering[this.index], "isok", "1");
+        },
+        // 更改返回对象键名 便于后续提交
         setRes(arr) {
             for (let i = 0, len = arr.length; i < len; i++) {
                 arr[i]["crLevel"] = arr[i]["pcLevel"];

@@ -56,6 +56,12 @@
                         </div>
                         <div>
                             <p class="main_text">
+                                <span class="main_title">待操作部门名称:</span>
+                                <span class="main_val bold">{{item.czrdeptName}}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="main_text">
                                 <span class="main_title">检查时间:</span>
                                 <span class="main_val">{{item.pcdate}}</span>
                             </p>

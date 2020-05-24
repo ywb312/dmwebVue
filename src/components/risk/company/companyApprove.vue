@@ -24,10 +24,7 @@ export default {
                 l: "",
                 e: "",
                 c: ""
-            },
-            slotsL: [],
-            slotsE: [],
-            slotsC: []
+            }
         };
     },
     props: ["appShow", "selectData"],
@@ -77,6 +74,13 @@ export default {
             this.$refs.pickC.reset();
             this.appVisible = false;
             this.$emit("popupClose");
+        },
+        setLEC(num) {
+            let a = parseInt(num);
+            if (a >= 1) {
+                a = Math.floor(a);
+            }
+            return a;
         }
     },
     watch: {
@@ -84,9 +88,9 @@ export default {
         appShow(val) {
             //popshow为父组件的值，val参数为值
             this.appVisible = val; //将父组件的值赋给popupVisible 子组件的值
-            this.$refs.pickL.setVal(this.selectData.l);
-            this.$refs.pickE.setVal(this.selectData.e);
-            this.$refs.pickC.setVal(this.selectData.c);
+            this.$refs.pickL.setVal(this.setLEC(this.selectData.l));
+            this.$refs.pickE.setVal(this.setLEC(this.selectData.e));
+            this.$refs.pickC.setVal(this.setLEC(this.selectData.c));
         }
     },
     components: {

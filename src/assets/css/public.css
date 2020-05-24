@@ -22,10 +22,12 @@
     padding: 5px 15px;
     background-color: rgb(250, 250, 250);
 }
-.main .noFlex{
+
+.main .noFlex {
     display: block;
     padding: 0;
 }
+
 .title {
     font-size: 18px;
 }
@@ -64,9 +66,14 @@
     letter-spacing: 10px;
 }
 
-.red{
+.red {
     color: red;
 }
+
+.blue {
+    color: blue;
+}
+
 /* 标志图片 */
 .navImg {
     width: 50px;

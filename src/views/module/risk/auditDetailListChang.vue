@@ -258,7 +258,8 @@ export default {
                 .then(resolve => {
                     _self.$api.risk
                         .measureDelete({
-                            "bean.gid": _self.selectData.gid
+                            "bean.gid": _self.selectData.gid,
+                            "bean.deptid": this.$route.query.deptid
                         })
                         .then(res => {
                             let data = eval("(" + res + ")");

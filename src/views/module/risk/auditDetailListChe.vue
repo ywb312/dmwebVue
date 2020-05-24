@@ -217,8 +217,12 @@ export default {
                     "bean.wid": this.selectData.wid
                 })
                 .then(res => {
+                    // 判断有数据
                     if (res[0] != null) {
                         this.selectData.pjid = res[0].pjid;
+                        this.selectData.l = res[0].l;
+                        this.selectData.e = res[0].e;
+                        this.selectData.c = res[0].c;
                     }
                     this.popshow = false;
                     this.approveShow = true;

@@ -88,6 +88,9 @@ export default {
                 return item.upUrl.substring(item.upUrl.indexOf(",") + 1);
             });
             this.$emit("toImgArr", arr);
+        },
+        clearImg() {
+            this.fileList = [];
         }
     }
 };
