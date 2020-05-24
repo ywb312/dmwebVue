@@ -56,6 +56,20 @@
                     <van-field label="整改单位" v-model="item.filed7" readonly />
                     <van-field label="整改人员" v-model="item.tbr" readonly />
                     <van-field label="整改日期" v-model="item.createDate" readonly />
+                    <div v-if="item.imgs&&item.imgs.length>0">
+                        <h4 class="color">检查现场图片</h4>
+                        <div class="imgs">
+                            <img
+                                v-for="item in item.imgs"
+                                :key="item"
+                                @click="previewImg(item)"
+                                :src="item"
+                                alt
+                            />
+                            <!-- 添加空div 使flex最后一行左对齐 -->
+                            <div class="holder"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="box" v-if="item.yhzt == '评估'">
                     <h2 class="color">隐患评估</h2>
@@ -76,6 +90,20 @@
                     <van-field label="验收结论" v-model="item.filed6" readonly />
                     <van-field label="验收情况" v-model="item.filed1" readonly />
                     <van-field label="备注" v-model="item.memo" readonly />
+                    <div v-if="item.imgs&&item.imgs.length>0">
+                        <h4 class="color">检查现场图片</h4>
+                        <div class="imgs">
+                            <img
+                                v-for="item in item.imgs"
+                                :key="item"
+                                @click="previewImg(item)"
+                                :src="item"
+                                alt
+                            />
+                            <!-- 添加空div 使flex最后一行左对齐 -->
+                            <div class="holder"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="box" v-if="item.yhzt == '督办'">
                     <h2 class="color">隐患督办</h2>
@@ -92,20 +120,6 @@
                     <h2 class="color">隐患闭环</h2>
                     <van-field label="隐患闭环人" v-model="item.createid" readonly />
                     <van-field label="销案日期" v-model="item.createDate" readonly />
-                </div>
-                <div v-if="item.imgs&&item.imgs.length>0">
-                    <h4 class="color">检查现场图片</h4>
-                    <div class="imgs">
-                        <img
-                            v-for="item in item.imgs"
-                            :key="item"
-                            @click="previewImg(item)"
-                            :src="item"
-                            alt
-                        />
-                        <!-- 添加空div 使flex最后一行左对齐 -->
-                        <div class="holder"></div>
-                    </div>
                 </div>
             </div>
         </div>
