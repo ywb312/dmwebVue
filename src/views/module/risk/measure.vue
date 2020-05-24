@@ -83,11 +83,13 @@ export default {
             ],
             // 增删改查组件的显示
             setShow: false,
-            type: "add"
+            type: "add",
+            deptid: ""
         };
     },
     created() {
         if (this.$route.query.deptid) {
+            this.deptid = this.$route.query.deptid;
             this.postData.obj["bean.deptid"] = this.$route.query.deptid;
         }
     },
@@ -132,7 +134,8 @@ export default {
                 .then(resolve => {
                     this.$api.risk
                         .measureDelete({
-                            "bean.gid": this.selectData.gid
+                            "bean.gid": this.selectData.gid,
+                            "bean.deptid": this.deptid
                         })
                         .then(res => {
                             let data = eval("(" + res + ")");

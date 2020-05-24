@@ -27,11 +27,15 @@ export default {
                 gname: "",
                 gtype: ""
             },
-            gTypeSlots: []
+            gTypeSlots: [],
+            deptid: ""
         };
     },
     props: ["setShow", "wid", "type", "selectData"],
     created() {
+        if (this.$route.query.deptid) {
+            this.deptid = this.$route.query.deptid;
+        }
         this.$common.comboList({ sourcename: "GKCSLX" }).then(res => {
             this.gTypeSlots = res;
         });
@@ -45,7 +49,8 @@ export default {
                     .measureAdd({
                         "bean.wid": this.wid,
                         "bean.gname": this.getData.gname,
-                        "bean.gtype": this.getData.gtype
+                        "bean.gtype": this.getData.gtype,
+                        "bean.deptid": this.deptid
                     })
                     .then(res => {
                         this.$store.commit("setIsLoading", false);
@@ -64,7 +69,8 @@ export default {
                         "bean.wid": this.selectData.wid,
                         "bean.gid": this.selectData.gid,
                         "bean.gname": this.getData.gname,
-                        "bean.gtype": this.getData.gtype
+                        "bean.gtype": this.getData.gtype,
+                        "bean.deptid": this.deptid
                     })
                     .then(res => {
                         this.$store.commit("setIsLoading", false);
