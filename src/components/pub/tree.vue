@@ -59,7 +59,6 @@ export default {
                 let childList = [
                     this.$common.getDeptName(this.treeData, this.childId)
                 ];
-                console.log(childList);
                 this.lists = childList;
             } else {
                 this.lists = this.treeData;

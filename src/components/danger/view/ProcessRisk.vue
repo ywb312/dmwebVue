@@ -30,7 +30,10 @@
                     @click="btnClick(item)"
                 >
                     <div class="title">
-                        <h4>{{index+1+"."+item.crname}}</h4>
+                        <h4 :class="item.prtype=='YHLX002'?'red':''">{{index+1+"."+item.crname}}</h4>
+                        <p class="main_tag">
+                            <van-tag round size="large" type="primary">{{item.crstateText}}</van-tag>
+                        </p>
                     </div>
                     <div class="main">
                         <div>
@@ -41,7 +44,13 @@
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title">隐患地点:</span>
+                                <span class="main_title">隐患类型:</span>
+                                <span class="main_val">{{item.prtype=='YHLX001'?'一般隐患':'重大隐患'}}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="main_text">
+                                <span class="main_title">隐患类型:</span>
                                 <span class="main_val">{{item.craddr}}</span>
                             </p>
                         </div>
@@ -105,12 +114,27 @@ export default {
             // 审批记录操作框
             compShow: false,
             // 查找组件的显示
-            popshow: false
+            popshow: false,
+            crstate: []
         };
     },
     methods: {
         getRendering(arr) {
-            this.rendering = arr;
+            let _self = this;
+            if (this.crstate.length == 0) {
+                _self.$common.comboList({ sourcename: "YHZT" }).then(res => {
+                    _self.crstate = res;
+                    arr.forEach(item => {
+                        _self.$common.code2Text(item, "crstate", _self.crstate);
+                    });
+                    _self.rendering = arr;
+                });
+            } else {
+                arr.forEach(item => {
+                    _self.$common.code2Text(item, "crstate", _self.crstate);
+                });
+                _self.rendering = arr;
+            }
         },
         // 查看方式 得到子组件传入的值
         radioData(v) {

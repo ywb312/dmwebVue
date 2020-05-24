@@ -64,6 +64,9 @@
     letter-spacing: 10px;
 }
 
+.red{
+    color: red;
+}
 /* 标志图片 */
 .navImg {
     width: 50px;
