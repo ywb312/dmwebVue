@@ -25,7 +25,13 @@
                 placeholder="审批意见"
                 :rules="[{ required: true, message: '请填写审批意见' }]"
             />
-            <date-pick title="督办截止时间" type="datetime" time="after" placeholder="请选择督办截止时间" @returnDate="getDate"></date-pick>
+            <date-pick
+                title="督办截止时间"
+                type="datetime"
+                time="after"
+                placeholder="请选择督办截止时间"
+                @returnDate="getDate"
+            ></date-pick>
             <tree ref="tree" title="督办责任单位" @selectMsg="getCompany"></tree>
             <van-field
                 label="督办事项"
@@ -57,7 +63,7 @@ export default {
             dbjzdate: "",
             zgbm: "",
             column_12: "",
-            tbr: "",
+            tbr: window.localStorage.username,
             memo: "",
             upImgArr: []
         };

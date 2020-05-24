@@ -62,7 +62,7 @@ export default {
             opinion: "",
             dyysqk: "",
             zgpsqk: "",
-            tbr: "",
+            tbr: window.localStorage.username,
             memo: "",
             upImgArr: []
         };

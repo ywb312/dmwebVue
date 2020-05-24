@@ -87,7 +87,7 @@ export default {
             xcyssj: "",
             ysqk: "",
             yszjry: "",
-            tbr: "",
+            tbr: window.localStorage.username,
             memo: "",
             zgdate: "",
             upImgArr: [],

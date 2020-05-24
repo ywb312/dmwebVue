@@ -36,28 +36,6 @@ export default {
             }
         };
     },
-    methods: {
-        treeShow() {
-            if (this.treeData.length != 0) {
-                this.lists = this.treeData;
-            } else {
-                this.$api.pub.getTree().then(function(res) {
-                    let data = eval("(" + res + ")");
-                    // 数据有误
-                    if (typeof data != "object") {
-                        this.$toast("服务器连接错误");
-                        return;
-                    }
-                    let sortData = _self.$common.toTree(data.cells);
-                    this.lists = sortData;
-                });
-            }
-            this.popupVisible = true;
-        },
-        reset() {
-            this.selectVal = { name: "" };
-        }
-    },
     props: {
         title: {
             type: String,
@@ -66,6 +44,29 @@ export default {
         placeholder: {
             type: String,
             default: "请选择单位"
+        },
+        // 获取下级单位 传入其id
+        childId: {
+            type: String,
+            default: ""
+        }
+    },
+    methods: {
+        treeShow() {
+            let sortData = [];
+            this.popupVisible = true;
+            if (this.childId != "") {
+                let childList = [
+                    this.$common.getDeptName(this.treeData, this.childId)
+                ];
+                console.log(childList);
+                this.lists = childList;
+            } else {
+                this.lists = this.treeData;
+            }
+        },
+        reset() {
+            this.selectVal = { name: "" };
         }
     },
     watch: {

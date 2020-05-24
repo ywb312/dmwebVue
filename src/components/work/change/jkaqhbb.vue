@@ -70,7 +70,7 @@ export default {
             pgdesc: "",
             gkcs: "",
             pgdate: "",
-            tbr: "",
+            tbr: window.localStorage.username,
             memo: ""
         };
     },

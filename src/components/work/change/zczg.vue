@@ -66,7 +66,7 @@ import uploadimg from "@/components/pub/uploadimg";
 export default {
     data() {
         return {
-            tbr: "",
+            tbr: window.localStorage.username,
             opinion: "",
             zgpsqk: "",
             zgsqsj: "",

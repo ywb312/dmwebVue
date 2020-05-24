@@ -78,6 +78,7 @@ export default {
                         storage.username = res.result.username;
                         storage.loginname = res.result.loginname;
                         storage.rolename = res.result.rolename;
+                        storage.deptid = res.result.deptid;
                         storage.roleLevel = _this.getDeptId(
                             res.result.rolename
                         );
@@ -100,7 +101,8 @@ export default {
             } else if (
                 name.indexOf("车间") != -1 ||
                 name.indexOf("工区") != -1 ||
-                name.indexOf("科室") != -1
+                name.indexOf("科室") != -1 ||
+                name.indexOf("生产队") != -1
             ) {
                 roleLevel = "2";
             } else if (name.indexOf("厂级") != -1) {

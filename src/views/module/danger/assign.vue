@@ -10,7 +10,7 @@
             @click-left="$router.back(-1)"
         />
         <van-form @submit="update" :show-error-message="false">
-            <tree title="整改责任单位" @selectMsg="getCompany"></tree>
+            <tree title="整改责任单位" @selectMsg="getCompany" :childId="deptID"></tree>
             <van-field
                 label="整改治理要求"
                 v-model="zgzlyq"
@@ -36,6 +36,7 @@ export default {
     name: "assign",
     data() {
         return {
+            deptID: window.localStorage.deptid,
             tbr: "",
             zgzlyq: "",
             memo: "",

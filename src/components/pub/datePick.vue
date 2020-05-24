@@ -56,6 +56,7 @@ export default {
     created() {
         if (this.nowTime) {
             this.value = this.formatDate(new Date());
+            this.$emit("returnDate", this.value);
         }
         switch (this.time) {
             case "left":

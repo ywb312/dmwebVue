@@ -67,7 +67,7 @@ export default {
     name: "increase",
     data() {
         return {
-            tbr: "",
+            tbr: window.localStorage.username,
             prtype: "YHLX001",
             inspacetcontent: "",
             craddr: "",

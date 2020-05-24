@@ -27,7 +27,7 @@
                 :rules="[{ required: true, message: '请填写审批意见' }]"
             />
             <div v-if="type=='zp'">
-                <tree ref="tree" title="整改责任单位" @selectMsg="getCompany"></tree>
+                <tree ref="tree" title="整改责任单位" @selectMsg="getCompany" :childId="deptID"></tree>
                 <van-field
                     label="整改治理要求"
                     v-model="zgzlyq"
@@ -58,11 +58,12 @@ export default {
         return {
             isPass: "pass",
             type: "",
+            deptID: window.localStorage.deptid,
             opinion: "",
             zgzrdw: "",
             zgzlyq: "",
             zgdate: "",
-            tbr: "",
+            tbr: window.localStorage.username,
             memo: "",
             typeArr: [
                 {

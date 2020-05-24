@@ -159,7 +159,11 @@ export default {
                         this.dealAjax(obj);
                     })
                     .catch(reject => {});
-            } else if (type == "tbzp" && this.isOrg) {
+            } else if (type == "tbzp") {
+                if (!this.isOrg) {
+                    this.$toast("没有下级单位!");
+                    return;
+                }
                 this.$router.push({
                     path: "/danger/assign"
                 });
