@@ -2,12 +2,7 @@
     <div>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
-                <div
-                    class="wrapper"
-                    v-for="(item,index) in rendering"
-                    :key="index"
-                    @click="btnClick"
-                >
+                <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                     <div class="title">
                         <h4>{{index+1+'.'+item.name}}</h4>
                         <p style="min-width:70px">
@@ -15,49 +10,50 @@
                         </p>
                     </div>
                     <div class="main">
-                        <div>
-                            <span>危险源名称: {{item.wname}}</span>
-                        </div>
-                        <div>
-                            <span>危险源责任单位: {{item.deptname}}</span>
-                        </div>
-                        <div>
-                            <span>
-                                风险等级:
-                                <van-tag
-                                    size="large"
-                                    round
-                                    :type="item.grade == 1?'danger':item.grade==2?'warning':'primary'"
-                                    :color="item.grade == 3?'yellow':''"
-                                >{{item.grade+"级"}}</van-tag>
-                            </span>
-                        </div>
-                        <div>
-                            <span>项目: {{item.project}}</span>
-                        </div>
-                        <div>
-                            <span>内容: {{item.content}}</span>
-                        </div>
-                        <div>
-                            <span>影响范围: {{item.yxfwText}}</span>
-                        </div>
-                        <div>
-                            <span>可能导致的事故: {{item.knfsText}}</span>
-                        </div>
-                        <div>
-                            <span>潜在后果: {{item.qzhgText}}</span>
-                        </div>
-                        <div>
-                            <span>可能性(L): {{item.l}}</span>
-                        </div>
-                        <div>
-                            <span>严重性(E): {{item.e}}</span>
-                        </div>
-                        <div>
-                            <span>频繁度(C): {{item.c}}</span>
-                        </div>
-                        <div>
-                            <span>管控措施: {{item.gname}}</span>
+                        <div
+                            class="noFlex"
+                            v-for="(n,m) in item.child"
+                            :key="m"
+                            @click="btnClick(n,'wid')"
+                        >
+                            <div>
+                                <p>
+                                    <span class="main_title">{{"("+(m+1)+")"}}</span>
+                                    <span class="main_val">{{n.wname}}</span>
+                                </p>
+                                <p class="main_tag">
+                                    <van-tag
+                                        size="large"
+                                        round
+                                        :type="item.grade == 1?'danger':item.grade==2?'warning':'primary'"
+                                        :color="item.grade == 3?'yellow':''"
+                                    >{{item.grade+"级"}}</van-tag>
+                                </p>
+                            </div>
+                            <div>
+                                <p>
+                                    <span>危险源责任单位:</span>
+                                    <span>{{item.deptname}}</span>
+                                </p>
+                            </div>
+                            <div>
+                                <p>
+                                    <span>项目: {{item.project}} | 内容: {{item.content}}</span>
+                                </p>
+                            </div>
+                            <div>
+                                <p>可能性:{{n.l}}|严重性:{{n.e}}|频繁度:{{n.c}}</p>
+                            </div>
+                            <div
+                                v-for="(key,val) in n.child"
+                                @click.stop="btnClick(key,'gid')"
+                                :key="val"
+                            >
+                                <p>
+                                    <span class="main_title">{{key.gtypeText+":"}}</span>
+                                    <span class="main_val">{{key.gname}}</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -67,12 +63,16 @@
         <!-- 操作按钮点击 -->
         <van-action-sheet v-model="sheetShow" cancel-text="取消" close-on-click-action>
             <div class="content" @click="modRisk">修改风险点</div>
-            <div class="content" @click="modCompany">修订危险源</div>
-            <div class="content" @click="delCompany">删除危险源</div>
-            <div class="content" @click="modApprove">修订评价</div>
-            <div class="content" @click="setMeasure('add')">增加管理措施</div>
-            <div class="content" @click="setMeasure('mod')">修订管控措施</div>
-            <div class="content" @click="delMeasure">删除管控措施</div>
+            <div v-if="clickType =='wid'">
+                <div class="content" @click="modCompany">修订危险源</div>
+                <div class="content" @click="delCompany">删除危险源</div>
+                <div class="content" @click="modApprove">修订评价</div>
+            </div>
+            <div v-if="clickType =='gid'">
+                <div class="content" @click="setMeasure('add')">增加管理措施</div>
+                <div class="content" @click="setMeasure('mod')">修订管控措施</div>
+                <div class="content" @click="delMeasure">删除管控措施</div>
+            </div>
         </van-action-sheet>
         <!-- 弹窗组 -->
         <div>
@@ -129,13 +129,16 @@ export default {
             rendering: [],
             postData: {
                 url: "biz/risk/companyRisk/rootlist.action",
-                obj: {}
+                obj: {
+                    rows: 20
+                }
             },
             upUrl: "",
             knfs: "",
             yxfw: "",
             qzhg: "",
             fxtype: "",
+            gtype: "",
             sheetShow: false,
             // 选中项
             selectData: {},
@@ -147,7 +150,9 @@ export default {
             approveShow: false,
             // 增、改管控措施
             measureShow: false,
-            measureType: "add"
+            measureType: "add",
+            clickType: "wid",
+            deptId: window.localStorage.deptid
         };
     },
     created() {},
@@ -162,13 +167,15 @@ export default {
                     this.yxfw = res[1];
                     this.qzhg = res[2];
                     this.fxtype = res[3];
+                    this.gtype = res[4];
                     arr.forEach(element => {
                         this.$common.code2Text(element, "knfs", this.knfs);
                         this.$common.code2Text(element, "yxfw", this.yxfw);
                         this.$common.code2Text(element, "qzhg", this.qzhg);
                         this.$common.code2Text(element, "fxtype", this.fxtype);
+                        this.$common.code2Text(element, "gtype", this.gtype);
                     });
-                    this.rendering = arr;
+                    this.rendering = this.setRes(arr);
                 });
             } else {
                 arr.forEach(element => {
@@ -176,8 +183,9 @@ export default {
                     this.$common.code2Text(element, "yxfw", this.yxfw);
                     this.$common.code2Text(element, "qzhg", this.qzhg);
                     this.$common.code2Text(element, "fxtype", this.fxtype);
+                    this.$common.code2Text(element, "gtype", this.gtype);
                 });
-                this.rendering = arr;
+                this.rendering = this.setRes(arr);
             }
         },
         promiseAll() {
@@ -223,7 +231,8 @@ export default {
                 .then(resolve => {
                     this.$api.risk
                         .companyRiskDelete({
-                            "bean.wid": this.selectData.wid
+                            "bean.wid": this.selectData.wid,
+                            "bean.deptid": this.deptId
                         })
                         .then(res => {
                             let data = eval("(" + res + ")");
@@ -260,7 +269,8 @@ export default {
                 .then(resolve => {
                     _self.$api.risk
                         .measureDelete({
-                            "bean.gid": _self.selectData.gid
+                            "bean.gid": _self.selectData.gid,
+                            "bean.deptid": this.deptId
                         })
                         .then(res => {
                             let data = eval("(" + res + ")");
@@ -273,7 +283,47 @@ export default {
                         });
                 })
                 .catch(reject => {});
-        }, // 清空数据 重新加载
+        }, // 设置返还参数
+        setRes(arr) {
+            let _self = this;
+            let returnArr = [];
+            function getItem(key, val, arr) {
+                return arr.findIndex(item => item[key] == val);
+            }
+            arr.forEach((item, index, arr) => {
+                let fidIndex = getItem("fid", item.fid, returnArr);
+                if (fidIndex == -1) {
+                    // 风险点不一致 向后新增
+                    // 深拷贝
+                    let obj = Object.assign(item);
+                    // 加入到其危险源
+                    item.child = [obj];
+                    // 加入到其管控措施
+                    item.child[0].child = [obj];
+                    // 推入数组
+                    returnArr.push(item);
+                } else if (fidIndex >= 0) {
+                    // 风险点一致 匹配危险源
+                    let widArr = returnArr[fidIndex].child;
+                    let widIndex = getItem("wid", item.wid, widArr);
+                    let deptIndex = getItem("deptname", item.deptname, widArr);
+                    if (widIndex >= 0 && deptIndex >= 0) {
+                        // 危险源一致 匹配危险源
+                        if (!widArr[widIndex].child) {
+                            widArr[widIndex].child = [];
+                        }
+                        widArr[widIndex].child.push(item);
+                    } else {
+                        // 危险源不一致 向后新增
+                        let obj = Object.assign(item);
+                        item.child = [obj];
+                        widArr.push(item);
+                    }
+                }
+            });
+            return returnArr;
+        },
+        // 清空数据 重新加载
         clearData() {
             this.$refs.view.clearData();
         }

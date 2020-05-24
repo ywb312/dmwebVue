@@ -315,13 +315,13 @@ export default {
                         let widArr = returnArr[fidIndex].child;
                         let widIndex = getItem("wid", item.wid, widArr);
                         if (widIndex >= 0) {
-                            // 危险源不一致 向后新增
+                            // 危险源一致 匹配危险源
                             if (!widArr[widIndex].child) {
                                 widArr[widIndex].child = [];
                             }
                             widArr[widIndex].child.push(item);
                         } else if (widIndex == -1) {
-                            // 危险源一致 匹配危险源
+                            // 危险源不一致 向后新增
                             let obj = JSON.parse(JSON.stringify(item));
                             item.child = [obj];
                             widArr.push(item);

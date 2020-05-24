@@ -84,6 +84,7 @@ export default {
         });
         return arr2
     },
+    // 查询数字字典
     comboList(data) {
         let _self = this;
         return new Promise(function (resolve, reject) {
@@ -95,7 +96,8 @@ export default {
             })
         });
     },
+    // 返回权限等级
     getLevel() {
         return window.localStorage.roleLevel;
-    }
+    },
 }
