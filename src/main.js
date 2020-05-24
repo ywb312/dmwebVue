@@ -16,8 +16,8 @@ import common from './utils/common'
 // 移动端设置html fontsize插件
 import 'amfe-flexible'
 // 引入vconsole 便于移动端调试
-import Vconsole from 'vconsole';
-new Vconsole();
+// import Vconsole from 'vconsole';
+// new Vconsole();
 import {
 	Form,
 	Field,

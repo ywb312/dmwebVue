@@ -23,7 +23,13 @@
                 <div v-if="pro.yhImg.length>0">
                     <h4 class="color">检查现场图片</h4>
                     <div class="imgs">
-                        <img v-for="item in pro.yhImg" :key="item" :src="item" alt />
+                        <img
+                            v-for="item in pro.yhImg"
+                            :key="item"
+                            @click="previewImg(item)"
+                            :src="item"
+                            alt
+                        />
                         <!-- 添加空div 使flex最后一行左对齐 -->
                         <div class="holder"></div>
                     </div>
@@ -87,11 +93,26 @@
                     <van-field label="隐患闭环人" v-model="item.createid" readonly />
                     <van-field label="销案日期" v-model="item.createDate" readonly />
                 </div>
+                <div v-if="item.imgs&&item.imgs.length>0">
+                    <h4 class="color">检查现场图片</h4>
+                    <div class="imgs">
+                        <img
+                            v-for="item in item.imgs"
+                            :key="item"
+                            @click="previewImg(item)"
+                            :src="item"
+                            alt
+                        />
+                        <!-- 添加空div 使flex最后一行左对齐 -->
+                        <div class="holder"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+import { ImagePreview } from "vant";
 export default {
     name: "detail",
     data() {
@@ -126,7 +147,15 @@ export default {
             _self.infos = res.infos;
         });
     },
-    methods: {}
+    methods: {
+        // 图片预览
+        previewImg(item) {
+            ImagePreview({
+                images: [item],
+                showIndex: false
+            });
+        }
+    }
 };
 </script>
 <style scoped>

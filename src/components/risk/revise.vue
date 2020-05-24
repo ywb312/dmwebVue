@@ -2,7 +2,12 @@
     <div>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
-                <div class="wrapper" v-for="(item,index) in rendering" :key="index">
+                <div
+                    class="wrapper"
+                    v-for="(item,index) in rendering"
+                    :key="index"
+                    @click="btnClick"
+                >
                     <div class="title">
                         <h4>{{index+1+'.'+item.name}}</h4>
                         <p style="min-width:70px">
@@ -284,3 +289,9 @@ export default {
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>
+<style scoped>
+.content {
+    padding: 16px 0;
+    text-align: center;
+}
+</style>
