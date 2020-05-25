@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="maskWrap" v-show="changeShow" @click="close">
+        <div class="maskWrap" v-show="changeShow" @touchmove.prevent @click.stop="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">排查隐患</div>
                 <van-form @submit="postData" :show-error-message="false">
@@ -164,8 +164,11 @@ export default {
 </script>
 <style scoped src="@/assets/css/public.css"/>
 <style scoped>
+.maskWrap {
+    overflow: scroll;
+}
 .maskMiddle {
-    margin-top: 30%;
+    margin-top: 15%;
 }
 .bgColor {
     background: white;

@@ -1,6 +1,6 @@
 <template>
     <div class="boardModify">
-        <div class="maskWrap" v-show="modShow" @click="close">
+        <div class="maskWrap" v-show="modShow"  @touchmove.prevent @click="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">修改公告栏信息</div>
                 <van-form @submit="postData" :show-error-message="false">

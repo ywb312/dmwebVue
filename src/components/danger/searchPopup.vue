@@ -1,6 +1,6 @@
 <template>
     <div class="searchPopup">
-        <div class="maskWrap" v-show="searchShow" @click="searchClose">
+        <div class="maskWrap" v-show="searchShow" @touchmove.prevent @click="searchClose">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">隐患条件查询</div>
                 <tree v-show="companyShow" ref="tree" title="查询单位" @selectMsg="getCompany"></tree>

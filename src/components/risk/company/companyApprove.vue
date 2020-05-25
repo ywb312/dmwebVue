@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="maskWrap" v-show="appShow" @click="close">
+        <div class="maskWrap" v-show="appShow"  @touchmove.prevent @click="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">危险源评价</div>
                 <van-form @submit="postData" :show-error-message="false">

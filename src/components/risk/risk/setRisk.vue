@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="maskWrap" v-show="setShow" @click="close">
+        <div class="maskWrap" v-show="setShow"  @touchmove.prevent @click="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">{{this.type == "add"?"新增风险点":"修改风险点"}}</div>
                 <van-form @submit="postData" :show-error-message="false">

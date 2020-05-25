@@ -1,6 +1,6 @@
 <template>
     <div class="addExamine">
-        <div class="maskWrap" v-show="addshow" @click="close">
+        <div class="maskWrap" v-show="addshow"  @touchmove.prevent @click="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">新增排查计划</div>
                 <van-form @submit="postData" :show-error-message="false">
