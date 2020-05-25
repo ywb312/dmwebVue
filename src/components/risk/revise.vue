@@ -130,7 +130,7 @@ export default {
             postData: {
                 url: "biz/risk/companyRisk/rootlist.action",
                 obj: {
-                    rows: 20
+                    rows: 15
                 }
             },
             upUrl: "",
@@ -188,6 +188,7 @@ export default {
                 this.rendering = this.setRes(arr);
             }
         },
+        // 查询字典值
         promiseAll() {
             return Promise.all([
                 this.$common.comboList({ sourcename: "KNFS" }),
@@ -283,13 +284,15 @@ export default {
                         });
                 })
                 .catch(reject => {});
-        }, // 设置返还参数
+        },
+        // 设置返还参数
         setRes(arr) {
             let _self = this;
             let returnArr = [];
             function getItem(key, val, arr) {
                 return arr.findIndex(item => item[key] == val);
             }
+            // 如果name,fxtype和上一项的name,fxtype不一致就推入新数组,否则添加子元素
             arr.forEach((item, index, arr) => {
                 let fidIndex = getItem("fid", item.fid, returnArr);
                 if (fidIndex == -1) {
@@ -306,14 +309,13 @@ export default {
                     // 风险点一致 匹配危险源
                     let widArr = returnArr[fidIndex].child;
                     let widIndex = getItem("wid", item.wid, widArr);
-                    let deptIndex = getItem("deptname", item.deptname, widArr);
-                    if (widIndex >= 0 && deptIndex >= 0) {
+                    if (widIndex >= 0) {
                         // 危险源一致 匹配危险源
                         if (!widArr[widIndex].child) {
                             widArr[widIndex].child = [];
                         }
                         widArr[widIndex].child.push(item);
-                    } else {
+                    } else if (widIndex == -1) {
                         // 危险源不一致 向后新增
                         let obj = Object.assign(item);
                         item.child = [obj];

@@ -137,6 +137,7 @@ export default {
             this.noRes = false;
             this.canLoad = false;
             this.rendering = [];
+            this.getData();
         }
     }
 };

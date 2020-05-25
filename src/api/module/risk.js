@@ -53,7 +53,7 @@ function examineDelete(data) {
 
 // 安环部审核通过
 function auidtPassAn(data) {
-    return axios.post("biz/risk/audit/doModifySave.action", data);
+    return axios.post("biz/risk/detail/pjpass.action", data);
 }
 
 // 非安环部审核通过

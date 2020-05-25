@@ -304,6 +304,7 @@ export default {
                         // 风险点不一致 向后新增
                         // 深拷贝
                         let obj = JSON.parse(JSON.stringify(item));
+                        console.log(obj);
                         // 加入到其危险源
                         item.child = [obj];
                         // 加入到其管控措施

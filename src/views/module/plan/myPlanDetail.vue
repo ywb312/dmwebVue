@@ -34,7 +34,7 @@
                 <div class="main">
                     <div>
                         <p>
-                            <span class="main_title bold">危险源名称:</span>
+                            <span class="main_title bold">{{1+index+"."}}危险源名称:</span>
                             <span class="main_val">{{item.maindanger}}</span>
                         </p>
                     </div>

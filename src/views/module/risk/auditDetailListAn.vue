@@ -129,8 +129,10 @@ export default {
         // 审核通过/不通过
         auditPass() {
             let obj = {
-                "bean.auditid": this.selectData.auditid
+                "bean.auditid": this.selectData.auditid,
+                "bean.cid": this.selectData.cid
             };
+            this.popshow = false;
             let _self = this;
             this.$dialog
                 .confirm({
@@ -138,6 +140,7 @@ export default {
                     message: "确定执行此操作?"
                 })
                 .then(resolve => {
+                    //
                     _self.$api.risk.auidtPassAn(obj).then(res => {
                         let data = eval("(" + res + ")");
                         // 数据有误
@@ -146,6 +149,7 @@ export default {
                             return;
                         }
                         _self.popshow = false;
+                        _self.clearData();
                         _self.$toast({
                             message: "操作成功",
                             position: "bottom"

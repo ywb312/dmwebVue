@@ -139,7 +139,7 @@ export default {
     text-align: center;
     border-radius: 6px;
     position: absolute;
-    top: 50%;
+    top: 10rem;
     left: 50%;
     transform: translate(-50%, -50%);
 }

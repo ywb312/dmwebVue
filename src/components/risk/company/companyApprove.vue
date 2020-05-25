@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="maskWrap" v-show="appShow"  @touchmove.prevent @click="close">
+        <div class="maskWrap" v-show="appShow" @touchmove.prevent @click="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">危险源评价</div>
                 <van-form @submit="postData" :show-error-message="false">
@@ -32,8 +32,7 @@ export default {
         // 根据当前页面的配置 对请求入参进行添加筛选
         returnData(option) {
             let obj = {
-                "bean.wid": this.selectData.wid,
-                "bean.wname": this.selectData.wname
+                "bean.wid": this.selectData.wid
             };
             obj["bean.pjid"] = this.selectData.pjid || "";
             for (const key in this.getData) {
