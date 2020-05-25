@@ -42,7 +42,9 @@ export default {
             // 请求出错
             error: false,
             // 避免一直执行onLoad
-            canLoad: true
+            canLoad: true,
+            // 正在请求中,不可加载
+            postIng: false
         };
     },
     // pageData父组件传来的配置项
@@ -71,12 +73,14 @@ export default {
         },
         // 请求、渲染函数
         getData(more = true) {
+            this.postIng = true;
             this.$api.pub
                 .showPage(this.postData.url, this.setObj())
                 .then(res => {
                     this.canLoad = true;
                     this.refreshing = false;
                     this.loading = false;
+                    this.postIng = false;
                     // 数据有误
                     if (typeof res != "object") {
                         this.noRes = true;
@@ -102,7 +106,7 @@ export default {
                         }
                         this.$emit("getRendering", this.rendering);
                         // 返回数据小于10条 停止上拉刷新
-                        if (res.rows.length < 10) {
+                        if (res.rows.length < 10 || res.records < 10) {
                             this.finished = true;
                         }
                     }
@@ -113,12 +117,17 @@ export default {
         },
         // 上拉加载方法
         onLoad() {
-            if (!this.canLoad) {
+            if (!this.canLoad || this.postIng) {
                 this.loading = false;
                 return;
             }
-            this.page++;
-            this.getData();
+            // 一秒让最多执行一次
+            if (!this.timer) {
+                this.timer = setTimeout(() => {
+                    this.page++;
+                    this.getData();
+                }, 1000);
+            }
         },
         // 清空所需渲染数据并重新渲染 下拉直接执行此方法
         clearData() {
@@ -128,9 +137,12 @@ export default {
             this.noRes = false;
             this.canLoad = false;
             this.rendering = [];
-            this.getData(false);
         }
     }
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>
+<style scoped>
+.page {
+}
+</style>

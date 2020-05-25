@@ -82,7 +82,7 @@ const routes = [{
 		name: 'increase',
 		component: () => import('@/views/module/danger/increase.vue'),
 		meta: {
-			keepAlive: true
+			keepAlive: false
 		}
 	},
 	{ //隐患管理 隐患详情

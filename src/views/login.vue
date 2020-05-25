@@ -1,9 +1,5 @@
 <template>
     <div class="login">
-        <div class="title">
-            <p>安全生产标准化</p>
-            <p>体系运行管理信息系统</p>
-        </div>
         <div class="main">
             <van-form @submit="onSubmit" :show-error-message="false">
                 <van-field
@@ -123,7 +119,9 @@ export default {
 <style scoped>
 .login {
     height: 100%;
-    background: rgb(16, 187, 255);
+    background: url("../assets/img/loginBg.jpg") no-repeat;
+    background-size: 100%;
+    position: relative;
 }
 .round_top {
     border-top-left-radius: 10px;
@@ -133,19 +131,16 @@ export default {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-.title {
-    padding-top: 140px;
-    text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-    color: white;
-}
 .main {
+    width: 300px;
     box-sizing: border-box;
-    margin: 20px 40px;
     padding: 28px 10px;
     background: skyblue;
     text-align: center;
     border-radius: 6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 </style>

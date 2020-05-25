@@ -76,7 +76,7 @@ export default {
             this.$emit("popupClose");
         },
         setLEC(num) {
-            let a = parseInt(num);
+            let a = Number(num);
             if (a >= 1) {
                 a = Math.floor(a);
             }
@@ -87,10 +87,12 @@ export default {
         // 监听两个值 确定显示的状态
         appShow(val) {
             //popshow为父组件的值，val参数为值
-            this.appVisible = val; //将父组件的值赋给popupVisible 子组件的值
-            this.$refs.pickL.setVal(this.setLEC(this.selectData.l));
-            this.$refs.pickE.setVal(this.setLEC(this.selectData.e));
-            this.$refs.pickC.setVal(this.setLEC(this.selectData.c));
+            if (val) {
+                this.appVisible = val; //将父组件的值赋给popupVisible 子组件的值
+                this.$refs.pickL.setVal(this.setLEC(this.selectData.l));
+                this.$refs.pickE.setVal(this.setLEC(this.selectData.e));
+                this.$refs.pickC.setVal(this.setLEC(this.selectData.c));
+            }
         }
     },
     components: {

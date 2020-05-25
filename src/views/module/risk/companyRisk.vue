@@ -69,6 +69,7 @@
                 :appShow="approveShow"
                 :selectData="selectData"
                 @popupClose="approveShow=false"
+                @suc="clearData"
             ></company-approve>
         </div>
     </div>
