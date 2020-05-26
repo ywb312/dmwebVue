@@ -121,13 +121,8 @@ export default {
                 this.loading = false;
                 return;
             }
-            // 一秒让最多执行一次
-            if (!this.timer) {
-                this.timer = setTimeout(() => {
-                    this.page++;
-                    this.getData();
-                }, 1000);
-            }
+            this.page++;
+            this.getData();
         },
         // 清空所需渲染数据并重新渲染 下拉直接执行此方法
         clearData() {

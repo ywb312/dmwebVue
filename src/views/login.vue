@@ -26,13 +26,13 @@
         </div>
     </div>
 </template>
-<script>
+<script> 
 export default {
     data() {
         return {
             //input双向绑定
-            username: "admin",
-            password: "123"
+            username: "",
+            password: ""
         };
     },
     // 设置免登陆 如果本地有数据自动跳转

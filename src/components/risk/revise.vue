@@ -25,20 +25,20 @@
                                     <van-tag
                                         size="large"
                                         round
-                                        :type="item.grade == 1?'danger':item.grade==2?'warning':'primary'"
-                                        :color="item.grade == 3?'yellow':''"
-                                    >{{item.grade+"级"}}</van-tag>
+                                        :type="n.grade == 1?'danger':n.grade==2?'warning':'primary'"
+                                        :color="n.grade == 3?'yellow':''"
+                                    >{{n.grade+"级"}}</van-tag>
                                 </p>
                             </div>
                             <div>
                                 <p>
                                     <span>危险源责任单位:</span>
-                                    <span>{{item.deptname}}</span>
+                                    <span>{{n.deptname}}</span>
                                 </p>
                             </div>
                             <div>
                                 <p>
-                                    <span>项目: {{item.project}} | 内容: {{item.content}}</span>
+                                    <span>项目: {{n.project}} | 内容: {{n.content}}</span>
                                 </p>
                             </div>
                             <div>
@@ -298,28 +298,29 @@ export default {
                 if (fidIndex == -1) {
                     // 风险点不一致 向后新增
                     // 深拷贝
-                    let obj = Object.assign(item);
+                    let obj = this.$common.deepClone(item);
                     // 加入到其危险源
-                    item.child = [obj];
+                    obj.child = [this.$common.deepClone(item)];
                     // 加入到其管控措施
-                    item.child[0].child = [obj];
+                    obj.child[0].child = [this.$common.deepClone(item)];
                     // 推入数组
-                    returnArr.push(item);
+                    returnArr.push(obj);
                 } else if (fidIndex >= 0) {
                     // 风险点一致 匹配危险源
                     let widArr = returnArr[fidIndex].child;
                     let widIndex = getItem("wid", item.wid, widArr);
-                    if (widIndex >= 0) {
+                    let deptIndex = getItem("deptname", item.deptname, widArr);
+                    if (widIndex >= 0 && deptIndex >= 0) {
                         // 危险源一致 匹配危险源
                         if (!widArr[widIndex].child) {
                             widArr[widIndex].child = [];
                         }
                         widArr[widIndex].child.push(item);
-                    } else if (widIndex == -1) {
+                    } else if (widIndex == -1 || deptIndex == -1) {
                         // 危险源不一致 向后新增
-                        let obj = Object.assign(item);
-                        item.child = [obj];
-                        widArr.push(item);
+                        let obj = this.$common.deepClone(item);
+                        obj.child = [this.$common.deepClone(item)];
+                        widArr.push(obj);
                     }
                 }
             });

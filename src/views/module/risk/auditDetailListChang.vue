@@ -303,14 +303,13 @@ export default {
                     if (fidIndex == -1) {
                         // 风险点不一致 向后新增
                         // 深拷贝
-                        let obj = JSON.parse(JSON.stringify(item));
-                        console.log(obj);
+                        let obj = this.$common.deepClone(item);
                         // 加入到其危险源
-                        item.child = [obj];
+                        obj.child = [this.$common.deepClone(item)];
                         // 加入到其管控措施
-                        item.child[0].child = [obj];
+                        obj.child[0].child = [this.$common.deepClone(item)];
                         // 推入数组
-                        returnArr.push(item);
+                        returnArr.push(obj);
                     } else if (fidIndex >= 0) {
                         // 风险点一致 匹配危险源
                         let widArr = returnArr[fidIndex].child;
@@ -323,9 +322,9 @@ export default {
                             widArr[widIndex].child.push(item);
                         } else if (widIndex == -1) {
                             // 危险源不一致 向后新增
-                            let obj = JSON.parse(JSON.stringify(item));
-                            item.child = [obj];
-                            widArr.push(item);
+                            let obj = this.$common.deepClone(item);
+                            obj.child = [this.$common.deepClone(item)];
+                            widArr.push(obj);
                         }
                     }
                 });
