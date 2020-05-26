@@ -110,7 +110,9 @@ export default {
             this.selectData.czwt = this.czwt;
             this.selectData.knfs = this.knfs;
             this.selectData.prtype = this.prtype;
-            this.selectData.crLevel = this.crLevel;
+            if (this.prtype == "YHLX001") {
+                this.selectData.crLevel = this.crLevel;
+            }
             this.selectData.childtype = this.childtype;
             this.selectData.img = this.upImgArr;
             this.close();

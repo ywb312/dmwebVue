@@ -72,7 +72,10 @@ export default {
         // 获取当前页面数据函数
         getData() {
             this.$api.plan
-                .doDetail({ "bean.cpid": this.selectData.cpid })
+                .doDetail({
+                    "bean.cpid": this.selectData.cpid,
+                    "bean.createdate": "2020-05-15"
+                })
                 .then(res => {
                     this.isLoading = false;
                     // 数据有误
