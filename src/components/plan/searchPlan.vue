@@ -19,7 +19,13 @@
                     @click="inquire('季')"
                 >季</span>
             </div>
-            <tree title="查询单位" ref="treeChild" placeholder="请选择单位" @selectMsg="getCompany"></tree>
+            <tree
+                title="查询单位"
+                ref="treeChild"
+                placeholder="请选择单位"
+                @selectMsg="getCompany"
+                :childId="deptID"
+            ></tree>
             <date-pick
                 title="查询日期"
                 ref="dateChild"
@@ -61,7 +67,7 @@
                                 <span class="main_title">计划来源:</span>
                                 <span class="main_val">{{item.planfrom}}</span>
                             </p>
-                             <p class="main_tag">
+                            <p class="main_tag">
                                 <van-tag size="large" round type="primary">{{item.checktype}}</van-tag>
                             </p>
                         </div>
@@ -86,6 +92,7 @@ export default {
     name: "searchPlan",
     data() {
         return {
+            deptID: window.localStorage.deptid,
             // 渲染的数据
             rendering: [],
             postData: {

@@ -76,8 +76,8 @@ export default {
     name: "myPlanDetail",
     data() {
         return {
-            zydd: "",
-            tbr: "",
+            zydd: window.localStorage.deptname + "作业",
+            tbr: window.localStorage.username,
             date: "",
             rendering: [],
             changeShow: false,

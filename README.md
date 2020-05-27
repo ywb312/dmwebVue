@@ -105,6 +105,6 @@ performance
 
 # 待开发 
     安全教育培训 设备设施
-## 上线注意事项
+# 上线注意事项
     1.App.vue create注释打开 解决vuex刷新问题
     2.App.vue 加载中动画的显示
