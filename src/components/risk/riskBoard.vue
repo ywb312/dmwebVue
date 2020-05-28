@@ -1,5 +1,14 @@
 <template>
     <div>
+        <van-sticky :offset-top="$common.getOffset()">
+            <tree
+                title="查询单位"
+                ref="treeChild"
+                placeholder="请选择单位"
+                @selectMsg="getCompany"
+                :childId="deptID"
+            ></tree>
+        </van-sticky>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div
@@ -50,6 +59,7 @@
 </template>
 <script>
 // 这是基本渲染功能的组件 公用
+import tree from "@/components/pub/tree";
 import ViewBox from "@/components/pub/ViewBox.vue";
 import boardModify from "@/components/risk/board/boardModify";
 export default {
@@ -63,29 +73,47 @@ export default {
                 obj: {}
             },
             modShow: false,
-            seletData: {}
+            seletData: {},
+            deptID: window.localStorage.deptid,
+            knfs: "",
+            yxfw: "",
+            qzhg: ""
         };
+    },
+    created() {
+        this.getComboList();
     },
     methods: {
         // 处理请求的数据
         getRendering(arr) {
             let _self = this;
-            Promise.all([
-                _self.$common.comboList({ sourcename: "KNFS" }),
-                _self.$common.comboList({ sourcename: "YXFWEI" }),
-                _self.$common.comboList({ sourcename: "QZHG" })
-            ]).then(res => {
+            if (_self.knfs != "") {
                 arr.forEach(element => {
-                    _self.$common.code2Text(element, "knfs", res[0]);
-                    _self.$common.code2Text(element, "yxfw", res[1]);
-                    _self.$common.code2Text(element, "qzhg", res[2]);
+                    _self.$common.code2Text(element, "knfs", _self.knfs);
+                    _self.$common.code2Text(element, "yxfw", _self.yxfw);
+                    _self.$common.code2Text(element, "qzhg", _self.qzhg);
                 });
-                _self.rendering = arr;
+            }
+            _self.rendering = arr;
+        },
+        getComboList() {
+            Promise.all([
+                this.$common.comboList({ sourcename: "KNFS" }),
+                this.$common.comboList({ sourcename: "YXFWEI" }),
+                this.$common.comboList({ sourcename: "QZHG" })
+            ]).then(res => {
+                this.knfs = res[0];
+                this.yxfw = res[1];
+                this.qzhg = res[2];
             });
         },
         btnClick(obj) {
             this.seletData = obj;
             this.modShow = true;
+        },
+        getCompany(v) {
+            this.postData.obj["bean.param"] = v.id;
+            this.clearData();
         },
         // 清空数据 重新加载
         clearData() {
@@ -94,7 +122,8 @@ export default {
     },
     components: {
         ViewBox,
-        boardModify
+        boardModify,
+        tree
     }
 };
 </script>

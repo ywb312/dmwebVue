@@ -10,14 +10,14 @@
             :rules="[{ required: true, message: '请选择' }]"
             @click="treeShow"
         />
-        <van-popup class="fill" v-model="popupVisible" position="right" get-container="#app">
-            <tree-preview
-                :data="lists"
-                v-model="selectVal"
-                value-key="id"
-                label-key="name"
-                @finish="popupVisible = false"
-            />
+        <van-popup
+            class="fill"
+            v-model="popupVisible"
+            position="right"
+            get-container="#app"
+            @close="finish"
+        >
+            <tree-preview :data="lists" v-model="selectVal" value-key="id" label-key="name" />
         </van-popup>
     </div>
 </template>
@@ -66,16 +66,12 @@ export default {
         },
         reset() {
             this.selectVal = { name: "" };
-        }
-    },
-    watch: {
-        selectVal: {
-            handler(newValue) {
-                if (newValue.id) {
-                    this.$emit("selectMsg", newValue);
-                }
-            },
-            deep: true
+        },
+        finish() {
+            this.popupVisible = false;
+            if (this.selectVal.id) {
+                this.$emit("selectMsg", this.selectVal);
+            }
         }
     },
     components: {
