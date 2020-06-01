@@ -133,9 +133,7 @@ export default {
                     return;
                 }
                 _self.$toast({ message: "操作成功" });
-                setTimeout(() => {
-                    _self.$router.back(-1);
-                }, 2000);
+                _self.$router.back(-1);
             });
         }
     },

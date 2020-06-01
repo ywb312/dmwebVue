@@ -140,9 +140,7 @@ export default {
                     }
                     if (res.success) {
                         this.$toast(res.id);
-                        setTimeout(() => {
-                            this.$router.back(-1);
-                        }, 2000);
+                        this.$router.back(-1);
                     }
                 });
         },

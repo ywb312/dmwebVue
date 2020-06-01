@@ -140,6 +140,8 @@ export default {
                     message: "提交成功",
                     position: "bottom"
                 });
+                // 重新获取列表
+                this.$refs.view.clearData();
             });
         }
     },

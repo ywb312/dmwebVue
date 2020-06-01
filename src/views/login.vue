@@ -66,7 +66,7 @@ export default {
                         storage.roleLevel = _this.getDeptId(
                             res.result.rolename
                         );
-                        _this.$router.push({
+                        _this.$router.replace({
                             name: "home"
                         });
                     } else {
@@ -98,6 +98,8 @@ export default {
                 name.indexOf("安全生产委员会") != -1
             ) {
                 roleLevel = "4";
+            } else if (name.indexOf("总经理") != -1) {
+                roleLevel = "5";
             }
             return roleLevel;
         }

@@ -111,9 +111,7 @@ export default {
                     }
                     if (res.success) {
                         _self.$toast(res.id);
-                        setTimeout(() => {
-                            _self.$router.back(-1);
-                        }, 2000);
+                        _self.$router.back(-1);
                     } else {
                         this.$toast({
                             message: res.errormessage

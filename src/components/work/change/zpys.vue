@@ -52,7 +52,7 @@
                     placeholder="驳回原因"
                     :rules="[{ required: true, message: '请填写驳回原因' }]"
                 />
-                <tree ref="tree" title="整改责任单位" @selectMsg="getCompany"></tree>
+                <tree ref="tree" title="整改责任单位" @selectMsg="getCompany" :childId="deptID"></tree>
                 <van-field
                     label="整改治理要求"
                     v-model="zgzlyq"
@@ -82,6 +82,7 @@ import uploadimg from "@/components/pub/uploadimg";
 export default {
     data() {
         return {
+            deptID: window.localStorage.deptid,
             isPass: "pass",
             opinion: "",
             xcyssj: "",
@@ -169,9 +170,7 @@ export default {
                     }
                     if (res.success) {
                         _self.$toast(res.id);
-                        setTimeout(() => {
-                            _self.$router.back(-1);
-                        }, 2000);
+                        _self.$router.back(-1);
                     } else {
                         this.$toast({
                             message: res.errormessage

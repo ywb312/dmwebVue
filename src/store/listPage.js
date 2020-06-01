@@ -110,6 +110,8 @@ export default [{
             "show": "3"
         }, {
             "show": "4"
+        }, {
+            "show": "5"
         }]
     }, {
         "text": "风险比较图",
@@ -126,6 +128,8 @@ export default [{
             "show": "3"
         }, {
             "show": "4"
+        }, {
+            "show": "5"
         }]
     }, {
         "text": "岗位风险告知卡",
@@ -138,6 +142,8 @@ export default [{
             "show": "3"
         }, {
             "show": "4"
+        }, {
+            "show": "5"
         }]
     }, {
         "text": "二级危险源汇总",
@@ -146,6 +152,8 @@ export default [{
             "show": "3"
         }, {
             "show": "4"
+        }, {
+            "show": "5"
         }]
     }, {
         "text": "安环部修订",

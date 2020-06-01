@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="maskWrap" v-show="setShow"  @touchmove.prevent @click="close">
+        <div class="maskWrap" v-show="setShow" @touchmove.prevent @click="close">
             <div @click.stop class="maskMiddle">
                 <div class="maskTitle">{{this.type == "add"?"新增风险点":"修改风险点"}}</div>
                 <van-form @submit="postData" :show-error-message="false">
@@ -51,7 +51,7 @@ export default {
                         let data = eval("(" + res + ")");
                         // 数据有误
                         if (!data.success) {
-                            this.$toast("提交不成功");
+                            this.$toast(data.errormessage);
                             return;
                         }
                         this.close();

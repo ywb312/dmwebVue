@@ -546,11 +546,11 @@ router.beforeEach(function (to, from, next) {
 			next();
 		} else {
 			Toast({
-				message: "未登录,即将跳转至登录页面",
+				message: "未登录,请先登录!",
 			})
 			setTimeout(() => {
 				next("/");
-			}, 2000)
+			}, 1000)
 		}
 	}
 })

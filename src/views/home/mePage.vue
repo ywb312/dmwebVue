@@ -37,6 +37,7 @@ export default {
                     message: "确定执行此操作?"
                 })
                 .then(resolve => {
+                    window.localStorage.clear();
                     _this.$api.pub.logout().then(res => {
                         _this.$router.push({
                             path: "/"
