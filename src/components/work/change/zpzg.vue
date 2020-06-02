@@ -106,7 +106,9 @@ export default {
                     }
                     if (res.success) {
                         _self.$toast(res.id);
-                        _self.$router.back(-1);
+                        _self.$router.replace({
+                            path: "/backlog"
+                        });
                     } else {
                         this.$toast({
                             message: res.errormessage

@@ -57,6 +57,7 @@ export default {
             let _self = this;
             _self.$store.commit("setIsLoading", true);
             let obj = {
+                "bean.zgtype": "ZGLX003",
                 "sbzpEntity.yhid": this.selectData.yhid,
                 "sbzpEntity.assignFlag": 0,
                 "sbzpEntity.zgzrdw": this.zgzrdw,
@@ -74,8 +75,11 @@ export default {
                     _self.$toast("服务器连接错误");
                     return;
                 }
-                _self.$toast({ message: "操作成功", duration: 2000 });
-                _self.$router.back(-1);
+                _self.$toast({ message: "操作成功" });
+                _self.$router.replace({
+                    path: "/danger",
+                    query: { id: "zdrisknotice" }
+                });
             });
         }
     },

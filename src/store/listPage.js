@@ -120,6 +120,8 @@ export default [{
             "show": "3"
         }, {
             "show": "4"
+        }, {
+            "show": "5"
         }]
     }, {
         "text": "安全风险公告栏",

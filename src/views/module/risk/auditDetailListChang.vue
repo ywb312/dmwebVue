@@ -70,7 +70,7 @@
                 <div class="content" @click="modRisk">修改风险点</div>
                 <div class="content" v-if="clickType =='wid'" @click="modCompany">修订危险源</div>
                 <div class="content" v-if="clickType =='wid'" @click="modApprove">修订评价</div>
-                <div class="content" @click="setMeasure('add')">增加管理措施</div>
+                <div class="content" v-if="clickType =='gid'" @click="setMeasure('add')">增加管理措施</div>
                 <div class="content" v-if="clickType =='gid'" @click="setMeasure('mod')">修订管控措施</div>
                 <div class="content" v-if="clickType =='gid'" @click="delMeasure">删除管控措施</div>
             </div>

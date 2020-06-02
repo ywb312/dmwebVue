@@ -133,7 +133,10 @@ export default {
                     return;
                 }
                 _self.$toast({ message: "操作成功" });
-                _self.$router.back(-1);
+                _self.$router.replace({
+                    path: "/danger",
+                    query: { id: "zdrisknotice" }
+                });
             });
         }
     },
