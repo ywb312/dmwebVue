@@ -33,6 +33,7 @@
                 placeholder="请选择时间"
                 @returnDate="getDate"
             ></date-pick>
+            <picker ref="picker" title="计划状态" :slots="planStatusArr" @returnMsg="getStatus"></picker>
             <div class="searchBtn">
                 <van-button type="info" size="small" @click.stop="clearCheacked">清空</van-button>
                 <van-button type="info" size="small" @click.stop="searchClick">查询</van-button>
@@ -88,6 +89,7 @@
 import ViewBox from "@/components/pub/ViewBox.vue";
 import tree from "@/components/pub/tree";
 import datePick from "@/components/pub/datePick";
+import picker from "@/components/pub/picker";
 export default {
     name: "searchPlan",
     data() {
@@ -100,9 +102,11 @@ export default {
                 obj: {
                     "bean.checktype": "班",
                     "bean.checkdept": "",
-                    "bean.param": ""
+                    "bean.param": "",
+                    "bean.planstatus": ""
                 }
-            }
+            },
+            planStatusArr: [{ text: "已执行" }, { text: "待执行" }]
         };
     },
     // pageData父组件传来的配置项
@@ -124,19 +128,24 @@ export default {
         getDate(v) {
             this.postData.obj["bean.param"] = v;
         },
+        getStatus(v) {
+            this.postData.obj["bean.planstatus"] = v.text;
+        },
         // 清空按钮事件 重置date和tree
         clearCheacked() {
             this.postData.obj["bean.checkdept"] = "";
             this.postData.obj["bean.param"] = "";
             this.$refs.treeChild.reset();
             this.$refs.dateChild.reset();
+            this.$refs.picker.reset();
             this.$refs.view.clearData();
         },
         // 查询按钮点击事件
         searchClick() {
             if (
                 this.postData.obj["bean.checkdept"] == "" &&
-                this.postData.obj["bean.param"] == ""
+                this.postData.obj["bean.param"] == "" &&
+                this.postData.obj["bean.planstatus"] == ""
             ) {
                 return;
             } else {
@@ -155,7 +164,8 @@ export default {
     components: {
         tree,
         datePick,
-        ViewBox
+        ViewBox,
+        picker
     }
 };
 </script>
