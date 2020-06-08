@@ -78,6 +78,7 @@ export default {
             if (obj.child) {
                 arr.push(...obj.child);
                 delete obj.child;
+                arr.unshift(obj);
             } else {
                 arr.push(obj);
             }

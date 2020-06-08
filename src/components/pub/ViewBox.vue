@@ -74,8 +74,9 @@ export default {
         // 请求、渲染函数
         getData(more = true) {
             this.postIng = true;
+            let obj = this.setObj();
             this.$api.pub
-                .showPage(this.postData.url, this.setObj())
+                .showPage(this.postData.url, obj)
                 .then(res => {
                     this.canLoad = true;
                     this.refreshing = false;
@@ -105,8 +106,11 @@ export default {
                             this.rendering = res.rows;
                         }
                         this.$emit("getRendering", this.rendering);
-                        // 返回数据小于10条 停止上拉刷新
-                        if (res.rows.length < 10 || res.records < 10) {
+                        // 返回数据小于obj.rows(默认10条) 停止上拉刷新
+                        if (
+                            res.rows.length < obj.rows ||
+                            res.records < obj.rows
+                        ) {
                             this.finished = true;
                         }
                     }
@@ -138,7 +142,3 @@ export default {
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>
-<style scoped>
-.page {
-}
-</style>

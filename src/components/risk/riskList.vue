@@ -62,7 +62,9 @@ export default {
             rendering: [],
             postData: {
                 url: "biz/risk/info/selectriskreportlist.action",
-                obj: {}
+                obj: {
+                    rows: 20
+                }
             }
         };
     },
