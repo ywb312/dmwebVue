@@ -96,11 +96,25 @@ export default {
         // 设置选中时间的格式
         formatDate(date) {
             if (this.type == "date") {
-                return `${date.getFullYear()}-${date.getMonth() +
-                    1}-${date.getDate()}`;
+                return `${date.getFullYear()}-${
+                    date.getMonth() + 1 >= 10
+                        ? date.getMonth() + 1
+                        : "0" + (date.getMonth() + 1)
+                }-${
+                    date.getDate() >= "10"
+                        ? date.getDate()
+                        : "0" + date.getDate()
+                }`;
             } else if (this.type == "datetime") {
-                return `${date.getFullYear()}-${date.getMonth() +
-                    1}-${date.getDate()} ${
+                return `${date.getFullYear()}-${
+                    date.getMonth() + 1 >= 10
+                        ? date.getMonth() + 1
+                        : "0" + (date.getMonth() + 1)
+                }-${
+                    date.getDate() >= "10"
+                        ? date.getDate()
+                        : "0" + date.getDate()
+                } ${
                     date.getHours() >= "10"
                         ? date.getHours()
                         : "0" + date.getHours()
