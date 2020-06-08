@@ -16,33 +16,37 @@
                         </p>
                     </div>
                     <div class="main">
-                        <div>
-                            <p>
-                                <span class="main_title">1.</span>
-                                <span class="main_val">{{item.wname}}</span>
-                            </p>
-                            <p class="main_tag">
-                                <van-tag
-                                    size="large"
-                                    round
-                                    :type="item.grade == 1?'danger':item.grade==2?'warning':'primary'"
-                                    :color="item.grade == 3?'yellow':''"
-                                >{{item.grade+"级"}}</van-tag>
-                            </p>
-                        </div>
-                        <div v-for="(n,m) in item.child" :key="m">
-                            <p>
-                                <span class="main_title">{{m+2+"."}}</span>
-                                <span class="main_val">{{n.wname}}</span>
-                            </p>
-                            <p class="main_tag">
-                                <van-tag
-                                    size="large"
-                                    round
-                                    :type="n.grade == 1?'danger':n.grade==2?'warning':'primary'"
-                                    :color="item.grade == 3?'yellow':''"
-                                >{{n.grade+"级"}}</van-tag>
-                            </p>
+                        <div
+                            class="noFlex"
+                            v-for="(n,m) in item.child"
+                            :key="m"
+                            @click.stop="btnClick(n)"
+                        >
+                            <div>
+                                <p>
+                                    <span class="main_title bold">{{"("+(m+1)+")"+n.wname}}</span>
+                                </p>
+                                <p>
+                                    <van-tag
+                                        size="large"
+                                        round
+                                        :type="n.grade == 1?'danger':n.grade==2?'warning':'primary'"
+                                        :color="n.grade == 3?'yellow':''"
+                                    >{{n.grade+"级"}}</van-tag>
+                                </p>
+                            </div>
+                            <div>
+                                <p>
+                                    <span class="main_title">责任单位:</span>
+                                    <span class="main_val">{{n.deptname}}</span>
+                                </p>
+                            </div>
+                            <div v-for="(key,val) in n.child" :key="val">
+                                <p>
+                                    <span class="main_title">{{key.gtypeText+":"}}</span>
+                                    <span class="main_val">{{key.gname}}</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,27 +86,50 @@ export default {
         },
         // 设置返还参数
         setRes(res) {
-            let self = this;
+            let _self = this;
             let returnArr = [];
             // 先对数组进行排序
             let sortArr = res.sort((a, b) => {
                 return a.name > b.name ? 1 : -1;
             });
-            return this.$common.comboList({ sourcename: "FXDLX" }).then(res => {
+            function getItem(key, val, arr) {
+                return arr.findIndex(item => item[key] == val);
+            }
+            return Promise.all([
+                _self.$common.comboList({ sourcename: "FXDLX" }),
+                _self.$common.comboList({ sourcename: "GKCSLX" })
+            ]).then(res => {
                 // 如果name,fxtype和上一项的name,fxtype不一致就推入新数组,否则添加子元素
                 sortArr.forEach((item, index, arr) => {
-                    self.$common.code2Text(item, "fxtype", res);
-                    if (index == 0) {
-                        item.child = [];
-                        returnArr.push(item);
-                    } else if (
-                        item.name == arr[index - 1].name &&
-                        item.fxtype == arr[index - 1].fxtype
-                    ) {
-                        returnArr[returnArr.length - 1].child.push(item);
-                    } else {
-                        item.child = [];
-                        returnArr.push(item);
+                    _self.$common.code2Text(item, "fxtype", res[0]);
+                    _self.$common.code2Text(item, "gtype", res[1]);
+                    let nameIndex = getItem("name", item.name, returnArr);
+                    if (nameIndex == -1) {
+                        // 风险点不一致 向后新增
+                        // 深拷贝
+                        let obj = this.$common.deepClone(item);
+                        // 加入到其危险源
+                        obj.child = [this.$common.deepClone(item)];
+                        // 加入到其管控措施
+                        obj.child[0].child = [this.$common.deepClone(item)];
+                        // 推入数组
+                        returnArr.push(obj);
+                    } else if (nameIndex >= 0) {
+                        // 风险点一致 匹配危险源
+                        let wnameArr = returnArr[nameIndex].child;
+                        let wnameIndex = getItem("wname", item.wname, wnameArr);
+                        if (wnameIndex >= 0) {
+                            // 危险源一致 匹配危险源
+                            if (!wnameArr[wnameIndex].child) {
+                                wnameArr[wnameIndex].child = [];
+                            }
+                            wnameArr[wnameIndex].child.push(item);
+                        } else if (wnameIndex == -1) {
+                            // 危险源不一致 向后新增
+                            let obj = this.$common.deepClone(item);
+                            obj.child = [this.$common.deepClone(item)];
+                            wnameArr.push(obj);
+                        }
                     }
                 });
                 return new Promise(reslove => {

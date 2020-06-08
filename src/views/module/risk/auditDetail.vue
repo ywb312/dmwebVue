@@ -18,10 +18,16 @@
                 </div>
                 <div class="main">
                     <div>
-                        <span>危险源名称: {{item.wname}}</span>
+                        <p>
+                            <span class="main_title">危险源名称:</span>
+                            <span class="main_val">{{item.wname}}</span>
+                        </p>
                     </div>
                     <div>
-                        <span>危险源责任单位: {{item.deptname}}</span>
+                        <p>
+                            <span class="main_title">危险源责任单位:</span>
+                            <span class="main_val">{{item.deptname}}</span>
+                        </p>
                     </div>
                     <div v-if="item.grade">
                         <span>
@@ -35,22 +41,43 @@
                         </span>
                     </div>
                     <div>
-                        <span>项目: {{item.project}}</span>
+                        <p>
+                            <span class="main_title">项目:</span>
+                            <span class="main_val">{{item.project}}</span>
+                        </p>
                     </div>
                     <div>
-                        <span>内容: {{item.content}}</span>
+                        <p>
+                            <span class="main_title">内容:</span>
+                            <span class="main_val">{{item.content}}</span>
+                        </p>
                     </div>
                     <div>
-                        <span>影响范围: {{item.yxfwText}}</span>
+                        <p>
+                            <span class="main_title">影响范围:</span>
+                            <span class="main_val">{{item.yxfwText}}</span>
+                        </p>
                     </div>
                     <div>
-                        <span>可能导致的事故: {{item.knfsText}}</span>
+                        <p>
+                            <span class="main_title">可能导致的事故:</span>
+                            <span class="main_val">{{item.knfsText}}</span>
+                        </p>
                     </div>
                     <div>
-                        <span>潜在后果: {{item.qzhgText}}</span>
+                        <p>
+                            <span class="main_title">潜在后果:</span>
+                            <span class="main_val">{{item.qzhgText}}</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p>可能性:{{item.l}} | 严重性:{{item.e}} | 频繁度:{{item.c}}</p>
                     </div>
                     <div v-if="item.gtypeText">
-                        <span>管控措施: {{item.gtypeText}}</span>
+                        <p>
+                            <span class="main_title">{{item.gtypeText}}:</span>
+                            <span class="main_val">{{item.gname}}</span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -75,10 +102,8 @@ export default {
     methods: {
         setData(obj) {
             let arr = [];
-            if (obj.child) {
+            if (obj.hasOwnProperty("child")) {
                 arr.push(...obj.child);
-                delete obj.child;
-                arr.unshift(obj);
             } else {
                 arr.push(obj);
             }

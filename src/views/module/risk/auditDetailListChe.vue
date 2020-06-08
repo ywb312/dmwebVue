@@ -244,7 +244,6 @@ export default {
             function getItem(key, val, arr) {
                 return arr.findIndex(item => item[key] == val);
             }
-            // 如果name,fxtype和上一项的name,fxtype不一致就推入新数组,否则添加子元素
             return Promise.all([
                 _self.$common.comboList({ sourcename: "FXDLX" }),
                 _self.$common.comboList({ sourcename: "SHZT" }),
