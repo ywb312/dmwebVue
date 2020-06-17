@@ -45,7 +45,9 @@
                     </div>
                     <div>
                         检查结果:
-                        <span>已落实</span>
+                        <span v-if="item.gkcs.isok=='1'">未落实</span>
+                        <span v-else-if="item.gkcs.isok=='0'">不涉及</span>
+                        <span v-else-if="item.gkcs.isok=='2'">已落实</span>
                     </div>
                 </div>
             </div>
