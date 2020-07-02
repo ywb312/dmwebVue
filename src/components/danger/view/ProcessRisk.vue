@@ -14,6 +14,7 @@
                 <img src="@/assets/iconfont/search.svg" />
             </template>
         </van-nav-bar>
+        <choice-dept @choiceCompany="getCompany"></choice-dept>
         <div>
             <!-- 查看方式 -->
             <van-sticky :offset-top="$common.getOffset()">
@@ -97,6 +98,7 @@
     </div>
 </template>
 <script>
+import choiceDept from "@/components/pub/choiceDept";
 // 查看方式组件
 import correlation from "@/components/danger/correlation";
 import ViewBox from "@/components/pub/ViewBox.vue";
@@ -142,6 +144,13 @@ export default {
                 _self.rendering = arr;
             }
         },
+        // 选取矿业公司
+        getCompany(v) {
+            for (const key in v) {
+                this.postData.obj[key] = v[key];
+            }
+            this.$refs.view.clearData();
+        },
         // 查看方式 得到子组件传入的值
         radioData(v) {
             this.postData.obj["bean.queryAll"] = v;
@@ -178,7 +187,8 @@ export default {
         ViewBox,
         correlation,
         searchPopup,
-        record
+        record,
+        choiceDept
     }
 };
 </script>

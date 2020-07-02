@@ -14,6 +14,7 @@
                 <img src="@/assets/iconfont/search.svg" />
             </template>
         </van-nav-bar>
+        <choice-dept @choiceCompany="getCompany"></choice-dept>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div
@@ -99,6 +100,7 @@
     </div>
 </template>
 <script>
+import choiceDept from "@/components/pub/choiceDept";
 import ViewBox from "@/components/pub/ViewBox.vue";
 // 查找组件
 import searchPopup from "@/components/danger/searchPopup";
@@ -123,6 +125,13 @@ export default {
         getRendering(arr) {
             this.rendering = arr;
         },
+        // 选取矿业公司
+        getCompany(v) {
+            for (const key in v) {
+                this.postData.obj[key] = v[key];
+            }
+            this.$refs.view.clearData();
+        },
         paramsDate(v) {
             Object.keys(v).forEach(key => {
                 this.postData.obj["bean." + key] = v[key];
@@ -142,7 +151,8 @@ export default {
     components: {
         ViewBox,
         searchPopup,
-        Popup
+        Popup,
+        choiceDept
     }
 };
 </script>

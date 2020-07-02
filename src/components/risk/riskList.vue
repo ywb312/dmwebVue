@@ -1,5 +1,6 @@
 <template>
     <div>
+        <choice-dept @choiceCompany="getCompany"></choice-dept>
         <SearchBox placeholder="请输入风险点名称搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
@@ -56,6 +57,7 @@
 </template>
 <script>
 // 这是基本渲染功能的组件 公用
+import choiceDept from "@/components/pub/choiceDept";
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 export default {
@@ -82,6 +84,13 @@ export default {
         searchBack(str) {
             this.postData.obj["bean.param"] = str;
             this.rendering = [];
+            this.$refs.view.clearData();
+        },
+        // 选取矿业公司
+        getCompany(v) {
+            for (const key in v) {
+                this.postData.obj[key] = v[key];
+            }
             this.$refs.view.clearData();
         },
         // 设置返还参数
@@ -146,7 +155,8 @@ export default {
     },
     components: {
         ViewBox,
-        SearchBox
+        SearchBox,
+        choiceDept
     }
 };
 </script>
