@@ -12,9 +12,9 @@ export default [{
     title: "隐患管理",
     path: "danger",
     page: [{
-    //     text: "隐患处理",
-    //     id: "zdrisknotice"
-    // }, {
+        //     text: "隐患处理",
+        //     id: "zdrisknotice"
+        // }, {
         text: "隐患详情查询",
         id: "processrisk"
     }, {
@@ -45,9 +45,9 @@ export default [{
     }, {
         text: "计划查询",
         id: "scdetail"
-    }, {
-        text: "专项检查计划",
-        id: "special"
+    // }, {
+    //     text: "专项检查计划",
+    //     id: "special"
     }]
 }, {
     title: "提醒预警",
@@ -298,6 +298,49 @@ export default [{
         }, {
             text: "安全标志标识库",
             id: "tasksafemarkinfo"
+        }]
+    }]
+}, {
+    title: "统计分析",
+    path: "statistics",
+    page: [{
+        text: "风险统计",
+        child: [{
+            text: "风险统计",
+            id: "riskSta"
+        }]
+    }, {
+        text: "隐患统计",
+        child: [{
+            text: "隐患数据统计",
+            id: "leaderView"
+        }, {
+            text: "隐患排查统计",
+            id: "checkStatistics"
+        }, {
+            text: "隐患信息统计",
+            id: "troubleStatistics"
+        }, {
+            text: "可能发生的事故统计",
+            id: "accident"
+        }, {
+            text: "车间隐患统计",
+            id: "deptStatistics"
+        }, {
+            text: "按时间统计",
+            id: "timeStatistics"
+        }, {
+            text: "按上报人数统计",
+            id: "personStatistics"
+        }, {
+            text: "按账号统计",
+            id: "loginPerson"
+        }, {
+            text: "按隐患名称统计",
+            id: "troubleNmae"
+        }, {
+            text: "按不同单位同台设备统计",
+            id: "devName"
         }]
     }]
 }, {

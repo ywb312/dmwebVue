@@ -57,6 +57,11 @@ export default {
                     title: "作业现场"
                 },
                 {
+                    id: "statistics",
+                    url: require("@/assets/img/ic_three_person.png"),
+                    title: "统计分析"
+                },
+                {
                     id: "target",
                     url: require("@/assets/img/ic_train.png"),
                     title: "方针目标"
