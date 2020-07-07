@@ -5,6 +5,7 @@
         success-text="刷新成功"
         @refresh="clearData"
     >
+        <div class="recordSum">总条数:{{this.records}}条</div>
         <van-list
             v-model="loading"
             :finished="finished"
@@ -44,7 +45,9 @@ export default {
             // 避免一直执行onLoad
             canLoad: true,
             // 正在请求中,不可加载
-            postIng: false
+            postIng: false,
+            // 总条数
+            records: 0
         };
     },
     // pageData父组件传来的配置项
@@ -87,6 +90,8 @@ export default {
                         this.noRes = true;
                         return;
                     }
+                    // 总条数赋值
+                    this.records = res.records;
                     this.$emit("getBacklog", res);
                     // 数据为空
                     if (res.records == 0) {
@@ -142,3 +147,10 @@ export default {
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>
+<style scoped>
+.recordSum {
+    margin-left: 0.4rem;
+    padding: 0.2rem 0;
+    font-weight: bold;
+}
+</style>
