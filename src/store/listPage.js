@@ -73,32 +73,32 @@ export default [{
             text: "班组级"
         }, {
             show: "2",
-            text: "车间/厂级"
+            text: "工段级"
         }, {
             show: "3",
-            text: "车间/厂级"
+            text: "车间级"
         }]
     }, {
         text: "审核列表",
         id: "auditpj",
         condition: [{
             show: "2",
-            text: "车间级"
+            text: "工段级"
         }, {
             show: "3",
-            text: "厂级"
+            text: "车间级"
         }, {
             show: "4",
             text: "安环部"
         }]
     }, {
-        text: "车间级汇总上报",
+        text: "工段级汇总上报",
         id: "reportrisk",
         condition: [{
             show: "2"
         }]
     }, {
-        text: "厂级汇总上报",
+        text: "车间级汇总上报",
         id: "reporpjtrisk",
         condition: [{
             show: "3"
