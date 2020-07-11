@@ -1,18 +1,7 @@
 <template>
     <div class="page">
-        <!-- 标题  -->
-        <van-nav-bar
-            :title="pageData.text"
-            left-text="返回"
-            fixed
-            placeholder
-            left-arrow
-            @click-left="$router.back(-1)"
-        />
         <!-- 主体 -->
-        <div>
-            <component :is="pageData.components" :pageData="pageData"></component>
-        </div>
+        <component :is="pageData.components" :pageData="pageData"></component>
     </div>
 </template>
 <script>

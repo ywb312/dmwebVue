@@ -1,5 +1,14 @@
 <template>
     <div>
+        <!-- 标题  -->
+        <van-nav-bar
+            title="风险统计"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div
