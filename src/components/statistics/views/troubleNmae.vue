@@ -8,7 +8,12 @@
             placeholder
             left-arrow
             @click-left="$router.back(-1)"
-        />
+            @click-right="popshow=true"
+        >
+            <template #right>
+                <img src="@/assets/iconfont/search.svg" />
+            </template>
+        </van-nav-bar>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div
