@@ -40,9 +40,9 @@ export default [{
     title: "计划管理",
     path: "plan",
     page: [{
-        text: "我的检查计划",
-        id: "myPlan"
-    }, {
+    //     text: "我的检查计划",
+    //     id: "myPlan"
+    // }, {
         text: "计划查询",
         id: "scdetail"
     // }, {
@@ -66,103 +66,26 @@ export default [{
     title: "风险管理",
     path: "risk",
     page: [{
-        text: "风险辨识",
-        id: "info",
-        condition: [{
-            show: "1",
-            text: "班组级"
-        }, {
-            show: "2",
-            text: "车间/厂级"
-        }, {
-            show: "3",
-            text: "车间/厂级"
-        }]
-    }, {
-        text: "审核列表",
-        id: "auditpj",
-        condition: [{
-            show: "2",
-            text: "车间级"
-        }, {
-            show: "3",
-            text: "厂级"
-        }, {
-            show: "4",
-            text: "安环部"
-        }]
-    }, {
-        text: "车间级汇总上报",
-        id: "reportrisk",
-        condition: [{
-            show: "2"
-        }]
-    }, {
-        text: "厂级汇总上报",
-        id: "reporpjtrisk",
-        condition: [{
-            show: "3"
-        }]
-    }, {
+    //     text: "风险辨识",
+    //     id: "info",
+    // }, {
+    //     text: "审核列表",
+    //     id: "auditpj",
+    // }, {
         text: "风险清单",
         id: "riskreport",
-        condition: [{
-            show: "3"
-        }, {
-            show: "4"
-        }, {
-            show: "5"
-        }]
-    }, {
-        text: "风险比较图",
-        id: "fxwxytj",
-        condition: [{
-            show: "3"
-        }, {
-            show: "4"
-        }, {
-            show: "5"
-        }]
-    }, {
-        text: "安全风险公告栏",
-        id: "ggl",
-        condition: [{
-            show: "3"
-        }, {
-            show: "4"
-        }, {
-            show: "5"
-        }]
-    }, {
-        text: "岗位风险告知卡",
-        id: "gzk",
-        condition: [{
-            show: "1"
-        }, {
-            show: "2"
-        }, {
-            show: "3"
-        }, {
-            show: "4"
-        }, {
-            show: "5"
-        }]
+    // }, {
+    //     text: "风险比较图",
+    //     id: "fxwxytj",
+    // }, {
+    //     text: "安全风险公告栏",
+    //     id: "ggl",
+    // }, {
+    //     text: "岗位风险告知卡",
+    //     id: "gzk",
     }, {
         text: "二级危险源汇总",
         id: "twoOnrisk",
-        condition: [{
-            show: "3"
-        }, {
-            show: "4"
-        }, {
-            show: "5"
-        }]
-    }, {
-        text: "安环部修订",
-        id: "revise",
-        condition: [{
-            show: "4"
-        }]
     }]
 }, {
     title: "作业现场管理",

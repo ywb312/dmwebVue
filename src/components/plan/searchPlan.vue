@@ -1,6 +1,7 @@
 <template>
     <div class="page">
         <div class="searchGroup">
+            <choice-dept @choiceCompany="getDeptCompany"></choice-dept>
             <div class="btnGroup">
                 <span
                     :class="postData.obj['bean.checktype']=='班'?'active':''"
@@ -86,6 +87,7 @@
 </template>
 <script>
 // 这是基本渲染功能的组件 公用
+import choiceDept from "@/components/pub/choiceDept";
 import ViewBox from "@/components/pub/ViewBox.vue";
 import tree from "@/components/pub/tree";
 import datePick from "@/components/pub/datePick";
@@ -114,6 +116,13 @@ export default {
     methods: {
         getRendering(arr) {
             this.rendering = arr;
+        },
+        // 选取矿业公司
+        getDeptCompany(v) {
+            for (const key in v) {
+                this.postData.obj[key] = v[key];
+            }
+            this.$refs.view.clearData();
         },
         // 头部查询功能
         inquire(str) {
@@ -162,6 +171,7 @@ export default {
         }
     },
     components: {
+        choiceDept,
         tree,
         datePick,
         ViewBox,

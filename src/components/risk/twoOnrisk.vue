@@ -1,5 +1,6 @@
 <template>
     <div>
+        <choice-dept @choiceCompany="getCompany"></choice-dept>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div class="wrapper" v-for="(item,index) in rendering" :key="index">
@@ -80,6 +81,7 @@
 </template>
 <script>
 // 这是基本渲染功能的组件 公用
+import choiceDept from "@/components/pub/choiceDept";
 import ViewBox from "@/components/pub/ViewBox.vue";
 export default {
     name: "twoOnrisk",
@@ -112,6 +114,13 @@ export default {
                 });
                 _self.rendering = arr;
             });
+        },
+        // 选取矿业公司
+        getCompany(v) {
+            for (const key in v) {
+                this.postData.obj[key] = v[key];
+            }
+            this.$refs.view.clearData();
         }
         // btnClick(obj) {
         //     this.$store.commit("getSelectData", obj);
@@ -121,7 +130,8 @@ export default {
         // }
     },
     components: {
-        ViewBox
+        ViewBox,
+        choiceDept
     }
 };
 </script>

@@ -51,81 +51,81 @@ export default {
                     url: require("@/assets/img/ic_sitesafe.png"),
                     title: "风险管理"
                 },
-                {
-                    id: "person",
-                    url: require("@/assets/img/ic_three_person.png"),
-                    title: "作业现场"
-                },
+                // {
+                //     id: "person",
+                //     url: require("@/assets/img/ic_three_person.png"),
+                //     title: "作业现场"
+                // },
                 {
                     id: "statistics",
                     url: require("@/assets/img/ic_three_person.png"),
                     title: "统计分析"
                 },
-                {
-                    id: "target",
-                    url: require("@/assets/img/ic_train.png"),
-                    title: "方针目标"
-                },
-                {
-                    id: "education",
-                    url: require("@/assets/img/ic_train_edu.png"),
-                    title: "教育培训"
-                },
-                {
-                    id: "technology",
-                    url: require("@/assets/img/ic_craft_manager.png"),
-                    title: "工艺管理"
-                },
-                {
-                    id: "environment",
-                    url: require("@/assets/img/ic_envir_pro.png"),
-                    title: "环保管理"
-                },
-                {
-                    id: "emergency",
-                    url: require("@/assets/img/ic_emergency_manager.png"),
-                    title: "应急管理"
-                },
-                {
-                    id: "accident",
-                    url: require("@/assets/img/ic_accident_manager.png"),
-                    title: "事故管理"
-                },
-                {
-                    id: "laws",
-                    url: require("@/assets/img/ic_laws.png"),
-                    title: "法律法规"
-                },
-                {
-                    id: "facility",
-                    url: require("@/assets/img/ic_facility.png"),
-                    title: "设备设施"
-                },
-                {
-                    id: "team",
-                    url: require("@/assets/img/ic_team.png"),
-                    title: "组织保障"
-                },
-                {
-                    id: "health",
-                    url: require("@/assets/img/ic_health.png"),
-                    title: "职业卫生"
-                },
-                {
-                    id: "inject",
-                    url: require("@/assets/img/ic_inject.png"),
-                    title: "安全环保投入"
-                },
-                {
-                    id: "fire",
-                    url: require("@/assets/img/ic_fire.png"),
-                    title: "消防管理"
-                },
-                {
-                    id: "performance",
-                    url: require("@/assets/img/ic_performance.png"),
-                    title: "绩效考核"
-                }
+                // {
+                //     id: "target",
+                //     url: require("@/assets/img/ic_train.png"),
+                //     title: "方针目标"
+                // },
+                // {
+                //     id: "education",
+                //     url: require("@/assets/img/ic_train_edu.png"),
+                //     title: "教育培训"
+                // },
+                // {
+                //     id: "technology",
+                //     url: require("@/assets/img/ic_craft_manager.png"),
+                //     title: "工艺管理"
+                // },
+                // {
+                //     id: "environment",
+                //     url: require("@/assets/img/ic_envir_pro.png"),
+                //     title: "环保管理"
+                // },
+                // {
+                //     id: "emergency",
+                //     url: require("@/assets/img/ic_emergency_manager.png"),
+                //     title: "应急管理"
+                // },
+                // {
+                //     id: "accident",
+                //     url: require("@/assets/img/ic_accident_manager.png"),
+                //     title: "事故管理"
+                // },
+                // {
+                //     id: "laws",
+                //     url: require("@/assets/img/ic_laws.png"),
+                //     title: "法律法规"
+                // },
+                // {
+                //     id: "facility",
+                //     url: require("@/assets/img/ic_facility.png"),
+                //     title: "设备设施"
+                // },
+                // {
+                //     id: "team",
+                //     url: require("@/assets/img/ic_team.png"),
+                //     title: "组织保障"
+                // },
+                // {
+                //     id: "health",
+                //     url: require("@/assets/img/ic_health.png"),
+                //     title: "职业卫生"
+                // },
+                // {
+                //     id: "inject",
+                //     url: require("@/assets/img/ic_inject.png"),
+                //     title: "安全环保投入"
+                // },
+                // {
+                //     id: "fire",
+                //     url: require("@/assets/img/ic_fire.png"),
+                //     title: "消防管理"
+                // },
+                // {
+                //     id: "performance",
+                //     url: require("@/assets/img/ic_performance.png"),
+                //     title: "绩效考核"
+                // }
             ],
             gridStyle: {
                 overflow: "scroll",

@@ -57,24 +57,24 @@ export default {
             });
         },
         pageData() {
-            if (this.onePage.path == "risk") {
-                let arr = [];
-                let pageData = this.onePage;
-                // 遍历对象数组
-                pageData.page.forEach(element => {
-                    element.condition.forEach(item => {
-                        if (item.show == this.$common.getLevel()) {
-                            let text = item.text || "";
-                            element.text = text + element.text;
-                            arr.push(element);
-                        }
-                    });
-                });
-                pageData.page = arr;
-                this.pageData = pageData;
-            } else {
+            // if (this.onePage.path == "risk") {
+            //     let arr = [];
+            //     let pageData = this.onePage;
+            //     // 遍历对象数组
+            //     pageData.page.forEach(element => {
+            //         element.condition.forEach(item => {
+            //             if (item.show == this.$common.getLevel()) {
+            //                 let text = item.text || "";
+            //                 element.text = text + element.text;
+            //                 arr.push(element);
+            //             }
+            //         });
+            //     });
+            //     pageData.page = arr;
+            //     this.pageData = pageData;
+            // } else {
                 this.pageData = this.onePage;
-            }
+            // }
         }
     },
     computed: {

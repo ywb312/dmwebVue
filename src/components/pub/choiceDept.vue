@@ -13,7 +13,6 @@ export default {
             companySlots: [
                 { text: "罗河矿业", id: "_lh" },
                 { text: "南山矿业", id: "_ns" },
-                { text: "马钢集团", id: "" },
                 { text: "张庄矿业", id: "_zz" },
                 { text: "桃冲矿业", id: "_tc" },
                 { text: "姑山矿业", id: "_gs" }

@@ -399,7 +399,7 @@ const routes = [{
 	},
 	{ //组织保障管理	相关方项目部人员统计子表
 		path: '/team/statistics',
-		name: 'statistics',
+		name: 'teamStatistics',
 		component: () => import('@/views/module/team/statistics.vue'),
 		meta: {
 			keepAlive: false
