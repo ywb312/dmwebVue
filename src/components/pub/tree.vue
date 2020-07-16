@@ -53,15 +53,36 @@ export default {
     },
     methods: {
         treeShow() {
+            let trees = {};
+            switch (this.deptId) {
+                case "_lh":
+                    this.trees = this.lhTree;
+                    break;
+                case "_zz":
+                    this.trees = this.zzTree;
+                    break;
+                case "_ns":
+                    this.trees = this.nsTree;
+                    break;
+                case "_gs":
+                    this.trees = this.gsTree;
+                    break;
+                case "_tc":
+                    this.trees = this.tcTree;
+                    break;
+                default:
+                    this.trees = this.treeData;
+                    break;
+            }
             let sortData = [];
             this.popupVisible = true;
             if (this.childId != "") {
                 let childList = [
-                    this.$common.getDeptName(this.treeData, this.childId)
+                    this.$common.getDeptName(this.trees, this.childId)
                 ];
                 this.lists = childList;
             } else {
-                this.lists = this.treeData;
+                this.lists = this.trees;
             }
         },
         reset() {
@@ -78,7 +99,15 @@ export default {
         treePreview
     },
     computed: {
-        ...mapState(["treeData"])
+        ...mapState([
+            "treeData",
+            "lhTree",
+            "zzTree",
+            "nsTree",
+            "gsTree",
+            "tcTree",
+            "deptId"
+        ])
     }
 };
 </script>

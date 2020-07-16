@@ -2,6 +2,7 @@
     <div class="page">
         <div class="searchGroup">
             <choice-dept @choiceCompany="getDeptCompany"></choice-dept>
+            <tree title="查询单位" ref="treeChild" placeholder="请选择单位" @selectMsg="getCompany"></tree>
             <div class="btnGroup">
                 <span
                     :class="postData.obj['bean.checktype']=='班'?'active':''"
@@ -20,13 +21,6 @@
                     @click="inquire('季')"
                 >季</span>
             </div>
-            <!-- <tree
-                title="查询单位"
-                ref="treeChild"
-                placeholder="请选择单位"
-                @selectMsg="getCompany"
-                :childId="deptID"
-            ></tree>-->
             <date-pick
                 title="查询日期"
                 ref="dateChild"
@@ -45,7 +39,7 @@
                 <div
                     class="wrapper"
                     v-for="(item,index) in rendering"
-                    :key="index"
+                    :key="item.cpid"
                     @click="btnClick(item)"
                 >
                     <div class="title">
@@ -89,14 +83,13 @@
 // 这是基本渲染功能的组件 公用
 import choiceDept from "@/components/pub/choiceDept";
 import ViewBox from "@/components/pub/ViewBox.vue";
-// import tree from "@/components/pub/tree";
+import tree from "@/components/pub/tree";
 import datePick from "@/components/pub/datePick";
 // import picker from "@/components/pub/picker";
 export default {
     name: "searchPlan",
     data() {
         return {
-            // deptID: window.localStorage.deptid,
             // 渲染的数据
             rendering: [],
             postData: {
@@ -122,6 +115,7 @@ export default {
             for (const key in v) {
                 this.postData.obj[key] = v[key];
             }
+            this.$store.commit("getDeptId", v["bean.tablesuffix"]);
             this.$refs.view.clearData();
         },
         // 头部查询功能
@@ -130,9 +124,9 @@ export default {
             this.$refs.view.clearData();
         },
         // 获取组织机构
-        // getCompany(v) {
-        //     this.postData.obj["bean.checkdept"] = v.id;
-        // },
+        getCompany(v) {
+            this.postData.obj["bean.checkdept"] = v.id;
+        },
         // 获取日期时间
         getDate(v) {
             this.postData.obj["bean.param"] = v;
@@ -144,7 +138,7 @@ export default {
         clearCheacked() {
             this.postData.obj["bean.checkdept"] = "";
             this.postData.obj["bean.param"] = "";
-            // this.$refs.treeChild.reset();
+            this.$refs.treeChild.reset();
             this.$refs.dateChild.reset();
             // this.$refs.picker.reset();
             this.$refs.view.clearData();
@@ -172,7 +166,7 @@ export default {
     },
     components: {
         choiceDept,
-        // tree,
+        tree,
         datePick,
         ViewBox
         // picker

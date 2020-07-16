@@ -42,11 +42,21 @@ export default {
     mounted() {
         let _self = this;
         // 获取tree的数据
-        this.$api.pub.getTree().then(function(res) {
-            let data = eval("(" + res + ")");
-            let sortData = _self.$common.toTree(data.cells);
-            _self.$store.commit("setTree", sortData);
-        });
+        function getTree(name, str) {
+            _self.$api.pub
+                .getTree({ "bean.tablesuffix": name })
+                .then(function(res) {
+                    let data = eval("(" + res + ")");
+                    let sortData = _self.$common.toTree(data.cells);
+                    _self.$store.commit(str, sortData);
+                });
+        }
+        getTree("", "setTree");
+        getTree("_lh", "setLHTree");
+        getTree("_zz", "setZZTree");
+        getTree("_ns", "setNSTree");
+        getTree("_tc", "setTCTree");
+        getTree("_gs", "setGSTree");
     },
     methods: {
         loadingShow(a) {

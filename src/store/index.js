@@ -18,6 +18,13 @@ export default new Vuex.Store({
 		listPage: listPage,
 		// 组织结构树
 		treeData: [],
+		lhTree: [],
+		zzTree: [],
+		nsTree: [],
+		gsTree: [],
+		tcTree: [],
+		// 矿山代码
+		deptId: "",
 		// 点击操作按钮获取的对象
 		selectData: {},
 		// LEC评价	下拉框配置	
@@ -111,11 +118,29 @@ export default new Vuex.Store({
 		setTree(state, data) {
 			state.treeData = data;
 		},
+		setLHTree(state, data) {
+			state.lhTree = data;
+		},
+		setZZTree(state, data) {
+			state.zzTree = data;
+		},
+		setNSTree(state, data) {
+			state.nsTree = data;
+		},
+		setTCTree(state, data) {
+			state.tcTree = data;
+		},
+		setGSTree(state, data) {
+			state.gsTree = data;
+		},
 		setBacklog(state, data) {
 			state.backlog = data;
 		},
 		getSelectData(state, data) {
 			state.selectData = data;
+		},
+		getDeptId(state, data) {
+			state.deptId = data;
 		}
 	},
 	actions: {},

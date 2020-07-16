@@ -22,8 +22,8 @@ function getConfig(url, data) {
 }
 
 // 获取组织机构
-function getTree() {
-    return axios.post("/manager/sys/dept/tree4.action");
+function getTree(data) {
+    return axios.post("/manager/sys/dept/tree4.action", data);
 }
 
 // 上传文件

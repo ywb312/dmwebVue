@@ -1,5 +1,6 @@
 <template>
     <div>
+        <choice-dept @choiceCompany="getCompany"></choice-dept>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div
@@ -69,6 +70,7 @@
     </div>
 </template>
 <script>
+import choiceDept from "@/components/pub/choiceDept";
 import ViewBox from "@/components/pub/ViewBox.vue";
 import Popup from "@/components/pub/Popup.vue";
 export default {
@@ -97,6 +99,13 @@ export default {
             this.show = true;
             this.selectData = obj;
         },
+        // 选取矿业公司
+        getCompany(v) {
+            for (const key in v) {
+                this.postData.obj[key] = v[key];
+            }
+            this.$refs.view.clearData();
+        },
         onSelect(item) {
             if (item.name == "查看详情") {
                 let warmArr = this.selectData.warmcontent.split("-");
@@ -113,7 +122,8 @@ export default {
     },
     components: {
         ViewBox,
-        Popup
+        Popup,
+        choiceDept
     }
 };
 </script>

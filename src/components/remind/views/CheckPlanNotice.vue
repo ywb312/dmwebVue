@@ -1,5 +1,6 @@
 <template>
     <div>
+        <choice-dept @choiceCompany="getDeptCompany"></choice-dept>
         <!-- 查询 -->
         <van-sticky :offset-top="$common.getOffset()">
             <van-button plain color="#2585cf" @click="searchShow=true" block>查询</van-button>
@@ -66,13 +67,14 @@
                         placeholder="请选择时间"
                         @returnDate="getDate"
                     ></date-pick>
-                    <tree title="部门" ref="tree" @selectMsg="getCompany"></tree>
+                    <!-- <tree title="部门" ref="tree" @selectMsg="getCompany"></tree> -->
                 </div>
             </van-dialog>
         </div>
     </div>
 </template>
 <script>
+import choiceDept from "@/components/pub/choiceDept";
 import ViewBox from "@/components/pub/ViewBox.vue";
 import tree from "@/components/pub/tree";
 import datePick from "@/components/pub/datePick";
@@ -108,9 +110,16 @@ export default {
             this.rendering = [];
             this.$refs.view.clearData();
         },
+        // 选取矿业公司
+        getDeptCompany(v) {
+            for (const key in v) {
+                this.postData.obj[key] = v[key];
+            }
+            this.$refs.view.clearData();
+        },
         // 取消操作
         removeVal() {
-            this.$refs.tree.reset();
+            // this.$refs.tree.reset();
             this.$refs.dateChild.reset();
             this.$set(this.postData.obj, "bean.checkdept", "");
             this.$set(this.postData.obj, "bean.createdate", "");
@@ -130,7 +139,8 @@ export default {
     components: {
         ViewBox,
         tree,
-        datePick
+        datePick,
+        choiceDept
     }
 };
 </script>
