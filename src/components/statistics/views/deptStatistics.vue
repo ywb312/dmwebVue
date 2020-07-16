@@ -14,6 +14,7 @@
                 <img src="@/assets/iconfont/search.svg" />
             </template>
         </van-nav-bar>
+        <choice-dept @choiceCompany="getCompany"></choice-dept>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div
@@ -26,12 +27,6 @@
                         <h4>{{index+1+"."}}</h4>
                     </div>
                     <div class="main">
-                        <div>
-                            <p class="main_text">
-                                <span class="main_title">名次:</span>
-                                <span class="main_val">{{item.rn}}</span>
-                            </p>
-                        </div>
                         <div>
                             <p class="main_text">
                                 <span class="main_title">单位:</span>
@@ -48,10 +43,18 @@
                 </div>
             </div>
         </ViewBox>
+        <search
+            @returnMsg="paramsDate"
+            :popshow="popshow"
+            :dateShow="true"
+            @popupClose="popshow=false"
+        ></search>
     </div>
 </template>
 <script>
+import choiceDept from "@/components/pub/choiceDept";
 import ViewBox from "@/components/pub/ViewBox.vue";
+import search from "@/components/statistics/search.vue";
 export default {
     name: "deptStatistics",
     data() {
@@ -61,7 +64,8 @@ export default {
             postData: {
                 url: "biz/sa/deptStatistics/list.action",
                 obj: {}
-            }
+            },
+            popshow: false
         };
     },
     // pageData父组件传来的配置项
@@ -69,10 +73,24 @@ export default {
     methods: {
         getRendering(arr) {
             this.rendering = arr;
+        },
+        paramsDate(val) {
+            this.postData.obj["bean.start"] = val["start"];
+            this.postData.obj["bean.endtime"] = val["endtime"];
+            this.$refs.view.clearData();
+        },
+        // 选取矿业公司
+        getCompany(v) {
+            for (const key in v) {
+                this.postData.obj[key] = v[key];
+            }
+            this.$refs.view.clearData();
         }
     },
     components: {
-        ViewBox
+        ViewBox,
+        search,
+        choiceDept
     }
 };
 </script>

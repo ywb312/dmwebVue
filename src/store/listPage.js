@@ -235,9 +235,9 @@ export default [{
     }, {
         text: "隐患统计",
         child: [{
-            text: "隐患数据统计",
-            id: "leaderView"
-        }, {
+        //     text: "隐患数据统计",
+        //     id: "leaderView"
+        // }, {
             text: "隐患排查统计",
             id: "checkStatistics"
         }, {
@@ -246,9 +246,9 @@ export default [{
         }, {
             text: "可能发生的事故统计",
             id: "accident"
-        }, {
-            text: "车间隐患统计",
-            id: "deptStatistics"
+        // }, {
+        //     text: "车间隐患统计",
+        //     id: "deptStatistics"
         }, {
             text: "按时间统计",
             id: "timeStatistics"
@@ -261,9 +261,9 @@ export default [{
         }, {
             text: "按隐患名称统计",
             id: "troubleNmae"
-        }, {
-            text: "按不同单位同台设备统计",
-            id: "devName"
+        // }, {
+        //     text: "按不同单位同台设备统计",
+        //     id: "devName"
         }]
     }]
 }, {

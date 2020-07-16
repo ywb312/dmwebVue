@@ -14,6 +14,7 @@
                 <img src="@/assets/iconfont/search.svg" />
             </template>
         </van-nav-bar>
+        <choice-dept @choiceCompany="getCompany"></choice-dept>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div
@@ -28,12 +29,6 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title">名次:</span>
-                                <span class="main_val">{{item.rn}}</span>
-                            </p>
-                        </div>
-                        <div>
-                            <p class="main_text">
                                 <span class="main_title">隐患名称:</span>
                                 <span class="main_val">{{item.crname}}</span>
                             </p>
@@ -41,7 +36,7 @@
                         <div>
                             <p class="main_text">
                                 <span class="main_title">日期范围:</span>
-                                <span class="main_val">{{item.date}}</span>
+                                <span class="main_val">{{item.start + " 至 " + item.endtime}}</span>
                             </p>
                         </div>
                         <div>
@@ -54,10 +49,21 @@
                 </div>
             </div>
         </ViewBox>
+        <detailPop :detailShow="detailShow" :msg="selectDetail" @close="detailShow=false"></detailPop>
+        <search
+            @returnMsg="paramsDate"
+            :popshow="popshow"
+            :dateShow="true"
+            :sortShow="true"
+            @popupClose="popshow=false"
+        ></search>
     </div>
 </template>
 <script>
+import choiceDept from "@/components/pub/choiceDept";
 import ViewBox from "@/components/pub/ViewBox.vue";
+import search from "@/components/statistics/search.vue";
+import detailPop from "@/components/statistics/detailPop.vue";
 export default {
     name: "troubleNmae",
     data() {
@@ -67,7 +73,10 @@ export default {
             postData: {
                 url: "biz/sa/troubleNmae/list.action",
                 obj: {}
-            }
+            },
+            popshow: false,
+            detailShow: false,
+            selectDetail: {}
         };
     },
     // pageData父组件传来的配置项
@@ -75,10 +84,42 @@ export default {
     methods: {
         getRendering(arr) {
             this.rendering = arr;
+        },
+        paramsDate(val) {
+            this.postData.obj["bean.sort"] = val["sort"];
+            this.postData.obj["bean.start"] = val["start"];
+            this.postData.obj["bean.endtime"] = val["endtime"];
+            this.$refs.view.clearData();
+        },
+        btnClick(item) {
+            let _self = this;
+            let obj = {
+                "bean.start": this.postData.obj["bean.start"],
+                "bean.endtime": this.postData.obj["bean.endtime"],
+                "bean.flag": 0,
+                "bean.tablesuffix": this.postData.obj["bean.tablesuffix"],
+                "bean.crname": item.crname
+            };
+            this.$api.pub
+                .showPage("biz/sa/troubleNmae/showyh.action", obj)
+                .then(res => {
+                    _self.detailShow = true;
+                    _self.selectDetail = res[0];
+                });
+        },
+        // 选取矿业公司
+        getCompany(v) {
+            for (const key in v) {
+                this.postData.obj[key] = v[key];
+            }
+            this.$refs.view.clearData();
         }
     },
     components: {
-        ViewBox
+        ViewBox,
+        search,
+        choiceDept,
+        detailPop
     }
 };
 </script>

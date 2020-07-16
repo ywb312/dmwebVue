@@ -15,13 +15,12 @@
             </template>
         </van-nav-bar>
         <choice-dept @choiceCompany="getCompany"></choice-dept>
-        <div>
-            <!-- 查看方式 -->
+        <!-- <div>
             <van-sticky :offset-top="$common.getOffset()">
                 <correlation @radioChange="radioData"></correlation>
             </van-sticky>
-            <!-- 主体 -->
-        </div>
+        </div> -->
+        <!-- 主体 -->
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div

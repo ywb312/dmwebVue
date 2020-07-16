@@ -253,6 +253,14 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //统计
+		path: '/statistics/timeStat',
+		name: 'timeStat',
+		component: () => import('@/views/module/statistics/timeStat.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
 	{ //教育培训
 		path: '/education',
 		name: 'education',
