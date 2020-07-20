@@ -253,10 +253,18 @@ const routes = [{
 			keepAlive: false
 		}
 	},
-	{ //统计
+	{ //统计 按时间获取
 		path: '/statistics/timeStat',
 		name: 'timeStat',
 		component: () => import('@/views/module/statistics/timeStat.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //统计 eCharts
+		path: '/statistics/staEcharts',
+		name: 'staEcharts',
+		component: () => import('@/views/module/statistics/staEcharts.vue'),
 		meta: {
 			keepAlive: false
 		}

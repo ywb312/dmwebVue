@@ -18,6 +18,7 @@ import 'amfe-flexible'
 // 引入vconsole 便于移动端调试
 // import Vconsole from 'vconsole';
 // new Vconsole();
+// 引入UI框架 vant
 import {
 	Form,
 	Field,
@@ -94,6 +95,14 @@ Vue.use(Form) //vant部分
 	.use(Uploader)
 	.use(Divider);
 Vue.use(axios)
+
+// 图表插件
+import ECharts from 'vue-echarts' // refers to components/ECharts.vue in webpack
+import 'echarts/lib/chart/bar'
+import 'echarts/lib/component/tooltip'
+import 'echarts-gl'
+Vue.component('v-chart', ECharts)
+
 Vue.prototype.$api = api;
 Vue.prototype.$common = common;
 

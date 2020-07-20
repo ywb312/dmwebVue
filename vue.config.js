@@ -99,5 +99,9 @@ module.exports = {
             }
         }
     },
-    lintOnSave: false
+    lintOnSave: false,
+    transpileDependencies: [
+        'vue-echarts',
+        'resize-detector'
+    ]
 }

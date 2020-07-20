@@ -106,6 +106,11 @@ export default {
             });
             this.rendering = arr;
         },
+        btnClick(item) {
+            // this.$router.push({
+            //     path:"/statistics/staEcharts",
+            // })
+        },
         // paramsDate(val) {
         //     this.postData.obj["bean.zrdw"] = val["zrdw"];
         //     this.postData.obj["bean.lx"] = val["lx"];
