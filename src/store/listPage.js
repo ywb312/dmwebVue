@@ -72,11 +72,11 @@ export default [{
     //     text: "审核列表",
     //     id: "auditpj",
     // }, {
-        text: "风险清单",
-        id: "riskreport",
+    //     text: "风险清单",
+    //     id: "riskreport",
     // }, {
-    //     text: "风险比较图",
-    //     id: "fxwxytj",
+        text: "风险比较图",
+        id: "fxwxytj",
     // }, {
     //     text: "安全风险公告栏",
     //     id: "ggl",

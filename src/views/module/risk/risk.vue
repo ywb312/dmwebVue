@@ -110,6 +110,17 @@ export default {
             require(["@/components/risk/informCard"], resolve),
         twoOnrisk: resolve => require(["@/components/risk/twoOnrisk"], resolve),
         revise: resolve => require(["@/components/risk/revise"], resolve)
+    },
+    beforeRouteLeave(to, from, next) {
+        if (to.name != "list") {
+            //不是list , 缓存
+            from.meta.keepAlive = true;
+        } else {
+            //list列表页,不缓存
+            from.meta.keepAlive = false;
+            this.$destroy();
+        }
+        next();
     }
 };
 </script>

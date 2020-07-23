@@ -138,7 +138,7 @@ const routes = [{
 		name: 'risk',
 		component: () => import('@/views/module/risk/risk.vue'),
 		meta: {
-			keepAlive: false
+			keepAlive: true
 		}
 	},
 	{ //风险管理 危险源
@@ -193,6 +193,14 @@ const routes = [{
 		path: '/risk/auditDetail',
 		name: 'auditDetail',
 		component: () => import('@/views/module/risk/auditDetail.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //风险管理 风险比较图
+		path: '/risk/selcetRisk',
+		name: 'selcetRisk',
+		component: () => import('@/views/module/risk/selcetRisk.vue'),
 		meta: {
 			keepAlive: false
 		}
