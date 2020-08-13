@@ -140,18 +140,21 @@ export default {
                 sourcetype: "",
                 pcdate: "",
                 crdesc: "",
-                yhImg: []
+                yhImg: [],
             },
-            infos: []
+            infos: [],
         };
     },
     created() {
         let _self = this;
         let obj = {
             "bean.yhid": this.$route.query.yhid,
-            "bean.flag": "1"
+            "bean.flag": "1",
+            "bean.tablesuffix": this.deptId,
+            "bean.recursuffix": ")",
+            "bean.recurprefix": "get",
         };
-        _self.$api.danger.detail(obj).then(res => {
+        _self.$api.danger.detail(obj).then((res) => {
             // 数据有误
             if (typeof res != "object") {
                 _self.$toast("服务器连接错误");
@@ -166,10 +169,15 @@ export default {
         previewImg(item) {
             ImagePreview({
                 images: [item],
-                showIndex: false
+                showIndex: false,
             });
-        }
-    }
+        },
+    },
+    computed: {
+        deptId() {
+            return this.$store.state.deptId;
+        },
+    },
 };
 </script>
 <style scoped>

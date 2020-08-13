@@ -39,7 +39,7 @@ export default {
             noData: false,
             // 数据有误
             noRes: false,
-            isLoading: true
+            isLoading: true,
         };
     },
     props: ["compShow"],
@@ -51,8 +51,13 @@ export default {
             let self = this;
             self.resData = [];
             this.$api.danger
-                .getHicomments({ bussinesskey: obj.yhid })
-                .then(res => {
+                .getHicomments({
+                    bussinesskey: obj.yhid,
+                    "bean.tablesuffix": this.deptId,
+                    "bean.recursuffix": ")",
+                    "bean.recurprefix": "get",
+                })
+                .then((res) => {
                     this.isLoading = false;
                     if (typeof res != "object") {
                         this.noRes = true;
@@ -68,7 +73,7 @@ export default {
         recordClose() {
             this.recordVisible = false;
             this.$emit("popupClose");
-        }
+        },
     },
     watch: {
         // 监听值 确定显示的状态
@@ -78,16 +83,19 @@ export default {
                 this.getData(this.selectData);
                 this.recordVisible = val; //将父组件的值赋给popupVisible 子组件的值
             }
-        }
+        },
     },
     components: {
-        Popup
+        Popup,
     },
     computed: {
         selectData() {
             return this.$store.state.selectData;
-        }
-    }
+        },
+        deptId() {
+            return this.$store.state.deptId;
+        },
+    },
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>

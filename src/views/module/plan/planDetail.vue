@@ -64,7 +64,7 @@ export default {
             rendering: [],
             isLoading: false,
             noData: false,
-            noRes: false
+            noRes: false,
         };
     },
     created() {
@@ -76,9 +76,12 @@ export default {
             this.$api.plan
                 .doDetail({
                     "bean.cpid": this.selectData.cpid,
-                    "bean.createdate": "2020-05-15"
+                    "bean.createdate": "2020-05-15",
+                    "bean.tablesuffix": this.deptId,
+                    "bean.recursuffix": ")",
+                    "bean.recurprefix": "get",
                 })
-                .then(res => {
+                .then((res) => {
                     this.isLoading = false;
                     // 数据有误
                     if (typeof res != "object") {
@@ -95,8 +98,8 @@ export default {
         // 处理rendering渲染数据的函数
         setRendering(arr) {
             let render = [];
-            arr.forEach(item => {
-                item.gkcs.forEach(element => {
+            arr.forEach((item) => {
+                item.gkcs.forEach((element) => {
                     let _obj = JSON.stringify(item);
                     let objClone = JSON.parse(_obj);
                     objClone.gkcs = element;
@@ -111,13 +114,16 @@ export default {
             this.noData = false;
             this.rendering = [];
             this.getData();
-        }
+        },
     },
     computed: {
         selectData() {
             return this.$store.state.selectData;
-        }
-    }
+        },
+        deptId() {
+            return this.$store.state.deptId;
+        },
+    },
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>
