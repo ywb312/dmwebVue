@@ -149,7 +149,11 @@ export default {
         },
         paramsDate(v) {
             Object.keys(v).forEach((key) => {
-                this.postData.obj["bean." + key] = v[key];
+                if (key == "zgzrdw") {
+                    this.postData.obj["bean.crqy"] = v[key];
+                } else {
+                    this.postData.obj["bean." + key] = v[key];
+                }
             });
             this.$refs.view.clearData();
         },
