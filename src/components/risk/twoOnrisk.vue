@@ -20,7 +20,6 @@
                             class="noFlex"
                             v-for="(n,m) in item.child"
                             :key="m"
-                            @click.stop="btnClick(n)"
                         >
                             <div>
                                 <p>
