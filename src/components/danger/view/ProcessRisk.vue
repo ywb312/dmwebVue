@@ -79,7 +79,7 @@
         <search-popup
             @returnMsg="paramsDate"
             :statusShow="true"
-            :companyShow="false"
+            :companyShow="true"
             :popshow="popshow"
             @popupClose="popshow=false"
         ></search-popup>
@@ -110,8 +110,8 @@ export default {
             postData: {
                 url: "biz/rm/processrisk/list.action",
                 obj: {
-                    "bean.queryAll": ""
-                }
+                    "bean.queryAll": "",
+                },
             },
             sheetShow: false,
             actions: [{ name: "隐患详情" }, { name: "审批记录" }],
@@ -121,22 +121,22 @@ export default {
             compShow: false,
             // 查找组件的显示
             popshow: false,
-            crstate: []
+            crstate: [],
         };
     },
     methods: {
         getRendering(arr) {
             let _self = this;
             if (this.crstate.length == 0) {
-                _self.$common.comboList({ sourcename: "YHZT" }).then(res => {
+                _self.$common.comboList({ sourcename: "YHZT" }).then((res) => {
                     _self.crstate = res;
-                    arr.forEach(item => {
+                    arr.forEach((item) => {
                         _self.$common.code2Text(item, "crstate", _self.crstate);
                     });
                     _self.rendering = arr;
                 });
             } else {
-                arr.forEach(item => {
+                arr.forEach((item) => {
                     _self.$common.code2Text(item, "crstate", _self.crstate);
                 });
                 _self.rendering = arr;
@@ -148,7 +148,7 @@ export default {
             this.$refs.view.clearData();
         },
         paramsDate(v) {
-            Object.keys(v).forEach(key => {
+            Object.keys(v).forEach((key) => {
                 this.postData.obj["bean." + key] = v[key];
             });
             this.$refs.view.clearData();
@@ -166,20 +166,20 @@ export default {
                 this.$router.push({
                     path: "/danger/detail",
                     query: {
-                        yhid: this.selectData.yhid
-                    }
+                        yhid: this.selectData.yhid,
+                    },
                 });
             } else if (item.name == "审批记录") {
                 this.compShow = true;
             }
-        }
+        },
     },
     components: {
         ViewBox,
         correlation,
         searchPopup,
-        record
-    }
+        record,
+    },
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>

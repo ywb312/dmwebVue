@@ -197,6 +197,14 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //风险管理 风险比较图
+		path: '/risk/selcetRisk',
+		name: 'selcetRisk',
+		component: () => import('@/views/module/risk/selcetRisk.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
 	{ //三项人员  
 		path: '/person',
 		name: 'person',

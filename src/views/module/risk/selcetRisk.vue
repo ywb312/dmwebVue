@@ -1,16 +1,36 @@
 <template>
-    <div>
+    <div class="page">
+        <!-- 标题  -->
+        <van-nav-bar
+            title="危险源"
+            left-text="返回"
+            fixed
+            placeholder
+            left-arrow
+            @click-left="$router.back(-1)"
+        />
+        <SearchBox placeholder="请输入风险点名称搜索" @callback="searchBack"></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
-                <div class="wrapper" v-for="(item,index) in rendering" :key="index">
+                <div
+                    class="wrapper"
+                    v-for="(item,index) in rendering"
+                    :key="index"
+                    @click="btnClick(item)"
+                >
                     <div class="title">
                         <h4>{{index+1+'.'+item.name}}</h4>
-                        <p class="main_tag">
+                        <p style="min-width:40px">
                             <van-tag size="large" round type="primary">{{item.fxtypeText}}</van-tag>
                         </p>
                     </div>
                     <div class="main">
-                        <div class="noFlex" v-for="(n,m) in item.child" :key="m">
+                        <div
+                            class="noFlex"
+                            v-for="(n,m) in item.child"
+                            :key="m"
+                            @click.stop="btnClick(n)"
+                        >
                             <div>
                                 <p>
                                     <span class="main_title bold">{{"("+(m+1)+")"+n.wname}}</span>
@@ -30,36 +50,6 @@
                                     <span class="main_val">{{n.deptname}}</span>
                                 </p>
                             </div>
-                            <div>
-                                <p>
-                                    <span class="main_title">项目:</span>
-                                    <span class="main_val">{{item.project}}</span>
-                                </p>
-                            </div>
-                            <div>
-                                <p>
-                                    <span class="main_title">内容:</span>
-                                    <span class="main_val">{{item.content}}</span>
-                                </p>
-                            </div>
-                            <div>
-                                <p>
-                                    <span class="main_title">影响范围:</span>
-                                    <span class="main_val">{{item.yxfwText}}</span>
-                                </p>
-                            </div>
-                            <div>
-                                <p>
-                                    <span class="main_title">可能导致的事故:</span>
-                                    <span class="main_val">{{item.knfsText}}</span>
-                                </p>
-                            </div>
-                            <div>
-                                <p>
-                                    <span class="main_title">潜在后果:</span>
-                                    <span class="main_val">{{item.qzhgText}}</span>
-                                </p>
-                            </div>
                             <div v-for="(key,val) in n.child" :key="val">
                                 <p>
                                     <span class="main_title">{{key.gtypeText+":"}}</span>
@@ -75,24 +65,31 @@
 </template>
 <script>
 // 这是基本渲染功能的组件 公用
+import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 export default {
-    name: "twoOnrisk",
+    name: "selcetRisk",
     data() {
         return {
             // 渲染的数据
             rendering: [],
             postData: {
-                url: "biz/risk/info/twoOnrisk.action",
-                obj: {},
-            },
+                url: "biz/risk/info/selectriskreportlist.action",
+                obj: this.$route.query
+            }
         };
     },
     methods: {
         getRendering(arr) {
-            this.setRes(arr).then((res) => {
+            this.setRes(arr).then(res => {
                 this.rendering = res;
             });
+        },
+        // 搜索框的回调
+        searchBack(str) {
+            this.postData.obj["bean.param"] = str;
+            this.rendering = [];
+            this.$refs.view.clearData();
         },
         // 设置返还参数
         setRes(res) {
@@ -103,22 +100,16 @@ export default {
                 return a.name > b.name ? 1 : -1;
             });
             function getItem(key, val, arr) {
-                return arr.findIndex((item) => item[key] == val);
+                return arr.findIndex(item => item[key] == val);
             }
             return Promise.all([
                 _self.$common.comboList({ sourcename: "FXDLX" }),
-                _self.$common.comboList({ sourcename: "KNFS" }),
-                _self.$common.comboList({ sourcename: "YXFWEI" }),
-                _self.$common.comboList({ sourcename: "QZHG" }),
-                _self.$common.comboList({ sourcename: "GKCSLX" }),
-            ]).then((res) => {
+                _self.$common.comboList({ sourcename: "GKCSLX" })
+            ]).then(res => {
                 // 如果name,fxtype和上一项的name,fxtype不一致就推入新数组,否则添加子元素
                 sortArr.forEach((item, index, arr) => {
                     _self.$common.code2Text(item, "fxtype", res[0]);
-                    _self.$common.code2Text(item, "knfs", res[1]);
-                    _self.$common.code2Text(item, "yxfw", res[2]);
-                    _self.$common.code2Text(item, "qzhg", res[3]);
-                    _self.$common.code2Text(item, "gtype", res[4]);
+                    _self.$common.code2Text(item, "gtype", res[1]);
                     let nameIndex = getItem("name", item.name, returnArr);
                     if (nameIndex == -1) {
                         // 风险点不一致 向后新增
@@ -132,35 +123,32 @@ export default {
                         returnArr.push(obj);
                     } else if (nameIndex >= 0) {
                         // 风险点一致 匹配危险源
-                        let deptnameArr = returnArr[nameIndex].child;
-                        let deptnameIndex = getItem(
-                            "wname",
-                            item.wname,
-                            deptnameArr
-                        );
-                        if (deptnameIndex >= 0) {
+                        let wnameArr = returnArr[nameIndex].child;
+                        let wnameIndex = getItem("wname", item.wname, wnameArr);
+                        if (wnameIndex >= 0) {
                             // 危险源一致 匹配危险源
-                            if (!deptnameArr[deptnameIndex].child) {
-                                deptnameArr[deptnameIndex].child = [];
+                            if (!wnameArr[wnameIndex].child) {
+                                wnameArr[wnameIndex].child = [];
                             }
-                            deptnameArr[deptnameIndex].child.push(item);
-                        } else if (deptnameIndex == -1) {
+                            wnameArr[wnameIndex].child.push(item);
+                        } else if (wnameIndex == -1) {
                             // 危险源不一致 向后新增
                             let obj = this.$common.deepClone(item);
                             obj.child = [this.$common.deepClone(item)];
-                            deptnameArr.push(obj);
+                            wnameArr.push(obj);
                         }
                     }
                 });
-                return new Promise((reslove) => {
+                return new Promise(reslove => {
                     reslove(returnArr);
                 });
             });
-        },
+        }
     },
     components: {
         ViewBox,
-    },
+        SearchBox
+    }
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>
