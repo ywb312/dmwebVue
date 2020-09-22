@@ -9,13 +9,22 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>运输线路检查负责人: {{item.person}}</p>
+                            <p class="main_text">
+                                <span class="main_title">运输线路检查负责人:</span>
+                                <span class="main_val">{{item.person}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>运输线路检查内容: {{item.content}}</p>
+                            <p class="main_text">
+                                <span class="main_title">运输线路检查内容:</span>
+                                <span class="main_val">{{item.content}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>运输线路检查日期: {{item.createDate}}</p>
+                            <p class="main_text">
+                                <span class="main_title">运输线路检查日期:</span>
+                                <span class="main_val">{{item.createDate}}</span>
+                            </p>
                         </div>
                         <div>
                             <p>
@@ -33,13 +42,22 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>检测检验负责人: {{item.person}}</p>
+                            <p class="main_text">
+                                <span class="main_title">检测检验负责人:</span>
+                                <span class="main_val">{{item.person}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>检测检验内容: {{item.content}}</p>
+                            <p class="main_text">
+                                <span class="main_title">检测检验内容:</span>
+                                <span class="main_val">{{item.content}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>检测检验日期: {{item.createDate}}</p>
+                            <p class="main_text">
+                                <span class="main_title">检测检验日期:</span>
+                                <span class="main_val">{{item.createDate}}</span>
+                            </p>
                         </div>
                         <div>
                             <p>
@@ -50,7 +68,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -66,16 +83,16 @@ export default {
             postData: {
                 url: "",
                 obj: {
-                    "bean.param": ""
-                }
-            }
+                    "bean.param": "",
+                },
+            },
         };
     },
     props: {
         pageData: {
             type: Object,
-            required: true
-        }
+            required: true,
+        },
     },
     created() {
         if (this.pageData.element == "1") {
@@ -94,12 +111,12 @@ export default {
             this.rendering = [];
             this.$refs.view.clearData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {},
     },
     components: {
         SearchBox,
-        ViewBox
-    }
+        ViewBox,
+    },
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>

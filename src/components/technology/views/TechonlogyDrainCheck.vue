@@ -11,11 +11,23 @@
                         <h4>{{index+1+"."+item.content}}</h4>
                     </div>
                     <div class="main">
-                        <div>
-                            <p>负责人: {{item.person}}</p>
+                          <div>
+                            <p class="main_text">
+                                <span class="main_title">检查内容:</span>
+                                <span class="main_val">{{item.content}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>检查日期: {{item.content}}</p>
+                            <p class="main_text">
+                                <span class="main_title">检查负责人:</span>
+                                <span class="main_val">{{item.person}}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="main_text">
+                                <span class="main_title">检查日期:</span>
+                                <span class="main_val">{{item.createDate}}</span>
+                            </p>
                         </div>
                         <div>
                             <p>

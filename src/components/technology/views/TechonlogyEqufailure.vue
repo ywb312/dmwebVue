@@ -9,27 +9,44 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>故障时间: {{item.faultdate}}</p>
+                            <p class="main_text">
+                                <span class="main_title">故障时间:</span>
+                                <span class="main_val">{{item.faultdate}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>故障原因: {{item.faultcause}}</p>
+                            <p class="main_text">
+                                <span class="main_title">故障原因:</span>
+                                <span class="main_val">{{item.faultcause}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>处理结果: {{item.disresult}}</p>
+                            <p class="main_text">
+                                <span class="main_title">处理结果:</span>
+                                <span class="main_val">{{item.disresult}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>汇报人: {{item.reportman}}</p>
+                            <p class="main_text">
+                                <span class="main_title">汇报人:</span>
+                                <span class="main_val">{{item.reportman}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>落实人: {{item.verifyman}}</p>
+                            <p class="main_text">
+                                <span class="main_title">落实人:</span>
+                                <span class="main_val">{{item.verifyman}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>备注: {{item.memo}}</p>
+                            <p class="main_text">
+                                <span class="main_title">备注:</span>
+                                <span class="main_val">{{item.memo}}</span>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -45,9 +62,9 @@ export default {
             postData: {
                 url: "biz/operate/sexsystem/equfailure/list.action",
                 obj: {
-                    "bean.param": ""
-                }
-            }
+                    "bean.param": "",
+                },
+            },
         };
     },
     created() {},
@@ -61,12 +78,12 @@ export default {
             this.rendering = [];
             this.$refs.view.clearData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {},
     },
     components: {
         SearchBox,
-        ViewBox
-    }
+        ViewBox,
+    },
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>

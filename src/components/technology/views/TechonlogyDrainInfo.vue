@@ -8,17 +8,29 @@
                         <h4>{{index+1+"."+item.projectName}}</h4>
                     </div>-->
                     <div class="main">
-                        <div>
-                            <p>排水量（m³）: {{item.tonage}}</p>
+                         <div>
+                            <p class="main_text">
+                                <span class="main_title">排水量（m³）::</span>
+                                <span class="main_val">{{item.tonage}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>排水原因: {{item.reason}}</p>
+                            <p class="main_text">
+                                <span class="main_title">排水原因:</span>
+                                <span class="main_val">{{item.reason}}</span>
+                            </p>
+                        </div>
+                         <div>
+                            <p class="main_text">
+                                <span class="main_title">排水责任人:</span>
+                                <span class="main_val">{{item.person}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>排水责任人: {{item.person}}</p>
-                        </div>
-                        <div>
-                            <p>排水日期: {{item.createDate}}</p>
+                            <p class="main_text">
+                                <span class="main_title">排水日期:</span>
+                                <span class="main_val">{{item.createDate}}</span>
+                            </p>
                         </div>
                         <div>
                             <p>

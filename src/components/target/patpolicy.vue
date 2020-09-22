@@ -7,8 +7,8 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title">发布单位:</span>
-                                <span class="main_val">{{item.pubdept}}</span>
+                                <span class="main_title">内容:</span>
+                                <span class="main_val">{{item.content}}</span>
                             </p>
                         </div>
                         <div>
@@ -25,14 +25,20 @@
                         </div>
                         <div>
                             <p class="main_text">
+                                <span class="main_title">发布单位:</span>
+                                <span class="main_val">{{item.pubdept}}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="main_text">
                                 <span class="main_title">发布时间:</span>
                                 <span class="main_val">{{item.pubtime}}</span>
                             </p>
                         </div>
                         <div>
-                            <p class="main_text">
-                                <span class="main_title">内容:</span>
-                                <span class="main_val">{{item.suggestion}}</span>
+                            <p>
+                                附件名称:
+                                <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
                             </p>
                         </div>
                     </div>
@@ -54,9 +60,9 @@ export default {
                 url: "biz/operate/patpolicy/list.action",
                 obj: {
                     "bean.param": "",
-                    "bean.element": this.pageData.element
-                }
-            }
+                    "bean.element": this.pageData.element,
+                },
+            },
         };
     },
     // pageData父组件传来的配置项
@@ -76,12 +82,12 @@ export default {
             // this.$router.push({
             //     path: "/education/traplanDetail"
             // });
-        }
+        },
     },
     components: {
         SearchBox,
-        ViewBox
-    }
+        ViewBox,
+    },
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>

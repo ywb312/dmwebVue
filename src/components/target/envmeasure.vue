@@ -10,29 +10,20 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title">发布单位:</span>
-                                <span class="main_val">{{item.pubdept}}</span>
-                            </p>
-                            <p class="main_tag">
-                                <van-tag round size="large" type="primary">{{item.year}}</van-tag>
+                                <span class="main_title">年度:</span>
+                                <span class="main_val">{{item.year+"年度"}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title">发布时间:</span>
-                                <span class="main_val">{{item.createtime}}</span>
+                                <span class="main_title">目标名称:</span>
+                                <span class="main_val">{{item.objname}}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title">发布状态:</span>
-                                <span class="main_val">{{item.status=="FBZT001"?"未发布":"已发布"}}</span>
-                            </p>
-                        </div>
-                        <div>
-                            <p class="main_text">
-                                <span class="main_title">附件名称:</span>
-                                <span class="main_val">{{item.attachname}}</span>
+                                附件名称:
+                                <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
                             </p>
                         </div>
                         <div>
@@ -45,6 +36,18 @@
                             <p class="main_text">
                                 <span class="main_title">附件制作时间:</span>
                                 <span class="main_val">{{item.maketime}}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="main_text">
+                                <span class="main_title">发布单位:</span>
+                                <span class="main_val">{{item.pubdept}}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="main_text">
+                                <span class="main_title">发布时间:</span>
+                                <span class="main_val">{{item.createtime}}</span>
                             </p>
                         </div>
                     </div>
@@ -66,9 +69,9 @@ export default {
                 url: "biz/operate/envMeasure/list.action",
                 obj: {
                     "bean.param": "",
-                    "bean.element": this.pageData.element
-                }
-            }
+                    "bean.element": this.pageData.element,
+                },
+            },
         };
     },
     // pageData父组件传来的配置项
@@ -88,12 +91,12 @@ export default {
             // this.$router.push({
             //     path: "/education/traplanDetail"
             // });
-        }
+        },
     },
     components: {
         SearchBox,
-        ViewBox
-    }
+        ViewBox,
+    },
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>

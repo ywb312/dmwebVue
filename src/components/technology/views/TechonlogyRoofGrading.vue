@@ -12,16 +12,22 @@
                     </div>
                     <div class="main">
                         <div>
+                            <p>顶板类型: {{item.rooftype}}</p>
+                        </div>
+                        <div>
                             <p>采矿方法: {{item.miningtypeText}}</p>
+                        </div>
+                        <div>
+                            <p>当前级别: {{item.crruentlevel}}</p>
                         </div>
                         <div>
                             <p>责任单位: {{item.dutyorg}}</p>
                         </div>
                         <div>
-                            <p>评估时间: {{item.lastcreatetime}}</p>
+                            <p>评估次数: {{item.nums}}</p>
                         </div>
                         <div>
-                            <p>评估次数: {{item.nums}}</p>
+                            <p>评估时间: {{item.lastcreatetime}}</p>
                         </div>
                         <div>
                             <p>登记人: {{item.createman}}</p>
@@ -44,9 +50,9 @@ export default {
             postData: {
                 url: "biz/operate/taskminingprojectinfo/list.action",
                 obj: {
-                    "bean.param": ""
-                }
-            }
+                    "bean.param": "",
+                },
+            },
             // dqztArr: [
             //     { id: "DQZT001", text: "采矿中" },
             //     { id: "DQZT002", text: "充填中" },
@@ -57,8 +63,8 @@ export default {
     methods: {
         getRendering(arr) {
             let _self = this;
-            this.$common.comboList({ sourcename: "CKFF" }).then(res => {
-                arr.forEach(element => {
+            this.$common.comboList({ sourcename: "CKFF" }).then((res) => {
+                arr.forEach((element) => {
                     _self.$common.code2Text(element, "miningtype", res);
                 });
                 _self.rendering = arr;
@@ -70,12 +76,19 @@ export default {
             this.rendering = [];
             this.$refs.view.clearData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {
+            this.$router.push({
+                path: "/technology/roofidentityrecords",
+                query: {
+                    filters: obj.pid,
+                },
+            });
+        },
     },
     components: {
         SearchBox,
-        ViewBox
-    }
+        ViewBox,
+    },
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>

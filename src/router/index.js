@@ -277,10 +277,18 @@ const routes = [{
 			keepAlive: false
 		}
 	},
-	{ //工艺管理
+	{ //生产工艺管理
 		path: '/technology',
 		name: 'technology',
 		component: () => import('@/views/module/technology/technology.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
+	{ //生产工艺管理 顶板分级信息
+		path: '/technology/roofidentityrecords',
+		name: 'technology/roofidentityrecords',
+		component: () => import('@/views/module/technology/roofidentityrecords.vue'),
 		meta: {
 			keepAlive: false
 		}

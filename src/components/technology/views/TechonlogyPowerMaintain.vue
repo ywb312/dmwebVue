@@ -9,10 +9,22 @@
                     </div>
                     <div class="main">
                         <div>
-                            <p>供电线路维护人: {{item.person}}</p>
+                            <p class="main_text">
+                                <span class="main_title">供电检查内容:</span>
+                                <span class="main_val">{{item.content}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>供电线路维护时间: {{item.createDate}}</p>
+                            <p class="main_text">
+                                <span class="main_title">供电检查负责人:</span>
+                                <span class="main_val">{{item.person}}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="main_text">
+                                <span class="main_title">供电检查日期:</span>
+                                <span class="main_val">{{item.createDate}}</span>
+                            </p>
                         </div>
                         <div>
                             <p>
@@ -23,7 +35,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -39,9 +50,9 @@ export default {
             postData: {
                 url: "biz/operate/powermaintain/list.action",
                 obj: {
-                    "bean.param": ""
-                }
-            }
+                    "bean.param": "",
+                },
+            },
         };
     },
     created() {},
@@ -55,12 +66,12 @@ export default {
             this.rendering = [];
             this.$refs.view.clearData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {},
     },
     components: {
         SearchBox,
-        ViewBox
-    }
+        ViewBox,
+    },
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>

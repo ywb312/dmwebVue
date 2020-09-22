@@ -45,9 +45,9 @@ export default [{
     }, {
         text: "计划查询",
         id: "scdetail"
-    // }, {
-    //     text: "专项检查计划",
-    //     id: "special"
+        // }, {
+        //     text: "专项检查计划",
+        //     id: "special"
     }]
 }, {
     title: "提醒预警",
@@ -301,97 +301,40 @@ export default [{
         }]
     }]
 }, {
-    title: "安全环保生产方针与目标",
+    title: "方针与目标",
     path: "target",
     page: [{
         text: "安全生产方针",
         child: [{
-            text: "安全生产方针发布、修订(环保)",
-            id: "patpolicy1"
-        }, {
-            text: "安全生产方针发布、修订(消防)",
-            id: "patpolicy2"
-        }, {
-            text: "安全生产方针发布、修订(安全)",
+            text: "矿山安全生产方针",
             id: "patpolicy3"
         }, {
-            text: "安全生产方针意见征集(环保)",
-            id: "patopinion1"
-        }, {
-            text: "安全生产方针意见征集(消防)",
-            id: "patopinion2"
-        }, {
-            text: "安全生产方针意见征集(安全)",
-            id: "patopinion3"
+            text: "矿山环境方针",
+            id: "patpolicy2"
         }]
     }, {
-        text: "安全生产目标",
+        text: "安全生产及消防目标",
         child: [{
-            text: "安全生产目标意见征集(环保)",
-            id: "opinionobj1"
-        }, {
-            text: "安全生产目标意见征集(消防)",
-            id: "opinionobj2"
-        }, {
-            text: "安全生产目标意见征集(安全)",
-            id: "opinionobj3"
-        }, {
-            text: "企业安全生产目标发布修订(环保)",
-            id: "annualobj1"
-        }, {
-            text: "企业安全生产目标发布修订(消防)",
-            id: "annualobj2"
-        }, {
-            text: "企业安全生产目标发布修订(安全)",
+            text: "矿山安全生产及消防目标",
             id: "annualobj3"
         }, {
-            text: "安全生产目标分解(环保)",
-            id: "thinobj1"
-        }, {
-            text: "安全生产目标分解(消防)",
-            id: "thinobj2"
-        }, {
-            text: "安全生产目标分解(安全)",
-            id: "thinobj3"
-        }, {
-            text: "安全生产目标考核(环保)",
-            id: "assessmentobj1"
-        }, {
-            text: "安全生产目标考核(消防)",
-            id: "assessmentobj2"
-        }, {
-            text: "安全生产目标考核(安全)",
-            id: "assessmentobj3"
-        }]
-    }, {
-        text: "环保方针目标",
-        child: [{
-            text: "环保措施计划(环保)",
-            id: "envmeasure1"
-        }, {
-            text: "环保措施计划(消防)",
+            text: "矿山安全生产及消防目标实施计划",
             id: "envmeasure2"
         }, {
-            text: "环保措施计划(安全)",
+            text: "矿山安全生产及消防目标实施的考核结果",
+            id: "envYearWorkPlan2"
+        }, ]
+    }, {
+        text: "环保目标",
+        child: [{
+            text: "矿山环保目标",
+            id: "envPolicyAims3"
+        }, {
+            text: "矿山环保目标实施计划",
             id: "envmeasure3"
         }, {
-            text: "年度环保工作计划(环保)",
-            id: "envYearWorkPlan1"
-        }, {
-            text: "年度环保工作计划(消防)",
-            id: "envYearWorkPlan2"
-        }, {
-            text: "年度环保工作计划(安全)",
+            text: "矿山环保目标实施的考核结果",
             id: "envYearWorkPlan3"
-        }, {
-            text: "环境方针目标(环保)",
-            id: "envPolicyAims1"
-        }, {
-            text: "环境方针目标(消防)",
-            id: "envPolicyAims2"
-        }, {
-            text: "环境方针目标(安全)",
-            id: "envPolicyAims3"
         }]
     }]
 }, {
@@ -460,10 +403,10 @@ export default [{
         id: "traplan3"
     }]
 }, {
-    title: "生产工艺系统安全管理",
-    path: "technology",
+    title: "项目三同时管理",
+    path: "simultaneously",
     page: [{
-        text: "项目三同时管理",
+        text: "建设项目安全“三同时”",
         child: [{
             text: "重大安全环保项目申请",
             id: "apply1"
@@ -476,18 +419,55 @@ export default [{
         }, {
             text: "职业卫生设施设计审查",
             id: "examine2"
+        }]
+    }, {
+        text: "建设项目职业卫生“三同时”",
+        child: [{
+            text: "重大安全环保项目申请",
+            id: "apply1"
         }, {
-            text: "消防项目设计审查",
-            id: "examine3"
+            text: "职业卫生项目的申请",
+            id: "apply2"
         }, {
-            text: "安全环保设施竣工验收信息",
-            id: "completed1"
+            text: "安全环保设施设计审查",
+            id: "examine1"
+        }]
+    }, {
+        text: "建设项目环保“三同时”管理",
+        child: [{
+            text: "重大安全环保项目申请",
+            id: "apply1"
         }, {
-            text: "职业卫生设施竣工验收信息",
-            id: "completed2"
+            text: "职业卫生项目的申请",
+            id: "apply2"
         }, {
-            text: "消防项目竣工验收信息",
-            id: "completed3"
+            text: "安全环保设施设计审查",
+            id: "examine1"
+        }]
+    }, {
+        text: "水土保持",
+        child: [{
+            text: "重大安全环保项目申请",
+            id: "apply1"
+        }, {
+            text: "职业卫生项目的申请",
+            id: "apply2"
+        }, {
+            text: "安全环保设施设计审查",
+            id: "examine1"
+        }]
+    }]
+}, {
+    title: "生产工艺系统安全管理",
+    path: "technology",
+    page: [{
+        text: "通风安全管理",
+        child: [{
+            text: "风质、风量、风速监测数据",
+            id: "prodaeration"
+        }, {
+            text: "通风系统反风试验记录",
+            id: "ventilationcheck"
         }]
     }, {
         text: "排水安全管理",
@@ -507,27 +487,9 @@ export default [{
     }, {
         text: "供电安全管理",
         child: [{
-            text: "供电线路维护",
+            text: "供电安全管理",
             id: "powermaintain"
-        }, {
-            text: "变电室检查",
-            id: "powerroomcheck"
         }]
-    }, {
-        text: "顶板、采空区管理",
-        child: [{
-            text: "顶板分级信息",
-            id: "roofgrading"
-        }, {
-            text: "采空区分布信息",
-            id: "taskdistributioninfo"
-        }, {
-            text: "采空区监控信息",
-            id: "taskmonitorinfo"
-        }]
-    }, {
-        text: "通风安全管理",
-        id: "prodaeration"
     }, {
         text: "提升运输安全管理",
         child: [{
@@ -549,6 +511,27 @@ export default [{
             text: "六大系统设备设施的检查、维护",
             id: "equfailure"
         }]
+    }, {
+        text: "顶板、采空区管理",
+        child: [{
+            text: "顶板分级信息",
+            id: "roofgrading"
+        }, {
+            text: "采空区安全防范措施",
+            id: "taskgoafsafe"
+        }, {
+            text: "采空区分布信息",
+            id: "taskdistributioninfo"
+        }, {
+            text: "采空区监控信息",
+            id: "taskmonitorinfo"
+        }]
+        // },{
+        //     text: "变化管理",
+        //     child: [{
+        //         text: "变化管理",
+        //         id: "prodcreview"
+        //     }]
     }]
 }, {
     title: "环保管理",

@@ -17,7 +17,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -33,9 +32,9 @@ export default {
             postData: {
                 url: "biz/operate/dev/taskdistributioninfo/list.action",
                 obj: {
-                    "bean.param": ""
-                }
-            }
+                    "bean.param": "",
+                },
+            },
         };
     },
     methods: {
@@ -48,12 +47,12 @@ export default {
             this.rendering = [];
             this.$refs.view.clearData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {},
     },
     components: {
         SearchBox,
-        ViewBox
-    }
+        ViewBox,
+    },
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>

@@ -6,10 +6,16 @@
                 <div class="wrapper" v-for="(item,index) in rendering" :key="index">
                     <div class="main">
                         <div>
-                            <p>点检人名称: {{item.checkman}}</p>
+                            <p class="main_text">
+                                <span class="main_title">点检人名称:</span>
+                                <span class="main_val">{{item.checkman}}</span>
+                            </p>
                         </div>
                         <div>
-                            <p>点检日期: {{item.checkdate}}</p>
+                            <p class="main_text">
+                                <span class="main_title">点检日期:</span>
+                                <span class="main_val">{{item.checkdate}}</span>
+                            </p>
                         </div>
                         <div>
                             <p>
@@ -20,7 +26,6 @@
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -36,9 +41,9 @@ export default {
             postData: {
                 url: "biz/operate/sexsystem/checkresult/list.action",
                 obj: {
-                    "bean.param": ""
-                }
-            }
+                    "bean.param": "",
+                },
+            },
         };
     },
     created() {},
@@ -52,12 +57,12 @@ export default {
             this.rendering = [];
             this.$refs.view.clearData();
         },
-        btnClick(obj) {}
+        btnClick(obj) {},
     },
     components: {
         SearchBox,
-        ViewBox
-    }
+        ViewBox,
+    },
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>

@@ -64,47 +64,18 @@ toTree(data) {
 
 ## 所有risk,danger一级页面为组件，其余新增、详情..等需要跳转的二级页面都是路由,其余共用一个组件
 ## technology(生产工艺)后端不是同一个接口,不分element;前端不分开,共用一个页面
+## 开发步骤
+    1.新增功能模块（九宫格）（一级菜单）
+        至src\views\home\homePage.vue 数组grid下新增对象
+    2.新增二级菜单(list)
+        至src\store\listPage.js 新增对象 手风琴特效需要child 不要手风琴特效直接text和id即可
+    3.新增页面
+        示例danger模块，至src\views\module\danger\danger.vue下
+        从listPage中获取数组，改为一级对象数组，每个对象中只有text、id和添加的component（可手动添加getPageData方法）
+        引入components
+    4.页面组件
+        复制其他页面组件 修改template和postdata即可    
 
-
-## 遗留问题
-检查记录详情planDetail 落实条件
-计划管理 我的计划
-
-inform  通知公告
-    详情
-    操作弹出框显示条件
-    增删改查
-
-<!-- plan    我的计划
-    专项检查计划 -->
-
-accident 事故管理
-    事故详情跳转（功能不够）
-
-emergency 应急管理
-    应急演练记录    详情评价状态未知
-
-team    组织保障管理
-    FileApprove 审批无数据
-    MeetingInfo 会议纪要发布 接口问题
-
-health后用弹窗来查看详情
-    体检结果 搜索框
-    职业卫生检测
-        放射源放射性监测 子表类别没有   是否合格判断
-        all 是否超限
-
-<!-- inject 安全投入
-    未根据已有年份 设置搜索范围 -->
-
-remind 提醒预警
-    检查逾期预警 一键取消未开发
-    
-performance
-    安全体系自评 子表未区分(一级/二级/三级)
-
-# 待开发 
-    安全教育培训 设备设施
 # 上线注意事项
     1.App.vue create注释打开 解决vuex刷新问题
     2.App.vue 加载中动画的显示
