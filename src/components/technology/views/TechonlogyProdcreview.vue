@@ -1,35 +1,53 @@
 <template>
     <div>
-        <SearchBox placeholder="请输入供电线路名称搜索" @callback="searchBack"></SearchBox>
+        <SearchBox
+            placeholder="请输入设计名称搜索"
+            @callback="searchBack"
+        ></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
-                <div class="wrapper" v-for="(item,index) in rendering" :key="index">
-                    <div class="title">
-                        <h4>{{index+1+"."+item.name}}</h4>
-                    </div>
+                <div
+                    class="wrapper"
+                    v-for="(item, index) in rendering"
+                    :key="index"
+                >
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title">供电检查内容:</span>
-                                <span class="main_val">{{item.content}}</span>
+                                <span class="main_title">设计名称:</span>
+                                <span class="main_val">{{
+                                    item.designname
+                                }}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title">供电检查负责人:</span>
-                                <span class="main_val">{{item.person}}</span>
+                                <span class="main_title">设计人:</span>
+                                <span class="main_val">{{ item.host }}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title">供电检查日期:</span>
-                                <span class="main_val">{{item.createDate}}</span>
+                                <span class="main_title">设计部门:</span>
+                                <span class="main_val">{{
+                                    item.designerdeptText
+                                }}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="main_text">
+                                <span class="main_title">记录人:</span>
+                                <span class="main_val">{{
+                                    item.recorder
+                                }}</span>
                             </p>
                         </div>
                         <div>
                             <p>
                                 附件名称:
-                                <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
+                                <a :href="item.attach ? item.attach : ''">{{
+                                    item.attachname
+                                }}</a>
                             </p>
                         </div>
                     </div>
@@ -57,8 +75,14 @@ export default {
     },
     created() {},
     methods: {
-        getRendering(v) {
-            this.rendering = v;
+        getRendering(arr) {
+            let _self = this;
+            this.$common.comboList({ sourcename: "SJBM" }).then((res) => {
+                arr.forEach((element) => {
+                    _self.$common.code2Text(element, "designerdept", res);
+                });
+                _self.rendering = arr;
+            });
         },
         // 搜索框的回调
         searchBack(str) {

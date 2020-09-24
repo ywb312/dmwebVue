@@ -526,12 +526,12 @@ export default [{
             text: "采空区监控信息",
             id: "taskmonitorinfo"
         }]
-        // },{
-        //     text: "变化管理",
-        //     child: [{
-        //         text: "变化管理",
-        //         id: "prodcreview"
-        //     }]
+    }, {
+        text: "变化管理",
+        child: [{
+            text: "变化管理",
+            id: "prodcreview"
+        }]
     }]
 }, {
     title: "环保管理",
@@ -644,89 +644,17 @@ export default [{
     title: "事故管理",
     path: "accident",
     page: [{
-        text: "事故快报",
-        child: [{
-            text: "事故快报(环保)",
-            id: "accireport1"
-        }, {
-            text: "事故快报(消防)",
-            id: "accireport2"
-        }, {
-            text: "事故快报(安全)",
-            id: "accireport3"
-        }]
+        text: "事故初报表",
+        id: "accireportnew"
     }, {
-        text: "事故详情",
-        child: [{
-            text: "事故详情(环保)",
-            id: "accidetabs1"
-        }, {
-            text: "事故详情(消防)",
-            id: "accidetabs2"
-        }, {
-            text: "事故详情(安全)",
-            id: "accidetabs3"
-        }]
+        text: "事故登记台账",
+        id: "accibook"
     }, {
-        text: "成立事故调查组",
-        child: [{
-            text: "成立事故调查组(环保)",
-            id: "relateduser1"
-        }, {
-            text: "成立事故调查组(消防)",
-            id: "relateduser2"
-        }, {
-            text: "成立事故调查组(安全)",
-            id: "relateduser3"
-        }]
+        text: "按事故发生季度统计",
+        id: "accidentzt"
     }, {
-        text: "现场调查取证",
-        child: [{
-            text: "现场调查取证(环保)",
-            id: "accihapevi1"
-        }, {
-            text: "现场调查取证(消防)",
-            id: "accihapevi2"
-        }, {
-            text: "现场调查取证(安全)",
-            id: "accihapevi3"
-        }]
-    }, {
-        text: "事故分析",
-        child: [{
-            text: "事故分析(环保)",
-            id: "accisutabs1"
-        }, {
-            text: "事故分析(消防)",
-            id: "accisutabs2"
-        }, {
-            text: "事故分析(安全)",
-            id: "accisutabs3"
-        }]
-    }, {
-        text: "调查报告",
-        child: [{
-            text: "调查报告(环保)",
-            id: "accsureport1"
-        }, {
-            text: "调查报告(消防)",
-            id: "accsureport2"
-        }, {
-            text: "调查报告(安全)",
-            id: "accsureport3"
-        }]
-    }, {
-        text: "事故事件库",
-        child: [{
-            text: "事故事件库(环保)",
-            id: "accistore1"
-        }, {
-            text: "事故事件库(消防)",
-            id: "accistore2"
-        }, {
-            text: "事故事件库(安全)",
-            id: "accistore3"
-        }]
+        text: "按事故伤者年龄统计",
+        id: "accidentsznl"
     }]
 }, {
     title: "设备设施管理",

@@ -11,7 +11,10 @@
         />
         <!-- 主体 -->
         <div>
-            <component :is="pageData.components" :pageData="pageData"></component>
+            <component
+                :is="pageData.components"
+                :pageData="pageData"
+            ></component>
         </div>
     </div>
 </template>
