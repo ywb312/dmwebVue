@@ -8,7 +8,7 @@
                 @click="reset"
             >
                 <div @click.stop class="maskMiddle">
-                    <div class="maskTitle">隐患条件查询</div>
+                    <div class="maskTitle">统计时间段</div>
                     <double-date-pick
                         ref="date"
                         :config="dbDateConifg"
@@ -56,7 +56,7 @@
 import ViewBox from "@/components/pub/ViewBox.vue";
 import doubleDatePick from "@/components/pub/doubleDatePick";
 export default {
-    name: "Accireportnew",
+    name: "Accidentsznl",
     data() {
         return {
             rendering: [],

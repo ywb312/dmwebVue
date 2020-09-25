@@ -120,7 +120,7 @@ import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 import Popup from "@/components/pub/Popup.vue";
 export default {
-    name: "Accireportnew",
+    name: "Accibook",
     data() {
         return {
             rendering: [],

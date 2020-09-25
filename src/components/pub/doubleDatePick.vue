@@ -7,7 +7,7 @@
             :value="value1"
             :label="config[0].title"
             :placeholder="config[0].placeholder"
-            @click="showPicker1=true"
+            @click="showPicker1 = true"
         />
         <van-field
             readonly
@@ -16,13 +16,13 @@
             :value="value2"
             :label="config[1].title"
             :placeholder="config[1].placeholder"
-            @click="showPicker2=true"
+            @click="showPicker2 = true"
         />
         <van-popup v-model="showPicker1" position="bottom" get-container="#app">
             <van-datetime-picker
                 v-model="pickerValue1"
                 ref="picker1"
-                type="date"
+                :type="type"
                 :formatter="formatter"
                 :min-date="minDate1"
                 :max-date="maxDate1"
@@ -34,7 +34,7 @@
             <van-datetime-picker
                 v-model="pickerValue2"
                 ref="picker2"
-                type="date"
+                :type="type"
                 :formatter="formatter"
                 :min-date="minDate2"
                 :max-date="maxDate2"
@@ -57,10 +57,21 @@ export default {
             value2: "",
             pickerValue2: new Date(),
             minDate2: new Date(new Date().getFullYear() - 10, 0, 1),
-            maxDate2: new Date(new Date().getFullYear() + 10, 11, 31)
+            maxDate2: new Date(new Date().getFullYear() + 10, 11, 31),
         };
     },
-    props: ["config"],
+    props: {
+        config: {
+            type: Array,
+            default: function () {
+                return [];
+            },
+        },
+        type: {
+            type: String,
+            default: "date",
+        },
+    },
     methods: {
         handleConfirm1(value) {
             this.value1 = this.formatDate(value);
@@ -95,10 +106,15 @@ export default {
         },
         // 设置选中时间的格式
         formatDate(date) {
-            return `${date.getFullYear()}-${date.getMonth() +
-                1}-${date.getDate()}`;
-        }
-    }
+            if (this.type == "date") {
+                return `${date.getFullYear()}-${
+                    date.getMonth() + 1
+                }-${date.getDate()}`;
+            } else if (this.type == "year-month") {
+                return `${date.getFullYear()}-${date.getMonth() + 1}`;
+            }
+        },
+    },
 };
 </script>
 <style lang="scss" scoped>
