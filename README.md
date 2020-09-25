@@ -63,7 +63,8 @@ toTree(data) {
 }
 
 ## 所有risk,danger一级页面为组件，其余新增、详情..等需要跳转的二级页面都是路由,其余共用一个组件
-## technology(生产工艺)后端不是同一个接口,不分element;前端不分开,共用一个页面
+## 2020-09-25修改 之前所需跳转的页面、子表变为组件  由子组件传值给父组件切换 例如设备管理页面facility、equipspecial中的choiseComponent
+
 ## 开发步骤
     1.新增功能模块（九宫格）（一级菜单）
         至src\views\home\homePage.vue 数组grid下新增对象

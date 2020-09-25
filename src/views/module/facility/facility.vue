@@ -14,6 +14,7 @@
             <component
                 :is="pageData.components"
                 :pageData="pageData"
+                @choiseComponent="choiseComponent"
             ></component>
         </div>
     </div>
@@ -51,6 +52,10 @@ export default {
                 }
             });
         },
+        // 切换组件
+        choiseComponent(obj) {
+            this.pageData = obj;
+        },
     },
     components: {
         // 特种设备检测检验
@@ -59,6 +64,9 @@ export default {
         // 特种设备、安标产品台账
         equipspecial: (resolve) =>
             require(["@/components/facility/views/Equipspecial"], resolve),
+        // 特种设备、安标产品台账子页面 检测详情
+        equipbookresult: (resolve) =>
+            require(["@/components/facility/views/Equipbookresult"], resolve),
     },
 };
 </script>
