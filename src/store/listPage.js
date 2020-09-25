@@ -657,116 +657,14 @@ export default [{
         id: "accidentsznl"
     }]
 }, {
-    title: "设备设施管理",
+    title: "设备管理",
     path: "facility",
     page: [{
-        text: "设备、设施、器具台账管理",
-        child: [{
-            text: "设备、设施、器具台账管理(环保)",
-            id: "devlist1"
-        }, {
-            text: "设备、设施、器具台账管理(消防)",
-            id: "devlist2"
-        }, {
-            text: "设备、设施、器具台账管理(安全)",
-            id: "devlist3"
-        }]
+        text: "特种设备检测检验",
+        id: "equipcheck"
     }, {
-        text: "设备、设施、器具购置与租赁",
-        child: [{
-            text: "设备、设施、器具购置与租赁(环保)",
-            id: "devpurchase1"
-        }, {
-            text: "设备、设施、器具购置与租赁(消防)",
-            id: "devpurchase2"
-        }, {
-            text: "设备、设施、器具购置与租赁(安全)",
-            id: "devpurchase3"
-        }]
-    }, {
-        text: "设备、设施、器具检验检测记录",
-        child: [{
-            text: "设备、设施、器具检验检测记录(环保)",
-            id: "devexpair1"
-        }, {
-            text: "设备、设施、器具检验检测记录(消防)",
-            id: "devexpair2"
-        }, {
-            text: "设备、设施、器具检验检测记录(安全)",
-            id: "devexpair3"
-        }]
-    }, {
-        text: "设备、设施、器具维修维护",
-        child: [{
-            text: "设备、设施、器具维修维护(环保)",
-            id: "devmaintain1"
-        }, {
-            text: "设备、设施、器具维修维护(消防)",
-            id: "devmaintain2"
-        }, {
-            text: "设备、设施、器具维修维护(安全)",
-            id: "devmaintain3"
-        }]
-    }, {
-        text: "设备、设施、器具报废封存",
-        child: [{
-            text: "设备、设施、器具报废封存(环保)",
-            id: "devscrap1"
-        }, {
-            text: "设备、设施、器具报废封存(消防)",
-            id: "devscrap2"
-        }, {
-            text: "设备、设施、器具报废封存(安全)",
-            id: "devscrap3"
-        }]
-    }, {
-        text: "特种设备台帐",
-        child: [{
-            text: "特种设备台帐(环保)",
-            id: "devspeciallist1"
-        }, {
-            text: "特种设备台帐(消防)",
-            id: "devspeciallist2"
-        }, {
-            text: "特种设备台帐(安全)",
-            id: "devspeciallist3"
-        }]
-    }, {
-        text: "特种设备检测检验报告",
-        child: [{
-            text: "特种设备检测检验报告(环保)",
-            id: "devtzsbjc1"
-        }, {
-            text: "特种设备检测检验报告(消防)",
-            id: "devtzsbjc2"
-        }, {
-            text: "特种设备检测检验报告(安全)",
-            id: "devtzsbjc3"
-        }]
-    }, {
-        text: "安全标志产品档案",
-        child: [{
-            text: "安全标志产品档案(环保)",
-            id: "devsafetysigns1"
-        }, {
-            text: "安全标志产品档案(消防)",
-            id: "devsafetysigns2"
-        }, {
-            text: "安全标志产品档案(安全)",
-            id: "devsafetysigns3"
-        }]
-    }, {
-        text: "安全标志产品检测检验报告",
-        child: [{
-            text: "安全标志产品检测检验报告(环保)",
-            id: "devsafetysignsjc1"
-        }, {
-            text: "安全标志产品检测检验报告(消防)",
-            id: "devsafetysignsjc2"
-        }, {
-            text: "安全标志产品检测检验报告(安全)",
-            id: "devsafetysignsjc3"
-        }]
+        text: "特种设备、安标产品台账",
+        id: "equipspecial"
     }]
 }, {
     title: "组织保障管理",

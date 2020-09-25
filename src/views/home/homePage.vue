@@ -94,7 +94,7 @@ export default {
                 {
                     id: "facility",
                     url: require("@/assets/img/ic_facility.png"),
-                    title: "设备设施"
+                    title: "设备管理"
                 },
                 {
                     id: "team",

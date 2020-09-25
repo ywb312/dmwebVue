@@ -1,37 +1,31 @@
 <template>
     <div>
-        <SearchBox placeholder="请输入项目名称搜索" @callback="searchBack"></SearchBox>
+        <SearchBox
+            placeholder="请输入设备名称，设备编号搜索"
+            @callback="searchBack"
+        ></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div
                     class="wrapper"
-                    v-for="(item,index) in rendering"
+                    v-for="(item, index) in rendering"
                     :key="index"
-                    @click="btnClick(item)"
                 >
                     <div class="title">
-                        <h4>{{index+1+"."+item.projectName}}</h4>
-                        <!-- <p style="min-width:40px">
-                            <van-tag round type="primary">{{item.moduleid}}</van-tag>
-                        </p>-->
+                        <h4>{{ index + 1 + "." + item.devcode }}</h4>
                     </div>
                     <div class="main">
                         <div>
-                            <p>上传人: {{item.createname}}</p>
-                        </div>
-                        <div>
-                            <p>发布日期: {{item.createDate}}</p>
-                        </div>
-                        <div>
-                            <p>
-                                附件名称:
-                                <a :href="item.attach?item.attach:''"  target="_blank">{{item.attachname}}</a>
+                            <p class="main_text">
+                                <span class="main_title">报告上传日期:</span>
+                                <span class="main_val">{{
+                                    item.createDate
+                                }}</span>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
     </div>
 </template>
@@ -39,22 +33,24 @@
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 export default {
-    name: "SafeOperation",
+    name: "Equipspecial",
     data() {
         return {
             // 渲染的数据
             rendering: [],
             postData: {
-                url: "biz/operate/safetypro/list.action",
-                obj: {}
-            }
+                url: "biz/operate/devpurchase/list.action",
+                obj: {
+                    "bean.element": this.pageData.element,
+                },
+            },
         };
     },
     // pageData父组件传来的配置项
     props: ["pageData"],
     methods: {
-        getRendering(v) {
-            this.rendering = v;
+        getRendering(arr) {
+            this.rendering = arr;
         },
         // 搜索框的回调
         searchBack(str) {
@@ -62,12 +58,11 @@ export default {
             this.rendering = [];
             this.$refs.view.clearData();
         },
-        btnClick(obj) {}
     },
     components: {
         SearchBox,
-        ViewBox
-    }
+        ViewBox,
+    },
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>

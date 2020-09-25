@@ -40,7 +40,7 @@
                         <div>
                             <p>
                                 文件:
-                                <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
+                                <a :href="item.attach?item.attach:''"  target="_blank">{{item.attachname}}</a>
                             </p>
                         </div>
                     </div>

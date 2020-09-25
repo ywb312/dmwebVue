@@ -48,7 +48,7 @@
                             <p class="main_text">
                                 <span class="main_title">附件名称:</span>
                                 <span class="main_val">
-                                    <a :href="item.attach?item.attach:''">{{item.attachname}}</a>
+                                    <a :href="item.attach?item.attach:''"  target="_blank">{{item.attachname}}</a>
                                 </span>
                             </p>
                         </div>
