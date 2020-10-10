@@ -325,22 +325,6 @@ const routes = [{
 			keepAlive: false
 		}
 	},
-	{ //应急管理 应急预案详情
-		path: '/emergency/emergPlanDetail',
-		name: 'emergPlanDetail',
-		component: () => import('@/views/module/emergency/emergPlanDetail.vue'),
-		meta: {
-			keepAlive: false
-		}
-	},
-	{ //应急管理 救援队伍信息
-		path: '/emergency/emergAgencyMan',
-		name: 'emergAgencyMan',
-		component: () => import('@/views/module/emergency/emergAgencyMan.vue'),
-		meta: {
-			keepAlive: false
-		}
-	},
 	{ //事故管理
 		path: '/accident',
 		name: 'accident',
