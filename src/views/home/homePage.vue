@@ -69,7 +69,7 @@ export default {
                 {
                     id: "technology",
                     url: require("@/assets/img/ic_craft_manager.png"),
-                    title: "工艺管理"
+                    title: "生产工艺"
                 },
                 {
                     id: "environment",

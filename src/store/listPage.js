@@ -892,87 +892,6 @@ export default [{
     title: "消防管理",
     path: "fire",
     page: [{
-        text: "消防工作记录清单",
-        id: "fireworklist"
-    }, {
-        text: "消防基础台账",
-        child: [{
-            text: "消防管理制度",
-            id: "firemanage"
-        }, {
-            text: "消防设备设施汇总",
-            id: "fireinfo"
-        }, {
-            text: "消防安全责任书",
-            id: "firesaferespon"
-        }, {
-            text: "消防从业人员资格证汇总",
-            id: "firecertificate"
-        }, {
-            text: "外来施工单位消防安全协议",
-            id: "fireforeignpact"
-        }]
-    }, {
-        text: "消防检查记录",
-        child: [{
-            text: "月巡查记录",
-            id: "moninspection"
-        }, {
-            text: "月巡查反馈记录",
-            id: "monfeedback"
-        }, {
-            text: "月巡查复查记录",
-            id: "monreview"
-        }, {
-            text: "专项检查记录",
-            id: "specialcheck"
-        }, {
-            text: "专项检查反馈记录",
-            id: "spefeedback"
-        }, {
-            text: "专项检查复查记录",
-            id: "spereview"
-        }, {
-            text: "重点防火部位检查记录",
-            id: "firerecord"
-        }, {
-            text: "重点防火部位反馈记录",
-            id: "firefeedback"
-        }, {
-            text: "重点放火部位复查记录",
-            id: "firereview"
-        }, {
-            text: "重大火灾隐患检查记录",
-            id: "blazerecord"
-        }, {
-            text: "重大火灾隐患反馈记录",
-            id: "blazefeedback"
-        }, {
-            text: "重大火灾隐患复查记录",
-            id: "blazereview"
-        }]
-    }, {
-        text: "消防宣传培训",
-        child: [{
-            text: "宣传报道",
-            id: "publicityreport"
-        }, {
-            text: "外派培训",
-            id: "expatriatetra"
-        }, {
-            text: "单位培训",
-            id: "unittrain"
-        }, {
-            text: "外来施工单位培训",
-            id: "foreigntrain"
-        }]
-    }, {
-        text: "消防安全专业工作月报表",
-        id: "firemonthreport"
-    }, {
-        text: "建筑消防设施完好过程控制季报表",
-        id: "fireseasonreport"
-    }, {
         text: "重要部位登记表 ",
         child: [{
             text: "人员密集场所登记表",
@@ -985,8 +904,20 @@ export default [{
         text: "重要场所消防验收情况统计",
         id: "fireaccept"
     }, {
-        text: "动火作业许可证",
-        id: "firepermit"
+        text: "消防安全检查登记表",
+        id: "checkplanXf"
+    }, {
+        text: "隐患整改反馈记录",
+        id: "feedback"
+    }, {
+        text: "消防器材设施台账",
+        id: "firebook"
+    }, {
+        text: "消防安全专业工作月报表",
+        id: "firemonthreport"
+    }, {
+        text: "建筑消防设施完好过程控制季报表",
+        id: "fireseasonreport"
     }]
 }, {
     title: "安全绩效测量与评价",
