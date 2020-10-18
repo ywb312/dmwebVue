@@ -81,11 +81,11 @@ export default {
                 //     url: require("@/assets/img/ic_envir_pro.png"),
                 //     title: "环保管理"
                 // },
-                // {
-                //     id: "emergency",
-                //     url: require("@/assets/img/ic_emergency_manager.png"),
-                //     title: "应急管理"
-                // },
+                {
+                    id: "emergency",
+                    url: require("@/assets/img/ic_emergency_manager.png"),
+                    title: "应急管理"
+                },
                 // {
                 //     id: "accident",
                 //     url: require("@/assets/img/ic_accident_manager.png"),

@@ -10,7 +10,7 @@ module.exports = {
         open: true,
         proxy: {
             '/dmweb': { //代理api
-                target: "http://localhost:8080/dmweb", //服务器api地址
+                target: "http://192.168.3.19:8080/dmweb", //服务器api地址
                 changeOrigin: true, //是否跨域
                 ws: true, // proxy websockets
                 pathRewrite: { //重写路径
