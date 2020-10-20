@@ -56,18 +56,17 @@ export default {
         getRendering(arr) {
             this.rendering = arr;
         },
-        btnClick(item){
+        btnClick(item) {
             // 向父组件传值 切换组件
-                let componentConfig = {
-                    text: "生产粉尘浓度检测结果",
-                    components: "DustResult",
-                    param: {
-                        filters: item.suffix,
-                    },
-                };
-                this.$emit("choiseComponent", componentConfig);
-            // /biz/operate/health/examdetail/checkAbnormalList.action?bean.tablesuffix=_gs
-        }
+            let componentConfig = {
+                text: "禁忌症人员清单",
+                components: "CheckAbnormal",
+                param: {
+                    filters: item.suffix,
+                },
+            };
+            this.$emit("choiseComponent", componentConfig);
+        },
     },
     components: {
         ViewBox,

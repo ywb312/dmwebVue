@@ -968,6 +968,12 @@ export default [{
             text: "职业健康检查结果汇总",
             id: "checkResultCount"
         }]
+    }, {
+        text: "接触职业病危害因素汇总",
+        child: [{
+            text: "接触职业病危害因素汇总",
+            id: "healthfactorsum"
+        }]
     }]
 }, {
     title: "安全环保投入",

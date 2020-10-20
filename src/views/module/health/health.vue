@@ -64,6 +64,10 @@ export default {
                     text: "职业健康检查结果汇总",
                     id: "checkResultCount",
                 },
+                {
+                    text: "接触职业病危害因素汇总",
+                    id: "healthfactorsum",
+                },
             ],
         };
     },
@@ -127,12 +131,21 @@ export default {
                 "@/components/health/views/test/VentilateResult",
             ], resolve),
 
-        // 禁忌症人员清单
+        // 禁忌症人员清单 五个矿总结
         checkAbnormalCount: (resolve) =>
             require(["@/components/health/views/CheckAbnormalCount"], resolve),
-        // 职业健康检查结果汇总
+        // 禁忌症人员清单
+        CheckAbnormal: (resolve) =>
+            require(["@/components/health/views/CheckAbnormal"], resolve),
+        // 职业健康检查结果汇总 五个矿总结
         checkResultCount: (resolve) =>
             require(["@/components/health/views/CheckResultCount"], resolve),
+        // 职业健康检查结果汇总
+        checkResult: (resolve) =>
+            require(["@/components/health/views/CheckResult"], resolve),
+        // 接触职业病危害因素汇总
+        healthfactorsum: (resolve) =>
+            require(["@/components/health/views/HealthFactorSum"], resolve),
     },
 };
 </script>
