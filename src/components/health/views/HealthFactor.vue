@@ -2,7 +2,7 @@
     <div>
         <choice-dept @choiceCompany="getCompany"></choice-dept>
         <SearchBox
-            placeholder="请输入应急预案名称搜索"
+            placeholder="请输入工种、危害原因搜索"
             @callback="searchBack"
         ></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
@@ -15,46 +15,40 @@
                     <div class="main">
                         <div>
                             <p class="main_text">
-                                <span class="main_title">单位名称: </span>
+                                <span class="main_title">工种: </span>
+                                <span class="main_val">{{ item.gongz }}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="main_text">
+                                <span class="main_title">危害原因: </span>
+                                <span class="main_val">{{ item.reason }}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="main_text">
+                                <span class="main_title">危害类型: </span>
                                 <span class="main_val">{{
-                                    item.unitname
+                                    item.hardtype
                                 }}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title">应急预案名称: </span>
-                                <span class="main_val">{{
-                                    item.yjyaname
-                                }}</span>
+                                <span class="main_title">控制措施: </span>
+                                <span class="main_val">{{ item.measure }}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title">制定日期: </span>
-                                <span class="main_val">{{
-                                    item.createDate
-                                }}</span>
+                                <span class="main_title">所在部门: </span>
+                                <span class="main_val">{{ item.unit }}</span>
                             </p>
                         </div>
                         <div>
                             <p class="main_text">
-                                <span class="main_title">主管单位: </span>
-                                <span class="main_val">{{ item.zgunit }}</span>
-                            </p>
-                        </div>
-                        <div>
-                            <p class="main_text">
-                                <span class="main_title">批准人: </span>
-                                <span class="main_val">{{
-                                    item.approver
-                                }}</span>
-                            </p>
-                        </div>
-                        <div>
-                            <p class="main_text">
-                                <span class="main_title">修订日期: </span>
-                                <span class="main_val">{{ item.xddate }}</span>
+                                <span class="main_title">备注: </span>
+                                <span class="main_val">{{ item.memo }}</span>
                             </p>
                         </div>
                     </div>
@@ -68,12 +62,12 @@ import choiceDept from "@/components/pub/choiceDept";
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 export default {
-    name: "EmergDetail",
+    name: "HealthFactor",
     data() {
         return {
             rendering: [],
             postData: {
-                url: "biz/create/emergdetail/list.action",
+                url: "biz/operate/healthfactor/list.action",
                 obj: {
                     "bean.param": "",
                 },

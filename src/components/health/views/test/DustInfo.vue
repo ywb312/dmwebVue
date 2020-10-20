@@ -1,34 +1,37 @@
 <template>
     <div>
-        <SearchBox placeholder="请输入录入人,仪器型号,仪器编号,批次号搜索" @callback="searchBack"></SearchBox>
+        <choice-dept @choiceCompany="getCompany"></choice-dept>
+        <SearchBox
+            placeholder="请输入录入人,仪器型号,仪器编号,批次号搜索"
+            @callback="searchBack"
+        ></SearchBox>
         <ViewBox :postData="postData" ref="view" @getRendering="getRendering">
             <div slot="views">
                 <div
                     class="wrapper"
-                    v-for="(item,index) in rendering"
+                    v-for="(item, index) in rendering"
                     :key="index"
                     @click="btnClick(item)"
                 >
                     <div class="main">
                         <div>
-                            <p>批次号: {{item.batchid}}</p>
+                            <p>批次号: {{ item.batchid }}</p>
                         </div>
                         <div>
-                            <p>仪器型号: {{item.instrument}}</p>
+                            <p>仪器型号: {{ item.instrument }}</p>
                         </div>
                         <div>
-                            <p>仪器编号: {{item.instruid}}</p>
+                            <p>仪器编号: {{ item.instruid }}</p>
                         </div>
                         <div>
-                            <p>录入人: {{item.logpeople}}</p>
+                            <p>录入人: {{ item.logpeople }}</p>
                         </div>
                         <div>
-                            <p>录入时间: {{item.logtime}}</p>
+                            <p>录入时间: {{ item.logtime }}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </ViewBox>
         <!-- 操作面板 -->
         <van-action-sheet
@@ -41,6 +44,7 @@
     </div>
 </template>
 <script>
+import choiceDept from "@/components/pub/choiceDept";
 import SearchBox from "@/components/pub/SearchBox";
 import ViewBox from "@/components/pub/ViewBox.vue";
 import Popup from "@/components/pub/Popup.vue";
@@ -52,11 +56,11 @@ export default {
             rendering: [],
             postData: {
                 url: "biz/operate/health/dustinfo/list.action",
-                obj: {}
+                obj: {},
             },
             show: false,
             actions: [{ name: "检测结果" }],
-            selectData: {}
+            selectData: {},
         };
     },
     // pageData父组件传来的配置项
@@ -71,26 +75,38 @@ export default {
             this.rendering = [];
             this.$refs.view.clearData();
         },
+        // 选取矿业公司
+        getCompany(v) {
+            for (const key in v) {
+                this.postData.obj[key] = v[key];
+            }
+            this.$refs.view.clearData();
+        },
         btnClick(obj) {
             this.show = true;
             this.selectData = obj;
         },
         onSelect(item) {
             if (item.name == "检测结果") {
-                this.$router.push({
-                    path: "/health/dustResult",
-                    query: {
-                        filters: this.selectData.dustid
-                    }
-                });
+                // 向父组件传值 切换组件
+                let componentConfig = {
+                    text: "生产粉尘浓度检测结果",
+                    components: "DustResult",
+                    param: {
+                        filters: this.selectData.dustid,
+                        tablesuffix: this.postData.obj["bean.tablesuffix"],
+                    },
+                };
+                this.$emit("choiseComponent", componentConfig);
             }
-        }
+        },
     },
     components: {
         SearchBox,
         ViewBox,
-        Popup
-    }
+        Popup,
+        choiceDept,
+    },
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>

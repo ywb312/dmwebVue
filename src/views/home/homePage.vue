@@ -106,11 +106,11 @@ export default {
                 //     url: require("@/assets/img/ic_team.png"),
                 //     title: "组织保障"
                 // },
-                // {
-                //     id: "health",
-                //     url: require("@/assets/img/ic_health.png"),
-                //     title: "职业卫生"
-                // },
+                {
+                    id: "health",
+                    url: require("@/assets/img/ic_health.png"),
+                    title: "职业卫生"
+                },
                 // {
                 //     id: "inject",
                 //     url: require("@/assets/img/ic_inject.png"),
