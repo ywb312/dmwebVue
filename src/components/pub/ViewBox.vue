@@ -1,11 +1,11 @@
 <template>
     <van-pull-refresh
-        style="min-height:500px"
+        style="min-height: 500px"
         v-model="refreshing"
         success-text="刷新成功"
         @refresh="clearData"
     >
-        <div class="recordSum">总条数:{{this.records}}条</div>
+        <div class="recordSum">总条数:{{ this.records }}条</div>
         <van-list
             v-model="loading"
             :finished="finished"
@@ -47,15 +47,15 @@ export default {
             // 正在请求中,不可加载
             postIng: false,
             // 总条数
-            records: 0
+            records: 0,
         };
     },
     // pageData父组件传来的配置项
     props: {
         postData: {
             type: Object,
-            default: {}
-        }
+            default: {},
+        },
     },
     created() {
         this.getData();
@@ -65,7 +65,7 @@ export default {
         setObj() {
             let obj = {
                 rows: 10,
-                page: this.page
+                page: this.page,
             };
             for (const key in this.postData.obj) {
                 if (this.postData.obj[key] != "") {
@@ -80,7 +80,7 @@ export default {
             let obj = this.setObj();
             this.$api.pub
                 .showPage(this.postData.url, obj)
-                .then(res => {
+                .then((res) => {
                     this.canLoad = true;
                     this.refreshing = false;
                     this.loading = false;
@@ -94,7 +94,7 @@ export default {
                     this.records = res.records;
                     this.$emit("getBacklog", res);
                     // 数据为空
-                    if (res.records == 0) {
+                    if (res.records == 0 && res.rows.length == 0) {
                         this.canLoad = false;
                         this.noData = true;
                         this.$emit("getRendering", this.rendering);
@@ -142,8 +142,8 @@ export default {
             this.canLoad = false;
             this.rendering = [];
             this.getData();
-        }
-    }
+        },
+    },
 };
 </script>
 <style scoped src="@/assets/css/public.css"/>

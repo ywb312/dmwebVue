@@ -509,6 +509,14 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //绩效评价
+		path: '/simultaneously',
+		name: 'simultaneously',
+		component: () => import('@/views/module/simultaneously/simultaneously.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
 
 	// 工作台部分路由
 	{ //待办事项

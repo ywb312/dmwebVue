@@ -408,55 +408,67 @@ export default [{
     page: [{
         text: "建设项目安全“三同时”",
         child: [{
-            text: "重大安全环保项目申请",
-            id: "apply1"
+            text: "完成的建设项目的汇总统计",
+            id: "safeapplyCount"
         }, {
-            text: "职业卫生项目的申请",
-            id: "apply2"
+            text: "安全项目申请",
+            id: "safeapply"
         }, {
-            text: "安全环保设施设计审查",
-            id: "examine1"
+            text: "安全预评价报告评审批复",
+            id: "safeevaluate"
         }, {
-            text: "职业卫生设施设计审查",
-            id: "examine2"
+            text: "安全设施设计审查批复",
+            id: "safeexamine"
+        }, {
+            text: "安全设施竣工验收报告",
+            id: "safecheck"
         }]
     }, {
-        text: "建设项目职业卫生“三同时”",
+        text: "环保“三同时”建设项目的汇总统计",
         child: [{
-            text: "重大安全环保项目申请",
-            id: "apply1"
+            text: "完成的建设项目的汇总统计",
+            id: "occupapplyCount"
         }, {
-            text: "职业卫生项目的申请",
-            id: "apply2"
+            text: "职业卫生项目申请",
+            id: "occupapply"
         }, {
-            text: "安全环保设施设计审查",
-            id: "examine1"
+            text: "职业卫生预评价报告批复",
+            id: "occupevaluate"
+        }, {
+            text: "职业卫生防护设施设计审查批复",
+            id: "occhealthreview"
+        }, {
+            text: "职业卫生控制效果评价报告",
+            id: "occacceptinfo"
         }]
     }, {
         text: "建设项目环保“三同时”管理",
         child: [{
-            text: "重大安全环保项目申请",
-            id: "apply1"
+            text: "完成的建设项目的汇总统计",
+            id: "environapplyCount"
         }, {
-            text: "职业卫生项目的申请",
-            id: "apply2"
+            text: "环保项目申请",
+            id: "environapply"
         }, {
-            text: "安全环保设施设计审查",
-            id: "examine1"
+            text: "项目立项批复、项目备案",
+            id: "envevaluate"
+        }, {
+            text: "环评文本、批复",
+            id: "firedesignreview"
+        }, {
+            text: "验收意见",
+            id: "firecompletioninfo"
         }]
     }, {
         text: "水土保持",
         child: [{
-            text: "重大安全环保项目申请",
-            id: "apply1"
+            text: "水土保持设计方案",
+            id: "maintainexamine"
         }, {
-            text: "职业卫生项目的申请",
-            id: "apply2"
-        }, {
-            text: "安全环保设施设计审查",
-            id: "examine1"
+            text: "水土保持竣工验收",
+            id: "maintaincheck"
         }]
-    }]
+    }, ]
 }, {
     title: "生产工艺系统安全管理",
     path: "technology",
