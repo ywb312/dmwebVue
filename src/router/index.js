@@ -445,6 +445,14 @@ const routes = [{
 			keepAlive: false
 		}
 	},
+	{ //项目三同时
+		path: '/simultaneously',
+		name: 'simultaneously',
+		component: () => import('@/views/module/simultaneously/simultaneously.vue'),
+		meta: {
+			keepAlive: false
+		}
+	},
 	{ //安全环保投入
 		path: '/inject',
 		name: 'inject',
