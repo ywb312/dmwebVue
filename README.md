@@ -2,6 +2,25 @@
     将本地vue服务端口/dmweb代理为localhost:8080/dmweb(后台服务端口)  可访问localhost:8080下的接口 不会发生跨域问题
     将api的http.js中的baseURL "dmweb"替换为"localhost:8080/dmweb"
 
+## 所有risk,danger一级页面为组件，其余新增、详情..等需要跳转的二级页面都是路由,其余共用一个组件
+## 2020-09-25修改 之前所需跳转的页面、子表变为组件  由子组件传值给父组件切换 例如设备管理页面facility、equipspecial中的choiseComponent
+
+## 开发步骤
+    1.新增功能模块（九宫格）（一级菜单）
+        至src\views\home\homePage.vue 数组grid下新增对象
+    2.新增二级菜单(list)
+        至src\store\listPage.js 新增对象 手风琴特效需要child 不要手风琴特效直接text和id即可
+    3.新增页面
+        示例danger模块，至src\views\module\danger\danger.vue下
+        从listPage中获取数组，改为一级对象数组，每个对象中只有text、id和添加的component（可手动添加getPageData方法）
+        引入components
+    4.页面组件
+        复制其他页面组件 修改template和postdata即可    
+
+# 上线注意事项
+    1.App.vue create注释打开 解决vuex刷新问题
+    2.App.vue 加载中动画的显示
+
 ## module为模块详情页,每个子页面详情都在其data中(还包括页面列表的格式和获取列表的url)
     通知公告 -- 'inform'
 	隐患管理 -- 'danger'
@@ -22,6 +41,7 @@
 	安全环保投入 -- 'inject'
 	消防管理 -- 'fire'
 	绩效考核 -- 'performance'
+    ...
     如需修改功能的名称,功能在store/index.js和module其功能名文件夹 功能文件下同时修改
 
 ## 开发的通用设置
@@ -56,27 +76,3 @@ toTree(data) {
     });
     return val;
 }
-
-## 去除浏览器默认滚动条
-::-webkit-scrollbar {
-    width: 0px;
-}
-
-## 所有risk,danger一级页面为组件，其余新增、详情..等需要跳转的二级页面都是路由,其余共用一个组件
-## 2020-09-25修改 之前所需跳转的页面、子表变为组件  由子组件传值给父组件切换 例如设备管理页面facility、equipspecial中的choiseComponent
-
-## 开发步骤
-    1.新增功能模块（九宫格）（一级菜单）
-        至src\views\home\homePage.vue 数组grid下新增对象
-    2.新增二级菜单(list)
-        至src\store\listPage.js 新增对象 手风琴特效需要child 不要手风琴特效直接text和id即可
-    3.新增页面
-        示例danger模块，至src\views\module\danger\danger.vue下
-        从listPage中获取数组，改为一级对象数组，每个对象中只有text、id和添加的component（可手动添加getPageData方法）
-        引入components
-    4.页面组件
-        复制其他页面组件 修改template和postdata即可    
-
-# 上线注意事项
-    1.App.vue create注释打开 解决vuex刷新问题
-    2.App.vue 加载中动画的显示
